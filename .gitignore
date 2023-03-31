@@ -1,5 +1,8 @@
-.gradle/
+*.class
+
 bin/
 build/
-*.class
-*.vscode
+.gradle/
+.vscode/
+.idea/
+.metals/
