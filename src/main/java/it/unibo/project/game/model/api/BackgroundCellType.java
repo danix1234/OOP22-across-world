@@ -1,5 +1,5 @@
 package it.unibo.project.game.model.api;
 
-public enum EntityType {
+public enum BackgroundCellType {
     
 }
