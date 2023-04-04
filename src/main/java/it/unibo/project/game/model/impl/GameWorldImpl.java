@@ -2,6 +2,7 @@ package it.unibo.project.game.model.impl;
 
 import java.util.List;
 
+import it.unibo.project.game.logic.api.GameLogic;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.GameWorld;

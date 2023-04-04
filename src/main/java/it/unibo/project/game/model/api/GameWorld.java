@@ -2,6 +2,8 @@ package it.unibo.project.game.model.api;
 
 import java.util.List;
 
+import it.unibo.project.game.logic.api.GameLogic;
+
 public interface GameWorld {
     public Player getPlayer();
 
