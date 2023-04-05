@@ -1,6 +1,5 @@
 package it.unibo.project.game.logic.api;
 
-import java.util.List;
 import java.util.Optional;
 
 import it.unibo.project.game.model.api.CollectableType;
@@ -13,7 +12,8 @@ public interface CheckCollision {
 
     public Optional<ObstacleType> checkStaticObstacleCollision(); // Optional not empty -> can't move in that direction
 
-    public List<ObstacleType> checkDynamicObstacleCollision(); // list not empty -> you lose (unless you hit water & trunk)
+    // !! REMEMBER TO HANDLE THE CASE OF COLLISION WITH TRUNK!!
+    public Optional<ObstacleType> checkDynamicObstacleCollision(); // list not empty -> you lose (unless you hit water & trunk)
 
     public boolean checkFinishLineCollision(); //true -> you win
 

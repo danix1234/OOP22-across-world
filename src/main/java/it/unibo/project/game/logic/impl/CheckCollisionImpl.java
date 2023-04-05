@@ -1,6 +1,5 @@
 package it.unibo.project.game.logic.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import it.unibo.project.game.logic.api.CheckCollision;
@@ -28,12 +27,6 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public List<ObstacleType> checkDynamicObstacleCollision() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkDynamicObstacleCollision'");
-    }
-
-    @Override
     public boolean checkFinishLineCollision() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'checkFinishLineCollision'");
@@ -43,5 +36,11 @@ public class CheckCollisionImpl implements CheckCollision {
     public boolean checkWallCollision() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'checkWallCollision'");
+    }
+
+    @Override
+    public Optional<ObstacleType> checkDynamicObstacleCollision() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'checkDynamicObstacleCollision'");
     }
 }
