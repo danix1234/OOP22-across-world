@@ -24,5 +24,11 @@ public class LauncherImpl implements Launcher {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getSceneType'");
     }
+
+    @Override
+    public void start() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'start'");
+    }
     
 }
