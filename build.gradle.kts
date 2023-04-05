@@ -3,6 +3,7 @@ plugins {
     java
 
     // support for running application on the terminal
+	// ".\gradlew.bat" instead of "./gradlew" if you are on windows
 	// run application via "./gradlew run" 
     application
 

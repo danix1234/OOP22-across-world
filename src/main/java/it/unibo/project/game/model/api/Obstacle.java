@@ -6,4 +6,6 @@ public interface Obstacle extends Entity {
     public ObstacleType getType();
 
     public Vector2D getPixelPosition();
+
+    public Vector2D movePixelPosition(int x, int y);
 }

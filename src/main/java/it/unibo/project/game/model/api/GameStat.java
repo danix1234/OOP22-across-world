@@ -9,5 +9,9 @@ public interface GameStat {
 
     public int getCoins();
 
+    public void addCoins(int collectedCoins);
+
     public List<Boolean> getUnlockedSkins();
+
+    public void changeUnlockedSkins(List<Boolean> unlockedSkins);
 }
