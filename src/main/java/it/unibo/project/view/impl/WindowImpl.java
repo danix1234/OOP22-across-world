@@ -9,7 +9,7 @@ import it.unibo.project.view.api.Scene;
 import it.unibo.project.view.api.Window;
 
 public class WindowImpl implements Window{
-    private final JFrame frame = new JFrame();
+    private final JFrame frame = new JFrame("Across the world");
     private Scene scene = null;
 
     // TODO add window size (relative to screen dimension)
