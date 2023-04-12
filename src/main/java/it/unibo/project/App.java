@@ -1,9 +1,9 @@
 package it.unibo.project;
 
-import it.unibo.project.controller.core.impl.LauncherFactoryImpl;
+import it.unibo.project.controller.core.impl.LauncherImpl;
 
 public class App{
     public static void main(String[] args) {
-        new LauncherFactoryImpl().createLauncher().start();
+        LauncherImpl.LAUNCHER.start();
     }
 }
