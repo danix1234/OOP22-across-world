@@ -77,7 +77,7 @@ public class MenuScene extends AbstractScene{
 
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                
             }
         });
 
