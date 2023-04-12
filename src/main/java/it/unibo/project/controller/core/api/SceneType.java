@@ -4,5 +4,5 @@ public enum SceneType {
     MENU,
     SHOP,
     GAME,
-    GAME_OVER,
+    OVER,
 }

@@ -20,7 +20,7 @@ public abstract class AbstractScene implements Scene {
         this.inputHandlers.put(SceneType.MENU, new MenuInputHandler());
         this.inputHandlers.put(SceneType.SHOP, new ShopInputHandler());
         this.inputHandlers.put(SceneType.GAME, new GameInputHandler());
-        this.inputHandlers.put(SceneType.GAME_OVER, new GameOverInputHandler());
+        this.inputHandlers.put(SceneType.OVER, new GameOverInputHandler());
     }
 
     @Override

@@ -10,10 +10,9 @@ public class SceneFactoryImpl implements SceneFactory {
     public Scene createScene(SceneType sceneType) {
         return switch (sceneType) {
             case GAME -> new GameScene();
-            case GAME_OVER -> new GameOverScene();
+            case OVER -> new GameOverScene();
             case MENU -> new MenuScene();
             case SHOP -> new ShopScene();
         };
     }
-
 }
