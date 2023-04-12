@@ -16,6 +16,4 @@ public interface Launcher {
     public GameWorld getGameWorld();
 
     public SceneType getSceneType();
-
-    public void setSceneType(SceneType newSceneType);
 }
