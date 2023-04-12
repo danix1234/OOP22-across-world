@@ -7,8 +7,7 @@ public class LauncherFactoryImpl implements LauncherFactory {
 
     @Override
     public Launcher createLauncher() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createLauncher'");
+        return new LauncherImpl();
     }
     
 }
