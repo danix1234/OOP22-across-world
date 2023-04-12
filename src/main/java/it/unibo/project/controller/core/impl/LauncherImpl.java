@@ -42,7 +42,12 @@ public class LauncherImpl implements Launcher {
 
     @Override
     public void start() {
-        window.setScene(new SceneFactoryImpl().createScene(this.sceneType));
+        setScene(this.sceneType);
+    }
+
+    @Override
+    public void setScene(SceneType sceneType) {
+        this.window.setScene(new SceneFactoryImpl().createScene(sceneType));
     }
 
 }
