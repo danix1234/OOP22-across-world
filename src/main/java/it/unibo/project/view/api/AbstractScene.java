@@ -2,6 +2,7 @@ package it.unibo.project.view.api;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.swing.JPanel;
 
@@ -25,7 +26,7 @@ public abstract class AbstractScene implements Scene {
 
     @Override
     public JPanel getPanel() {
-        return this.scenePanel;
+        return Optional.ofNullable(this.scenePanel).orElseThrow();
     }
 
     @Override
