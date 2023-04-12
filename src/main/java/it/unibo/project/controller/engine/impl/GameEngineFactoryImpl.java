@@ -7,8 +7,7 @@ public class GameEngineFactoryImpl implements GameEngineFactory {
 
     @Override
     public GameEngine createGameEngine() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createGameEngine'");
+        return new GameEngineImpl();
     }
     
 }

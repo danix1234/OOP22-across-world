@@ -7,8 +7,7 @@ public class GameWorldFactoryImpl implements GameWorldFactory {
 
     @Override
     public GameWorld createGameWorld() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createGameWorld'");
+        return new GameWorldImpl();
     }
     
 }

@@ -7,8 +7,7 @@ public class WindowFactoryImpl implements WindowFactory {
 
     @Override
     public Window createWindow() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createWindow'");
+        return new WindowImpl();
     }
     
 }

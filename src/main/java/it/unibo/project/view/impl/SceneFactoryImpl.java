@@ -8,8 +8,12 @@ public class SceneFactoryImpl implements SceneFactory {
 
     @Override
     public Scene createScene(SceneType sceneType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createScene'");
+        return switch (sceneType) {
+            case GAME -> new GameScene();
+            case GAME_OVER -> new GameOverScene();
+            case MENU -> new MenuScene();
+            case SHOP -> new ShopScene();
+        };
     }
-    
+
 }
