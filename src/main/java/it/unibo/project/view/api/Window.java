@@ -4,6 +4,4 @@ public interface Window {
     public void setScene(Scene scene);
 
     public Scene getScene();
-
-    public void show();
 }
