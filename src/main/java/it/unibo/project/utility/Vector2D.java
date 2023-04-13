@@ -1,7 +1,5 @@
 package it.unibo.project.utility;
 
-import java.util.Objects;
-
 public class Vector2D {
     private int x;
     private int y;
@@ -18,20 +16,33 @@ public class Vector2D {
     public int getY(){
         return this.y;
     }
-
-    public boolean equals(Vector2D vector) {
-        if (this == vector) {
-            return true;
-        }
-        if (vector == null) {
-            return false;
-        }
-        if (getClass() != vector.getClass()) {
-            return false;
-        }
-        return Objects.equals(this.x, vector.getX()) && Objects.equals(this.y, vector.getY());
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Vector2D other = (Vector2D) obj;
+        if (x != other.x)
+            return false;
+        if (y != other.y)
+            return false;
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "Pair [x=" + this.x + ", y=" + this.y + "]";
     }
