@@ -41,7 +41,7 @@ public class Vector2D {
             return false;
         return true;
     }
-
+ 
     @Override
     public String toString() {
         return "Pair [x=" + this.x + ", y=" + this.y + "]";
