@@ -1,5 +1,6 @@
 package it.unibo.project.view.impl;
 
+import java.awt.Toolkit;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -8,15 +9,18 @@ import javax.swing.JFrame;
 import it.unibo.project.view.api.Scene;
 import it.unibo.project.view.api.Window;
 
-public class WindowImpl implements Window{
+public class WindowImpl implements Window {
+    public static final int WINDOW_HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+    public static final int WINDOW_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    
     private final JFrame frame = new JFrame("Across the world");
     private Scene scene = null;
 
-    // TODO add window size (relative to screen dimension)
     public WindowImpl(){
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setLocationRelativeTo(null);
-        this.frame.setResizable(false);
+        this.frame.setLocationByPlatform(true);
+        this.frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        this.frame.setExtendedState( this.frame.getExtendedState() | JFrame.MAXIMIZED_BOTH );
         this.frame.setVisible(true);
     }
 
