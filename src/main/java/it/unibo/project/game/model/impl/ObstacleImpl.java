@@ -19,9 +19,9 @@ public class ObstacleImpl extends EntityImpl implements Obstacle {
 	}
 
 	@Override
-	public Vector2D movePixelPosition(int x, int y) {
+	public Vector2D movePixelPosition(final int x, final int y) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'movePixelPosition'");
 	}
-    
+
 }

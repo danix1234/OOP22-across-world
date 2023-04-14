@@ -9,9 +9,9 @@ public interface HandlePowerup {
     // then remove them from the GameWorld collectable list, 
     // then run the timer
     // then restore the saved collectables inside gameworld
-    public void addPowerUp(CollectableType type); // add timer thread to remove powerup after 10 seconds
+    void addPowerUp(CollectableType type); // add timer thread to remove powerup after 10 seconds
 
-    public Optional<CollectableType> getCurrentPowerUp();
+    Optional<CollectableType> getCurrentPowerUp();
 
-    public void clearPowerUp();
+    void clearPowerUp();
 }

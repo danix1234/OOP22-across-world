@@ -15,7 +15,7 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public boolean checkCoinLessDistantThen(int distance) {
+    public boolean checkCoinLessDistantThen(final int distance) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'checkCoinLessDistantThen'");
     }

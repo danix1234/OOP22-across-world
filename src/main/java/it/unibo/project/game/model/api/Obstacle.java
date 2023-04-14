@@ -3,9 +3,9 @@ package it.unibo.project.game.model.api;
 import it.unibo.project.utility.Vector2D;
 
 public interface Obstacle extends Entity {
-    public ObstacleType getType();
+    ObstacleType getType();
 
-    public Vector2D getPixelPosition();
+    Vector2D getPixelPosition();
 
-    public Vector2D movePixelPosition(int x, int y);
+    Vector2D movePixelPosition(int x, int y);
 }

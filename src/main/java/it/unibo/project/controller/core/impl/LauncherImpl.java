@@ -10,7 +10,7 @@ import it.unibo.project.view.api.Window;
 import it.unibo.project.view.impl.SceneFactoryImpl;
 import it.unibo.project.view.impl.WindowFactoryImpl;
 
-public class LauncherImpl implements Launcher {
+public final class LauncherImpl implements Launcher {
     public static final Launcher LAUNCHER = new LauncherImpl();
     
     private final Window window = new WindowFactoryImpl().createWindow();
@@ -46,7 +46,7 @@ public class LauncherImpl implements Launcher {
     }
 
     @Override
-    public void setScene(SceneType sceneType) {
+    public void setScene(final SceneType sceneType) {
         this.sceneType = sceneType;
         this.window.setScene(new SceneFactoryImpl().createScene(this.sceneType));
     }

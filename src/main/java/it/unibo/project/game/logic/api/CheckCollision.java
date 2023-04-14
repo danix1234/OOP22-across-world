@@ -6,16 +6,16 @@ import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.ObstacleType;
 
 public interface CheckCollision {
-    public Optional<CollectableType> checkCollectableCollision(); // true -> coin or powerup collected
+    Optional<CollectableType> checkCollectableCollision(); // true -> coin or powerup collected
 
-    public boolean checkCoinLessDistantThen(int distance); // true -> coin magnet powerup collected
+    boolean checkCoinLessDistantThen(int distance); // true -> coin magnet powerup collected
 
-    public Optional<ObstacleType> checkStaticObstacleCollision(); // Optional not empty -> can't move in that direction
+    Optional<ObstacleType> checkStaticObstacleCollision(); // Optional not empty -> can't move in that direction
 
     // !! REMEMBER TO HANDLE THE CASE OF COLLISION WITH TRUNK!!
-    public Optional<ObstacleType> checkDynamicObstacleCollision(); // list not empty -> you lose (unless you hit water & trunk)
+    Optional<ObstacleType> checkDynamicObstacleCollision(); // list not empty -> you lose (unless you hit water & trunk)
 
-    public boolean checkFinishLineCollision(); //true -> you win
+    boolean checkFinishLineCollision(); //true -> you win
 
-    public boolean checkWallCollision(); // true -> can't move in that direction
+    boolean checkWallCollision(); // true -> can't move in that direction
 }

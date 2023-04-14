@@ -6,13 +6,13 @@ import it.unibo.project.input.api.InputHandler;
 public class MenuInputHandler implements InputHandler {
 
     @Override
-    public void executeAction(Action action) {
+    public void executeAction(final Action action) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'executeAction'");
     }
 
     @Override
-    public void storeAction(Action action) {
+    public void storeAction(final Action action) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'storeAction'");
     }

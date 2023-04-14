@@ -11,7 +11,7 @@ import it.unibo.project.view.api.Window;
 
 public class WindowImpl implements Window {
     private final JFrame frame = new JFrame("Across the world");
-    private Scene scene = null;
+    private Scene scene;
 
     public WindowImpl(){
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,9 +22,9 @@ public class WindowImpl implements Window {
     }
 
     @Override
-    public void setScene(Scene scene) {
+    public void setScene(final Scene scene) {
         Objects.requireNonNull(scene);
-        Optional.ofNullable(this.scene).ifPresent(old_scene -> this.frame.remove(old_scene.getPanel()));
+        Optional.ofNullable(this.scene).ifPresent(oldScene -> this.frame.remove(oldScene.getPanel()));
         this.scene = scene;
         this.frame.add(this.scene.getPanel());
         this.frame.validate();

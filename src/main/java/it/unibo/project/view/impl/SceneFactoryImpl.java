@@ -7,7 +7,7 @@ import it.unibo.project.view.api.SceneFactory;
 public class SceneFactoryImpl implements SceneFactory {
 
     @Override
-    public Scene createScene(SceneType sceneType) {
+    public Scene createScene(final SceneType sceneType) {
         return switch (sceneType) {
             case GAME -> new GameScene();
             case OVER -> new GameOverScene();

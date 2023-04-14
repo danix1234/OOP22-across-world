@@ -5,17 +5,17 @@ import java.util.List;
 import it.unibo.project.game.logic.api.GameLogic;
 
 public interface GameWorld {
-    public Player getPlayer();
+    Player getPlayer();
 
-    public List<Obstacle> getObstacles();
+    List<Obstacle> getObstacles();
 
-    public List<Collectable> getCollectables();
+    List<Collectable> getCollectables();
 
-    public List<BackgroundCell> getBackgroundCells();
+    List<BackgroundCell> getBackgroundCells();
 
-    public GameLogic getGameLogic();
+    GameLogic getGameLogic();
 
-    public void clearMap();
+    void clearMap();
 
-    public void loadMap(String mapName);
+    void loadMap(String mapName);
 }

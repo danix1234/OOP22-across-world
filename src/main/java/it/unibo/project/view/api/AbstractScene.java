@@ -15,7 +15,7 @@ import it.unibo.project.input.impl.ShopInputHandler;
 
 public abstract class AbstractScene implements Scene {
     private JPanel scenePanel;
-    private Map<SceneType, InputHandler> inputHandlers = new HashMap<>();
+    private final Map<SceneType, InputHandler> inputHandlers = new HashMap<>();
 
     public AbstractScene() {
         this.inputHandlers.put(SceneType.MENU, new MenuInputHandler());
@@ -30,11 +30,11 @@ public abstract class AbstractScene implements Scene {
     }
 
     @Override
-    public InputHandler getInputHandler(SceneType sceneType) {
+    public InputHandler getInputHandler(final SceneType sceneType) {
         return this.inputHandlers.get(sceneType);
     }
 
-    protected void setPanel(JPanel newPanel) {
+    protected void setPanel(final JPanel newPanel) {
         this.scenePanel = newPanel;
     }
 }

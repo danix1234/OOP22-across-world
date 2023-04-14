@@ -7,17 +7,17 @@ import it.unibo.project.view.api.Window;
 // launcher is a singleton, so everything can be easily accessed globally
 public interface Launcher {
     // method called in main function, which runs the program, and handle the scene
-    public void start();
+    void start();
 
-    public Window getWindow();
+    Window getWindow();
 
-    public GameEngine getGameEngine();
+    GameEngine getGameEngine();
 
-    public GameWorld getGameWorld();
+    GameWorld getGameWorld();
 
-    public SceneType getSceneType();
+    SceneType getSceneType();
 
     // shortcut for changing current shene
     // MUST BE USED FOR CHANGING SCENE, SINCE IT ALSO KEEP TRACK OF THE CURRENT SCENE TYPE
-    public void setScene(SceneType sceneType);
+    void setScene(SceneType sceneType);
 }

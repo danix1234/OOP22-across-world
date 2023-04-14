@@ -9,7 +9,7 @@ import it.unibo.project.input.api.InputHandler;
 public class SharedInputHandler implements InputHandler {
 
     @Override
-    public void executeAction(Action action) {
+    public void executeAction(final Action action) {
         switch (action) {
             case EXIT_APP:
                 System.exit(0);
@@ -32,7 +32,7 @@ public class SharedInputHandler implements InputHandler {
     }
 
     @Override
-    public void storeAction(Action action) {
+    public void storeAction(final Action action) {
         throw new UnsupportedOperationException("not needed method");
     }
 

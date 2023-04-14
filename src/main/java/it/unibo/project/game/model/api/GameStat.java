@@ -3,15 +3,15 @@ package it.unibo.project.game.model.api;
 import java.util.List;
 
 public interface GameStat {
-    public void loadStat();
+    void loadStat();
 
-    public void saveStat();
+    void saveStat();
 
-    public int getCoins();
+    int getCoins();
 
-    public void addCoins(int collectedCoins);
+    void addCoins(int collectedCoins);
 
-    public List<Boolean> getUnlockedSkins();
+    List<Boolean> getUnlockedSkins();
 
-    public void changeUnlockedSkins(List<Boolean> unlockedSkins);
+    void changeUnlockedSkins(List<Boolean> unlockedSkins);
 }

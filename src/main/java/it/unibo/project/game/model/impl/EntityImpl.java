@@ -18,9 +18,9 @@ public class EntityImpl implements Entity {
 	}
 
 	@Override
-	public void move(int x, int y) {
+	public void move(final int x, final int y) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'move'");
 	}
-    
+
 }

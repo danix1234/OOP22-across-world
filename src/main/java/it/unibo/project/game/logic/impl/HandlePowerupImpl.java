@@ -8,7 +8,7 @@ import it.unibo.project.game.model.api.CollectableType;
 public class HandlePowerupImpl implements HandlePowerup {
 
     @Override
-    public void addPowerUp(CollectableType type) {
+    public void addPowerUp(final CollectableType type) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addPowerUp'");
     }

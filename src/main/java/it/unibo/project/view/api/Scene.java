@@ -6,9 +6,9 @@ import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.input.api.InputHandler;
 
 public interface Scene {
-    public JPanel getPanel();
+    JPanel getPanel();
 
-    public void update();
+    void update();
 
-    public InputHandler getInputHandler(SceneType sceneType);
+    InputHandler getInputHandler(SceneType sceneType);
 }
