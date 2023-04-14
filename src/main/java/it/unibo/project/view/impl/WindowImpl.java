@@ -19,7 +19,6 @@ public class WindowImpl implements Window {
         this.frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.frame.setExtendedState( this.frame.getExtendedState() | JFrame.MAXIMIZED_BOTH );
         this.frame.setVisible(true);
-        System.out.println(frame.getSize());
     }
 
     @Override
