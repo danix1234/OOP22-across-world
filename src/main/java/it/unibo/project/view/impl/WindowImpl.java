@@ -10,9 +10,6 @@ import it.unibo.project.view.api.Scene;
 import it.unibo.project.view.api.Window;
 
 public class WindowImpl implements Window {
-    public static final int WINDOW_HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-    public static final int WINDOW_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    
     private final JFrame frame = new JFrame("Across the world");
     private Scene scene = null;
 
@@ -22,6 +19,7 @@ public class WindowImpl implements Window {
         this.frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.frame.setExtendedState( this.frame.getExtendedState() | JFrame.MAXIMIZED_BOTH );
         this.frame.setVisible(true);
+        System.out.println(frame.getSize());
     }
 
     @Override
