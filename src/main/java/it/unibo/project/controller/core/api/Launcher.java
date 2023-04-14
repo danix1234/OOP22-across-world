@@ -1,24 +1,19 @@
 package it.unibo.project.controller.core.api;
 
-import it.unibo.project.controller.engine.api.GameEngine;
-import it.unibo.project.game.model.api.GameWorld;
-import it.unibo.project.view.api.Window;
-
-// launcher is a singleton, so everything can be easily accessed globally
+// launcher is a singleton, with methods to call to do comunicate between model & view
 public interface Launcher {
-    // method called in main function, which runs the program, and handle the scene
-    void start();
-
-    Window getWindow();
-
-    GameEngine getGameEngine();
-
-    GameWorld getGameWorld();
-
+    // VIEW methods
     SceneType getSceneType();
 
-    // shortcut for changing current shene
-    // MUST BE USED FOR CHANGING SCENE, SINCE IT ALSO KEEP TRACK OF THE CURRENT
-    // SCENE TYPE
     void setScene(SceneType sceneType);
+
+    void closeWindow();
+
+    // MODEL methods
+
+    // CONTROLLER methods
+    void start();
+
+    // TODO: feel free to create all the methods you want, since only the launcher
+    // can interact with everything
 }
