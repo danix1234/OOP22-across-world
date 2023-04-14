@@ -10,5 +10,5 @@ public class BackgroundCellImpl extends EntityImpl implements BackgroundCell {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'getType'");
 	}
-    
+
 }

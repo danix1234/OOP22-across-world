@@ -15,7 +15,7 @@ public interface CheckCollision {
     // !! REMEMBER TO HANDLE THE CASE OF COLLISION WITH TRUNK!!
     Optional<ObstacleType> checkDynamicObstacleCollision(); // list not empty -> you lose (unless you hit water & trunk)
 
-    boolean checkFinishLineCollision(); //true -> you win
+    boolean checkFinishLineCollision(); // true -> you win
 
     boolean checkWallCollision(); // true -> can't move in that direction
 }

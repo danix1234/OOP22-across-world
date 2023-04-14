@@ -9,5 +9,5 @@ public class GameEngineFactoryImpl implements GameEngineFactory {
     public GameEngine createGameEngine() {
         return new GameEngineImpl();
     }
-    
+
 }

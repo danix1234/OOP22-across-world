@@ -24,5 +24,5 @@ public class GameLogicImpl implements GameLogic {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getMovementLogic'");
     }
-    
+
 }

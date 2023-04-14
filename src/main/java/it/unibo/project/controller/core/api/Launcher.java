@@ -18,6 +18,7 @@ public interface Launcher {
     SceneType getSceneType();
 
     // shortcut for changing current shene
-    // MUST BE USED FOR CHANGING SCENE, SINCE IT ALSO KEEP TRACK OF THE CURRENT SCENE TYPE
+    // MUST BE USED FOR CHANGING SCENE, SINCE IT ALSO KEEP TRACK OF THE CURRENT
+    // SCENE TYPE
     void setScene(SceneType sceneType);
 }

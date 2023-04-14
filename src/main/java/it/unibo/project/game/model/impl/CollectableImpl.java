@@ -10,5 +10,5 @@ public class CollectableImpl extends EntityImpl implements Collectable {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'getType'");
 	}
-    
+
 }

@@ -28,5 +28,5 @@ public class GameInputHandler implements InputHandler {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'clearStoredAction'");
     }
-    
+
 }

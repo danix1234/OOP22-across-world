@@ -24,5 +24,5 @@ public class HandlePowerupImpl implements HandlePowerup {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'clearPowerUp'");
     }
-    
+
 }

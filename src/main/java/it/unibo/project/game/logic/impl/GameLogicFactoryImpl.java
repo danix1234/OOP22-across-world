@@ -9,5 +9,5 @@ public class GameLogicFactoryImpl implements GameLogicFactory {
     public GameLogic creatGameLogic() {
         return new GameLogicImpl();
     }
-    
+
 }

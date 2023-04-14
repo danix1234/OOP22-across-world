@@ -13,11 +13,11 @@ public class WindowImpl implements Window {
     private final JFrame frame = new JFrame("Across the world");
     private Scene scene;
 
-    public WindowImpl(){
+    public WindowImpl() {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationByPlatform(true);
         this.frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        this.frame.setExtendedState( this.frame.getExtendedState() | JFrame.MAXIMIZED_BOTH );
+        this.frame.setExtendedState(this.frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         this.frame.setVisible(true);
     }
 
@@ -34,5 +34,5 @@ public class WindowImpl implements Window {
     public Scene getScene() {
         return Optional.ofNullable(this.scene).orElseThrow();
     }
-    
+
 }

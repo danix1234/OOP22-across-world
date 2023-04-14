@@ -9,5 +9,5 @@ public class GameWorldFactoryImpl implements GameWorldFactory {
     public GameWorld createGameWorld() {
         return new GameWorldImpl();
     }
-    
+
 }

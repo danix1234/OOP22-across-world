@@ -9,5 +9,5 @@ public class ShopScene extends AbstractScene {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
-    
+
 }

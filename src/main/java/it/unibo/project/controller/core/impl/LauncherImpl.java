@@ -12,13 +12,14 @@ import it.unibo.project.view.impl.WindowFactoryImpl;
 
 public final class LauncherImpl implements Launcher {
     public static final Launcher LAUNCHER = new LauncherImpl();
-    
+
     private final Window window = new WindowFactoryImpl().createWindow();
     private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
     private SceneType sceneType = SceneType.MENU;
 
-    private LauncherImpl(){}
+    private LauncherImpl() {
+    }
 
     @Override
     public Window getWindow() {

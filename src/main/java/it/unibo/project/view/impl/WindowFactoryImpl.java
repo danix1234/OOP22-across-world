@@ -9,5 +9,5 @@ public class WindowFactoryImpl implements WindowFactory {
     public Window createWindow() {
         return new WindowImpl();
     }
-    
+
 }

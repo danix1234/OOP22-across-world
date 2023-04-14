@@ -34,5 +34,5 @@ public class GameEngineImpl implements GameEngine {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'render'");
     }
-    
+
 }

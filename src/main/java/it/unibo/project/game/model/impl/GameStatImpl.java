@@ -41,5 +41,5 @@ public class GameStatImpl implements GameStat {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'changeUnlockedSkins'");
     }
-    
+
 }
