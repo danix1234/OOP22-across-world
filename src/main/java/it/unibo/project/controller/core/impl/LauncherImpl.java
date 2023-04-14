@@ -47,7 +47,8 @@ public class LauncherImpl implements Launcher {
 
     @Override
     public void setScene(SceneType sceneType) {
-        this.window.setScene(new SceneFactoryImpl().createScene(sceneType));
+        this.sceneType = sceneType;
+        this.window.setScene(new SceneFactoryImpl().createScene(this.sceneType));
     }
 
 }
