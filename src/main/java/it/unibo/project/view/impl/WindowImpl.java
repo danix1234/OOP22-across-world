@@ -35,4 +35,9 @@ public class WindowImpl implements Window {
         return Optional.ofNullable(this.scene).orElseThrow();
     }
 
+    @Override
+    public void close() {
+        this.frame.dispose();
+    }
+
 }
