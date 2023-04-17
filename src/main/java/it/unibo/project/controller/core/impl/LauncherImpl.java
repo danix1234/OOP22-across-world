@@ -1,5 +1,6 @@
 package it.unibo.project.controller.core.impl;
 
+import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.view.api.Window;
@@ -11,9 +12,12 @@ public final class LauncherImpl implements Launcher {
 
     private final Window window = new WindowFactoryImpl().createWindow();
     // uncomment when are gonna be needed
-    // private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
-    // private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
+    // private final GameEngine gameEngine = new
+    // GameEngineFactoryImpl().createGameEngine();
+    // private final GameWorld gameWorld = new
+    // GameWorldFactoryImpl().createGameWorld();
     private SceneType sceneType = SceneType.MENU;
+    private Difficulty difficulty = Difficulty.NORMAL;
 
     private LauncherImpl() {
     }
@@ -24,14 +28,27 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public void start() {
-        setScene(this.sceneType);
-    }
-
-    @Override
     public void setScene(final SceneType sceneType) {
         this.sceneType = sceneType;
         this.window.setScene(new SceneFactoryImpl().createScene(this.sceneType));
+    }
+
+
+    
+    @Override
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
+
+    @Override
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+        
+    }
+
+    @Override
+    public void start() {
+        setScene(this.sceneType);
     }
 
     @Override

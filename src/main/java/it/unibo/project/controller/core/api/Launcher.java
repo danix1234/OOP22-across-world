@@ -11,6 +11,10 @@ public interface Launcher {
 
     // MODEL methods
 
+    Difficulty getDifficulty();
+
+    void setDifficulty(Difficulty difficulty);
+
     // CONTROLLER methods
     void start();
 
