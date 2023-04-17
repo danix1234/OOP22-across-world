@@ -1,16 +1,8 @@
 package it.unibo.project.controller.engine.impl;
 
 import it.unibo.project.controller.engine.api.GameEngine;
-import it.unibo.project.view.api.Window;
 
 public class GameEngineImpl implements GameEngine {
-
-    @Override
-    public Window getWindow() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWindow'");
-    }
-
     @Override
     public void start() {
         // TODO Auto-generated method stub
