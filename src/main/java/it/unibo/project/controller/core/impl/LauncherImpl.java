@@ -3,6 +3,7 @@ package it.unibo.project.controller.core.impl;
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.SceneType;
+import it.unibo.project.input.api.InputHandler;
 import it.unibo.project.view.api.Scene;
 import it.unibo.project.view.api.Window;
 import it.unibo.project.view.impl.SceneFactoryImpl;
@@ -24,7 +25,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public SceneType getSceneType() {
+    public synchronized SceneType getSceneType() {
         return this.sceneType;
     }
 
@@ -34,7 +35,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public void setScene(final SceneType sceneType) {
+    public synchronized void setScene(final SceneType sceneType) {
         this.sceneType = sceneType;
         this.window.setScene(new SceneFactoryImpl().createScene(this.sceneType));
     }
@@ -58,6 +59,11 @@ public final class LauncherImpl implements Launcher {
     @Override
     public void closeWindow() {
         this.window.close();
+    }
+
+    @Override
+    public InputHandler geInputHandler(SceneType sceneType) {
+        return getScene().getInputHandler(sceneType);
     }
 
 }

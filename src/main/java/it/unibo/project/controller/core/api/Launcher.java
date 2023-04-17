@@ -1,5 +1,6 @@
 package it.unibo.project.controller.core.api;
 
+import it.unibo.project.input.api.InputHandler;
 import it.unibo.project.view.api.Scene;
 
 // launcher is a singleton, with methods to call to do comunicate between model & view
@@ -21,6 +22,8 @@ public interface Launcher {
 
     // CONTROLLER methods
     void start();
+
+    InputHandler geInputHandler(SceneType sceneType);
 
     // TODO: feel free to create all the methods you want, since only the launcher
     // can interact with everything
