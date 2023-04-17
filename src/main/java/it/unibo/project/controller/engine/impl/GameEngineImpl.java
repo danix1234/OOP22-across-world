@@ -10,16 +10,15 @@ public class GameEngineImpl implements GameEngine {
     public static final int MILLI_SEC_IN_NANO_SEC = 1_000_000;
     public static final int FRAME_PER_PLAYER_MOVEMENT = 12;
 
-    private Thread gameEngineThread = new Thread(this::engine);
-    private int playerFrameCounter = 0;
+    private int playerFrameCounter;
 
     @Override
     public void start() {
-        this.gameEngineThread.start();
+        new Thread(this::engine).start();
     }
 
     private void engine() {
-        double drawInterval = SEC_IN_NANO_SEC / FPS;
+        final double drawInterval = SEC_IN_NANO_SEC / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
         double timeLeft;
 
@@ -41,7 +40,6 @@ public class GameEngineImpl implements GameEngine {
                 Thread.sleep((long) (timeLeft / MILLI_SEC_IN_NANO_SEC), (int) (timeLeft % MILLI_SEC_IN_NANO_SEC));
                 nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
 
             // limits movement player to every n frames
@@ -51,14 +49,15 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void processInput() {
-        if (this.playerFrameCounter == 0){
+        if (this.playerFrameCounter == 0) {
             LauncherImpl.LAUNCHER.geInputHandler(SceneType.GAME).executeStoredAction();
         }
     }
 
     @Override
     public void updateGame() {
-        
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateGame'");
     }
 
     @Override

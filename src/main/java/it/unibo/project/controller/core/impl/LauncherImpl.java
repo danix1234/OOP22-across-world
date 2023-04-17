@@ -14,10 +14,9 @@ public final class LauncherImpl implements Launcher {
 
     private final Window window = new WindowFactoryImpl().createWindow();
     // uncomment when are gonna be needed
-    // private final GameEngine gameEngine = new
-    // GameEngineFactoryImpl().createGameEngine();
-    // private final GameWorld gameWorld = new
-    // GameWorldFactoryImpl().createGameWorld();
+    // private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
+    // private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
+
     private SceneType sceneType = SceneType.MENU;
     private Difficulty difficulty = Difficulty.NORMAL;
 
@@ -30,7 +29,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public Scene getScene() {
+    public synchronized Scene getScene() {
         return this.window.getScene();
     }
 
@@ -41,28 +40,27 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public Difficulty getDifficulty() {
+    public synchronized Difficulty getDifficulty() {
         return this.difficulty;
     }
 
     @Override
-    public void setDifficulty(Difficulty difficulty) {
+    public synchronized void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
-
     }
 
     @Override
-    public void start() {
+    public synchronized void start() {
         setScene(this.sceneType);
     }
 
     @Override
-    public void closeWindow() {
+    public synchronized void closeWindow() {
         this.window.close();
     }
 
     @Override
-    public InputHandler geInputHandler(SceneType sceneType) {
+    public synchronized InputHandler geInputHandler(SceneType sceneType) {
         return getScene().getInputHandler(sceneType);
     }
 
