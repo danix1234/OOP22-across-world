@@ -1,18 +1,34 @@
 package it.unibo.project.utility;
 
+/**
+ * Class {@code Vector2D}, contains the x and y of a coordinate.
+ */
 public class Vector2D {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
+    /**
+     * Constructor to inizialize the attributes
+     * @param x value of coordinate 
+     * @param y value of coordinate 
+     */
     public Vector2D(int x, int y){
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Called for get the x value of the coordinate
+     * @return the int value of x
+     */
     public int getX(){
         return this.x;
     }
 
+    /**
+     * Called for get the y value of the coordinate
+     * @return the int value of y
+     */
     public int getY(){
         return this.y;
     }
@@ -28,17 +44,22 @@ public class Vector2D {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj){
             return true;
-        if (obj == null)
+        }
+        if (obj == null){
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()){
             return false;
+        }
         Vector2D other = (Vector2D) obj;
-        if (x != other.x)
+        if (x != other.x){
             return false;
-        if (y != other.y)
+        }
+        if (y != other.y){
             return false;
+        }
         return true;
     }
  
