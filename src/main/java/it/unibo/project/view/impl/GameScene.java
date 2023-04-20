@@ -1,7 +1,11 @@
 package it.unibo.project.view.impl;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.List;
+
+import javax.swing.JPanel;
 
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.model.api.Entity;
@@ -17,6 +21,12 @@ public class GameScene extends AbstractScene {
     public static final int TOP_CELL_DELTA = VERT_CELL / 2;
     public static final int BOTTOM_CELL_DELTA = VERT_CELL - TOP_CELL_DELTA - 1;
 
+    private final Panel panel = new Panel();
+
+    public GameScene() {
+        setPanel(this.panel);
+    }
+
     private int minCell() {
         return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() - BOTTOM_CELL_DELTA;
     }
@@ -29,6 +39,8 @@ public class GameScene extends AbstractScene {
         return vector.getY() >= minCell() && vector.getY() <= maxCell();
     }
 
+    // TODO temporary suppress, to be removed
+    @SuppressWarnings("unused")
     private <X extends Entity> List<X> filterEntityToDraw(final List<X> entityList) {
         return entityList
                 .stream()
@@ -38,7 +50,22 @@ public class GameScene extends AbstractScene {
 
     @Override
     public void update() {
-
+        this.panel.repaint();
     }
 
+    public class Panel extends JPanel {
+
+        // TODO temporary suppress, to be removed
+        @SuppressWarnings("unused")
+        private void drawCell(Image image, Vector2D cellPos, Graphics g) {
+            final int x = 128 * cellPos.getX();
+            final int y = 128 * (VERT_CELL - cellPos.getY() - 1);
+            g.drawImage(image, x, y, CELL_DIM, CELL_DIM, null);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+        }
+    }
 }

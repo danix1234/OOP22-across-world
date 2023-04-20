@@ -78,20 +78,18 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public List<BackgroundCell> getBackgroundCells() {
+    public synchronized List<BackgroundCell> getBackgroundCells() {
         return this.gameWorld.getBackgroundCells();
     }
 
     @Override
-    public List<Collectable> getCollectables() {
+    public synchronized List<Collectable> getCollectables() {
         return this.gameWorld.getCollectables();
     }
 
     @Override
-    public List<Obstacle> getObstacles() {
+    public synchronized List<Obstacle> getObstacles() {
         return this.gameWorld.getObstacles();
     }
-
-    
 
 }
