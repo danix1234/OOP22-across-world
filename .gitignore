@@ -17,3 +17,6 @@ build/
 .project
 .settings/
 .classpath
+
+# ignore mac files
+.DS_Store
