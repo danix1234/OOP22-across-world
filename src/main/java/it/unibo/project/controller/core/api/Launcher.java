@@ -1,5 +1,12 @@
 package it.unibo.project.controller.core.api;
 
+
+import java.util.List;
+
+import it.unibo.project.game.model.api.BackgroundCell;
+import it.unibo.project.game.model.api.Collectable;
+import it.unibo.project.game.model.api.Obstacle;
+import it.unibo.project.game.model.api.Player;
 import it.unibo.project.input.api.InputHandler;
 import it.unibo.project.view.api.Scene;
 
@@ -19,6 +26,14 @@ public interface Launcher {
     Difficulty getDifficulty();
 
     void setDifficulty(Difficulty difficulty);
+
+    Player getPlayer();
+
+    List<Obstacle> getObstacles();
+
+    List<Collectable> getCollectables();
+
+    List<BackgroundCell> getBackgroundCells();
 
     // CONTROLLER methods
     void start();

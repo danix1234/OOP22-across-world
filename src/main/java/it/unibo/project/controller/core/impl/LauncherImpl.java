@@ -1,8 +1,16 @@
 package it.unibo.project.controller.core.impl;
 
+import java.util.List;
+
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.SceneType;
+import it.unibo.project.game.model.api.BackgroundCell;
+import it.unibo.project.game.model.api.Collectable;
+import it.unibo.project.game.model.api.GameWorld;
+import it.unibo.project.game.model.api.Obstacle;
+import it.unibo.project.game.model.api.Player;
+import it.unibo.project.game.model.impl.GameWorldFactoryImpl;
 import it.unibo.project.input.api.InputHandler;
 import it.unibo.project.view.api.Scene;
 import it.unibo.project.view.api.Window;
@@ -15,7 +23,7 @@ public final class LauncherImpl implements Launcher {
     private final Window window = new WindowFactoryImpl().createWindow();
     // uncomment when are gonna be needed
     // private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
-    // private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
+    private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
 
     private SceneType sceneType = SceneType.MENU;
     private Difficulty difficulty = Difficulty.NORMAL;
@@ -63,5 +71,27 @@ public final class LauncherImpl implements Launcher {
     public synchronized InputHandler geInputHandler(SceneType sceneType) {
         return getScene().getInputHandler(sceneType);
     }
+
+    @Override
+    public synchronized Player getPlayer() {
+        return this.gameWorld.getPlayer();
+    }
+
+    @Override
+    public List<BackgroundCell> getBackgroundCells() {
+        return this.gameWorld.getBackgroundCells();
+    }
+
+    @Override
+    public List<Collectable> getCollectables() {
+        return this.gameWorld.getCollectables();
+    }
+
+    @Override
+    public List<Obstacle> getObstacles() {
+        return this.gameWorld.getObstacles();
+    }
+
+    
 
 }
