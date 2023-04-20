@@ -4,10 +4,8 @@ import java.awt.Toolkit;
 import java.util.List;
 
 import it.unibo.project.controller.core.impl.LauncherImpl;
-import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.Entity;
 import it.unibo.project.utility.Vector2D;
-// import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.view.api.AbstractScene;
 
 public class GameScene extends AbstractScene {
@@ -24,7 +22,7 @@ public class GameScene extends AbstractScene {
     }
 
     private int maxCell() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() - BOTTOM_CELL_DELTA;
+        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() + TOP_CELL_DELTA;
     }
 
     private boolean checkVertPos(Vector2D vector) {
