@@ -3,49 +3,49 @@ package it.unibo.project.utility;
 import java.util.Objects;
 
 /**
- * Class {@code Pair}, with generics to make a pair of values 
+ * Class {@code Pair}, with generics to make a pair of values.
+ * @param <X> first element of pair
+ * @param <Y> second element of pair
  */
-
-public class Pair<E1,E2> {
-
-    private final E1 e1;
-    private final E2 e2;
+public class Pair<X, Y> {
+    private final X x;
+    private final Y y;
 
     /**
-     * Constructor to inizialize the attributes
+     * Constructor to inizialize the attributes.
      * @param x first element of pair
      * @param y second element of pair
      */
-    public Pair(E1 x, E2 y) {
+    public Pair(final X x, final Y y) {
         super();
-        this.e1 = x;
-        this.e2 = y;
-    }
-    
-    /**
-     * Called for get the first element of pair
-     * @return the value of first element
-     */
-    public E1 get1() {
-        return e1;
+        this.x = x;
+        this.y = y;
     }
 
     /**
-     * Called for get the second element of pair
+     * Called for get the first element of pair.
+     * @return the value of first element
+     */
+    public X get1() {
+        return x;
+    }
+
+    /**
+     * Called for get the second element of pair.
      * @return the value of second element
      */
-    public E2 get2() {
-        return e2;
+    public Y get2() {
+        return y;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(e1, e2);
+    public final int hashCode() {
+        return Objects.hash(x, y);
     }
 
     @Override
     @SuppressWarnings("rawtypes")
-    public boolean equals(Object obj) {
+    public final boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -55,12 +55,12 @@ public class Pair<E1,E2> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Pair other = (Pair) obj;
-        return Objects.equals(e1, other.e1) && Objects.equals(e2, other.e2);
+        final Pair other = (Pair) obj;
+        return Objects.equals(x, other.x) && Objects.equals(y, other.y);
     }
 
     @Override
-    public String toString() {
-        return "Pair [e1=" + e1 + ", e2=" + e2 + "]";
+    public final String toString() {
+        return "Pair [X=" + x + ", Y=" + y + "]";
     }
 }

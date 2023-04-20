@@ -8,33 +8,33 @@ public class Vector2D {
     private final int y;
 
     /**
-     * Constructor to inizialize the attributes
+     * Constructor to inizialize the attributes.
      * @param x value of coordinate 
      * @param y value of coordinate 
      */
-    public Vector2D(int x, int y){
+    public Vector2D(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
 
     /**
-     * Called for get the x value of the coordinate
+     * Called for get the x value of the coordinate.
      * @return the int value of x
      */
-    public int getX(){
+    public int getX() {
         return this.x;
     }
 
     /**
-     * Called for get the y value of the coordinate
+     * Called for get the y value of the coordinate.
      * @return the int value of y
      */
-    public int getY(){
+    public int getY() {
         return this.y;
     }
-    
+
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + x;
@@ -43,28 +43,29 @@ public class Vector2D {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj){
+    public final boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (obj == null){
+        if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()){
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        Vector2D other = (Vector2D) obj;
-        if (x != other.x){
+        final Vector2D other = (Vector2D) obj;
+        if (x != other.x) {
             return false;
         }
-        if (y != other.y){
+        /*if (y != other.y){
             return false;
         }
-        return true;
+        return true;*/
+        return y == other.y;
     }
  
     @Override
-    public String toString() {
+    public final String toString() {
         return "Pair [x=" + this.x + ", y=" + this.y + "]";
     }
 }
