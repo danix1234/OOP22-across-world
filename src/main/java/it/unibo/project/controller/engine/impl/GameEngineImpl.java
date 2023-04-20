@@ -56,8 +56,7 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void updateGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateGame'");
+        
     }
 
     @Override
