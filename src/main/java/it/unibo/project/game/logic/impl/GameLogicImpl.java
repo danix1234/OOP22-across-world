@@ -6,23 +6,23 @@ import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.logic.api.MovementLogic;
 
 public class GameLogicImpl implements GameLogic {
+    private final CheckCollision checkCollision = new CheckCollisionImpl();
+    private final HandlePowerup handlePowerup = new HandlePowerupImpl();
+    private final MovementLogic movementLogic = new MovementLogicImpl();
 
     @Override
     public CheckCollision getCollisionChecker() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCollisionChecker'");
+        return this.checkCollision;
     }
 
     @Override
     public HandlePowerup getPowerupHandler() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPowerupHandler'");
+        return this.handlePowerup;
     }
 
     @Override
     public MovementLogic getMovementLogic() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMovementLogic'");
+        return this.movementLogic;
     }
 
 }
