@@ -17,12 +17,20 @@ import it.unibo.project.view.api.Window;
 import it.unibo.project.view.impl.SceneFactoryImpl;
 import it.unibo.project.view.impl.WindowFactoryImpl;
 
+/**
+ * class {@linkplain LauncherImpl}, implements {@linkplain Launcher}, and it's a
+ * {@code singleton} ({@link #LAUNCHER}).
+ */
 public final class LauncherImpl implements Launcher {
+    /**
+     * {@code singleton} of {@linkplain Launcher} class.
+     */
     public static final Launcher LAUNCHER = new LauncherImpl();
 
     private final Window window = new WindowFactoryImpl().createWindow();
     // uncomment when are gonna be needed
-    // private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
+    // private final GameEngine gameEngine = new
+    // GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
 
     private SceneType sceneType = SceneType.MENU;

@@ -5,11 +5,17 @@ import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.input.api.InputHandler;
 
-//class to use in shared action type, like change of scene, or exit button
+/**
+ * class {@code SharedInputHandler} is to be {@code decorated} and use to handle
+ * common {@linkplain Action}:
+ * <b>
+ * {@code Action.CHANGE_SCENE_TO_*}, {@code Action.EXIT_APP}.
+ * </b>
+ */
 public class SharedInputHandler implements InputHandler {
 
     @Override
-    public void executeAction(final Action action) {
+    public final void executeAction(final Action action) {
         switch (action) {
             case EXIT_APP:
                 LauncherImpl.LAUNCHER.closeWindow();
@@ -32,17 +38,17 @@ public class SharedInputHandler implements InputHandler {
     }
 
     @Override
-    public void storeAction(final Action action) {
+    public final void storeAction(final Action action) {
         throw new UnsupportedOperationException("not needed method");
     }
 
     @Override
-    public void executeStoredAction() {
+    public final void executeStoredAction() {
         throw new UnsupportedOperationException("not needed method");
     }
 
     @Override
-    public void clearStoredAction() {
+    public final void clearStoredAction() {
         throw new UnsupportedOperationException("not needed method");
     }
 

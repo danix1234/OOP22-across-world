@@ -4,16 +4,26 @@ import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.controller.engine.api.GameEngine;
 
+/**
+ * class {@code GameEngineImpl} implements {@linkplain GameEngine}.
+ */
 public class GameEngineImpl implements GameEngine {
+    /**
+     * frames per second.
+     */
     public static final int FPS = 60;
-    public static final int SEC_IN_NANO_SEC = 1_000_000_000;
-    public static final int MILLI_SEC_IN_NANO_SEC = 1_000_000;
+    /**
+     * quantity of frames to wait before handling player movement.
+     */
     public static final int FRAME_PER_PLAYER_MOVEMENT = 12;
+
+    private static final int SEC_IN_NANO_SEC = 1_000_000_000;
+    private static final int MILLI_SEC_IN_NANO_SEC = 1_000_000;
 
     private int playerFrameCounter;
 
     @Override
-    public void start() {
+    public final void start() {
         new Thread(this::engine).start();
     }
 
@@ -48,19 +58,19 @@ public class GameEngineImpl implements GameEngine {
     }
 
     @Override
-    public void processInput() {
+    public final void processInput() {
         if (this.playerFrameCounter == 0) {
             LauncherImpl.LAUNCHER.geInputHandler(SceneType.GAME).executeStoredAction();
         }
     }
 
     @Override
-    public void updateGame() {
-        
+    public final void updateGame() {
+
     }
 
     @Override
-    public void render() {
+    public final void render() {
         LauncherImpl.LAUNCHER.getScene().update();
     }
 

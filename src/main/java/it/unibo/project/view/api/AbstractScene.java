@@ -13,10 +13,17 @@ import it.unibo.project.input.impl.GameOverInputHandler;
 import it.unibo.project.input.impl.MenuInputHandler;
 import it.unibo.project.input.impl.ShopInputHandler;
 
+/**
+ * class {@code AbstractScene} for respecting {@code D.R.Y.} principle and
+ * implementing methods common for all Scene Implementation.
+ */
 public abstract class AbstractScene implements Scene {
     private JPanel scenePanel;
     private final Map<SceneType, InputHandler> inputHandlers = new HashMap<>();
 
+    /**
+     * AbstractScene {@code constructor}.
+     */
     public AbstractScene() {
         this.inputHandlers.put(SceneType.MENU, new MenuInputHandler());
         this.inputHandlers.put(SceneType.SHOP, new ShopInputHandler());
@@ -25,16 +32,22 @@ public abstract class AbstractScene implements Scene {
     }
 
     @Override
-    public JPanel getPanel() {
+    public final JPanel getPanel() {
         return Optional.ofNullable(this.scenePanel).orElseThrow();
     }
 
     @Override
-    public InputHandler getInputHandler(final SceneType sceneType) {
+    public final InputHandler getInputHandler(final SceneType sceneType) {
         return this.inputHandlers.get(sceneType);
     }
 
-    protected void setPanel(final JPanel newPanel) {
+    /**
+     * setter method to change {@code panel} which will be store, and given to
+     * {@linkplain Window} throw the {@link #getPanel()} method.
+     * 
+     * @param newPanel new panel, replacing old one
+     */
+    protected final void setPanel(final JPanel newPanel) {
         this.scenePanel = newPanel;
     }
 }
