@@ -156,7 +156,7 @@ public class LoaderImpl implements Loader {
 
     @Override
     public final List<Boolean> getUnlockedSkins() {
-        return this.unlockedSkins;
+        return List.copyOf(this.unlockedSkins);
     }
 
 }
