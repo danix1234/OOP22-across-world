@@ -4,11 +4,15 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.game.model.api.GameStat;
@@ -48,27 +52,83 @@ public class LoaderImpl implements Loader {
     // STATS FILE
     private static final String STAT_FILE = "stats.txt";
 
-    private Optional<GameWorld> gameWorld = Optional.empty();
     private Optional<GameStat> gameStat = Optional.empty();
     private Optional<List<Image>> playerImages = Optional.empty();
+    private Optional<Map<String, GameWorld>> gameWorld = Optional.empty();
     private Optional<Map<ObstacleType, List<Image>>> collectableImages = Optional.empty();
     private Optional<Map<ObstacleType, List<Image>>> backgroundCellImages = Optional.empty();
     private Optional<Map<ObstacleType, List<Image>>> obstaclesImages = Optional.empty();
 
-    // LOAD operation
+    // LOAD operations
 
-    @Override
-    public void loadAllFromFile() {
+    // stats
+
+    private Path getStatFile() {
+        if (Files.exists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE))) {
+            return Paths.get(STAT_DIR + FILE_SEP + STAT_FILE);
+        }
+        return Paths.get(DEFAULT_STAT_DIR + FILE_SEP + STAT_FILE);
+    }
+
+    private void loadStat(Path filePath) {
+        try {
+            List<String> lines = Files.readAllLines(filePath);
+            final int coins = lines.stream()
+                    .dropWhile(line -> !line.equalsIgnoreCase("[coins]"))
+                    .skip(1)
+                    .limit(1)
+                    .findAny()
+                    .map(Integer::valueOf)
+                    .orElseThrow();
+            final int skins = lines.stream()
+                    .dropWhile(line -> !line.equalsIgnoreCase("[skins]"))
+                    .skip(1)
+                    .limit(1)
+                    .findAny()
+                    .map(Integer::valueOf)
+                    .orElseThrow();
+            final List<Boolean> unlockedSkin = lines.stream()
+                    .dropWhile(line -> !line.equalsIgnoreCase("[skins]"))
+                    .skip(2)
+                    .limit(skins)
+                    .map(Boolean::valueOf)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new IllegalStateException("load operation failed!");
+        }
+    }
+
+    private void loadStat() {
+        loadStat(getStatFile());
+    }
+
+    // maps
+
+    private void loadMaps() {
 
     }
 
-    // SAVE operation
+    // images
+
+    private void loadImages() {
+
+    }
+
+    @Override
+    public void loadAllFromFile() {
+        loadStat();
+        loadMaps();
+        loadImages();
+    }
+
+    // SAVE operations
 
     private void createFile() {
         try {
             Files.createDirectories(Paths.get(STAT_DIR));
             Files.createFile(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
         } catch (IOException e) {
+            throw new IllegalStateException("file creation operation failed!");
         }
     }
 
@@ -80,13 +140,14 @@ public class LoaderImpl implements Loader {
         buffer.append("[skins]\n");
         buffer.append(stats.getUnlockedSkins().size());
         buffer.append("\n");
-        for (var elem : stats.getUnlockedSkins()){
+        for (var elem : stats.getUnlockedSkins()) {
             buffer.append(elem);
             buffer.append("\n");
         }
         try {
             Files.writeString(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE), buffer.toString());
         } catch (IOException e) {
+            throw new IllegalStateException("save operation failed!");
         }
     }
 
