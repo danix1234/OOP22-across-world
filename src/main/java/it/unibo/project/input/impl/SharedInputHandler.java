@@ -18,7 +18,7 @@ public class SharedInputHandler implements InputHandler {
     public final void executeAction(final Action action) {
         switch (action) {
             case EXIT_APP:
-                LauncherImpl.LAUNCHER.closeWindow();
+                LauncherImpl.LAUNCHER.saveAndCloseWindow();
                 break;
             case CHANGE_SCENE_TO_MENU:
                 LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
