@@ -1,21 +1,16 @@
 package it.unibo.project.controller.core.impl;
 
-import java.awt.Image;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.game.model.api.GameStat;
-import it.unibo.project.game.model.api.GameWorld;
-import it.unibo.project.game.model.api.ObstacleType;
 
 /**
  * class {@code LoaderImpl} implements {@linkplain Loader}.
@@ -32,15 +27,15 @@ public class LoaderImpl implements Loader {
             + FILE_SEP + "it"
             + FILE_SEP + "unibo"
             + FILE_SEP + "project";
-    private static final String SPRITE_DIR = RESOURCE_DIR + FILE_SEP + "sprite";
+    // private static final String SPRITE_DIR = RESOURCE_DIR + FILE_SEP + "sprite";
 
     // RESOURCES DIRECTORIES
-    private static final String MAPS_DIR = RESOURCE_DIR + FILE_SEP + "maps";
     private static final String DEFAULT_STAT_DIR = RESOURCE_DIR + FILE_SEP + "stats";
-    private static final String BACKGROUND_DIR = SPRITE_DIR + FILE_SEP + "background";
-    private static final String COLLECTABLE_DIR = SPRITE_DIR + FILE_SEP + "collectable";
-    private static final String OBSTACLE_DIR = SPRITE_DIR + FILE_SEP + "obstacle";
-    private static final String PLAYER_DIR = SPRITE_DIR + FILE_SEP + "player";
+    // private static final String MAPS_DIR = RESOURCE_DIR + FILE_SEP + "maps";
+    // private static final String BACKGROUND_DIR = SPRITE_DIR + FILE_SEP + "background";
+    // private static final String COLLECTABLE_DIR = SPRITE_DIR + FILE_SEP + "collectable";
+    // private static final String OBSTACLE_DIR = SPRITE_DIR + FILE_SEP + "obstacle";
+    // private static final String PLAYER_DIR = SPRITE_DIR + FILE_SEP + "player";
 
     // STATS DIRECTORY (IN USER HOME)
     private static final String STAT_DIR = USER_HOME_DIR + FILE_SEP + ".across_world";
@@ -50,11 +45,11 @@ public class LoaderImpl implements Loader {
 
     private int coins;
     private List<Boolean> unlockedSkins;
-    private Optional<List<Image>> playerImages = Optional.empty();
-    private Optional<Map<String, GameWorld>> gameWorld = Optional.empty();
-    private Optional<Map<ObstacleType, List<Image>>> collectableImages = Optional.empty();
-    private Optional<Map<ObstacleType, List<Image>>> backgroundCellImages = Optional.empty();
-    private Optional<Map<ObstacleType, List<Image>>> obstaclesImages = Optional.empty();
+    // private Optional<List<Image>> playerImages = Optional.empty();
+    // private Optional<Map<String, GameWorld>> gameWorld = Optional.empty();
+    // private Optional<Map<ObstacleType, List<Image>>> collectableImages = Optional.empty();
+    // private Optional<Map<ObstacleType, List<Image>>> backgroundCellImages = Optional.empty();
+    // private Optional<Map<ObstacleType, List<Image>>> obstaclesImages = Optional.empty();
 
     // LOAD operations
 
@@ -104,13 +99,13 @@ public class LoaderImpl implements Loader {
     // maps
 
     private void loadMaps() {
-
+        // TODO
     }
 
     // images
 
     private void loadImages() {
-
+        // TODO
     }
 
     @Override
@@ -161,7 +156,7 @@ public class LoaderImpl implements Loader {
 
     @Override
     public final List<Boolean> getUnlockedSkins() {
-        return this.getUnlockedSkins();
+        return this.unlockedSkins;
     }
 
 }
