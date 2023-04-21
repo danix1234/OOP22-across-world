@@ -1,0 +1,8 @@
+[coins]
+0
+
+[skins]
+3
+true
+false
+false
