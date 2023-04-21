@@ -15,6 +15,8 @@ public interface GameWorld {
 
     GameLogic getGameLogic();
 
+    GameStat getGameStat();
+
     void clearMap();
 
     void loadMap(String mapName);
