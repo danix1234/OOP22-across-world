@@ -1,17 +1,14 @@
 package it.unibo.project.controller.core.impl;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import it.unibo.project.controller.core.api.Loader;
@@ -22,8 +19,6 @@ import it.unibo.project.game.model.api.ObstacleType;
 /**
  * class {@code LoaderImpl} implements {@linkplain Loader}.
  */
-// TODO remove warning suppression!
-@SuppressWarnings("unused")
 public class LoaderImpl implements Loader {
     // UTILITY PATH
     private static final String FILE_SEP = System.getProperty("file.separator");
@@ -115,7 +110,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public void loadAllFromFile() {
+    public final void loadAllFromFile() {
         loadStat();
         loadMaps();
         loadImages();
@@ -152,7 +147,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public void saveStatOnFile(final GameStat stats) {
+    public final void saveStatOnFile(final GameStat stats) {
         Objects.requireNonNull(stats);
         createFile();
         saveOnFile(stats);
