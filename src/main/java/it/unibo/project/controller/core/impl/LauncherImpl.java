@@ -29,7 +29,7 @@ public final class LauncherImpl implements Launcher {
     public static final Launcher LAUNCHER = new LauncherImpl();
 
     private final Window window = new WindowFactoryImpl().createWindow();
-    // private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
+    //private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
     private final Loader loader = new LoaderImpl();
 
@@ -103,6 +103,12 @@ public final class LauncherImpl implements Launcher {
     @Override
     public synchronized Loader getLoader() {
         return this.loader;
+    }
+
+    @Override
+    public void saveAndCloseWindow() {
+        this.gameWorld.getGameStat().saveStat();
+        this.closeWindow();
     }
 
 }

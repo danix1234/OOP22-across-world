@@ -36,6 +36,11 @@ public interface Launcher {
     void closeWindow();
 
     /**
+     * method which wraps {@link #closeWindow()} but saves on file before closing.
+     */
+    void saveAndCloseWindow();
+
+    /**
      * @return current {@linkplain Scene} being shown by the application
      */
     Scene getScene();
