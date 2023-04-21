@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Launcher;
+import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
@@ -28,10 +29,9 @@ public final class LauncherImpl implements Launcher {
     public static final Launcher LAUNCHER = new LauncherImpl();
 
     private final Window window = new WindowFactoryImpl().createWindow();
-    // uncomment when are gonna be needed
-    // private final GameEngine gameEngine = new
-    // GameEngineFactoryImpl().createGameEngine();
+    // private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
+    private final Loader loader = new LoaderImpl();
 
     private SceneType sceneType = SceneType.MENU;
     private Difficulty difficulty = Difficulty.NORMAL;
@@ -98,6 +98,11 @@ public final class LauncherImpl implements Launcher {
     @Override
     public synchronized List<Obstacle> getObstacles() {
         return this.gameWorld.getObstacles();
+    }
+
+    @Override
+    public synchronized Loader getLoader() {
+        return this.loader;
     }
 
 }

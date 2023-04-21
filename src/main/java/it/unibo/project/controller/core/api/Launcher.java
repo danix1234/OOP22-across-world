@@ -72,6 +72,11 @@ public interface Launcher {
      */
     List<BackgroundCell> getBackgroundCells();
 
+    /**
+     * @return {@linkplain Loader} which manages save and load operation from file
+     */
+    Loader getLoader();
+
     // CONTROLLER methods
     /**
      * starts the application.
