@@ -1,7 +1,5 @@
 package it.unibo.project.controller.core.api;
 
-import java.util.List;
-
 import it.unibo.project.game.model.api.GameStat;
 
 /**
@@ -30,12 +28,7 @@ public interface Loader {
     void saveStatOnFile(GameStat stats);
 
     /**
-     * @return quantity coins saved in file
+     * @return {@linkplain GameStat} initialized using the file
      */
-    int getCoins();
-
-    /**
-     * @return list of boolean representing if skins are unlocked
-     */
-    List<Boolean> getUnlockedSkins();
+    GameStat getGameStat();
 }

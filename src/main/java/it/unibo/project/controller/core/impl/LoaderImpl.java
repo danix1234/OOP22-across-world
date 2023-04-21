@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.game.model.api.GameStat;
+import it.unibo.project.game.model.impl.GameStatImpl;
 
 /**
  * class {@code LoaderImpl} implements {@linkplain Loader}.
@@ -43,8 +43,7 @@ public class LoaderImpl implements Loader {
     // STATS FILE
     private static final String STAT_FILE = "stats.txt";
 
-    private int coins;
-    private List<Boolean> unlockedSkins;
+    private GameStat gameStat = new GameStatImpl();
     // private Optional<List<Image>> playerImages = Optional.empty();
     // private Optional<Map<String, GameWorld>> gameWorld = Optional.empty();
     // private Optional<Map<ObstacleType, List<Image>>> collectableImages = Optional.empty();
@@ -52,6 +51,13 @@ public class LoaderImpl implements Loader {
     // private Optional<Map<ObstacleType, List<Image>>> obstaclesImages = Optional.empty();
 
     // LOAD operations
+    
+    @Override
+    public final void loadAllFromFile() {
+        loadStat();
+        loadMaps();
+        loadImages();
+    }
 
     // stats
 
@@ -85,8 +91,8 @@ public class LoaderImpl implements Loader {
                     .limit(skins)
                     .map(Boolean::valueOf)
                     .collect(Collectors.toList());
-            this.coins = coins;
-            this.unlockedSkins = new ArrayList<>(unlockedSkin);
+            this.gameStat.addCoins(coins);
+            this.gameStat.changeUnlockedSkins(List.copyOf(unlockedSkin));
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
@@ -106,13 +112,6 @@ public class LoaderImpl implements Loader {
 
     private void loadImages() {
         // TODO
-    }
-
-    @Override
-    public final void loadAllFromFile() {
-        loadStat();
-        loadMaps();
-        loadImages();
     }
 
     // SAVE operations
@@ -150,13 +149,8 @@ public class LoaderImpl implements Loader {
     // GETTERS
 
     @Override
-    public final int getCoins() {
-        return this.coins;
-    }
-
-    @Override
-    public final List<Boolean> getUnlockedSkins() {
-        return List.copyOf(this.unlockedSkins);
-    }
+    public GameStat getGameStat() {
+        return this.gameStat;
+    } 
 
 }
