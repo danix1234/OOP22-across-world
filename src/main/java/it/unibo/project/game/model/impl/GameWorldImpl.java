@@ -49,7 +49,7 @@ public class GameWorldImpl implements GameWorld {
     }
 
     @Override
-    public void loadMap(final String mapName) {
+    public void loadMap(final GameWorld gameWorld) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'loadMap'");
     }

@@ -19,5 +19,5 @@ public interface GameWorld {
 
     void clearMap();
 
-    void loadMap(String mapName);
+    void loadMap(GameWorld gameWorld);
 }
