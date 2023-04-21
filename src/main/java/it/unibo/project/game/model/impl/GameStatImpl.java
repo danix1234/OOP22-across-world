@@ -29,4 +29,10 @@ public class GameStatImpl implements GameStat {
         throw new UnsupportedOperationException("Unimplemented method 'changeUnlockedSkins'");
     }
 
+    @Override
+    public void setCoind(int coins) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setCoind'");
+    }
+
 }

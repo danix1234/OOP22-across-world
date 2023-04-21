@@ -5,6 +5,8 @@ import java.util.List;
 public interface GameStat {
     int getCoins();
 
+    void setCoind(int coins);
+
     void addCoins(int collectedCoins);
 
     List<Boolean> getUnlockedSkins();
