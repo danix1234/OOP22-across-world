@@ -30,7 +30,7 @@ public class GameStatImpl implements GameStat {
     }
 
     @Override
-    public void setCoind(int coins) {
+    public void setCoins(int coins) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setCoind'");
     }
