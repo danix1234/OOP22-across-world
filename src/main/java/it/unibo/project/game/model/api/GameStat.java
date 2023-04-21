@@ -5,7 +5,7 @@ import java.util.List;
 public interface GameStat {
     int getCoins();
 
-    void setCoind(int coins);
+    void setCoins(int coins);
 
     void addCoins(int collectedCoins);
 

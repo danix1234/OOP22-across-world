@@ -91,7 +91,7 @@ public class LoaderImpl implements Loader {
                     .limit(skins)
                     .map(Boolean::valueOf)
                     .collect(Collectors.toList());
-            this.gameStat.addCoins(coins);
+            this.gameStat.setCoins(coins);
             this.gameStat.changeUnlockedSkins(List.copyOf(unlockedSkin));
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
