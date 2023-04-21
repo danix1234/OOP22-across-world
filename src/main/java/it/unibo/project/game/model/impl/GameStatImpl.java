@@ -2,6 +2,7 @@ package it.unibo.project.game.model.impl;
 
 import java.util.List;
 
+import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.model.api.GameStat;
 
 public class GameStatImpl implements GameStat {
@@ -14,8 +15,7 @@ public class GameStatImpl implements GameStat {
 
     @Override
     public void saveStat() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveStat'");
+        LauncherImpl.LAUNCHER.getLoader().saveStatOnFile(this);
     }
 
     @Override
