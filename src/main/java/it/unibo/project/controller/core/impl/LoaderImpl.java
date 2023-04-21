@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -47,7 +48,8 @@ public class LoaderImpl implements Loader {
     // STATS FILE
     private static final String STAT_FILE = "stats.txt";
 
-    private Optional<GameStat> gameStat = Optional.empty();
+    private int coins;
+    private List<Boolean> unlockedSkins;
     private Optional<List<Image>> playerImages = Optional.empty();
     private Optional<Map<String, GameWorld>> gameWorld = Optional.empty();
     private Optional<Map<ObstacleType, List<Image>>> collectableImages = Optional.empty();
@@ -65,31 +67,33 @@ public class LoaderImpl implements Loader {
         return Paths.get(DEFAULT_STAT_DIR + FILE_SEP + STAT_FILE);
     }
 
-    private void loadStat(Path filePath) {
+    private void loadStat(final Path filePath) {
         try {
-            List<String> lines = Files.readAllLines(filePath);
+            final List<String> lines = Files.readAllLines(filePath);
             final int coins = lines.stream()
-                    .dropWhile(line -> !line.equalsIgnoreCase("[coins]"))
+                    .dropWhile(line -> !"[coins]".equalsIgnoreCase(line))
                     .skip(1)
                     .limit(1)
                     .findAny()
                     .map(Integer::valueOf)
                     .orElseThrow();
             final int skins = lines.stream()
-                    .dropWhile(line -> !line.equalsIgnoreCase("[skins]"))
+                    .dropWhile(line -> !"[skins]".equalsIgnoreCase(line))
                     .skip(1)
                     .limit(1)
                     .findAny()
                     .map(Integer::valueOf)
                     .orElseThrow();
             final List<Boolean> unlockedSkin = lines.stream()
-                    .dropWhile(line -> !line.equalsIgnoreCase("[skins]"))
+                    .dropWhile(line -> !"[skins]".equalsIgnoreCase(line))
                     .skip(2)
                     .limit(skins)
                     .map(Boolean::valueOf)
                     .collect(Collectors.toList());
+            this.coins = coins;
+            this.unlockedSkins = new ArrayList<>(unlockedSkin);
         } catch (IOException e) {
-            throw new IllegalStateException("load operation failed!");
+            LauncherImpl.LAUNCHER.closeWindow();
         }
     }
 
@@ -123,26 +127,21 @@ public class LoaderImpl implements Loader {
             Files.createDirectories(Paths.get(STAT_DIR));
             Files.createFile(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
         } catch (IOException e) {
-            throw new IllegalStateException("file creation operation failed!");
+            LauncherImpl.LAUNCHER.closeWindow();
         }
     }
 
     private void saveOnFile(final GameStat stats) {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("[coins]\n");
-        buffer.append(stats.getCoins());
-        buffer.append("\n\n");
-        buffer.append("[skins]\n");
-        buffer.append(stats.getUnlockedSkins().size());
-        buffer.append("\n");
-        for (var elem : stats.getUnlockedSkins()) {
-            buffer.append(elem);
-            buffer.append("\n");
-        }
+        final String buffer = "[coins]\n" + stats.getCoins() + "\n\n"
+                + "[skins]\n" + stats.getUnlockedSkins().size() + "\n"
+                + stats.getUnlockedSkins()
+                        .stream()
+                        .map(String::valueOf)
+                        .map(bool -> bool + "\n");
         try {
-            Files.writeString(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE), buffer.toString());
+            Files.writeString(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE), buffer);
         } catch (IOException e) {
-            throw new IllegalStateException("save operation failed!");
+            LauncherImpl.LAUNCHER.closeWindow();
         }
     }
 
@@ -151,6 +150,18 @@ public class LoaderImpl implements Loader {
         Objects.requireNonNull(stats);
         createFile();
         saveOnFile(stats);
+    }
+
+    // GETTERS
+
+    @Override
+    public final int getCoins() {
+        return this.coins;
+    }
+
+    @Override
+    public final List<Boolean> getUnlockedSkins() {
+        return this.getUnlockedSkins();
     }
 
 }
