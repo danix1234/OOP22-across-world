@@ -49,7 +49,7 @@ public class LoaderImpl implements Loader {
     // STATS FILE
     private static final String STAT_FILE = "stats.txt";
 
-    private GameStat gameStat = new GameStatImpl();
+    private Optional<GameStat> gameStat = Optional.empty();
     private Optional<List<Image>> playerImages = Optional.empty();
     private Optional<Map<Difficulty, List<GameWorld>>> gameWorld = Optional.empty();
     private Optional<Map<ObstacleType, List<Image>>> collectableImages = Optional.empty();
@@ -57,7 +57,7 @@ public class LoaderImpl implements Loader {
     private Optional<Map<ObstacleType, List<Image>>> obstaclesImages = Optional.empty();
 
     // LOAD operations
-    
+
     @Override
     public final void loadAllFromFile() {
         loadStat();
@@ -97,8 +97,9 @@ public class LoaderImpl implements Loader {
                     .limit(skins)
                     .map(Boolean::valueOf)
                     .collect(Collectors.toList());
-            this.gameStat.setCoins(coins);
-            this.gameStat.changeUnlockedSkins(List.copyOf(unlockedSkin));
+            this.gameStat = Optional.of(new GameStatImpl());
+            this.gameStat.ifPresent(stat -> stat.setCoins(coins));
+            this.gameStat.ifPresent(stat -> stat.changeUnlockedSkins(List.copyOf(unlockedSkin)));
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
@@ -156,7 +157,10 @@ public class LoaderImpl implements Loader {
 
     @Override
     public GameStat getGameStat() {
-        return this.gameStat;
-    } 
+        return this.gameStat.orElseGet(() -> {
+            loadStat();
+            return this.gameStat.orElseThrow();
+        });
+    }
 
 }
