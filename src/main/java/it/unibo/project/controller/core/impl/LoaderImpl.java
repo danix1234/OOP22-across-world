@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,7 +142,7 @@ public class LoaderImpl implements Loader {
 
     // images
 
-    private Image loadImage(String path) {
+    private Image loadImage(final String path) {
         try {
             return ImageIO.read(new File(path));
         } catch (IOException e) {
@@ -154,7 +153,7 @@ public class LoaderImpl implements Loader {
         return null;
     }
 
-    private List<Image> loadImages(String directory, List<String> fileNames) {
+    private List<Image> loadImages(final String directory, final List<String> fileNames) {
         return fileNames.stream()
                 .map(fileName -> directory + FILE_SEP + fileName)
                 .map(this::loadImage)
@@ -222,7 +221,7 @@ public class LoaderImpl implements Loader {
     // GETTERS
 
     @Override
-    public <X> X getElementRandom(List<X> collection) {
+    public <X> X getElementRandom(final List<X> collection) {
         return collection.get(new Random().nextInt(collection.size()));
     }
 
@@ -235,7 +234,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public List<Image> getBackgroundCellSprites(BackgroundCellType backgroundCellType) {
+    public List<Image> getBackgroundCellSprites(final BackgroundCellType backgroundCellType) {
         return this.backgroundCellImages.orElseGet(() -> {
             loadImages();
             return this.backgroundCellImages.orElseThrow();
@@ -243,7 +242,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public List<Image> getCollectablesSprites(CollectableType collectableType) {
+    public List<Image> getCollectablesSprites(final CollectableType collectableType) {
         return this.collectableImages.orElseGet(() -> {
             loadImages();
             return this.collectableImages.orElseThrow();
@@ -251,7 +250,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public List<Image> getObstacleSprites(ObstacleType obstacleType) {
+    public List<Image> getObstacleSprites(final ObstacleType obstacleType) {
         return this.obstacleImages.orElseGet(() -> {
             loadImages();
             return this.obstacleImages.orElseThrow();
