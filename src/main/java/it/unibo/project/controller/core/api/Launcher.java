@@ -30,8 +30,7 @@ public interface Launcher {
     void setScene(SceneType sceneType);
 
     /**
-     * method to {@code gracefully} close application, and execute operations
-     * necessary before terminate application (example: saving statistics on file).
+     * method to {@code gracefully} close application
      */
     void closeWindow();
 

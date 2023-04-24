@@ -1,16 +1,20 @@
 package it.unibo.project.controller.core.impl;
 
 import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.imageio.ImageIO;
 
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Loader;
@@ -49,11 +53,26 @@ public class LoaderImpl implements Loader {
     private static final String DEFAULT_STAT_DIR = RESOURCE_DIR + FILE_SEP + "stats";
     private static final String STAT_DIR = USER_HOME_DIR + FILE_SEP + ".across_world";
 
-    // RESOURCES FILES
-    private static final Map<CollectableType, List<String>> collectableFiles = Map.of();
-    private static final Map<BackgroundCellType, List<String>> backgroundCellFiles = Map.of();
-    private static final Map<ObstacleType, List<String>> ObstacleFiles = Map.of();
-    private static final List<String> playerFiles = List.of();
+    // RESOURCES FILES (modify if new files, or types are added)
+    private static final Map<CollectableType, List<String>> collectableFiles = Map.of(
+            CollectableType.COIN, List.of("coin.png"),
+            CollectableType.POWERUP_COIN_MAGNET, List.of("powerup.png"),
+            CollectableType.POWERUP_COIN_MULTIPLIER, List.of("powerup.png"),
+            CollectableType.POWERUP_IMMORTALITY, List.of("powerup.png"));
+    private static final Map<BackgroundCellType, List<String>> backgroundCellFiles = Map.of(
+            BackgroundCellType.GRASS, List.of("grass.png"),
+            BackgroundCellType.RAIL, List.of("rail.png"),
+            BackgroundCellType.ROAD, List.of("road.png"),
+            BackgroundCellType.WATER, List.of("water.png"));
+    private static final Map<ObstacleType, List<String>> ObstacleFiles = Map.of(
+            ObstacleType.BUSH, List.of("bush.png"),
+            ObstacleType.TREE, List.of("tree.png"),
+            ObstacleType.CAR_SX, List.of("carSX0.png"),
+            ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png"),
+            ObstacleType.TRAIN_SX, List.of(),
+            ObstacleType.TRAIN_DX, List.of(),
+            ObstacleType.TRASPARENT_WATER, List.of());
+    private static final List<String> playerFiles = List.of("player0.png");
 
     // STATS FILE
     private static final String STAT_FILE = "stats.txt";
@@ -127,7 +146,27 @@ public class LoaderImpl implements Loader {
 
     // images
 
+    private Image loadImage(String path) {
+        try {
+            return ImageIO.read(new File(path));
+        } catch (IOException e) {
+            LauncherImpl.LAUNCHER.closeWindow();
+        }
+
+        // can't be reached, but java compiler can't know
+        return null;
+    }
+
+    private void loadPlayer() {
+        final List<Image> players = new ArrayList<>();
+        for (String fileName : playerFiles) {
+            players.add(loadImage(PLAYER_DIR + FILE_SEP + fileName));
+        }
+        this.playerImages = Optional.of(players);
+    }
+
     private void loadImages() {
+        loadPlayer();
         // TODO
     }
 
