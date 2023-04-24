@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
@@ -48,23 +49,21 @@ public class LoaderImpl implements Loader {
     private static final String COLLECTABLE_DIR = SPRITE_DIR + FILE_SEP + "collectable";
     private static final String OBSTACLE_DIR = SPRITE_DIR + FILE_SEP + "obstacle";
     private static final String PLAYER_DIR = SPRITE_DIR + FILE_SEP + "player";
-
-    // STATS DIRECTORIES
     private static final String DEFAULT_STAT_DIR = RESOURCE_DIR + FILE_SEP + "stats";
     private static final String STAT_DIR = USER_HOME_DIR + FILE_SEP + ".across_world";
 
-    // RESOURCES FILES (modify if new files, or types are added)
-    private static final Map<CollectableType, List<String>> collectableFiles = Map.of(
+    // RESOURCES FILES
+    private static final Map<CollectableType, List<String>> COLLECTABLE_FILES = Map.of(
             CollectableType.COIN, List.of("coin.png"),
             CollectableType.POWERUP_COIN_MAGNET, List.of("powerup.png"),
             CollectableType.POWERUP_COIN_MULTIPLIER, List.of("powerup.png"),
             CollectableType.POWERUP_IMMORTALITY, List.of("powerup.png"));
-    private static final Map<BackgroundCellType, List<String>> backgroundCellFiles = Map.of(
+    private static final Map<BackgroundCellType, List<String>> BACKGROUND_FILES = Map.of(
             BackgroundCellType.GRASS, List.of("grass.png"),
             BackgroundCellType.RAIL, List.of("rail.png"),
             BackgroundCellType.ROAD, List.of("road.png"),
             BackgroundCellType.WATER, List.of("water.png"));
-    private static final Map<ObstacleType, List<String>> ObstacleFiles = Map.of(
+    private static final Map<ObstacleType, List<String>> OBSTACLE_FILES = Map.of(
             ObstacleType.BUSH, List.of("bush.png"),
             ObstacleType.TREE, List.of("tree.png"),
             ObstacleType.CAR_SX, List.of("carSX0.png"),
@@ -72,18 +71,16 @@ public class LoaderImpl implements Loader {
             ObstacleType.TRAIN_SX, List.of(),
             ObstacleType.TRAIN_DX, List.of(),
             ObstacleType.TRASPARENT_WATER, List.of());
-    private static final List<String> playerFiles = List.of("player0.png");
-
-    // STATS FILE
+    private static final List<String> PLAYER_FILES = List.of("player0.png");
     private static final String STAT_FILE = "stats.txt";
 
     // LOADED DATA
     private Optional<GameStat> gameStat = Optional.empty();
-    private Optional<List<Image>> playerImages = Optional.empty();
     private Optional<Map<Difficulty, List<GameWorld>>> gameWorld = Optional.empty();
+    private Optional<List<Image>> playerImages = Optional.empty();
     private Optional<Map<CollectableType, List<Image>>> collectableImages = Optional.empty();
     private Optional<Map<BackgroundCellType, List<Image>>> backgroundCellImages = Optional.empty();
-    private Optional<Map<ObstacleType, List<Image>>> obstaclesImages = Optional.empty();
+    private Optional<Map<ObstacleType, List<Image>>> obstacleImages = Optional.empty();
 
     // LOAD operations
 
@@ -157,17 +154,37 @@ public class LoaderImpl implements Loader {
         return null;
     }
 
-    private void loadPlayer() {
-        final List<Image> players = new ArrayList<>();
-        for (String fileName : playerFiles) {
-            players.add(loadImage(PLAYER_DIR + FILE_SEP + fileName));
-        }
-        this.playerImages = Optional.of(players);
+    private List<Image> loadImages(String directory, List<String> fileNames) {
+        return fileNames.stream()
+                .map(fileName -> directory + FILE_SEP + fileName)
+                .map(this::loadImage)
+                .toList();
     }
 
     private void loadImages() {
-        loadPlayer();
-        // TODO
+        // players
+        this.playerImages = Optional.of(loadImages(PLAYER_DIR, PLAYER_FILES));
+
+        // collectables
+        final Map<CollectableType, List<Image>> collectableImages = new HashMap<>();
+        for (CollectableType type : CollectableType.values()) {
+            collectableImages.put(type, loadImages(COLLECTABLE_DIR, COLLECTABLE_FILES.get(type)));
+        }
+        this.collectableImages = Optional.of(collectableImages);
+
+        // obstacle
+        final Map<ObstacleType, List<Image>> obstacleImages = new HashMap<>();
+        for (ObstacleType type : ObstacleType.values()) {
+            obstacleImages.put(type, loadImages(OBSTACLE_DIR, OBSTACLE_FILES.get(type)));
+        }
+        this.obstacleImages = Optional.of(obstacleImages);
+
+        // background
+        final Map<BackgroundCellType, List<Image>> backgroundCellImages = new HashMap<>();
+        for (BackgroundCellType type : BackgroundCellType.values()) {
+            backgroundCellImages.put(type, loadImages(BACKGROUND_DIR, BACKGROUND_FILES.get(type)));
+        }
+        this.backgroundCellImages = Optional.of(backgroundCellImages);
     }
 
     // SAVE operations
@@ -205,10 +222,47 @@ public class LoaderImpl implements Loader {
     // GETTERS
 
     @Override
+    public <X> X getElementRandom(List<X> collection) {
+        return collection.get(new Random().nextInt(collection.size()));
+    }
+
+    @Override
     public GameStat getGameStat() {
         return this.gameStat.orElseGet(() -> {
             loadStat();
             return this.gameStat.orElseThrow();
+        });
+    }
+
+    @Override
+    public List<Image> getBackgroundCellSprites(BackgroundCellType backgroundCellType) {
+        return this.backgroundCellImages.orElseGet(() -> {
+            loadImages();
+            return this.backgroundCellImages.orElseThrow();
+        }).get(backgroundCellType);
+    }
+
+    @Override
+    public List<Image> getCollectablesSprites(CollectableType collectableType) {
+        return this.collectableImages.orElseGet(() -> {
+            loadImages();
+            return this.collectableImages.orElseThrow();
+        }).get(collectableType);
+    }
+
+    @Override
+    public List<Image> getObstacleSprites(ObstacleType obstacleType) {
+        return this.obstacleImages.orElseGet(() -> {
+            loadImages();
+            return this.obstacleImages.orElseThrow();
+        }).get(obstacleType);
+    }
+
+    @Override
+    public List<Image> getPlayerSprites() {
+        return this.playerImages.orElseGet(() -> {
+            loadImages();
+            return this.playerImages.orElseThrow();
         });
     }
 
