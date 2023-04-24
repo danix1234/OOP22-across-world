@@ -74,5 +74,5 @@ public interface Loader {
      * @param collection
      * @return {@code random} element from the list
      */
-    <X> X getElementRandom(List<X> collection);
+    Image getElementRandom(List<Image> collection);
 }

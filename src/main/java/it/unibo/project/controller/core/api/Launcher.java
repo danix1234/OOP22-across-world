@@ -30,7 +30,7 @@ public interface Launcher {
     void setScene(SceneType sceneType);
 
     /**
-     * method to {@code gracefully} close application
+     * method to {@code gracefully} close application.
      */
     void closeWindow();
 

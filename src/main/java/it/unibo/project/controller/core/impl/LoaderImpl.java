@@ -166,21 +166,21 @@ public class LoaderImpl implements Loader {
 
         // collectables
         final Map<CollectableType, List<Image>> collectableImages = new HashMap<>();
-        for (CollectableType type : CollectableType.values()) {
+        for (final CollectableType type : CollectableType.values()) {
             collectableImages.put(type, loadImages(COLLECTABLE_DIR, COLLECTABLE_FILES.get(type)));
         }
         this.collectableImages = Optional.of(collectableImages);
 
         // obstacle
         final Map<ObstacleType, List<Image>> obstacleImages = new HashMap<>();
-        for (ObstacleType type : ObstacleType.values()) {
+        for (final ObstacleType type : ObstacleType.values()) {
             obstacleImages.put(type, loadImages(OBSTACLE_DIR, OBSTACLE_FILES.get(type)));
         }
         this.obstacleImages = Optional.of(obstacleImages);
 
         // background
         final Map<BackgroundCellType, List<Image>> backgroundCellImages = new HashMap<>();
-        for (BackgroundCellType type : BackgroundCellType.values()) {
+        for (final BackgroundCellType type : BackgroundCellType.values()) {
             backgroundCellImages.put(type, loadImages(BACKGROUND_DIR, BACKGROUND_FILES.get(type)));
         }
         this.backgroundCellImages = Optional.of(backgroundCellImages);
@@ -221,12 +221,12 @@ public class LoaderImpl implements Loader {
     // GETTERS
 
     @Override
-    public <X> X getElementRandom(final List<X> collection) {
+    public final Image getElementRandom(final List<Image> collection) {
         return collection.get(new Random().nextInt(collection.size()));
     }
 
     @Override
-    public GameStat getGameStat() {
+    public final GameStat getGameStat() {
         return this.gameStat.orElseGet(() -> {
             loadStat();
             return this.gameStat.orElseThrow();
@@ -234,7 +234,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public List<Image> getBackgroundCellSprites(final BackgroundCellType backgroundCellType) {
+    public final List<Image> getBackgroundCellSprites(final BackgroundCellType backgroundCellType) {
         return this.backgroundCellImages.orElseGet(() -> {
             loadImages();
             return this.backgroundCellImages.orElseThrow();
@@ -242,7 +242,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public List<Image> getCollectablesSprites(final CollectableType collectableType) {
+    public final List<Image> getCollectablesSprites(final CollectableType collectableType) {
         return this.collectableImages.orElseGet(() -> {
             loadImages();
             return this.collectableImages.orElseThrow();
@@ -250,7 +250,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public List<Image> getObstacleSprites(final ObstacleType obstacleType) {
+    public final List<Image> getObstacleSprites(final ObstacleType obstacleType) {
         return this.obstacleImages.orElseGet(() -> {
             loadImages();
             return this.obstacleImages.orElseThrow();
@@ -258,7 +258,7 @@ public class LoaderImpl implements Loader {
     }
 
     @Override
-    public List<Image> getPlayerSprites() {
+    public final List<Image> getPlayerSprites() {
         return this.playerImages.orElseGet(() -> {
             loadImages();
             return this.playerImages.orElseThrow();
