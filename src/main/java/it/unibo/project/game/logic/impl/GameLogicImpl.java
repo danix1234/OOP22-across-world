@@ -6,7 +6,7 @@ import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.logic.api.MovementLogic;
 
 /**
- * class {@code GameLogicImpl} implements {@linkplain GameLogic}
+ * class {@code GameLogicImpl} implements {@linkplain GameLogic}.
  */
 public class GameLogicImpl implements GameLogic {
     private final CheckCollision checkCollision = new CheckCollisionImpl();
