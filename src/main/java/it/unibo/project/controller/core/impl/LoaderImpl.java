@@ -18,10 +18,13 @@ import javax.imageio.ImageIO;
 
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Loader;
+import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.BackgroundCellType;
+import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.GameWorld;
+import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.game.model.impl.GameStatImpl;
 
@@ -75,7 +78,9 @@ public class LoaderImpl implements Loader {
 
     // LOADED DATA
     private Optional<GameStat> gameStat = Optional.empty();
-    private Optional<Map<Difficulty, List<GameWorld>>> gameWorld = Optional.empty();
+    private Optional<Map<Difficulty, Map<ObstacleType, List<Obstacle>>>> obstacles = Optional.empty();
+    private Optional<Map<Difficulty, Map<BackgroundCellType, List<BackgroundCell>>>> backgroundCells = Optional.empty();
+    private Optional<Map<Difficulty, Map<CollectableType, List<Collectable>>>> collectables = Optional.empty();
     private Optional<List<Image>> playerImages = Optional.empty();
     private Optional<Map<CollectableType, List<Image>>> collectableImages = Optional.empty();
     private Optional<Map<BackgroundCellType, List<Image>>> backgroundCellImages = Optional.empty();
