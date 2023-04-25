@@ -2,6 +2,7 @@ package it.unibo.project.game.model.impl;
 
 import java.util.List;
 
+import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.game.logic.api.GameLogic;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
@@ -43,21 +44,14 @@ public class GameWorldImpl implements GameWorld {
     }
 
     @Override
-    public void clearMap() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clearMap'");
-    }
-
-    @Override
-    public void loadMap(final GameWorld gameWorld) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadMap'");
-    }
-
-    @Override
     public GameStat getGameStat() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getGameStat'");
+    }
+
+    @Override
+    public void loadMap(final Difficulty difficulty) {
+        // TODO Auto-generated method stub
     }
 
 }

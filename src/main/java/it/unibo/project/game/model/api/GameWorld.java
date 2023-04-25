@@ -2,6 +2,7 @@ package it.unibo.project.game.model.api;
 
 import java.util.List;
 
+import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.game.logic.api.GameLogic;
 
 public interface GameWorld {
@@ -17,7 +18,5 @@ public interface GameWorld {
 
     GameStat getGameStat();
 
-    void clearMap();
-
-    void loadMap(GameWorld gameWorld);
+    void loadMap(Difficulty difficulty);    
 }
