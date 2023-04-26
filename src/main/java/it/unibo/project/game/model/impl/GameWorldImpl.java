@@ -55,19 +55,19 @@ public class GameWorldImpl implements GameWorld {
     }
 
     @Override
-    public void addObstacles(List<Obstacle> obstacles) {
+    public void addObstacles(final List<Obstacle> obstacles) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addObstacles'");
     }
 
     @Override
-    public void addCollectables(List<Collectable> collectables) {
+    public void addCollectables(final List<Collectable> collectables) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addCollectables'");
     }
 
     @Override
-    public void addBackgroundCell(List<BackgroundCell> backgroundCells) {
+    public void addBackgroundCell(final List<BackgroundCell> backgroundCells) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addBackgroundCell'");
     }

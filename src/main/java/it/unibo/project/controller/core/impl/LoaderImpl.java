@@ -274,7 +274,7 @@ public class LoaderImpl implements Loader {
     // OTHER
 
     @Override
-    public void deleteStatFile() {
+    public final void deleteStatFile() {
         try {
             Files.deleteIfExists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
             Files.deleteIfExists(Paths.get(STAT_DIR));

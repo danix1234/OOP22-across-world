@@ -12,19 +12,28 @@ import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.game.model.impl.GameStatImpl;
 
-public class LoaderTest {
+/**
+ * tests for {@linkplain Loader} class.
+ */
+class LoaderTest {
     private final Loader loader = new LoaderImpl();
     private boolean deleteStatFile = true;
 
+    /**
+     * assure resorces loading work.
+     */
     @Test
-    public void testLoading() {
+    void testLoading() {
         assertDoesNotThrow(() -> {
             this.loader.loadAllFromFile();
         });
     }
 
+    /**
+     * assure getter methods work.
+     */
     @Test
-    public void testGetters() {
+    void testGetters() {
         assertNotNull(this.loader.getGameStat());
         assertNotNull(this.loader.getPlayerSprites());
         assertNotNull(this.loader.getBackgroundCellSprites(BackgroundCellType.GRASS));
@@ -33,8 +42,13 @@ public class LoaderTest {
         assertNotNull(this.loader.getElementRandom(this.loader.getPlayerSprites()));
     }
 
+    /**
+     * assure saving work.
+     * 
+     * @implNote deletes directory in user home before ending
+     */
     @Test
-    public void testSaving() {
+    void testSaving() {
         assertDoesNotThrow(() -> {
             try {
                 this.loader.saveStatOnFile(new GameStatImpl());
@@ -46,8 +60,11 @@ public class LoaderTest {
         });
     }
 
+    /**
+     * test loading stats from user dir.
+     */
     @Test
-    public void testAllWithStatDir() {
+    void testAllWithStatDir() {
         // tests loading statistics from user directory, instead then from default file
         this.deleteStatFile = false;
         testSaving();
