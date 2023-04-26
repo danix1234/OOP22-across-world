@@ -271,4 +271,15 @@ public class LoaderImpl implements Loader {
         });
     }
 
+    // OTHER
+
+    @Override
+    public void deleteStatFile() {
+        try {
+            Files.deleteIfExists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
+            Files.deleteIfExists(Paths.get(STAT_DIR));
+        } catch (IOException e) {
+            LauncherImpl.LAUNCHER.closeWindow();
+        }
+    }
 }
