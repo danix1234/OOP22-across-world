@@ -6,6 +6,8 @@ import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.api.SceneType;
+import it.unibo.project.controller.engine.api.GameEngine;
+import it.unibo.project.controller.engine.impl.GameEngineFactoryImpl;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.GameWorld;
@@ -22,6 +24,8 @@ import it.unibo.project.view.impl.WindowFactoryImpl;
  * class {@linkplain LauncherImpl}, implements {@linkplain Launcher}, and it's a
  * {@code singleton} ({@link #LAUNCHER}).
  */
+// TODO remove temporary warning suppression
+@SuppressWarnings("unused")
 public final class LauncherImpl implements Launcher {
     /**
      * {@code singleton} of {@linkplain Launcher} class.
@@ -29,8 +33,7 @@ public final class LauncherImpl implements Launcher {
     public static final Launcher LAUNCHER = new LauncherImpl();
 
     private final Window window = new WindowFactoryImpl().createWindow();
-    // private final GameEngine gameEngine = new
-    // GameEngineFactoryImpl().createGameEngine();
+    private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
     private final Loader loader = new LoaderImpl();
 
