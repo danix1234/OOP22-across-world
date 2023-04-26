@@ -41,4 +41,11 @@ public class LauncherTest {
     public void testLoader() {
         assertNotNull(this.launcher.getLoader());
     }
+
+    @Test
+    public void testInputHandler() {
+        for (final var type : SceneType.values()) {
+            assertNotNull(this.launcher.geInputHandler(type));
+        }
+    }
 }
