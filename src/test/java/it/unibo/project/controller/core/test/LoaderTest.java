@@ -67,9 +67,14 @@ class LoaderTest {
     void testAllWithStatDir() {
         // tests loading statistics from user directory, instead then from default file
         this.deleteStatFile = false;
-        testSaving();
+        assertDoesNotThrow(() -> {
+            testSaving();
+            testLoading();
+            testGetters();
+        });
+
+        // removes directory in user home
         this.deleteStatFile = true;
-        testLoading();
-        testGetters();
+        testSaving();
     }
 }
