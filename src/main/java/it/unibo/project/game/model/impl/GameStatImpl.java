@@ -4,35 +4,34 @@ import java.util.List;
 
 import it.unibo.project.game.model.api.GameStat;
 
+
 public class GameStatImpl implements GameStat {
+    int coins;
+    List<Boolean> unlockedSkins;
+
     @Override
     public int getCoins() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCoins'");
+        return coins;
     }
 
     @Override
     public List<Boolean> getUnlockedSkins() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUnlockedSkins'");
+        return unlockedSkins;
     }
 
     @Override
     public void addCoins(final int collectedCoins) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addCoins'");
+        coins += collectedCoins;
     }
 
     @Override
     public void changeUnlockedSkins(final List<Boolean> unlockedSkins) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'changeUnlockedSkins'");
+        this.unlockedSkins = unlockedSkins;
     }
 
     @Override
     public void setCoins(int coins) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setCoind'");
+        this.coins = coins;
     }
 
 }
