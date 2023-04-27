@@ -80,7 +80,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public synchronized InputHandler geInputHandler(SceneType sceneType) {
+    public synchronized InputHandler getInputHandler(SceneType sceneType) {
         return getScene().getInputHandler(sceneType);
     }
 

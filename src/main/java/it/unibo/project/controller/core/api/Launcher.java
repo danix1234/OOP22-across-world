@@ -93,5 +93,5 @@ public interface Launcher {
      * @param sceneType of the inputHandler needed
      * @return {@linkplain InputHandler} which handles the {@linkplain Action}
      */
-    InputHandler geInputHandler(SceneType sceneType);
+    InputHandler getInputHandler(SceneType sceneType);
 }
