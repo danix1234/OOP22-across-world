@@ -34,6 +34,13 @@ public interface Loader {
     void saveStatOnFile(GameStat stats);
 
     /**
+     * remove the directory and the files saved in the user home directory.
+     * 
+     * @implNote {@code WARNING}: removes all player gameplay results, {@code use wisely!}
+     */
+    void deleteStatFile();
+
+    /**
      * @return {@linkplain GameStat} initialized using the file
      */
     GameStat getGameStat();

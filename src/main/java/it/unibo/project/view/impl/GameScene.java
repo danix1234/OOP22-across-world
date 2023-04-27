@@ -31,7 +31,7 @@ public class GameScene extends AbstractScene {
     /**
      * {@code quantity} of cell in {@code vertical} direction.
      */
-    public static final int VERT_CELL = (HEIGHT / (WIDTH / ORIZ_CELL)) + 1;
+    public static final int VERT_CELL = HEIGHT / (WIDTH / ORIZ_CELL) + 1;
     /**
      * {@code dimension} of one side of each cell, in {@code pixel}.
      */
@@ -83,6 +83,7 @@ public class GameScene extends AbstractScene {
     }
 
     private class Panel extends JPanel {
+        private static final long serialVersionUID = 0L;
 
         // TODO temporary suppress, to be removed
         @SuppressWarnings("unused")

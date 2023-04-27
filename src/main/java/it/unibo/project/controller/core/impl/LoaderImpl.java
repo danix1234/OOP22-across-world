@@ -23,7 +23,6 @@ import it.unibo.project.game.model.api.BackgroundCellType;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.GameStat;
-import it.unibo.project.game.model.api.GameWorld;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.game.model.impl.GameStatImpl;
@@ -31,6 +30,8 @@ import it.unibo.project.game.model.impl.GameStatImpl;
 /**
  * class {@code LoaderImpl} implements {@linkplain Loader}.
  */
+// TODO remove temporary warning suppression
+@SuppressWarnings("unused")
 public class LoaderImpl implements Loader {
     // UTILITY PATH
     private static final String FILE_SEP = System.getProperty("file.separator");
@@ -270,4 +271,15 @@ public class LoaderImpl implements Loader {
         });
     }
 
+    // OTHER
+
+    @Override
+    public final void deleteStatFile() {
+        try {
+            Files.deleteIfExists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
+            Files.deleteIfExists(Paths.get(STAT_DIR));
+        } catch (IOException e) {
+            LauncherImpl.LAUNCHER.closeWindow();
+        }
+    }
 }

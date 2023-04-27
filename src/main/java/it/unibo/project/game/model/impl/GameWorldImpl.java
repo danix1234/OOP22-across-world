@@ -2,7 +2,6 @@ package it.unibo.project.game.model.impl;
 
 import java.util.List;
 
-import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.game.logic.api.GameLogic;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
@@ -50,8 +49,33 @@ public class GameWorldImpl implements GameWorld {
     }
 
     @Override
-    public void loadMap(final Difficulty difficulty) {
+    public void setGameStat() {
         // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setGameStat'");
+    }
+
+    @Override
+    public void addObstacles(final List<Obstacle> obstacles) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addObstacles'");
+    }
+
+    @Override
+    public void addCollectables(final List<Collectable> collectables) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addCollectables'");
+    }
+
+    @Override
+    public void addBackgroundCell(final List<BackgroundCell> backgroundCells) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addBackgroundCell'");
+    }
+
+    @Override
+    public void clearAllEntity() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'clearAllEntity'");
     }
 
 }

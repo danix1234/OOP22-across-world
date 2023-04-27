@@ -60,7 +60,7 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public final void processInput() {
         if (this.playerFrameCounter == 0) {
-            LauncherImpl.LAUNCHER.geInputHandler(SceneType.GAME).executeStoredAction();
+            LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).executeStoredAction();
         }
     }
 
