@@ -1,4 +1,4 @@
-package it.unibo.project.controller.core.test;
+package it.unibo.project.controller.core;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;

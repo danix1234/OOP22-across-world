@@ -1,4 +1,4 @@
-package it.unibo.project.controller.engine.test;
+package it.unibo.project.controller.engine;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 

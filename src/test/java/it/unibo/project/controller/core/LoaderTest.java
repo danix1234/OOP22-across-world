@@ -1,4 +1,4 @@
-package it.unibo.project.controller.core.test;
+package it.unibo.project.controller.core;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -65,16 +65,18 @@ class LoaderTest {
      */
     @Test
     void testAllWithStatDir() {
-        // tests loading statistics from user directory, instead then from default file
-        this.deleteStatFile = false;
-        assertDoesNotThrow(() -> {
+        try {
+            // tests loading statistics from user directory, instead then from default file
+            this.deleteStatFile = false;
+            assertDoesNotThrow(() -> {
+                testSaving();
+                testLoading();
+                testGetters();
+            });
+        } finally {
+            // removes directory in user home
+            this.deleteStatFile = true;
             testSaving();
-            testLoading();
-            testGetters();
-        });
-
-        // removes directory in user home
-        this.deleteStatFile = true;
-        testSaving();
+        }
     }
 }
