@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,11 @@ import it.unibo.project.game.model.api.Entity;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
+import it.unibo.project.game.model.impl.BackgroundCellImpl;
+import it.unibo.project.game.model.impl.CollectableImpl;
 import it.unibo.project.game.model.impl.EntityImpl;
 import it.unibo.project.game.model.impl.GameStatImpl;
+import it.unibo.project.game.model.impl.ObstacleImpl;
 import it.unibo.project.utility.Vector2D;
 
 /**
@@ -172,22 +176,40 @@ public class LoaderImpl implements Loader {
     }
 
     private List<Vector2D> loadEntity(Difficulty difficulty, String nameEntity) {
-        return null;
+        return getMapBuffer(difficulty)
+                .stream()
+                .dropWhile(line -> !line.equalsIgnoreCase("[" + nameEntity + " ]"))
+                .skip(1)
+                .map(String::strip)
+                .takeWhile(line -> line.length() > 0)
+                .map(line -> line.split(" "))
+                .map(line -> new Vector2D(Integer.parseInt(line[0]), Integer.parseInt(line[1])))
+                .toList();
     }
 
     private List<Collectable> loadEntityCollectable(Difficulty difficulty, CollectableType type) {
-        return null;
+        return loadEntity(difficulty, type.name())
+                .stream()
+                .map(vector -> (Collectable) new CollectableImpl(vector, type))
+                .toList();
     }
 
     private List<Obstacle> loadEntityObstacle(Difficulty difficulty, ObstacleType type) {
-        return null;
+        return loadEntity(difficulty, type.name())
+                .stream()
+                .map(vector -> (Obstacle) new ObstacleImpl(vector, type))
+                .toList();
     }
 
     private List<BackgroundCell> loadEntityBackground(Difficulty difficulty, BackgroundCellType type) {
-        return null;
+        return loadEntity(difficulty, type.name())
+                .stream()
+                .map(vector -> (BackgroundCell) new BackgroundCellImpl(vector, type))
+                .toList();
     }
 
     private void loadMaps() {
+
     }
 
     // images
