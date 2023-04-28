@@ -22,10 +22,13 @@ import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.BackgroundCellType;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
+import it.unibo.project.game.model.api.Entity;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
+import it.unibo.project.game.model.impl.EntityImpl;
 import it.unibo.project.game.model.impl.GameStatImpl;
+import it.unibo.project.utility.Vector2D;
 
 /**
  * class {@code LoaderImpl} implements {@linkplain Loader}.
@@ -74,6 +77,10 @@ public class LoaderImpl implements Loader {
             ObstacleType.TRAIN_SX, List.of(),
             ObstacleType.TRAIN_DX, List.of(),
             ObstacleType.TRASPARENT_WATER, List.of());
+    private static final Map<Difficulty, String> MAP_FILES = Map.of(
+            Difficulty.EASY, "easy.txt",
+            Difficulty.NORMAL, "normal.txt",
+            Difficulty.HARD, "hard.txt");
     private static final List<String> PLAYER_FILES = List.of("player0.png");
     private static final String STAT_FILE = "stats.txt";
 
@@ -86,6 +93,9 @@ public class LoaderImpl implements Loader {
     private Optional<Map<CollectableType, List<Image>>> collectableImages = Optional.empty();
     private Optional<Map<BackgroundCellType, List<Image>>> backgroundCellImages = Optional.empty();
     private Optional<Map<ObstacleType, List<Image>>> obstacleImages = Optional.empty();
+
+    // BUFFERS
+    private Optional<Map<Difficulty, List<String>>> mapBuffer = Optional.empty();
 
     // LOAD operations
 
@@ -142,8 +152,42 @@ public class LoaderImpl implements Loader {
 
     // maps
 
+    private void loadMapBuffers() {
+        try {
+            final var mapBuffers = new HashMap<Difficulty, List<String>>();
+            for (var difficulty : Difficulty.values()) {
+                mapBuffers.put(difficulty, Files.readAllLines(Paths.get(MAPS_DIR + FILE_SEP)));
+            }
+            this.mapBuffer = Optional.of(mapBuffers);
+        } catch (IOException e) {
+            LauncherImpl.LAUNCHER.closeWindow();
+        }
+    }
+
+    private List<String> getMapBuffer(Difficulty difficulty) {
+        return this.mapBuffer.orElseGet(() -> {
+            loadMapBuffers();
+            return this.mapBuffer.orElseThrow();
+        }).get(difficulty);
+    }
+
+    private List<Vector2D> loadEntity(Difficulty difficulty, String nameEntity) {
+        return null;
+    }
+
+    private List<Collectable> loadEntityCollectable(Difficulty difficulty, CollectableType type) {
+        return null;
+    }
+
+    private List<Obstacle> loadEntityObstacle(Difficulty difficulty, ObstacleType type) {
+        return null;
+    }
+
+    private List<BackgroundCell> loadEntityBackground(Difficulty difficulty, BackgroundCellType type) {
+        return null;
+    }
+
     private void loadMaps() {
-        // TODO
     }
 
     // images

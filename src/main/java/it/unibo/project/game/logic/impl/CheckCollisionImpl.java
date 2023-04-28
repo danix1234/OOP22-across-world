@@ -2,8 +2,6 @@ package it.unibo.project.game.logic.impl;
 
 import java.util.Optional;
 
-import it.unibo.project.controller.core.impl.LauncherImpl;
-import it.unibo.project.controller.core.impl.LoaderImpl;
 import it.unibo.project.game.logic.api.CheckCollision;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.ObstacleType;
@@ -12,7 +10,7 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public Optional<CollectableType> checkCollectableCollision() {        
-        
+        throw new UnsupportedOperationException("Unimplemented method 'checkCollectableCollision'");
     }
 
     @Override
