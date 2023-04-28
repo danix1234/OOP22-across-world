@@ -1,0 +1,110 @@
+package it.unibo.project.controller.core.impl;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import it.unibo.project.controller.core.api.Difficulty;
+import it.unibo.project.game.model.api.BackgroundCell;
+import it.unibo.project.game.model.api.BackgroundCellType;
+import it.unibo.project.game.model.api.Collectable;
+import it.unibo.project.game.model.api.CollectableType;
+import it.unibo.project.game.model.api.Obstacle;
+import it.unibo.project.game.model.api.ObstacleType;
+import it.unibo.project.game.model.impl.BackgroundCellImpl;
+import it.unibo.project.game.model.impl.CollectableImpl;
+import it.unibo.project.game.model.impl.ObstacleImpl;
+import it.unibo.project.utility.Vector2D;
+
+public abstract class AbstractMapLoader extends AbstractStatLoader {
+
+    private void loadMapBuffers() {
+        try {
+            final var mapBuffers = new HashMap<Difficulty, List<String>>();
+            for (final var difficulty : Difficulty.values()) {
+                final var path = Paths.get(MAPS_DIR + FILE_SEP + MAP_FILES.get(difficulty));
+                mapBuffers.put(difficulty, Files.readAllLines(path));
+            }
+            this.mapBuffer = Optional.of(mapBuffers);
+        } catch (IOException e) {
+            LauncherImpl.LAUNCHER.closeWindow();
+        }
+    }
+
+    private List<String> getMapBuffer(final Difficulty difficulty) {
+        return this.mapBuffer.orElseGet(() -> {
+            loadMapBuffers();
+            return this.mapBuffer.orElseThrow();
+        }).get(difficulty);
+    }
+
+    private List<Vector2D> loadEntity(final Difficulty difficulty, final String nameEntity) {
+        return getMapBuffer(difficulty)
+                .stream()
+                .dropWhile(line -> !line.equalsIgnoreCase("[" + nameEntity + " ]"))
+                .skip(1)
+                .map(String::strip)
+                .takeWhile(line -> line.length() > 0)
+                .map(line -> line.split(" "))
+                .map(line -> new Vector2D(Integer.parseInt(line[0]), Integer.parseInt(line[1])))
+                .toList();
+    }
+
+    private List<Collectable> loadEntityCollectable(final Difficulty difficulty, final CollectableType type) {
+        return loadEntity(difficulty, type.name())
+                .stream()
+                .map(vector -> (Collectable) new CollectableImpl(vector, type))
+                .toList();
+    }
+
+    private List<Obstacle> loadEntityObstacle(final Difficulty difficulty, final ObstacleType type) {
+        return loadEntity(difficulty, type.name())
+                .stream()
+                .map(vector -> (Obstacle) new ObstacleImpl(vector, type))
+                .toList();
+    }
+
+    private List<BackgroundCell> loadEntityBackground(final Difficulty difficulty, final BackgroundCellType type) {
+        return loadEntity(difficulty, type.name())
+                .stream()
+                .map(vector -> (BackgroundCell) new BackgroundCellImpl(vector, type))
+                .toList();
+    }
+
+    @Override
+    public void loadMaps() {
+        final Map<Difficulty, List<Obstacle>> obstacleAll = new HashMap<>();
+        final Map<Difficulty, List<BackgroundCell>> backgroundCellAll = new HashMap<>();
+        final Map<Difficulty, List<Collectable>> collectableAll = new HashMap<>();
+
+        for (final var difficulty : Difficulty.values()) {
+            final List<Obstacle> obstacles = new ArrayList<>();
+            final List<BackgroundCell> backgroundCells = new ArrayList<>();
+            final List<Collectable> collectables = new ArrayList<>();
+
+            for (final var obstacleType : ObstacleType.values()) {
+                obstacles.addAll(loadEntityObstacle(difficulty, obstacleType));
+            }
+            for (final var backgroundType : BackgroundCellType.values()) {
+                backgroundCells.addAll(loadEntityBackground(difficulty, backgroundType));
+            }
+            for (final var collectableType : CollectableType.values()) {
+                collectables.addAll(loadEntityCollectable(difficulty, collectableType));
+            }
+
+            obstacleAll.put(difficulty, obstacles);
+            backgroundCellAll.put(difficulty, backgroundCells);
+            collectableAll.put(difficulty, collectables);
+        }
+
+        this.obstacles = Optional.of(obstacleAll);
+        this.backgroundCells = Optional.of(backgroundCellAll);
+        this.collectables = Optional.of(collectableAll);
+    }
+
+}
