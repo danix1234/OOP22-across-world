@@ -14,6 +14,9 @@ import it.unibo.project.game.model.api.BackgroundCellType;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.ObstacleType;
 
+/**
+ * class to load images from files.
+ */
 public abstract class AbstractImageLoader extends AbstractMapLoader {
 
     private Image loadImage(final String path) {
@@ -22,9 +25,7 @@ public abstract class AbstractImageLoader extends AbstractMapLoader {
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
-
-        // can't be reached, but java compiler can't know
-        return null;
+        throw new UnsupportedOperationException("this exception can never be reached!");
     }
 
     private List<Image> loadImages(final String directory, final List<String> fileNames) {
@@ -35,30 +36,30 @@ public abstract class AbstractImageLoader extends AbstractMapLoader {
     }
 
     @Override
-    public void loadImages() {
+    public final void loadImages() {
         // players
-        this.playerImages = Optional.of(loadImages(PLAYER_DIR, PLAYER_FILES));
+        setPlayerImagesOpt(Optional.of(loadImages(PLAYER_DIR, PLAYER_FILES)));
 
         // collectables
         final Map<CollectableType, List<Image>> collectableImages = new HashMap<>();
         for (final CollectableType type : CollectableType.values()) {
             collectableImages.put(type, loadImages(COLLECTABLE_DIR, COLLECTABLE_FILES.get(type)));
         }
-        this.collectableImages = Optional.of(collectableImages);
+        setCollectableImagesOpt(Optional.of(collectableImages));
 
         // obstacle
         final Map<ObstacleType, List<Image>> obstacleImages = new HashMap<>();
         for (final ObstacleType type : ObstacleType.values()) {
             obstacleImages.put(type, loadImages(OBSTACLE_DIR, OBSTACLE_FILES.get(type)));
         }
-        this.obstacleImages = Optional.of(obstacleImages);
+        setObstacleImagesOpt(Optional.of(obstacleImages));
 
         // background
         final Map<BackgroundCellType, List<Image>> backgroundCellImages = new HashMap<>();
         for (final BackgroundCellType type : BackgroundCellType.values()) {
             backgroundCellImages.put(type, loadImages(BACKGROUND_DIR, BACKGROUND_FILES.get(type)));
         }
-        this.backgroundCellImages = Optional.of(backgroundCellImages);
+        setBackgroundCellImagesOpt(Optional.of(backgroundCellImages));
     }
 
 }

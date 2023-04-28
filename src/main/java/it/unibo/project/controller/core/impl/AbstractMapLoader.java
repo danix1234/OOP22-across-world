@@ -21,6 +21,9 @@ import it.unibo.project.game.model.impl.CollectableImpl;
 import it.unibo.project.game.model.impl.ObstacleImpl;
 import it.unibo.project.utility.Vector2D;
 
+/**
+ * class to load maps from files.
+ */
 public abstract class AbstractMapLoader extends AbstractStatLoader {
 
     private void loadMapBuffers() {
@@ -30,16 +33,16 @@ public abstract class AbstractMapLoader extends AbstractStatLoader {
                 final var path = Paths.get(MAPS_DIR + FILE_SEP + MAP_FILES.get(difficulty));
                 mapBuffers.put(difficulty, Files.readAllLines(path));
             }
-            this.mapBuffer = Optional.of(mapBuffers);
+            setMapBufferOpt(Optional.of(mapBuffers));
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
     }
 
     private List<String> getMapBuffer(final Difficulty difficulty) {
-        return this.mapBuffer.orElseGet(() -> {
+        return getMapBufferOpt().orElseGet(() -> {
             loadMapBuffers();
-            return this.mapBuffer.orElseThrow();
+            return getMapBufferOpt().orElseThrow();
         }).get(difficulty);
     }
 
@@ -77,7 +80,7 @@ public abstract class AbstractMapLoader extends AbstractStatLoader {
     }
 
     @Override
-    public void loadMaps() {
+    public final void loadMaps() {
         final Map<Difficulty, List<Obstacle>> obstacleAll = new HashMap<>();
         final Map<Difficulty, List<BackgroundCell>> backgroundCellAll = new HashMap<>();
         final Map<Difficulty, List<Collectable>> collectableAll = new HashMap<>();
@@ -102,9 +105,9 @@ public abstract class AbstractMapLoader extends AbstractStatLoader {
             collectableAll.put(difficulty, collectables);
         }
 
-        this.obstacles = Optional.of(obstacleAll);
-        this.backgroundCells = Optional.of(backgroundCellAll);
-        this.collectables = Optional.of(collectableAll);
+        setObstaclesOpt(Optional.of(obstacleAll));
+        setBackgroundCellsOpt(Optional.of(backgroundCellAll));
+        setCollectablesOpt(Optional.of(collectableAll));
     }
 
 }

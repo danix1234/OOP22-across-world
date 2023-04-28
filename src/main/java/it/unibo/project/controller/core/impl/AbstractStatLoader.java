@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.impl.GameStatImpl;
 
+/**
+ * class to save and load stats from file.
+ */
 public abstract class AbstractStatLoader extends AbstractLoader {
 
     // LOAD operations
@@ -25,6 +28,7 @@ public abstract class AbstractStatLoader extends AbstractLoader {
     private void loadStat(final Path filePath) {
         try {
             final List<String> lines = Files.readAllLines(filePath);
+            final GameStat gameStat = new GameStatImpl();
             final int coins = lines.stream()
                     .dropWhile(line -> !"[coins]".equalsIgnoreCase(line))
                     .skip(1)
@@ -45,16 +49,16 @@ public abstract class AbstractStatLoader extends AbstractLoader {
                     .limit(skins)
                     .map(Boolean::valueOf)
                     .collect(Collectors.toList());
-            this.gameStat = Optional.of(new GameStatImpl());
-            this.gameStat.ifPresent(stat -> stat.setCoins(coins));
-            this.gameStat.ifPresent(stat -> stat.changeUnlockedSkins(List.copyOf(unlockedSkin)));
+            gameStat.setCoins(coins);
+            gameStat.changeUnlockedSkins(unlockedSkin);
+            setGameStatOpt(Optional.of(gameStat));
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
     }
 
     @Override
-    public void loadStats() {
+    public final void loadStats() {
         loadStat(getStatFile());
     }
 

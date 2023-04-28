@@ -13,45 +13,48 @@ import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 
+/**
+ * implementation of {@linkplain Loader} class.
+ */
 public class LoaderImpl extends AbstractImageLoader {
 
     @Override
     public final GameStat getGameStat() {
-        return this.gameStat.orElseGet(() -> {
+        return getGameStatOpt().orElseGet(() -> {
             loadStats();
-            return this.gameStat.orElseThrow();
+            return getGameStatOpt().orElseThrow();
         });
     }
 
     @Override
     public final List<Image> getBackgroundCellSprites(final BackgroundCellType backgroundCellType) {
-        return this.backgroundCellImages.orElseGet(() -> {
+        return getBackgroundCellImagesOpt().orElseGet(() -> {
             loadImages();
-            return this.backgroundCellImages.orElseThrow();
+            return getBackgroundCellImagesOpt().orElseThrow();
         }).get(backgroundCellType);
     }
 
     @Override
     public final List<Image> getCollectablesSprites(final CollectableType collectableType) {
-        return this.collectableImages.orElseGet(() -> {
+        return getCollectableImagesOpt().orElseGet(() -> {
             loadImages();
-            return this.collectableImages.orElseThrow();
+            return getCollectableImagesOpt().orElseThrow();
         }).get(collectableType);
     }
 
     @Override
     public final List<Image> getObstacleSprites(final ObstacleType obstacleType) {
-        return this.obstacleImages.orElseGet(() -> {
+        return getObstacleImagesOpt().orElseGet(() -> {
             loadImages();
-            return this.obstacleImages.orElseThrow();
+            return getObstacleImagesOpt().orElseThrow();
         }).get(obstacleType);
     }
 
     @Override
     public final List<Image> getPlayerSprites() {
-        return this.playerImages.orElseGet(() -> {
+        return getPlayerImagesOpt().orElseGet(() -> {
             loadImages();
-            return this.playerImages.orElseThrow();
+            return getPlayerImagesOpt().orElseThrow();
         });
     }
 
@@ -61,26 +64,26 @@ public class LoaderImpl extends AbstractImageLoader {
     }
 
     @Override
-    public List<BackgroundCell> getBackgroundCells(final Difficulty difficulty) {
-        return this.backgroundCells.orElseGet(() -> {
+    public final List<BackgroundCell> getBackgroundCells(final Difficulty difficulty) {
+        return getBackgroundCellsOpt().orElseGet(() -> {
             loadMaps();
-            return this.backgroundCells.orElseThrow();
+            return getBackgroundCellsOpt().orElseThrow();
         }).get(difficulty);
     }
 
     @Override
-    public List<Collectable> getCollectables(final Difficulty difficulty) {
-        return this.collectables.orElseGet(() -> {
+    public final List<Collectable> getCollectables(final Difficulty difficulty) {
+        return getCollectablesOpt().orElseGet(() -> {
             loadMaps();
-            return this.collectables.orElseThrow();
+            return getCollectablesOpt().orElseThrow();
         }).get(difficulty);
     }
 
     @Override
-    public List<Obstacle> getObstacles(final Difficulty difficulty) {
-        return this.obstacles.orElseGet(() -> {
+    public final List<Obstacle> getObstacles(final Difficulty difficulty) {
+        return getObstaclesOpt().orElseGet(() -> {
             loadMaps();
-            return this.obstacles.orElseThrow();
+            return getObstaclesOpt().orElseThrow();
         }).get(difficulty);
     }
 
