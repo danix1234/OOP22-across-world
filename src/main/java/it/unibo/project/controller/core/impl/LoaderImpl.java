@@ -38,15 +38,8 @@ import it.unibo.project.utility.Vector2D;
 public class LoaderImpl extends AbstractLoader {
 
     // LOAD operations
-
-    @Override
-    public final void loadAllFromFile() {
-        loadStats();
-        loadMaps();
-        loadImages();
-    }
-
     // stats
+
     private Path getStatFile() {
         if (Files.exists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE))) {
             return Paths.get(STAT_DIR + FILE_SEP + STAT_FILE);
@@ -326,15 +319,4 @@ public class LoaderImpl extends AbstractLoader {
         }).get(difficulty);
     }
 
-    // OTHER
-
-    @Override
-    public final void deleteStatFile() {
-        try {
-            Files.deleteIfExists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
-            Files.deleteIfExists(Paths.get(STAT_DIR));
-        } catch (IOException e) {
-            LauncherImpl.LAUNCHER.closeWindow();
-        }
-    }
 }
