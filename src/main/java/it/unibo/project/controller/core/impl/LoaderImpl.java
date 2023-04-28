@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,13 +23,11 @@ import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.BackgroundCellType;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
-import it.unibo.project.game.model.api.Entity;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.game.model.impl.BackgroundCellImpl;
 import it.unibo.project.game.model.impl.CollectableImpl;
-import it.unibo.project.game.model.impl.EntityImpl;
 import it.unibo.project.game.model.impl.GameStatImpl;
 import it.unibo.project.game.model.impl.ObstacleImpl;
 import it.unibo.project.utility.Vector2D;
@@ -37,8 +35,6 @@ import it.unibo.project.utility.Vector2D;
 /**
  * class {@code LoaderImpl} implements {@linkplain Loader}.
  */
-// TODO remove temporary warning suppression
-@SuppressWarnings("unused")
 public class LoaderImpl implements Loader {
     // UTILITY PATH
     private static final String FILE_SEP = System.getProperty("file.separator");
@@ -90,9 +86,9 @@ public class LoaderImpl implements Loader {
 
     // LOADED DATA
     private Optional<GameStat> gameStat = Optional.empty();
-    private Optional<Map<Difficulty, Map<ObstacleType, List<Obstacle>>>> obstacles = Optional.empty();
-    private Optional<Map<Difficulty, Map<BackgroundCellType, List<BackgroundCell>>>> backgroundCells = Optional.empty();
-    private Optional<Map<Difficulty, Map<CollectableType, List<Collectable>>>> collectables = Optional.empty();
+    private Optional<Map<Difficulty, List<Obstacle>>> obstacles = Optional.empty();
+    private Optional<Map<Difficulty, List<BackgroundCell>>> backgroundCells = Optional.empty();
+    private Optional<Map<Difficulty, List<Collectable>>> collectables = Optional.empty();
     private Optional<List<Image>> playerImages = Optional.empty();
     private Optional<Map<CollectableType, List<Image>>> collectableImages = Optional.empty();
     private Optional<Map<BackgroundCellType, List<Image>>> backgroundCellImages = Optional.empty();
@@ -159,8 +155,9 @@ public class LoaderImpl implements Loader {
     private void loadMapBuffers() {
         try {
             final var mapBuffers = new HashMap<Difficulty, List<String>>();
-            for (var difficulty : Difficulty.values()) {
-                mapBuffers.put(difficulty, Files.readAllLines(Paths.get(MAPS_DIR + FILE_SEP)));
+            for (final var difficulty : Difficulty.values()) {
+                final var path = Paths.get(MAPS_DIR + FILE_SEP + MAP_FILES.get(difficulty));
+                mapBuffers.put(difficulty, Files.readAllLines(path));
             }
             this.mapBuffer = Optional.of(mapBuffers);
         } catch (IOException e) {
@@ -168,14 +165,14 @@ public class LoaderImpl implements Loader {
         }
     }
 
-    private List<String> getMapBuffer(Difficulty difficulty) {
+    private List<String> getMapBuffer(final Difficulty difficulty) {
         return this.mapBuffer.orElseGet(() -> {
             loadMapBuffers();
             return this.mapBuffer.orElseThrow();
         }).get(difficulty);
     }
 
-    private List<Vector2D> loadEntity(Difficulty difficulty, String nameEntity) {
+    private List<Vector2D> loadEntity(final Difficulty difficulty, final String nameEntity) {
         return getMapBuffer(difficulty)
                 .stream()
                 .dropWhile(line -> !line.equalsIgnoreCase("[" + nameEntity + " ]"))
@@ -187,21 +184,21 @@ public class LoaderImpl implements Loader {
                 .toList();
     }
 
-    private List<Collectable> loadEntityCollectable(Difficulty difficulty, CollectableType type) {
+    private List<Collectable> loadEntityCollectable(final Difficulty difficulty, final CollectableType type) {
         return loadEntity(difficulty, type.name())
                 .stream()
                 .map(vector -> (Collectable) new CollectableImpl(vector, type))
                 .toList();
     }
 
-    private List<Obstacle> loadEntityObstacle(Difficulty difficulty, ObstacleType type) {
+    private List<Obstacle> loadEntityObstacle(final Difficulty difficulty, final ObstacleType type) {
         return loadEntity(difficulty, type.name())
                 .stream()
                 .map(vector -> (Obstacle) new ObstacleImpl(vector, type))
                 .toList();
     }
 
-    private List<BackgroundCell> loadEntityBackground(Difficulty difficulty, BackgroundCellType type) {
+    private List<BackgroundCell> loadEntityBackground(final Difficulty difficulty, final BackgroundCellType type) {
         return loadEntity(difficulty, type.name())
                 .stream()
                 .map(vector -> (BackgroundCell) new BackgroundCellImpl(vector, type))
@@ -209,7 +206,33 @@ public class LoaderImpl implements Loader {
     }
 
     private void loadMaps() {
+        final Map<Difficulty, List<Obstacle>> obstacleAll = new HashMap<>();
+        final Map<Difficulty, List<BackgroundCell>> backgroundCellAll = new HashMap<>();
+        final Map<Difficulty, List<Collectable>> collectableAll = new HashMap<>();
 
+        for (final var difficulty : Difficulty.values()) {
+            final List<Obstacle> obstacles = new ArrayList<>();
+            final List<BackgroundCell> backgroundCells = new ArrayList<>();
+            final List<Collectable> collectables = new ArrayList<>();
+
+            for (final var obstacleType : ObstacleType.values()) {
+                obstacles.addAll(loadEntityObstacle(difficulty, obstacleType));
+            }
+            for (final var backgroundType : BackgroundCellType.values()) {
+                backgroundCells.addAll(loadEntityBackground(difficulty, backgroundType));
+            }
+            for (final var collectableType : CollectableType.values()) {
+                collectables.addAll(loadEntityCollectable(difficulty, collectableType));
+            }
+
+            obstacleAll.put(difficulty, obstacles);
+            backgroundCellAll.put(difficulty, backgroundCells);
+            collectableAll.put(difficulty, collectables);
+        }
+
+        this.obstacles = Optional.of(obstacleAll);
+        this.backgroundCells = Optional.of(backgroundCellAll);
+        this.collectables = Optional.of(collectableAll);
     }
 
     // images
@@ -338,6 +361,30 @@ public class LoaderImpl implements Loader {
     }
 
     // OTHER
+
+    @Override
+    public List<BackgroundCell> getBackgroundCells(final Difficulty difficulty) {
+        return this.backgroundCells.orElseGet(() -> {
+            loadMaps();
+            return this.backgroundCells.orElseThrow();
+        }).get(difficulty);
+    }
+
+    @Override
+    public List<Collectable> getCollectables(final Difficulty difficulty) {
+        return this.collectables.orElseGet(() -> {
+            loadMaps();
+            return this.collectables.orElseThrow();
+        }).get(difficulty);
+    }
+
+    @Override
+    public List<Obstacle> getObstacles(final Difficulty difficulty) {
+        return this.obstacles.orElseGet(() -> {
+            loadMaps();
+            return this.obstacles.orElseThrow();
+        }).get(difficulty);
+    }
 
     @Override
     public final void deleteStatFile() {

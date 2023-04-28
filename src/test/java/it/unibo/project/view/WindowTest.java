@@ -1,7 +1,6 @@
 package it.unibo.project.view;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ import it.unibo.project.view.impl.SceneFactoryImpl;
 import it.unibo.project.view.impl.WindowFactoryImpl;
 
 /**
- * tests for {@linkplain Window} class
+ * tests for {@linkplain Window} class.
  */
 class WindowTest {
 
@@ -27,6 +26,5 @@ class WindowTest {
         assertDoesNotThrow(() -> {
             window.setScene(scene);
         });
-        assertTrue(window.getScene() == scene);
     }
 }

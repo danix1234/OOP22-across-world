@@ -3,9 +3,12 @@ package it.unibo.project.controller.core.api;
 import java.awt.Image;
 import java.util.List;
 
+import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.BackgroundCellType;
+import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.GameStat;
+import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 
 /**
@@ -36,7 +39,8 @@ public interface Loader {
     /**
      * remove the directory and the files saved in the user home directory.
      * 
-     * @implNote {@code WARNING}: removes all player gameplay results, {@code use wisely!}
+     * @implNote {@code WARNING}: removes all player gameplay results,
+     *           {@code use wisely!}
      */
     void deleteStatFile();
 
@@ -82,4 +86,22 @@ public interface Loader {
      * @return {@code random} element from the list
      */
     Image getElementRandom(List<Image> collection);
+
+    /**
+     * @param difficulty specify which map to load
+     * @return collection of {@linkplain Collectable} of loaded map
+     */
+    List<Collectable> getCollectables(Difficulty difficulty);
+
+    /**
+     * @param difficulty specify which map to load
+     * @return collection of {@linkplain Obstacle} of loaded map
+     */
+    List<Obstacle> getObstacles(Difficulty difficulty);
+
+    /**
+     * @param difficulty specify which map to load
+     * @return collection of {@linkplain BackgroundCell} of loaded map
+     */
+    List<BackgroundCell> getBackgroundCells(Difficulty difficulty);
 }
