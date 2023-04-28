@@ -6,7 +6,7 @@ import it.unibo.project.utility.Vector2D;
 
 public class ObstacleImpl extends EntityImpl implements Obstacle {
 
-	public ObstacleImpl(Vector2D initialPos) {
+	public ObstacleImpl(final Vector2D initialPos, final ObstacleType type) {
 		super(initialPos);
 	}
 

@@ -6,7 +6,7 @@ import it.unibo.project.utility.Vector2D;
 
 public class CollectableImpl extends EntityImpl implements Collectable {
 
-	public CollectableImpl(Vector2D initialPos) {
+	public CollectableImpl(final Vector2D initialPos, final CollectableType type) {
 		super(initialPos);
 	}
 
