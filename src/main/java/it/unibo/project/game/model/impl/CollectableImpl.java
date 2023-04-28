@@ -2,8 +2,13 @@ package it.unibo.project.game.model.impl;
 
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
+import it.unibo.project.utility.Vector2D;
 
 public class CollectableImpl extends EntityImpl implements Collectable {
+
+	public CollectableImpl(Vector2D initialPos) {
+		super(initialPos);
+	}
 
 	@Override
 	public CollectableType getType() {

@@ -5,6 +5,10 @@ import it.unibo.project.utility.Vector2D;
 
 public class EntityImpl implements Entity {
 
+	public EntityImpl(final Vector2D initialPos) {
+		// TODO
+	}
+
 	@Override
 	public Vector2D getPosition() {
 		// TODO Auto-generated method stub
