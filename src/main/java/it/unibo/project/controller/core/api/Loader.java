@@ -18,6 +18,27 @@ import it.unibo.project.game.model.api.ObstacleType;
 public interface Loader {
 
     /**
+     * load all images from memory.
+     * 
+     * @see #loadAllFromFile()
+     */
+    void loadImages();
+
+    /**
+     * load statistics from memory, or from user home if present.
+     * 
+     * @see #loadAllFromFile()
+     */
+    void loadStats();
+
+    /**
+     * load all maps from memory.
+     * 
+     * @see #loadAllFromFile()
+     */
+    void loadMaps();
+
+    /**
      * loads everything from files, and keeps it in memory.
      * 
      * @implNote to use after starting the application, or to refresh what was

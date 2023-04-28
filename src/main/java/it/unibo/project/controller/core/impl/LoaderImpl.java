@@ -35,79 +35,18 @@ import it.unibo.project.utility.Vector2D;
 /**
  * class {@code LoaderImpl} implements {@linkplain Loader}.
  */
-public class LoaderImpl implements Loader {
-    // UTILITY PATH
-    private static final String FILE_SEP = System.getProperty("file.separator");
-    private static final String PROJECT_DIR = System.getProperty("user.dir");
-    private static final String USER_HOME_DIR = System.getProperty("user.home");
-    private static final String RESOURCE_DIR = PROJECT_DIR
-            + FILE_SEP + "src"
-            + FILE_SEP + "main"
-            + FILE_SEP + "resources"
-            + FILE_SEP + "it"
-            + FILE_SEP + "unibo"
-            + FILE_SEP + "project";
-    private static final String SPRITE_DIR = RESOURCE_DIR + FILE_SEP + "sprite";
-
-    // RESOURCES DIRECTORIES
-    private static final String MAPS_DIR = RESOURCE_DIR + FILE_SEP + "maps";
-    private static final String BACKGROUND_DIR = SPRITE_DIR + FILE_SEP + "background";
-    private static final String COLLECTABLE_DIR = SPRITE_DIR + FILE_SEP + "collectable";
-    private static final String OBSTACLE_DIR = SPRITE_DIR + FILE_SEP + "obstacle";
-    private static final String PLAYER_DIR = SPRITE_DIR + FILE_SEP + "player";
-    private static final String DEFAULT_STAT_DIR = RESOURCE_DIR + FILE_SEP + "stats";
-    private static final String STAT_DIR = USER_HOME_DIR + FILE_SEP + ".across_world";
-
-    // RESOURCES FILES
-    private static final Map<CollectableType, List<String>> COLLECTABLE_FILES = Map.of(
-            CollectableType.COIN, List.of("coin.png"),
-            CollectableType.POWERUP_COIN_MAGNET, List.of("powerup.png"),
-            CollectableType.POWERUP_COIN_MULTIPLIER, List.of("powerup.png"),
-            CollectableType.POWERUP_IMMORTALITY, List.of("powerup.png"));
-    private static final Map<BackgroundCellType, List<String>> BACKGROUND_FILES = Map.of(
-            BackgroundCellType.GRASS, List.of("grass.png"),
-            BackgroundCellType.RAIL, List.of("rail.png"),
-            BackgroundCellType.ROAD, List.of("road.png"),
-            BackgroundCellType.WATER, List.of("water.png"));
-    private static final Map<ObstacleType, List<String>> OBSTACLE_FILES = Map.of(
-            ObstacleType.BUSH, List.of("bush.png"),
-            ObstacleType.TREE, List.of("tree.png"),
-            ObstacleType.CAR_SX, List.of("carSX0.png"),
-            ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png"),
-            ObstacleType.TRAIN_SX, List.of(),
-            ObstacleType.TRAIN_DX, List.of(),
-            ObstacleType.TRASPARENT_WATER, List.of());
-    private static final Map<Difficulty, String> MAP_FILES = Map.of(
-            Difficulty.EASY, "easy.txt",
-            Difficulty.NORMAL, "normal.txt",
-            Difficulty.HARD, "hard.txt");
-    private static final List<String> PLAYER_FILES = List.of("player0.png");
-    private static final String STAT_FILE = "stats.txt";
-
-    // LOADED DATA
-    private Optional<GameStat> gameStat = Optional.empty();
-    private Optional<Map<Difficulty, List<Obstacle>>> obstacles = Optional.empty();
-    private Optional<Map<Difficulty, List<BackgroundCell>>> backgroundCells = Optional.empty();
-    private Optional<Map<Difficulty, List<Collectable>>> collectables = Optional.empty();
-    private Optional<List<Image>> playerImages = Optional.empty();
-    private Optional<Map<CollectableType, List<Image>>> collectableImages = Optional.empty();
-    private Optional<Map<BackgroundCellType, List<Image>>> backgroundCellImages = Optional.empty();
-    private Optional<Map<ObstacleType, List<Image>>> obstacleImages = Optional.empty();
-
-    // BUFFERS
-    private Optional<Map<Difficulty, List<String>>> mapBuffer = Optional.empty();
+public class LoaderImpl extends AbstractLoader {
 
     // LOAD operations
 
     @Override
     public final void loadAllFromFile() {
-        loadStat();
+        loadStats();
         loadMaps();
         loadImages();
     }
 
     // stats
-
     private Path getStatFile() {
         if (Files.exists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE))) {
             return Paths.get(STAT_DIR + FILE_SEP + STAT_FILE);
@@ -146,7 +85,8 @@ public class LoaderImpl implements Loader {
         }
     }
 
-    private void loadStat() {
+    @Override
+    public void loadStats() {
         loadStat(getStatFile());
     }
 
@@ -205,7 +145,8 @@ public class LoaderImpl implements Loader {
                 .toList();
     }
 
-    private void loadMaps() {
+    @Override
+    public void loadMaps() {
         final Map<Difficulty, List<Obstacle>> obstacleAll = new HashMap<>();
         final Map<Difficulty, List<BackgroundCell>> backgroundCellAll = new HashMap<>();
         final Map<Difficulty, List<Collectable>> collectableAll = new HashMap<>();
@@ -255,7 +196,8 @@ public class LoaderImpl implements Loader {
                 .toList();
     }
 
-    private void loadImages() {
+    @Override
+    public void loadImages() {
         // players
         this.playerImages = Optional.of(loadImages(PLAYER_DIR, PLAYER_FILES));
 
@@ -323,7 +265,7 @@ public class LoaderImpl implements Loader {
     @Override
     public final GameStat getGameStat() {
         return this.gameStat.orElseGet(() -> {
-            loadStat();
+            loadStats();
             return this.gameStat.orElseThrow();
         });
     }
@@ -360,8 +302,6 @@ public class LoaderImpl implements Loader {
         });
     }
 
-    // OTHER
-
     @Override
     public List<BackgroundCell> getBackgroundCells(final Difficulty difficulty) {
         return this.backgroundCells.orElseGet(() -> {
@@ -385,6 +325,8 @@ public class LoaderImpl implements Loader {
             return this.obstacles.orElseThrow();
         }).get(difficulty);
     }
+
+    // OTHER
 
     @Override
     public final void deleteStatFile() {
