@@ -44,6 +44,11 @@ public interface Launcher {
      */
     Scene getScene();
 
+    /**
+     * show window.
+     */
+    void showWindow();
+
     // MODEL methods
 
     /**

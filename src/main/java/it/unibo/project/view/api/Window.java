@@ -22,4 +22,9 @@ public interface Window {
      * @see {@linkplain LauncherImpl}
      */
     void close();
+
+    /**
+     * show window.
+     */
+    void show();
 }

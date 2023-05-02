@@ -30,7 +30,6 @@ public class WindowImpl implements Window {
         // if (gd.isFullScreenSupported()) {
         // gd.setFullScreenWindow(this.frame);
         // }
-        this.frame.setVisible(true);
     }
 
     @Override
@@ -50,6 +49,11 @@ public class WindowImpl implements Window {
     @Override
     public final void close() {
         this.frame.dispose();
+    }
+
+    @Override
+    public void show() {
+        this.frame.setVisible(true);
     }
 
 }
