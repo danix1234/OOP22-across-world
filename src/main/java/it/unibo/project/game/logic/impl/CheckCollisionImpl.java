@@ -6,6 +6,7 @@ import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.CheckCollision;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.ObstacleType;
+import it.unibo.project.utility.Vector2D;
 
 public class CheckCollisionImpl implements CheckCollision {
 
@@ -16,17 +17,19 @@ public class CheckCollisionImpl implements CheckCollision {
         .findFirst()
         .get()
         .getType());
-    }
-    
+    }    
 
     @Override
     public int checkCoinLessDistantThen(final int distance) {
         int collectedCoinCounter = 0;
-        for(int x=-1;x<=distance;x++){
-            for(int y=-1;y<=distance;y++){
+        int x,y;
+        for(x=-1;x<=distance;x++){
+            for(y=-1;y<=distance;y++){
+                final int innerX = x;
+                final int innerY = y;
                 if(!Optional.of(LauncherImpl.LAUNCHER.getCollectables().stream()
                 .filter(collectable -> collectable.getType()==CollectableType.COIN)
-                .filter(collectable -> collectable.getPosition()==LauncherImpl.LAUNCHER.getPlayer().getPosition())
+                .filter(collectable -> collectable.getPosition()==new Vector2D(LauncherImpl.LAUNCHER.getPlayer().getPosition().getX()+innerX,LauncherImpl.LAUNCHER.getPlayer().getPosition().getY()+innerY))
                 .findFirst()
                 .get()
                 .getType()).isEmpty()){
