@@ -5,26 +5,33 @@ import it.unibo.project.utility.Vector2D;
 
 public class EntityImpl implements Entity {
 
-	public EntityImpl(final Vector2D initialPos) {
-		// TODO
+	Vector2D entityPos;
+	boolean movable;
+
+	/**
+     * Constructor of class Entity
+     */
+	public EntityImpl(final Vector2D initialPos, boolean movable) {
+		this.entityPos = initialPos;
+		this.movable = movable;
 	}
 
 	@Override
 	public Vector2D getPosition() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
+		return entityPos;
 	}
 
 	@Override
 	public boolean isMovable() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'isMovable'");
+		return movable;
 	}
 
 	@Override
 	public void move(final int x, final int y) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'move'");
+		if(movable){
+			Vector2D newPos = new Vector2D(x, y); 
+			entityPos = newPos;
+		} 
 	}
 
 }
