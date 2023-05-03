@@ -7,7 +7,7 @@ import it.unibo.project.utility.Vector2D;
 public class BackgroundCellImpl extends EntityImpl implements BackgroundCell {
 
 	public BackgroundCellImpl(final Vector2D initialPos, final BackgroundCellType type) {
-		super(initialPos);
+		super(initialPos, false);
 	}
 
 	@Override

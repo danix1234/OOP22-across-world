@@ -6,7 +6,7 @@ import it.unibo.project.utility.Vector2D;
 public class PlayerImpl extends EntityImpl implements Player {
 
 	public PlayerImpl(Vector2D initialPos) {
-		super(initialPos);
+		super(initialPos, true);
 	}
 
 	@Override
