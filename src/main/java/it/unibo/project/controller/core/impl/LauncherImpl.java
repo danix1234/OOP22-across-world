@@ -110,13 +110,13 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public void saveAndCloseWindow() {
+    public synchronized void saveAndCloseWindow() {
         this.loader.saveStatOnFile(this.gameWorld.getGameStat());
         this.closeWindow();
     }
 
     @Override
-    public void showWindow() {
+    public synchronized void showWindow() {
         this.window.show();        
     }
 
