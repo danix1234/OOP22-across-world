@@ -16,25 +16,15 @@ import it.unibo.project.view.api.AbstractScene;
  * Class {@code GameScene} takes care of rendering all entities on window.
  */
 public class GameScene extends AbstractScene {
-    /**
-     * {@code width} in pixel of window.
-     */
+    /** {@code width} in pixel of window. */
     public static final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    /**
-     * {@code height} in pixel of window.
-     */
+    /** {@code height} in pixel of window. */
     public static final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-    /**
-     * {@code quantity} of cell in {@code orizontal} direction.
-     */
+    /** {@code quantity} of cell in {@code orizontal} direction. */
     public static final int ORIZ_CELL = 15;
-    /**
-     * {@code quantity} of cell in {@code vertical} direction.
-     */
+    /** {@code quantity} of cell in {@code vertical} direction. */
     public static final int VERT_CELL = HEIGHT / (WIDTH / ORIZ_CELL) + 1;
-    /**
-     * {@code dimension} of one side of each cell, in {@code pixel}.
-     */
+    /** {@code dimension} of one side of each cell, in {@code pixel}. */
     public static final int CELL_DIM = WIDTH / ORIZ_CELL;
     /**
      * {@code quantity} of lines of orizontal cell to be loaded {@code above} the
