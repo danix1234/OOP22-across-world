@@ -17,6 +17,7 @@ public class CheckCollisionImpl implements CheckCollision {
         .get()
         .getType());
     }
+    
 
     @Override
     public int checkCoinLessDistantThen(final int distance) {

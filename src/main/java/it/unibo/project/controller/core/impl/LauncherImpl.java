@@ -115,4 +115,9 @@ public final class LauncherImpl implements Launcher {
         this.closeWindow();
     }
 
+    @Override
+    public void showWindow() {
+        this.window.show();        
+    }
+
 }
