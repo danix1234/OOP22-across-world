@@ -49,9 +49,9 @@ public abstract class AbstractMapLoader extends AbstractStatLoader {
     private List<Vector2D> loadEntity(final Difficulty difficulty, final String nameEntity) {
         return getMapBuffer(difficulty)
                 .stream()
-                .dropWhile(line -> !line.equalsIgnoreCase("[" + nameEntity + " ]"))
-                .skip(1)
                 .map(String::strip)
+                .dropWhile(line -> !line.equalsIgnoreCase("[" + nameEntity + "]"))
+                .skip(1)
                 .takeWhile(line -> line.length() > 0)
                 .map(line -> line.split(" "))
                 .map(line -> new Vector2D(Integer.parseInt(line[0]), Integer.parseInt(line[1])))
