@@ -12,7 +12,6 @@ import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
-import it.unibo.project.game.model.api.Player;
 
 /**
  * implementation of {@linkplain Loader} class.
@@ -85,14 +84,6 @@ public class LoaderImpl extends AbstractImageLoader {
         return getObstaclesOpt().orElseGet(() -> {
             loadMaps();
             return getObstaclesOpt().orElseThrow();
-        }).get(difficulty);
-    }
-
-    @Override
-    public final Player getPlayerCell(final Difficulty difficulty) {
-        return getPlayerCellOpt().orElseGet(() ->{
-            loadMaps();
-            return getPlayerCellOpt().orElseThrow();
         }).get(difficulty);
     }
 }
