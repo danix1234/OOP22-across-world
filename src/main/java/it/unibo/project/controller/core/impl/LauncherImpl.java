@@ -10,6 +10,7 @@ import it.unibo.project.controller.engine.api.GameEngine;
 import it.unibo.project.controller.engine.impl.GameEngineFactoryImpl;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
+import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.GameWorld;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.Player;
@@ -135,5 +136,10 @@ public final class LauncherImpl implements Launcher {
     @Override
     public synchronized void loadMap(){
         this.gameWorld.loadMap();
+    }
+
+    @Override
+    public synchronized GameStat getGameStat() {
+        return this.gameWorld.getGameStat();
     }
 }

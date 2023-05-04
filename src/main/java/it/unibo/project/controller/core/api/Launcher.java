@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
+import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.Player;
 import it.unibo.project.input.api.InputHandler;
@@ -102,6 +103,11 @@ public interface Launcher {
      * loads map from file in {@linkplain GameWorld}
      */
     void loadMap();
+
+    /** 
+     * @return updated {@linkplain GameStat} 
+     */
+    GameStat getGameStat();
 
     // CONTROLLER methods
     /**
