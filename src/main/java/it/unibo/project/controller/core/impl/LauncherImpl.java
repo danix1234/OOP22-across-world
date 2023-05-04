@@ -122,8 +122,13 @@ public final class LauncherImpl implements Launcher {
         this.window.show();        
     }
 
-    public Pair<Integer, Integer> getCellDim() {
+    @Override
+    public synchronized Pair<Integer, Integer> getCellDim() {
         return new Pair<>(GameScene.ORIZ_CELL, GameScene.VERT_CELL);
     }
 
+    @Override
+    public synchronized Pair<Integer, Integer> getHeightDelta() {
+        return new Pair<>(GameScene.TOP_CELL_DELTA, GameScene.BOTTOM_CELL_DELTA);
+    }
 }

@@ -55,6 +55,11 @@ public interface Launcher {
      */
     Pair<Integer, Integer> getCellDim();
 
+    /**
+     * @return top and bottom point of map view
+     */
+    Pair<Integer, Integer> getHeightDelta();
+
 
     // MODEL methods
 

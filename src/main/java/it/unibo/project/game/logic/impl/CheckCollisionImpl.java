@@ -56,8 +56,10 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public boolean checkFinishLineCollision() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkFinishLineCollision'");
+        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() + LauncherImpl.LAUNCHER.getHeightDelta().get1() > LauncherImpl.LAUNCHER.getLoader().getBackgroundCells(LauncherImpl.LAUNCHER.getDifficulty()).stream()
+        .map(cell -> cell.getPosition().getY())
+        .reduce(Integer::max)
+        .get();
     }
 
     @Override
