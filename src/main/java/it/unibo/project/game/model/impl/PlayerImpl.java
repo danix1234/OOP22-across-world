@@ -5,14 +5,21 @@ import it.unibo.project.utility.Vector2D;
 
 public class PlayerImpl extends EntityImpl implements Player {
 
+	private int maxDistance = 0;
+
 	public PlayerImpl(Vector2D initialPos) {
 		super(initialPos, true);
 	}
 
 	@Override
 	public int getMaxDistance() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getMaxDistance'");
+		return this.maxDistance;
+	}
+
+	@Override
+	public void move(final int x, final int y) {
+		super.move(x, y);
+		maxDistance = Integer.max(maxDistance, y);
 	}
 
 }
