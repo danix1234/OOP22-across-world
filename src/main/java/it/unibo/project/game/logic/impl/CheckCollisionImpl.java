@@ -4,7 +4,9 @@ import java.util.Optional;
 
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.CheckCollision;
+import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
+import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.utility.Vector2D;
 
@@ -12,27 +14,25 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public Optional<CollectableType> checkCollectableCollision() {
-        return Optional.of(LauncherImpl.LAUNCHER.getCollectables().stream()
-        .filter(collectable -> collectable.getPosition()==LauncherImpl.LAUNCHER.getPlayer().getPosition())
+        return LauncherImpl.LAUNCHER.getCollectables().stream()
+        .filter(collectable -> collectable.getPosition().equals(LauncherImpl.LAUNCHER.getPlayer().getPosition()))
         .findFirst()
-        .get()
-        .getType());
+        .map(Collectable::getType);
     }    
 
     @Override
     public int checkCoinLessDistantThen(final int distance) {
         int collectedCoinCounter = 0;
         int x,y;
-        for(x=-1;x<=distance;x++){
-            for(y=-1;y<=distance;y++){
+        for(x=-distance;x<=distance;x++){
+            for(y=-distance;y<=distance;y++){
                 final int innerX = x;
                 final int innerY = y;
-                if(!Optional.of(LauncherImpl.LAUNCHER.getCollectables().stream()
-                .filter(collectable -> collectable.getType()==CollectableType.COIN)
-                .filter(collectable -> collectable.getPosition()==new Vector2D(LauncherImpl.LAUNCHER.getPlayer().getPosition().getX()+innerX,LauncherImpl.LAUNCHER.getPlayer().getPosition().getY()+innerY))
+                if(!LauncherImpl.LAUNCHER.getCollectables().stream()
+                .filter(collectable -> collectable.getType().equals(CollectableType.COIN))
+                .filter(collectable -> collectable.getPosition().equals(new Vector2D(LauncherImpl.LAUNCHER.getPlayer().getPosition().getX()+innerX,LauncherImpl.LAUNCHER.getPlayer().getPosition().getY()+innerY)))
                 .findFirst()
-                .get()
-                .getType()).isEmpty()){
+                .map(Collectable::getType).isEmpty()){
                     collectedCoinCounter++;
                 }
             }
@@ -42,12 +42,11 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public Optional<ObstacleType> checkStaticObstacleCollision() {
-        return Optional.of(LauncherImpl.LAUNCHER.getObstacles().stream()
-        .filter(obstacle -> obstacle.getType()==ObstacleType.BUSH || obstacle.getType()==ObstacleType.TREE || obstacle.getType()==ObstacleType.TRASPARENT_WATER)
+        return LauncherImpl.LAUNCHER.getObstacles().stream()
+        .filter(obstacle -> obstacle.getType().equals(ObstacleType.BUSH) || obstacle.getType().equals(ObstacleType.TREE) || obstacle.getType().equals(ObstacleType.TRASPARENT_WATER))
         .filter(staticObstacle -> staticObstacle.getPosition()==LauncherImpl.LAUNCHER.getPlayer().getPosition())        
         .findFirst()
-        .get()
-        .getType());
+        .map(Obstacle::getType);
     }
 
     @Override
@@ -63,11 +62,10 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public Optional<ObstacleType> checkDynamicObstacleCollision() {
-        return Optional.of(LauncherImpl.LAUNCHER.getObstacles().stream()
-        .filter(obstacle -> obstacle.getType()==ObstacleType.CAR_DX || obstacle.getType()==ObstacleType.CAR_SX || obstacle.getType()==ObstacleType.TRAIN_DX || obstacle.getType()==ObstacleType.TRAIN_SX)
-        .filter(dynamicObstacle -> dynamicObstacle.getPosition()==LauncherImpl.LAUNCHER.getPlayer().getPosition())        
+        return LauncherImpl.LAUNCHER.getObstacles().stream()
+        .filter(obstacle -> obstacle.getType().equals(ObstacleType.CAR_DX) || obstacle.getType().equals(ObstacleType.CAR_SX) || obstacle.getType().equals(ObstacleType.TRAIN_DX) || obstacle.getType().equals(ObstacleType.TRAIN_SX))
+        .filter(dynamicObstacle -> dynamicObstacle.getPosition().equals(LauncherImpl.LAUNCHER.getPlayer().getPosition()))       
         .findFirst()
-        .get()
-        .getType());
+        .map(Obstacle::getType);
     }
 }
