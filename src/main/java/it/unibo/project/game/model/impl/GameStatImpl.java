@@ -1,5 +1,6 @@
 package it.unibo.project.game.model.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.project.game.model.api.GameStat;
@@ -7,7 +8,7 @@ import it.unibo.project.game.model.api.GameStat;
 
 public class GameStatImpl implements GameStat {
     int coins;
-    List<Boolean> unlockedSkins;
+    List<Boolean> unlockedSkins = new ArrayList<>();
 
     @Override
     public int getCoins() {
