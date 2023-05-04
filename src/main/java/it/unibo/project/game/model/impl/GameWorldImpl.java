@@ -50,7 +50,7 @@ public class GameWorldImpl implements GameWorld {
     @Override
     public GameStat getGameStat() {
         return this.gameStat;
-    }    
+    }
 
     @Override
     public void loadMap() {
@@ -61,6 +61,9 @@ public class GameWorldImpl implements GameWorld {
         this.collectableList = loader.getCollectables(difficulty);
         this.obstacleList = loader.getObstacles(difficulty);
         this.player = loader.getPlayerCell(difficulty);
+        if (this.gameStat == null) {
+            this.gameStat = loader.getGameStat();
+        }
     }
 
 }
