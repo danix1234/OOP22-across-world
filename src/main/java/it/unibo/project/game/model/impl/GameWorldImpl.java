@@ -2,7 +2,11 @@ package it.unibo.project.game.model.impl;
 
 import java.util.List;
 
+import it.unibo.project.controller.core.api.Difficulty;
+import it.unibo.project.controller.core.api.Loader;
+import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.GameLogic;
+import it.unibo.project.game.logic.impl.GameLogicImpl;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.GameStat;
@@ -11,71 +15,52 @@ import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.Player;
 
 public class GameWorldImpl implements GameWorld {
+    private Player player;
+    private GameStat gameStat;
+    private List<Obstacle> obstacleList;
+    private List<Collectable> collectableList;
+    private List<BackgroundCell> backgroundCellList;
+    private GameLogic gameLogic = new GameLogicImpl();
 
     @Override
     public Player getPlayer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlayer'");
+        return this.player;
     }
 
     @Override
     public List<Obstacle> getObstacles() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getObstacles'");
+        return this.obstacleList;
     }
 
     @Override
     public List<Collectable> getCollectables() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCollectables'");
+        return this.collectableList;
     }
 
     @Override
     public List<BackgroundCell> getBackgroundCells() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBackgroundCells'");
+        return this.backgroundCellList;
     }
 
     @Override
     public GameLogic getGameLogic() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGameLogic'");
+        return this.gameLogic;
     }
 
     @Override
     public GameStat getGameStat() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGameStat'");
-    }
+        return this.gameStat;
+    }    
 
     @Override
-    public void setGameStat() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setGameStat'");
-    }
+    public void loadMap() {
+        final Difficulty difficulty = LauncherImpl.LAUNCHER.getDifficulty();
+        final Loader loader = LauncherImpl.LAUNCHER.getLoader();
 
-    @Override
-    public void addObstacles(final List<Obstacle> obstacles) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addObstacles'");
-    }
-
-    @Override
-    public void addCollectables(final List<Collectable> collectables) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addCollectables'");
-    }
-
-    @Override
-    public void addBackgroundCell(final List<BackgroundCell> backgroundCells) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addBackgroundCell'");
-    }
-
-    @Override
-    public void clearAllEntity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clearAllEntity'");
+        this.backgroundCellList = loader.getBackgroundCells(difficulty);
+        this.collectableList = loader.getCollectables(difficulty);
+        this.obstacleList = loader.getObstacles(difficulty);
+        this.player = loader.getPlayerCell(difficulty);
     }
 
 }

@@ -15,16 +15,8 @@ public interface GameWorld {
 
     GameLogic getGameLogic();
 
-    GameStat getGameStat();
+    GameStat getGameStat();    
 
-    void setGameStat();
-
-    void addObstacles(List<Obstacle> obstacles);
-
-    void addCollectables(List<Collectable> collectables);
-
-    void addBackgroundCell(List<BackgroundCell> backgroundCells);
-
-    void clearAllEntity();
+    void loadMap();
 }
 
