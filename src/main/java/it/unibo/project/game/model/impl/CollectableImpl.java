@@ -6,14 +6,16 @@ import it.unibo.project.utility.Vector2D;
 
 public class CollectableImpl extends EntityImpl implements Collectable {
 
+	private CollectableType type;
+	
 	public CollectableImpl(final Vector2D initialPos, final CollectableType type) {
 		super(initialPos, false);
+		this.type = type;
 	}
 
 	@Override
 	public CollectableType getType() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getType'");
+		return this.type;
 	}
 
 }

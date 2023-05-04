@@ -5,8 +5,8 @@ import it.unibo.project.utility.Vector2D;
 
 public class EntityImpl implements Entity {
 
-	Vector2D entityPos;
-	boolean movable;
+	private Vector2D entityPos;
+	private boolean movable;
 
 	/**
      * Constructor of class Entity
@@ -18,20 +18,21 @@ public class EntityImpl implements Entity {
 
 	@Override
 	public Vector2D getPosition() {
-		return entityPos;
+		return this.entityPos;
 	}
 
 	@Override
 	public boolean isMovable() {
-		return movable;
+		return this.movable;
 	}
 
 	@Override
 	public void move(final int x, final int y) {
 		if(movable){
 			Vector2D newPos = new Vector2D(x, y); 
-			entityPos = newPos;
+			this.entityPos = newPos;
 		} 
 	}
+
 
 }

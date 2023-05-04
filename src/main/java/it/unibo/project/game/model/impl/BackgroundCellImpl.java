@@ -6,14 +6,15 @@ import it.unibo.project.utility.Vector2D;
 
 public class BackgroundCellImpl extends EntityImpl implements BackgroundCell {
 
+	BackgroundCellType type;
 	public BackgroundCellImpl(final Vector2D initialPos, final BackgroundCellType type) {
 		super(initialPos, false);
+		this.type = type;
 	}
 
 	@Override
 	public BackgroundCellType getType() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getType'");
+		return this.type;
 	}
 
 }
