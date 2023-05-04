@@ -12,7 +12,7 @@ import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.BackgroundCellType;
-import it.unibo.project.game.model.api.Collectable;
+import it.unibo.project.game.model.api.*;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
@@ -93,6 +93,7 @@ public abstract class AbstractLoader implements Loader {
 
     // LOADED DATA
     private Optional<GameStat> gameStat = Optional.empty();
+    private Optional<Map<Difficulty,Player>> player = Optional.empty();
     private Optional<Map<Difficulty, List<Obstacle>>> obstacles = Optional.empty();
     private Optional<Map<Difficulty, List<BackgroundCell>>> backgroundCells = Optional.empty();
     private Optional<Map<Difficulty, List<Collectable>>> collectables = Optional.empty();
@@ -131,6 +132,15 @@ public abstract class AbstractLoader implements Loader {
      */
     protected final Optional<GameStat> getGameStatOpt() {
         return this.gameStat;
+    }
+
+    /**
+     * get player loaded from map.
+     * 
+     * @return {@link #player}
+     */
+    protected final Optional<Map<Difficulty,Player>> getPlayerCellOpt(){
+        return this.player;
     }
 
     /** get obstacles loaded from file. difficulty chooses the map.
@@ -205,6 +215,14 @@ public abstract class AbstractLoader implements Loader {
      */
     protected final void setGameStatOpt(final Optional<GameStat> gameStat) {
         this.gameStat = gameStat;
+    }
+
+    /** set player.
+     * 
+     * @param player
+     */
+    protected final void setPlayerOpt(final Optional<Map<Difficulty,Player>> player){
+        this.player = player;
     }
 
     /** set obstacles.

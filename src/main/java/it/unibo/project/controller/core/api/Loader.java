@@ -10,6 +10,7 @@ import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
+import it.unibo.project.game.model.api.Player;
 
 /**
  * class {@code Loader} interacts with filesystem, abstracting it to the other
@@ -125,4 +126,10 @@ public interface Loader {
      * @return collection of {@linkplain BackgroundCell} of loaded map
      */
     List<BackgroundCell> getBackgroundCells(Difficulty difficulty);
+
+    /**
+     * @param difficulty specify which map to load
+     * @return get {@linkplain Player} of loaded map
+     */
+    Player getPlayerCell(Difficulty difficulty);
 }
