@@ -17,6 +17,8 @@ import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
+import it.unibo.project.game.model.impl.PlayerImpl;
+import it.unibo.project.utility.Vector2D;
 
 /**
  * class with various methods for {@linkplain Loader} class.
@@ -92,8 +94,8 @@ public abstract class AbstractLoader implements Loader {
     protected static final String STAT_FILE = "stats.txt";
 
     // LOADED DATA
+    private Player player = new PlayerImpl(new Vector2D(10, 5));
     private Optional<GameStat> gameStat = Optional.empty();
-    private Optional<Map<Difficulty,Player>> player = Optional.empty();
     private Optional<Map<Difficulty, List<Obstacle>>> obstacles = Optional.empty();
     private Optional<Map<Difficulty, List<BackgroundCell>>> backgroundCells = Optional.empty();
     private Optional<Map<Difficulty, List<Collectable>>> collectables = Optional.empty();
@@ -124,6 +126,11 @@ public abstract class AbstractLoader implements Loader {
         }
     }
 
+    @Override
+    public final Player getPlayerCell(final Difficulty difficulty){
+        return this.player;
+    }
+
     // GETTERS
 
     /** get gamestat loaded from file.
@@ -132,15 +139,6 @@ public abstract class AbstractLoader implements Loader {
      */
     protected final Optional<GameStat> getGameStatOpt() {
         return this.gameStat;
-    }
-
-    /**
-     * get player loaded from map.
-     * 
-     * @return {@link #player}
-     */
-    protected final Optional<Map<Difficulty,Player>> getPlayerCellOpt(){
-        return this.player;
     }
 
     /** get obstacles loaded from file. difficulty chooses the map.
@@ -215,14 +213,6 @@ public abstract class AbstractLoader implements Loader {
      */
     protected final void setGameStatOpt(final Optional<GameStat> gameStat) {
         this.gameStat = gameStat;
-    }
-
-    /** set player.
-     * 
-     * @param player
-     */
-    protected final void setPlayerOpt(final Optional<Map<Difficulty,Player>> player){
-        this.player = player;
     }
 
     /** set obstacles.

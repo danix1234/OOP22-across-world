@@ -19,7 +19,6 @@ import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.game.model.impl.BackgroundCellImpl;
 import it.unibo.project.game.model.impl.CollectableImpl;
 import it.unibo.project.game.model.impl.ObstacleImpl;
-import it.unibo.project.game.model.impl.PlayerImpl;
 import it.unibo.project.utility.Vector2D;
 
 /**
@@ -85,7 +84,6 @@ public abstract class AbstractMapLoader extends AbstractStatLoader {
         final Map<Difficulty, List<Obstacle>> obstacleAll = new HashMap<>();
         final Map<Difficulty, List<BackgroundCell>> backgroundCellAll = new HashMap<>();
         final Map<Difficulty, List<Collectable>> collectableAll = new HashMap<>();
-        final Map<Difficulty,Player> playerAll = new HashMap<>();
 
         for (final var difficulty : Difficulty.values()) {
             final List<Obstacle> obstacles = new ArrayList<>();
@@ -105,13 +103,11 @@ public abstract class AbstractMapLoader extends AbstractStatLoader {
             obstacleAll.put(difficulty, obstacles);
             backgroundCellAll.put(difficulty, backgroundCells);
             collectableAll.put(difficulty, collectables);
-            playerAll.put(difficulty, new PlayerImpl(loadEntity(difficulty, "PLAYER").get(0)));
         }
 
         setObstaclesOpt(Optional.of(obstacleAll));
         setBackgroundCellsOpt(Optional.of(backgroundCellAll));
         setCollectablesOpt(Optional.of(collectableAll));
-        setPlayerOpt(Optional.of(playerAll));
     }
 
 }
