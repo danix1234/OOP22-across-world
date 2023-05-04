@@ -98,6 +98,11 @@ public interface Launcher {
      */
     Loader getLoader();
 
+    /**
+     * loads map from file in {@linkplain GameWorld}
+     */
+    void loadMap();
+
     // CONTROLLER methods
     /**
      * starts the application.

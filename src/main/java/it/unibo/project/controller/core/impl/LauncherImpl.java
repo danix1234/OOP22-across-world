@@ -40,7 +40,7 @@ public final class LauncherImpl implements Launcher {
     private final Loader loader = new LoaderImpl();
 
     private SceneType sceneType = SceneType.MENU;
-    private Difficulty difficulty = Difficulty.NORMAL;
+    private Difficulty difficulty = Difficulty.EASY;
 
     private LauncherImpl() {
     }
@@ -130,5 +130,10 @@ public final class LauncherImpl implements Launcher {
     @Override
     public synchronized Pair<Integer, Integer> getHeightDelta() {
         return new Pair<>(GameScene.TOP_CELL_DELTA, GameScene.BOTTOM_CELL_DELTA);
+    }
+
+    @Override
+    public synchronized void loadMap(){
+        this.gameWorld.loadMap();
     }
 }
