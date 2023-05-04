@@ -11,7 +11,8 @@ public class ObstacleImpl extends EntityImpl implements Obstacle {
 	private Vector2D pixelPos;
 
 	public ObstacleImpl(final Vector2D initialPos, final ObstacleType type) {
-		super(initialPos, type == ObstacleType.CAR_DX || type == ObstacleType.CAR_SX || type == ObstacleType.TRAIN_DX || type == ObstacleType.TRAIN_SX);
+		super(initialPos, type == ObstacleType.CAR_DX || type == ObstacleType.CAR_SX || type == ObstacleType.TRAIN_DX
+				|| type == ObstacleType.TRAIN_SX);
 		this.type = type;
 
 	}
@@ -29,7 +30,7 @@ public class ObstacleImpl extends EntityImpl implements Obstacle {
 
 	@Override
 	public Vector2D movePixelPosition(final int x, final int y) {
-		Vector2D newPixelPos = new Vector2D(x, y); 
+		Vector2D newPixelPos = new Vector2D(x, y);
 		this.pixelPos = newPixelPos;
 		return this.pixelPos;
 	}

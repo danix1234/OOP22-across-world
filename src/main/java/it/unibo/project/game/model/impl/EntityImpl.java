@@ -9,8 +9,8 @@ public class EntityImpl implements Entity {
 	private boolean movable;
 
 	/**
-     * Constructor of class Entity
-     */
+	 * Constructor of class Entity.
+	 */
 	public EntityImpl(final Vector2D initialPos, boolean movable) {
 		this.entityPos = initialPos;
 		this.movable = movable;
@@ -28,11 +28,10 @@ public class EntityImpl implements Entity {
 
 	@Override
 	public void move(final int x, final int y) {
-		if(movable){
-			Vector2D newPos = new Vector2D(x, y); 
+		if (movable) {
+			Vector2D newPos = new Vector2D(x, y);
 			this.entityPos = newPos;
-		} 
+		}
 	}
-
 
 }
