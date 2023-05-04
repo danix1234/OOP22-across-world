@@ -17,8 +17,10 @@ import it.unibo.project.game.model.impl.GameWorldFactoryImpl;
 import it.unibo.project.input.api.InputHandler;
 import it.unibo.project.view.api.Scene;
 import it.unibo.project.view.api.Window;
+import it.unibo.project.view.impl.GameScene;
 import it.unibo.project.view.impl.SceneFactoryImpl;
 import it.unibo.project.view.impl.WindowFactoryImpl;
+import it.unibo.project.utility.Pair;
 
 /**
  * class {@linkplain LauncherImpl}, implements {@linkplain Launcher}, and it's a
@@ -118,6 +120,10 @@ public final class LauncherImpl implements Launcher {
     @Override
     public synchronized void showWindow() {
         this.window.show();        
+    }
+
+    public Pair<Integer, Integer> getCellDim() {
+        return new Pair<>(GameScene.ORIZ_CELL, GameScene.VERT_CELL);
     }
 
 }

@@ -8,6 +8,7 @@ import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.Player;
 import it.unibo.project.input.api.InputHandler;
 import it.unibo.project.view.api.Scene;
+import it.unibo.project.utility.Pair;
 
 /**
  * class {@code Launcher} is an {@code intermediary} between {@code View} and
@@ -48,6 +49,12 @@ public interface Launcher {
      * show window.
      */
     void showWindow();
+
+    /**
+     * @return width and height of map cells
+     */
+    Pair<Integer, Integer> getCellDim();
+
 
     // MODEL methods
 
@@ -99,4 +106,6 @@ public interface Launcher {
      * @return {@linkplain InputHandler} which handles the {@linkplain Action}
      */
     InputHandler getInputHandler(SceneType sceneType);
+
+
 }
