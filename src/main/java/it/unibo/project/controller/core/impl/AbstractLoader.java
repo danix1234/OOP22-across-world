@@ -76,7 +76,7 @@ public abstract class AbstractLoader implements Loader {
     protected static final Map<ObstacleType, List<String>> OBSTACLE_FILES = Map.of(
             ObstacleType.BUSH, List.of("bush.png"),
             ObstacleType.TREE, List.of("tree.png"),
-            ObstacleType.CAR_SX, List.of("carSX0.png"),
+            ObstacleType.CAR_SX, List.of("carSX0.png", "carSX1.png", "carSX2.png"),
             ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png"),
             ObstacleType.TRAIN_SX, List.of(),
             ObstacleType.TRAIN_DX, List.of(),
@@ -87,7 +87,7 @@ public abstract class AbstractLoader implements Loader {
             Difficulty.NORMAL, "normal.txt",
             Difficulty.HARD, "hard.txt");
     /** all player sprite file names. */
-    protected static final List<String> PLAYER_FILES = List.of("player0.png");
+    protected static final List<String> PLAYER_FILES = List.of("player0.png", "player1.png", "player2.png");
     /** stats file name. */
     protected static final String STAT_FILE = "stats.txt";
 
