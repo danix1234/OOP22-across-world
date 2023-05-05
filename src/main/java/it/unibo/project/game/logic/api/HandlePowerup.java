@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import it.unibo.project.game.model.api.CollectableType;
 
+/**
+ * class {@code HandlePowerup} contain methods to manage power up.
+ */
 public interface HandlePowerup {
     // save all collectables (but not coins, and not the one just picked up) inside
     // a temporary list
