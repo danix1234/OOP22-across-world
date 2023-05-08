@@ -1,7 +1,5 @@
 package it.unibo.project.controller.engine.impl;
 
-import javax.swing.SwingUtilities;
-
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.controller.engine.api.GameEngine;
@@ -26,7 +24,7 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public final void start() {
-        SwingUtilities.invokeLater(this::engine);
+        new Thread(this::engine).start();
     }
 
     private void engine() {

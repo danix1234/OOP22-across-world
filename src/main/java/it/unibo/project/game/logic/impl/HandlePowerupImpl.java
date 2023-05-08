@@ -3,8 +3,6 @@ package it.unibo.project.game.logic.impl;
 import java.util.Optional;
 import java.util.TimerTask;
 
-import javax.swing.SwingUtilities;
-
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.model.api.CollectableType;
@@ -31,7 +29,7 @@ public class HandlePowerupImpl implements HandlePowerup {
             }
         };
 
-        SwingUtilities.invokeLater(timerPowerUp);
+        new Thread(timerPowerUp).start();
     }
 
     @Override
