@@ -1,7 +1,5 @@
 package it.unibo.project.controller.engine.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import javax.swing.SwingUtilities;
 
 import it.unibo.project.controller.core.api.SceneType;
@@ -28,7 +26,7 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public final void start() {
-        new Thread(this::engine).start();
+        SwingUtilities.invokeLater(this::engine);
     }
 
     private void engine() {
@@ -43,15 +41,9 @@ public class GameEngineImpl implements GameEngine {
             }
 
             // engine
-            try {
-                SwingUtilities.invokeAndWait(() -> {
-                    processInput();
-                    updateGame();
-                    render();
-                });
-            } catch (InvocationTargetException | InterruptedException e) {
-                LauncherImpl.LAUNCHER.closeWindow();
-            }
+            processInput();
+            updateGame();
+            render();
 
             // handles fps
             try {
