@@ -16,7 +16,7 @@ public class HandlePowerupImpl implements HandlePowerup {
     private Optional<CollectableType> powerUpType;
 
     @Override
-    public void addPowerUp(final CollectableType type) {
+    public synchronized void addPowerUp(final CollectableType type) {
         this.powerUpType = Optional.of(type);
         TimerTask timerPowerUp = new TimerTask() {
 
@@ -24,25 +24,23 @@ public class HandlePowerupImpl implements HandlePowerup {
             public void run() {
                 try {
                     Thread.sleep(10000);
-                    SwingUtilities.invokeLater(() -> {
-                        clearPowerUp();
-                    });
+                    clearPowerUp();
                 } catch (final InterruptedException e) {
                     LauncherImpl.LAUNCHER.closeWindow();
                 }
             }
         };
 
-        timerPowerUp.run();
+        SwingUtilities.invokeLater(timerPowerUp);
     }
 
     @Override
-    public Optional<CollectableType> getCurrentPowerUp() {
+    public synchronized Optional<CollectableType> getCurrentPowerUp() {
         return powerUpType;
     }
 
     @Override
-    public void clearPowerUp() {
+    public synchronized void clearPowerUp() {
         powerUpType = Optional.empty();
     }
 }
