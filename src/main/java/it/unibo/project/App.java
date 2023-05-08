@@ -1,5 +1,7 @@
 package it.unibo.project;
 
+import javax.swing.SwingUtilities;
+
 import it.unibo.project.controller.core.impl.LauncherImpl;
 
 /**
@@ -15,7 +17,9 @@ public final class App {
      * @param args strings passed from terminal
      */
     public static void main(final String[] args) {
-        LauncherImpl.LAUNCHER.start();
-        LauncherImpl.LAUNCHER.showWindow();
+        SwingUtilities.invokeLater(() -> {
+            LauncherImpl.LAUNCHER.start();
+            LauncherImpl.LAUNCHER.showWindow();
+        });
     }
 }

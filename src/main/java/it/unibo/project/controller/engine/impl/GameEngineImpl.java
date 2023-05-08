@@ -1,5 +1,7 @@
 package it.unibo.project.controller.engine.impl;
 
+import javax.swing.SwingUtilities;
+
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.controller.engine.api.GameEngine;
@@ -39,9 +41,11 @@ public class GameEngineImpl implements GameEngine {
             }
 
             // engine
-            processInput();
-            updateGame();
-            render();
+            SwingUtilities.invokeLater(() -> {
+                processInput();
+                updateGame();
+                render();
+            });
 
             // handles fps
             try {
@@ -50,6 +54,7 @@ public class GameEngineImpl implements GameEngine {
                 Thread.sleep((long) (timeLeft / MILLI_SEC_IN_NANO_SEC), (int) (timeLeft % MILLI_SEC_IN_NANO_SEC));
                 nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
+                LauncherImpl.LAUNCHER.closeWindow();
             }
 
             // limits movement player to every n frames
