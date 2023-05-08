@@ -80,7 +80,7 @@ public abstract class AbstractStatLoader extends AbstractLoader {
                     + stats.getUnlockedSkins()
                             .stream()
                             .map(String::valueOf)
-                            .map(bool -> bool + "\n");
+                            .collect(Collectors.joining("\n"));
             Files.writeString(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE), buffer);
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
