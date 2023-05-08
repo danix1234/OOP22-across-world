@@ -118,6 +118,8 @@ public class GameScene extends AbstractScene {
 
             final var player = launcher.getPlayer();
             drawCell(playerSprite, player.getPosition(), g);
+            // needed because repaint method is draw on screen only when java swing wants
+            Toolkit.getDefaultToolkit().sync();
         }
     }
 }
