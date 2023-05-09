@@ -56,18 +56,22 @@ public class GameScene extends AbstractScene {
 
             @Override
             public void keyPressed(KeyEvent arg0) {
-                switch (arg0.getKeyChar()) {
-                    case 'w':
-                    getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_UP);
+                switch (arg0.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                    case KeyEvent.VK_W:
+                        getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_UP);
                         break;
-                    case 'a':
-                    getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_LEFT);
+                    case KeyEvent.VK_LEFT:
+                    case KeyEvent.VK_A:
+                        getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_LEFT);
                         break;
-                    case 's':
-                    getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_DOWN);
+                    case KeyEvent.VK_DOWN:
+                    case KeyEvent.VK_S:
+                        getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_DOWN);
                         break;
-                    case 'd':
-                    getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_RIGHT);
+                    case KeyEvent.VK_RIGHT:
+                    case KeyEvent.VK_D:
+                        getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_RIGHT);
                         break;
                     default:
                         break;
