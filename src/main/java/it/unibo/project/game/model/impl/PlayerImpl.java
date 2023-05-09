@@ -16,6 +16,11 @@ public class PlayerImpl extends EntityImpl implements Player {
 		return this.maxDistance;
 	}
 
+	/**
+     * Called for move the player.
+	 * Call the super move and compare the actual distance of the player
+	 * with the max distance which he achieved.
+     */
 	@Override
 	public void move(final int x, final int y) {
 		super.move(x, y);
