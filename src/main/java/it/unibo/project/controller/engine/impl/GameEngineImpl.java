@@ -15,7 +15,7 @@ public class GameEngineImpl implements GameEngine {
     /**
      * quantity of frames to wait before handling player movement.
      */
-    public static final int FRAME_PER_PLAYER_MOVEMENT = 12;
+    public static final int FRAME_PER_PLAYER_MOVEMENT = 4;
 
     private static final int SEC_IN_NANO_SEC = 1_000_000_000;
     private static final int MILLI_SEC_IN_NANO_SEC = 1_000_000;
