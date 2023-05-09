@@ -11,7 +11,6 @@ public class GameInputHandler implements InputHandler {
 
     @Override
     public void executeAction(final Action action) {
-        throw new UnsupportedOperationException("Unimplemented method 'executeAction'");
     }
 
     @Override

@@ -7,13 +7,11 @@ public class MovementLogicImpl implements MovementLogic {
     @Override
     public void movePlayer(final int x, final int y) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'movePlayer'");
     }
 
     @Override
     public void moveObstacle() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moveObstacle'");
     }
 
 }

@@ -27,8 +27,6 @@ import it.unibo.project.utility.Pair;
  * class {@linkplain LauncherImpl}, implements {@linkplain Launcher}, and it's a
  * {@code singleton} ({@link #LAUNCHER}).
  */
-// TODO remove temporary warning suppression
-@SuppressWarnings("unused")
 public final class LauncherImpl implements Launcher {
     /**
      * {@code singleton} of {@linkplain Launcher} class.
