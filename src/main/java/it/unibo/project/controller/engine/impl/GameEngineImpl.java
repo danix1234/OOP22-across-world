@@ -67,7 +67,7 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public final void updateGame() {
-
+        LauncherImpl.LAUNCHER.moveDynamicObstacles();
     }
 
     @Override

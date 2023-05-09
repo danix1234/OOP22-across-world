@@ -119,6 +119,11 @@ public interface Launcher {
      */
     void movePlayerIfPossible(int x, int y);
 
+    /**
+     * force {@code MovementLogic} to move dynamic obstacles (cars, trains, trunks)
+     */
+    void moveDynamicObstacles();
+
     // CONTROLLER methods
     /**
      * starts the application.

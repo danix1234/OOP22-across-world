@@ -150,5 +150,10 @@ public final class LauncherImpl implements Launcher {
     public synchronized void startEngine() {
         this.gameEngine.start();
     }
+
+    @Override
+    public void moveDynamicObstacles() {
+        this.gameWorld.getGameLogic().getMovementLogic().moveObstacle();
+    }
     
 }
