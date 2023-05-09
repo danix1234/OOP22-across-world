@@ -144,8 +144,13 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public void movePlayerIfPossible(int x, int y) {
+    public synchronized void movePlayerIfPossible(int x, int y) {
         this.gameWorld.getGameLogic().getMovementLogic().movePlayer(x, y);
+    }
+
+    @Override
+    public synchronized void startEngine() {
+        this.gameEngine.start();
     }
     
 }

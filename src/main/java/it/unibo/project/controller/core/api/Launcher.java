@@ -133,4 +133,11 @@ public interface Launcher {
      */
     InputHandler getInputHandler(SceneType sceneType);
 
+    /**
+     * start the game engine.
+     * 
+     * @implNote game engine kills itself when not in game scene!
+     */
+    void startEngine();
+
 }

@@ -28,6 +28,7 @@ public class SharedInputHandler implements InputHandler {
                 break;
             case CHANGE_SCENE_TO_GAME:
                 LauncherImpl.LAUNCHER.loadMap();
+                LauncherImpl.LAUNCHER.startEngine();
                 LauncherImpl.LAUNCHER.setScene(SceneType.GAME);
                 break;
             case CHANGE_SCENE_TO_OVER:
