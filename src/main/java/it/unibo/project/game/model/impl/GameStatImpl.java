@@ -5,7 +5,6 @@ import java.util.List;
 
 import it.unibo.project.game.model.api.GameStat;
 
-
 public class GameStatImpl implements GameStat {
     int coins;
     List<Boolean> unlockedSkins = new ArrayList<>();
@@ -27,7 +26,7 @@ public class GameStatImpl implements GameStat {
 
     @Override
     public void changeUnlockedSkins(final List<Boolean> unlockedSkins) {
-        this.unlockedSkins = unlockedSkins;
+        this.unlockedSkins = new ArrayList<>(List.copyOf(unlockedSkins));
     }
 
     @Override

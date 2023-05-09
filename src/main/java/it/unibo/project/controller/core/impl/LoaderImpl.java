@@ -17,6 +17,7 @@ import it.unibo.project.game.model.api.ObstacleType;
  * implementation of {@linkplain Loader} class.
  */
 public class LoaderImpl extends AbstractImageLoader {
+    private final Random random = new Random();
 
     @Override
     public final GameStat getGameStat() {
@@ -60,7 +61,7 @@ public class LoaderImpl extends AbstractImageLoader {
 
     @Override
     public final Image getElementRandom(final List<Image> collection) {
-        return collection.get(new Random().nextInt(collection.size()));
+        return collection.get(this.random.nextInt(collection.size()));
     }
 
     @Override
