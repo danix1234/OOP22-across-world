@@ -159,7 +159,7 @@ public class GameScene extends AbstractScene {
 
         /* needed to allow keyListener to work */
         @Override
-        public final boolean isFocusTraversable() {
+        public final boolean isFocusable() {
             return true;
         }
 
