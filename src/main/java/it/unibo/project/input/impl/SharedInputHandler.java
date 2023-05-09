@@ -28,29 +28,27 @@ public class SharedInputHandler implements InputHandler {
                 break;
             case CHANGE_SCENE_TO_GAME:
                 LauncherImpl.LAUNCHER.loadMap();
+                LauncherImpl.LAUNCHER.startEngine();
                 LauncherImpl.LAUNCHER.setScene(SceneType.GAME);
                 break;
             case CHANGE_SCENE_TO_OVER:
                 LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
                 break;
             default:
-                throw new UnsupportedOperationException("wrong action type passed");
+                break;
         }
     }
 
     @Override
     public final void storeAction(final Action action) {
-        throw new UnsupportedOperationException("not needed method");
     }
 
     @Override
     public final void executeStoredAction() {
-        throw new UnsupportedOperationException("not needed method");
     }
 
     @Override
     public final void clearStoredAction() {
-        throw new UnsupportedOperationException("not needed method");
     }
 
 }

@@ -25,7 +25,7 @@ public abstract class AbstractImageLoader extends AbstractMapLoader {
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
-        throw new UnsupportedOperationException("this exception can never be reached!");
+        throw new IllegalStateException("this exception can never be reached!");
     }
 
     private List<Image> loadImages(final String directory, final List<String> fileNames) {

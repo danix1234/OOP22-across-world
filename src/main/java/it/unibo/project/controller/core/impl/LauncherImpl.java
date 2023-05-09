@@ -27,8 +27,6 @@ import it.unibo.project.utility.Pair;
  * class {@linkplain LauncherImpl}, implements {@linkplain Launcher}, and it's a
  * {@code singleton} ({@link #LAUNCHER}).
  */
-// TODO remove temporary warning suppression
-@SuppressWarnings("unused")
 public final class LauncherImpl implements Launcher {
     /**
      * {@code singleton} of {@linkplain Launcher} class.
@@ -142,4 +140,15 @@ public final class LauncherImpl implements Launcher {
     public synchronized GameStat getGameStat() {
         return this.gameWorld.getGameStat();
     }
+
+    @Override
+    public synchronized void movePlayerIfPossible(int x, int y) {
+        this.gameWorld.getGameLogic().getMovementLogic().movePlayer(x, y);
+    }
+
+    @Override
+    public synchronized void startEngine() {
+        this.gameEngine.start();
+    }
+    
 }

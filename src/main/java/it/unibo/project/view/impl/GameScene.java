@@ -3,6 +3,8 @@ package it.unibo.project.view.impl;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,9 @@ import javax.swing.JPanel;
 
 import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.Loader;
+import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
+import it.unibo.project.input.api.Action;
 import it.unibo.project.utility.Vector2D;
 import it.unibo.project.view.api.AbstractScene;
 
@@ -48,6 +52,37 @@ public class GameScene extends AbstractScene {
      * {@code GameScene} constructor.
      */
     public GameScene() {
+        this.panel.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyPressed(KeyEvent arg0) {
+                switch (arg0.getKeyChar()) {
+                    case 'w':
+                    getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_UP);
+                        break;
+                    case 'a':
+                    getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_LEFT);
+                        break;
+                    case 's':
+                    getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_DOWN);
+                        break;
+                    case 'd':
+                    getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_RIGHT);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent arg0) {
+            }
+
+            @Override
+            public void keyTyped(KeyEvent arg0) {
+            }
+
+        });
         setPanel(this.panel);
 
         final List<Image> playerSkins = this.loader.getPlayerSprites();
@@ -121,5 +156,12 @@ public class GameScene extends AbstractScene {
             // needed because repaint method is draw on screen only when java swing wants
             Toolkit.getDefaultToolkit().sync();
         }
+
+        /* needed to allow keyListener to work */
+        @Override
+        public final boolean isFocusTraversable() {
+            return true;
+        }
+
     }
 }

@@ -61,7 +61,6 @@ public interface Launcher {
      */
     Pair<Integer, Integer> getHeightDelta();
 
-
     // MODEL methods
 
     /**
@@ -104,10 +103,21 @@ public interface Launcher {
      */
     void loadMap();
 
-    /** 
-     * @return updated {@linkplain GameStat} 
+    /**
+     * @return updated {@linkplain GameStat}
      */
     GameStat getGameStat();
+
+    /**
+     * suggests {@code MovementLogic} to move player to [x,y] if there are no
+     * obstacles in the way
+     * 
+     * @param x
+     * @param y
+     * 
+     * @implNote {@code MovementLogic} takes care of doing all checks on the move
+     */
+    void movePlayerIfPossible(int x, int y);
 
     // CONTROLLER methods
     /**
@@ -123,5 +133,11 @@ public interface Launcher {
      */
     InputHandler getInputHandler(SceneType sceneType);
 
+    /**
+     * start the game engine.
+     * 
+     * @implNote game engine kills itself when not in game scene!
+     */
+    void startEngine();
 
 }
