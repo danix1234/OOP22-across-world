@@ -56,15 +56,17 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public boolean checkFinishLineCollision() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() + LauncherImpl.LAUNCHER.getHeightDelta().get1() > LauncherImpl.LAUNCHER.getLoader().getBackgroundCells(LauncherImpl.LAUNCHER.getDifficulty()).stream()
-        .map(cell -> cell.getPosition().getY())
-        .reduce(Integer::max)
-        .get();
+        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY()
+                + LauncherImpl.LAUNCHER.getHeightDelta().get1() >= LauncherImpl.LAUNCHER.getLoader()
+                        .getBackgroundCells(LauncherImpl.LAUNCHER.getDifficulty()).stream()
+                        .map(cell -> cell.getPosition().getY())
+                        .reduce(Integer::max)
+                        .get();
     }
 
     @Override
     public boolean checkWallCollision() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getX() < 0
+        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getX() <= 0
                 || LauncherImpl.LAUNCHER.getPlayer().getPosition().getX() >= LauncherImpl.LAUNCHER.getCellDim().get1();
     }
 
