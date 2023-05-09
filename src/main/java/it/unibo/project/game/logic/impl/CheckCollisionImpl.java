@@ -65,9 +65,8 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public boolean checkWallCollision() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getX() <= 0
-                || LauncherImpl.LAUNCHER.getPlayer().getPosition().getX() >= LauncherImpl.LAUNCHER.getCellDim().get1();
+    public boolean checkWallCollision(Vector2D playerPos) {
+        return playerPos.getX() < 0 || playerPos.getX() >= LauncherImpl.LAUNCHER.getCellDim().get1();
     }
 
     @Override

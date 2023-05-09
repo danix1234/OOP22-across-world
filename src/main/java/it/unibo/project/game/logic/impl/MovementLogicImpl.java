@@ -13,7 +13,7 @@ public class MovementLogicImpl implements MovementLogic {
 
         if (checker.checkDynamicObstacleCollision().isEmpty()
                 && checker.checkStaticObstacleCollision(new Vector2D(x, y)).isEmpty()
-                && !checker.checkWallCollision()
+                && !checker.checkWallCollision(new Vector2D(x, y))
                 && !checker.checkFinishLineCollision()) {
 
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
