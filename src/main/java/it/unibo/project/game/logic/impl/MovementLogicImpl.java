@@ -13,6 +13,7 @@ public class MovementLogicImpl implements MovementLogic {
     @Override
     public void moveObstacle() {
         // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'moveObstacle'");
     }
 
 }
