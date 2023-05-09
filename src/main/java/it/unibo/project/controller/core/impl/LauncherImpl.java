@@ -142,4 +142,10 @@ public final class LauncherImpl implements Launcher {
     public synchronized GameStat getGameStat() {
         return this.gameWorld.getGameStat();
     }
+
+    @Override
+    public void movePlayerIfPossible(int x, int y) {
+        this.gameWorld.getGameLogic().getMovementLogic().movePlayer(x, y);
+    }
+    
 }
