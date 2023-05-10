@@ -10,16 +10,17 @@ public class MovementLogicImpl implements MovementLogic {
     @Override
     public void movePlayer(final int x, final int y) {
         CheckCollisionImpl checker = new CheckCollisionImpl();
+        Vector2D nextPlayerPosition = new Vector2D(x, y);
 
-        if (checker.checkDynamicObstacleCollision().isEmpty()
-                && checker.checkStaticObstacleCollision(new Vector2D(x, y)).isEmpty()
-                && !checker.checkWallCollision(new Vector2D(x, y))
-                && !checker.checkFinishLineCollision()) {
+        if (checker.checkDynamicObstacleCollision(nextPlayerPosition).isEmpty()
+                && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
+                && !checker.checkWallCollision(nextPlayerPosition)
+                && !checker.checkFinishLineCollision(nextPlayerPosition)) {
 
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
-        } else if (checker.checkFinishLineCollision()) {
+        } else if (checker.checkFinishLineCollision(nextPlayerPosition)) {
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
-        } else if (checker.checkDynamicObstacleCollision().isPresent()) {
+        } else if (checker.checkDynamicObstacleCollision(nextPlayerPosition).isPresent()) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
     }

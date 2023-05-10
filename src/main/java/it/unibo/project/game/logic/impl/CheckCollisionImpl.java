@@ -13,10 +13,10 @@ import it.unibo.project.utility.Vector2D;
 public class CheckCollisionImpl implements CheckCollision {
 
     @Override
-    public Optional<CollectableType> checkCollectableCollision() {
+    public Optional<CollectableType> checkCollectableCollision(Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getCollectables().stream()
                 .filter(collectable -> collectable.getPosition()
-                        .equals(LauncherImpl.LAUNCHER.getPlayer().getPosition()))
+                        .equals(playerPos))
                 .findFirst()
                 .map(Collectable::getType);
     }
@@ -55,8 +55,8 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public boolean checkFinishLineCollision() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY()
+    public boolean checkFinishLineCollision(Vector2D playerPos) {
+        return playerPos.getY()
                 + LauncherImpl.LAUNCHER.getHeightDelta().get1() >= LauncherImpl.LAUNCHER.getLoader()
                         .getBackgroundCells(LauncherImpl.LAUNCHER.getDifficulty()).stream()
                         .map(cell -> cell.getPosition().getY())
@@ -70,14 +70,14 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public Optional<ObstacleType> checkDynamicObstacleCollision() {
+    public Optional<ObstacleType> checkDynamicObstacleCollision(Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getObstacles().stream()
                 .filter(obstacle -> obstacle.getType().equals(ObstacleType.CAR_DX)
                         || obstacle.getType().equals(ObstacleType.CAR_SX)
                         || obstacle.getType().equals(ObstacleType.TRAIN_DX)
                         || obstacle.getType().equals(ObstacleType.TRAIN_SX))
                 .filter(dynamicObstacle -> dynamicObstacle.getPosition()
-                        .equals(LauncherImpl.LAUNCHER.getPlayer().getPosition()))
+                        .equals(playerPos))
                 .findFirst()
                 .map(Obstacle::getType);
     }
