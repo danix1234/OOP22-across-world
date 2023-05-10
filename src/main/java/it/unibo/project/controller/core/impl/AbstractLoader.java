@@ -82,7 +82,8 @@ public abstract class AbstractLoader implements Loader {
             ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png"),
             ObstacleType.TRAIN_SX, List.of(),
             ObstacleType.TRAIN_DX, List.of(),
-            ObstacleType.TRASPARENT_WATER, List.of());
+            ObstacleType.TRASPARENT_WATER, List.of(),
+            ObstacleType.TRUNK, List.of());
     /** all map file names. */
     protected static final Map<Difficulty, String> MAP_FILES = Map.of(
             Difficulty.EASY, "easy.txt",
