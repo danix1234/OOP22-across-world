@@ -1,7 +1,6 @@
 package it.unibo.project.game.logic.impl;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.CheckCollision;
