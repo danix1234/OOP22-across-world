@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class ObstacleImpl extends EntityImpl implements Obstacle {
 	private final ObstacleType type;
-	private Vector2D pixelPos;
+	private Vector2D pixelPos = new Vector2D(0, 0);
 	private final int speed;
 	private final int moveLeft;
 

@@ -14,6 +14,7 @@ import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
+import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.utility.Vector2D;
 import it.unibo.project.view.api.AbstractScene;
@@ -133,6 +134,14 @@ public class GameScene extends AbstractScene {
             g.drawImage(image, x, y, CELL_DIM, CELL_DIM, null);
         }
 
+        private void drawPixels(final Image image, final Vector2D cellPos, final Vector2D pixelPos, final Graphics g) {
+            if (!checkVertPos(cellPos)) {
+                return;
+            }
+            final int y = 128 * (VERT_CELL - posRelativeToPlayer(cellPos));
+            g.drawImage(image, pixelPos.getX(), y, CELL_DIM, CELL_DIM, null);
+        }
+
         @Override
         protected final void paintComponent(final Graphics g) {
             super.paintComponent(g);
@@ -144,9 +153,18 @@ public class GameScene extends AbstractScene {
                             g));
 
             launcher.getObstacles().stream()
+                    .filter(obstacle -> !obstacle.isMovable())
                     .forEach(cell -> drawCell(
                             loader.getElementRandom(loader.getObstacleSprites(cell.getType())),
                             cell.getPosition(),
+                            g));
+
+            launcher.getObstacles().stream()
+                    .filter(Obstacle::isMovable)
+                    .forEach(cell -> drawPixels(
+                            loader.getObstacleSprites(cell.getType()).get(0),
+                            cell.getPosition(),
+                            cell.getPixelPosition(),
                             g));
 
             launcher.getCollectables().stream()
