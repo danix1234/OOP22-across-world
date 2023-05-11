@@ -68,18 +68,19 @@ public abstract class AbstractLoader implements Loader {
             BackgroundCellType.GRASS, List.of("grass.png"),
             BackgroundCellType.RAIL, List.of("rail.png"),
             BackgroundCellType.ROAD, List.of("road.png"),
-            BackgroundCellType.WATER, List.of("water.png"));
+            BackgroundCellType.WATER, List.of("water.png"),
+            BackgroundCellType.FINISHLINE, List.of("finishline.png"));
     /** all obstacle sprite file names. */
     protected static final Map<ObstacleType, List<String>> OBSTACLE_FILES = Map.of(
             ObstacleType.BUSH, List.of("bush.png"),
             ObstacleType.TREE, List.of("tree.png"),
             ObstacleType.CAR_SX, List.of("carSX0.png", "carSX1.png", "carSX2.png"),
             ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png"),
-            ObstacleType.TRAIN_SX, List.of(),
-            ObstacleType.TRAIN_DX, List.of(),
-            ObstacleType.TRASPARENT_WATER, List.of(),
-            ObstacleType.TRUNK_SX, List.of(),
-            ObstacleType.TRUNK_DX, List.of());
+            ObstacleType.TRAIN_SX, List.of("trainSX.png"),
+            ObstacleType.TRAIN_DX, List.of("trainDX.png"),
+            ObstacleType.TRASPARENT_WATER, List.of("transparentwater.png"),
+            ObstacleType.TRUNK_SX, List.of("trunkSX.png"),
+            ObstacleType.TRUNK_DX, List.of("trunkDX.png"));
     /** all map file names. */
     protected static final Map<Difficulty, String> MAP_FILES = Map.of(
             Difficulty.EASY, "easy.txt",
