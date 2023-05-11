@@ -73,7 +73,6 @@ public class CheckCollisionImpl implements CheckCollision {
         if (checkRiverCollision(playerPos)) {
             return false;
         }
-        System.out.println(checkRiverCollision(playerPos));
         return LauncherImpl.LAUNCHER.getObstacles().stream()
                 .filter(obstacle -> !obstacle.getType().equals(ObstacleType.TRUNK_DX)
                         && !obstacle.getType().equals(ObstacleType.TRUNK_SX))
