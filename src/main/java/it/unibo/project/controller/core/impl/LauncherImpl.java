@@ -1,6 +1,6 @@
 package it.unibo.project.controller.core.impl;
 
-import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.util.List;
 
 import it.unibo.project.controller.core.api.Difficulty;
@@ -33,9 +33,9 @@ public final class LauncherImpl implements Launcher {
      */
     public static final Launcher LAUNCHER = new LauncherImpl();
     /** {@code width} in pixel of window. */
-    public static final int WIDTH = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth() ;
+    public static final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() ;
     /** {@code height} in pixel of window. */
-    public static final int HEIGHT = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
+    public static final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
     /** {@code quantity} of cell in {@code orizontal} direction. */
     public static final int ORIZ_CELL = 15;
     /** {@code quantity} of cell in {@code vertical} direction. */
