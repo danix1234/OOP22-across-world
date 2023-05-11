@@ -78,7 +78,7 @@ public abstract class AbstractLoader implements Loader {
             ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png"),
             ObstacleType.TRAIN_SX, List.of("trainSX.png"),
             ObstacleType.TRAIN_DX, List.of("trainDX.png"),
-            ObstacleType.TRASPARENT_WATER, List.of("transparentwater.png"),
+            ObstacleType.TRANSPARENT_WATER, List.of("transparentwater.png"),
             ObstacleType.TRUNK_SX, List.of("trunkSX.png"),
             ObstacleType.TRUNK_DX, List.of("trunkDX.png"));
     /** all map file names. */

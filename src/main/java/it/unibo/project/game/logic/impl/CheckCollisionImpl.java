@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.CheckCollision;
+import it.unibo.project.game.model.api.BackgroundCellType;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.Obstacle;
@@ -55,40 +56,53 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public boolean checkFinishLineCollision(Vector2D playerPos) {
-        return false;
+        return LauncherImpl.LAUNCHER.getBackgroundCells().stream()
+                .filter(background -> background.getType().equals(BackgroundCellType.FINISHLINE))
+                .filter(finishline -> finishline.getPosition().equals(playerPos))
+                .findFirst()
+                .isPresent();
     }
 
     @Override
     public boolean checkWallCollision(Vector2D playerPos) {
-        return playerPos.getX() < 0 || playerPos.getX() >= LauncherImpl.WIDTH;
+        return playerPos.getX() < 0 || playerPos.getX() >= LauncherImpl.ORIZ_CELL;
     }
 
     @Override
-    public Optional<ObstacleType> checkDynamicObstacleCollision(Vector2D playerPos) {
-        if (checkRiverCollision(playerPos).isPresent()) {
-            return checkRiverCollision(playerPos);
+    public boolean checkDynamicObstacleCollision(Vector2D playerPos) {
+        if (checkRiverCollision(playerPos)) {
+            return false;
         }
+        System.out.println(checkRiverCollision(playerPos));
         return LauncherImpl.LAUNCHER.getObstacles().stream()
-                .filter(obstacle -> obstacle.isMovable())
+                .filter(obstacle -> !obstacle.getType().equals(ObstacleType.TRUNK_DX)
+                        && !obstacle.getType().equals(ObstacleType.TRUNK_SX))
+                .filter(obstacle -> obstacle.isMovable() || obstacle.getType().equals(ObstacleType.TRANSPARENT_WATER))
                 .filter(dynamicObstacle -> dynamicObstacle.getPosition()
                         .equals(playerPos))
                 .findFirst()
-                .map(Obstacle::getType);
+                .isPresent();
     }
 
-    private Optional<ObstacleType> checkRiverCollision(Vector2D playerPos) {
+    private boolean checkRiverCollision(Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getObstacles().stream()
-                .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRASPARENT_WATER))
+                .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRANSPARENT_WATER))
                 .filter(waterObstacle -> waterObstacle.getPosition().equals(playerPos))
-                .filter(waterWithPlayer -> waterWithPlayer.getPosition()
-                        .equals(LauncherImpl.LAUNCHER.getObstacles().stream()
+                .filter(waterWithPlayer -> LauncherImpl.LAUNCHER.getObstacles().stream()
                                 .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRUNK_DX)
                                         || obstacle.getType().equals(ObstacleType.TRUNK_SX))
-                                .filter(trunkObstacle -> trunkObstacle.getPosition().equals(playerPos))
+                                .filter(trunkObstacle -> trunkObstacle.getPosition().equals(waterWithPlayer.getPosition()))
                                 .findFirst()
                                 .map(Obstacle::getPosition)
-                                .get()))
+                                .isPresent())
                 .findFirst()
-                .map(Obstacle::getType);
+                .isPresent();
+        /*
+         * return LauncherImpl.LAUNCHER.getObstacles().stream()
+         * .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRASPARENT_WATER)
+         * || obstacle.getType().equals(ObstacleType.TRUNK_DX) ||
+         * obstacle.getType().equals(ObstacleType.TRUNK_SX))
+         * .filter()
+         */
     }
 }

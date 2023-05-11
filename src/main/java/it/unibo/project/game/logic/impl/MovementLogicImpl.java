@@ -12,7 +12,7 @@ public class MovementLogicImpl implements MovementLogic {
     public void movePlayer(final int x, final int y) {
         final Vector2D nextPlayerPosition = new Vector2D(x, y);
 
-        if (checker.checkDynamicObstacleCollision(nextPlayerPosition).isEmpty()
+        if (!checker.checkDynamicObstacleCollision(nextPlayerPosition)
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
                 && !checker.checkWallCollision(nextPlayerPosition)
                 && !checker.checkFinishLineCollision(nextPlayerPosition)) {
@@ -20,7 +20,7 @@ public class MovementLogicImpl implements MovementLogic {
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
         } else if (checker.checkFinishLineCollision(nextPlayerPosition)) {
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
-        } else if (checker.checkDynamicObstacleCollision(nextPlayerPosition).isPresent()) {
+        } else if (checker.checkDynamicObstacleCollision(nextPlayerPosition)) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
     }
@@ -29,7 +29,7 @@ public class MovementLogicImpl implements MovementLogic {
     public void moveObstacle() {
         final Vector2D playerPos = LauncherImpl.LAUNCHER.getPlayer().getPosition();
 
-        if (checker.checkDynamicObstacleCollision(playerPos).isPresent()) {
+        if (checker.checkDynamicObstacleCollision(playerPos)) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
     }

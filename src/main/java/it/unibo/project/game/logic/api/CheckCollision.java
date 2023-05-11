@@ -14,7 +14,7 @@ public interface CheckCollision {
     Optional<ObstacleType> checkStaticObstacleCollision(Vector2D playerPos); // Optional not empty -> can't move in that direction
 
     // !! REMEMBER TO HANDLE THE CASE OF COLLISION WITH TRUNK!!
-    Optional<ObstacleType> checkDynamicObstacleCollision(Vector2D playerPos); // list not empty -> you lose (unless you hit water & trunk)
+    boolean checkDynamicObstacleCollision(Vector2D playerPos); // list not empty -> you lose (unless you hit water & trunk)
 
     boolean checkFinishLineCollision(Vector2D playerPos); // true -> you win
 

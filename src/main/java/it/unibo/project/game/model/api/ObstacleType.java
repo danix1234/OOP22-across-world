@@ -7,7 +7,7 @@ public enum ObstacleType {
     CAR_SX,
     TRAIN_DX,
     TRAIN_SX,
-    TRASPARENT_WATER,
+    TRANSPARENT_WATER,
     TRUNK_DX,
     TRUNK_SX;
 }
