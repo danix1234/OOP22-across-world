@@ -6,11 +6,11 @@ import it.unibo.project.game.logic.api.MovementLogic;
 import it.unibo.project.utility.Vector2D;
 
 public class MovementLogicImpl implements MovementLogic {
+    private final CheckCollisionImpl checker = new CheckCollisionImpl();
 
     @Override
     public void movePlayer(final int x, final int y) {
-        CheckCollisionImpl checker = new CheckCollisionImpl();
-        Vector2D nextPlayerPosition = new Vector2D(x, y);
+        final Vector2D nextPlayerPosition = new Vector2D(x, y);
 
         if (checker.checkDynamicObstacleCollision(nextPlayerPosition).isEmpty()
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
@@ -27,7 +27,11 @@ public class MovementLogicImpl implements MovementLogic {
 
     @Override
     public void moveObstacle() {
-        // TODO Auto-generated method stub
+        final Vector2D playerPos = LauncherImpl.LAUNCHER.getPlayer().getPosition();
+
+        if (checker.checkDynamicObstacleCollision(playerPos).isPresent()) {
+            LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
+        }
     }
 
 }
