@@ -1,6 +1,5 @@
 package it.unibo.project.view.impl;
 
-import java.awt.Toolkit;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -22,7 +21,6 @@ public class WindowImpl implements Window {
     public WindowImpl() {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationByPlatform(true);
-        this.frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.frame.setExtendedState(this.frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         //// uncomment following code to force fullscreen [WARNING: NOT RESIZABLE!] \\\\
         // final GraphicsDevice gd =
