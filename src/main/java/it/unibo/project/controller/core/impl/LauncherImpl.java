@@ -60,7 +60,7 @@ public final class LauncherImpl implements Launcher {
     private final Loader loader = new LoaderImpl();
 
     private SceneType sceneType = SceneType.MENU;
-    private Difficulty difficulty = Difficulty.EASY;
+    private Difficulty difficulty = Difficulty.NORMAL;
 
     private LauncherImpl() {
     }
