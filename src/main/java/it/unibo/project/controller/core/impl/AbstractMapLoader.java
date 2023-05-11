@@ -1,8 +1,5 @@
 package it.unibo.project.controller.core.impl;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +11,7 @@ import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.BackgroundCellType;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
-import it.unibo.project.game.model.api.*;
+import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.game.model.impl.BackgroundCellImpl;
 import it.unibo.project.game.model.impl.CollectableImpl;
@@ -27,16 +24,11 @@ import it.unibo.project.utility.Vector2D;
 public abstract class AbstractMapLoader extends AbstractStatLoader {
 
     private void loadMapBuffers() {
-        try {
-            final var mapBuffers = new HashMap<Difficulty, List<String>>();
-            for (final var difficulty : Difficulty.values()) {
-                final var path = Paths.get(MAPS_DIR + FILE_SEP + MAP_FILES.get(difficulty));
-                mapBuffers.put(difficulty, Files.readAllLines(path));
-            }
-            setMapBufferOpt(Optional.of(mapBuffers));
-        } catch (IOException e) {
-            LauncherImpl.LAUNCHER.closeWindow();
+        final var mapBuffers = new HashMap<Difficulty, List<String>>();
+        for (final var difficulty : Difficulty.values()) {
+            mapBuffers.put(difficulty, loadResourceFile(MAPS_DIR + FILE_SEP + MAP_FILES.get(difficulty)));
         }
+        setMapBufferOpt(Optional.of(mapBuffers));
     }
 
     private List<String> getMapBuffer(final Difficulty difficulty) {
