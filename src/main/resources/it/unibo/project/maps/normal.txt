@@ -2,6 +2,21 @@
 7 5
 
 [GRASS]
+0 -1
+1 -1
+2 -1
+3 -1
+4 -1
+5 -1
+6 -1
+7 -1
+8 -1
+9 -1
+10 -1
+11 -1
+12 -1
+13 -1
+14 -1
 0 0
 1 0
 2 0
@@ -1845,19 +1860,20 @@
 14 58
 14 95
 
-[TRAIN_DX]
+(TRAIN_DX)
 0 14
 0 38
 0 78
 
-[TRUNKS_SX]
+(TRUNKS_SX)
 
-[TRUNKS_DX]
+(TRUNKS_DX)
 
 [COIN]
-1 6
+2 6
 
 [POWERUP_COIN_MULTIPLIER]
+1 7
 
 [POWERUP_COIN_MAGNET]
 
