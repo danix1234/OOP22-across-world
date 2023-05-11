@@ -6,7 +6,10 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -27,6 +30,8 @@ public class GameScene extends AbstractScene {
     private final Launcher launcher = LauncherImpl.LAUNCHER;
     private final Loader loader = LauncherImpl.LAUNCHER.getLoader();
     private final Image playerSprite;
+    private final Map<Integer, Integer> lineRandomValue = new HashMap<>();
+    private final Random random = new Random();
 
     /**
      * {@code GameScene} constructor.
@@ -121,44 +126,65 @@ public class GameScene extends AbstractScene {
             g.drawImage(image, pixelPos.getX(), y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
         }
 
+        private void calculateLineRandomValue(final int line) {
+            if (!lineRandomValue.containsKey(line)) {
+                lineRandomValue.put(line, random.nextInt(0, Integer.MAX_VALUE));
+            }
+        }
+
+        private Image getHashedElement(final List<Image> images, final int line) {
+            calculateLineRandomValue(line);
+            return images.get(lineRandomValue.get(line) % images.size());
+        }
+
         @Override
         protected final void paintComponent(final Graphics g) {
             super.paintComponent(g);
 
+            final var player = launcher.getPlayer();
+
             launcher.getBackgroundCells().stream()
                     .forEach(cell -> drawCell(
-                            loader.getElementRandom(loader.getBackgroundCellSprites(cell.getType())),
+                            getHashedElement(
+                                    loader.getBackgroundCellSprites(cell.getType()),
+                                    cell.getPosition().getY()),
                             cell.getPosition(),
                             g));
 
             launcher.getObstacles().stream()
                     .filter(obstacle -> !obstacle.isMovable())
                     .forEach(cell -> drawCell(
-                            loader.getElementRandom(loader.getObstacleSprites(cell.getType())),
+                            getHashedElement(
+                                    loader.getObstacleSprites(cell.getType()),
+                                    cell.getPosition().getY()),
                             cell.getPosition(),
                             g));
 
             launcher.getObstacles().stream()
                     .filter(Obstacle::isMovable)
                     .forEach(cell -> drawPixels(
-                            loader.getObstacleSprites(cell.getType()).get(0),
+                            getHashedElement(
+                                    loader.getObstacleSprites(cell.getType()),
+                                    cell.getPosition().getY()),
                             cell.getPosition(),
                             cell.getPixelPosition(),
                             g));
 
             launcher.getCollectables().stream()
                     .forEach(cell -> drawCell(
-                            loader.getElementRandom(loader.getCollectablesSprites(cell.getType())),
+                            getHashedElement(
+                                    loader.getCollectablesSprites(cell.getType()),
+                                    cell.getPosition().getY()),
                             cell.getPosition(),
                             g));
 
-            final var player = launcher.getPlayer();
             drawCell(playerSprite, player.getPosition(), g);
+
             // needed because repaint method is draw on screen only when java swing wants
             Toolkit.getDefaultToolkit().sync();
         }
 
-        /* needed to allow keyListener to work */
+        /* needed to allow keyListener to work. */
         @Override
         public final boolean isFocusable() {
             return true;
