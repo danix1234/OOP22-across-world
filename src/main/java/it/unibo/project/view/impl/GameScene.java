@@ -113,6 +113,23 @@ public class GameScene extends AbstractScene {
         return vector.getY() >= minCell() && vector.getY() <= maxCell();
     }
 
+    // doesn't translate pos x = PIXEL_MAX - little to cell zero
+    public Vector2D convertCellToPixelPos(final Vector2D cellPos) {
+        final int x = cellPos.getX() * CELL_DIM;
+        final int y = -1; // won't be ever used (hopefully)
+        return new Vector2D(x, y);
+    }
+
+    public Vector2D convertPixelToCellPos(final Vector2D pixelPos) {
+        int x = pixelPos.getX() / CELL_DIM;
+        if (pixelPos.getX() % CELL_DIM > (CELL_DIM / 2)){
+            x++;
+        }
+        return new Vector2D(x, pixelPos.getY());
+    }
+
+    // TODO pixel translated a little to the right to fix previous problem
+
     @Override
     public final void update() {
         this.panel.repaint();
