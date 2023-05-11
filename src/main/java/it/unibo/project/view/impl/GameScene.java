@@ -23,27 +23,6 @@ import it.unibo.project.view.api.AbstractScene;
  * Class {@code GameScene} takes care of rendering all entities on window.
  */
 public class GameScene extends AbstractScene {
-    /** {@code width} in pixel of window. */
-    public static final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    /** {@code height} in pixel of window. */
-    public static final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-    /** {@code quantity} of cell in {@code orizontal} direction. */
-    public static final int ORIZ_CELL = 15;
-    /** {@code quantity} of cell in {@code vertical} direction. */
-    public static final int VERT_CELL = HEIGHT / (WIDTH / ORIZ_CELL) + 1;
-    /** {@code dimension} of one side of each cell, in {@code pixel}. */
-    public static final int CELL_DIM = WIDTH / ORIZ_CELL;
-    /**
-     * {@code quantity} of lines of orizontal cell to be loaded {@code above} the
-     * player current one.
-     */
-    public static final int TOP_CELL_DELTA = VERT_CELL / 2;
-    /**
-     * {@code quantity} of lines of orizontal cell to be loaded {@code below} the
-     * player current one.
-     */
-    public static final int BOTTOM_CELL_DELTA = VERT_CELL - TOP_CELL_DELTA - 1;
-
     private final Panel panel = new Panel();
     private final Launcher launcher = LauncherImpl.LAUNCHER;
     private final Loader loader = LauncherImpl.LAUNCHER.getLoader();
@@ -102,33 +81,16 @@ public class GameScene extends AbstractScene {
     }
 
     private int minCell() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() - BOTTOM_CELL_DELTA;
+        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() - LauncherImpl.BOTTOM_CELL_DELTA;
     }
 
     private int maxCell() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() + TOP_CELL_DELTA;
+        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() + LauncherImpl.TOP_CELL_DELTA;
     }
 
     private boolean checkVertPos(final Vector2D vector) {
         return vector.getY() >= minCell() && vector.getY() <= maxCell();
     }
-
-    // doesn't translate pos x = PIXEL_MAX - little to cell zero
-    public Vector2D convertCellToPixelPos(final Vector2D cellPos) {
-        final int x = cellPos.getX() * CELL_DIM;
-        final int y = -1; // won't be ever used (hopefully)
-        return new Vector2D(x, y);
-    }
-
-    public Vector2D convertPixelToCellPos(final Vector2D pixelPos) {
-        int x = pixelPos.getX() / CELL_DIM;
-        if (pixelPos.getX() % CELL_DIM > (CELL_DIM / 2)){
-            x++;
-        }
-        return new Vector2D(x, pixelPos.getY());
-    }
-
-    // TODO pixel translated a little to the right to fix previous problem
 
     @Override
     public final void update() {
@@ -139,7 +101,7 @@ public class GameScene extends AbstractScene {
         private static final long serialVersionUID = 0L;
 
         private int posRelativeToPlayer(final Vector2D cellPos) {
-            return cellPos.getY() - launcher.getPlayer().getPosition().getY() + BOTTOM_CELL_DELTA + 1;
+            return cellPos.getY() - launcher.getPlayer().getPosition().getY() + LauncherImpl.BOTTOM_CELL_DELTA + 1;
         }
 
         private void drawCell(final Image image, final Vector2D cellPos, final Graphics g) {
@@ -147,16 +109,16 @@ public class GameScene extends AbstractScene {
                 return;
             }
             final int x = 128 * cellPos.getX();
-            final int y = 128 * (VERT_CELL - posRelativeToPlayer(cellPos));
-            g.drawImage(image, x, y, CELL_DIM, CELL_DIM, null);
+            final int y = 128 * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
+            g.drawImage(image, x, y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
         }
 
         private void drawPixels(final Image image, final Vector2D cellPos, final Vector2D pixelPos, final Graphics g) {
             if (!checkVertPos(cellPos)) {
                 return;
             }
-            final int y = 128 * (VERT_CELL - posRelativeToPlayer(cellPos));
-            g.drawImage(image, pixelPos.getX(), y, CELL_DIM, CELL_DIM, null);
+            final int y = 128 * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
+            g.drawImage(image, pixelPos.getX(), y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
         }
 
         @Override

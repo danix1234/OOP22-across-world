@@ -55,17 +55,12 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public boolean checkFinishLineCollision(Vector2D playerPos) {
-        return playerPos.getY()
-                + LauncherImpl.LAUNCHER.getHeightDelta().get1() >= LauncherImpl.LAUNCHER.getLoader()
-                        .getBackgroundCells(LauncherImpl.LAUNCHER.getDifficulty()).stream()
-                        .map(cell -> cell.getPosition().getY())
-                        .reduce(Integer::max)
-                        .get();
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public boolean checkWallCollision(Vector2D playerPos) {
-        return playerPos.getX() < 0 || playerPos.getX() >= LauncherImpl.LAUNCHER.getCellDim().get1();
+        return playerPos.getX() < 0 || playerPos.getX() >= LauncherImpl.WIDTH;
     }
 
     @Override

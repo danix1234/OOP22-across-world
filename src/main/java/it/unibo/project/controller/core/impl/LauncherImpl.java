@@ -1,5 +1,6 @@
 package it.unibo.project.controller.core.impl;
 
+import java.awt.Toolkit;
 import java.util.List;
 
 import it.unibo.project.controller.core.api.Difficulty;
@@ -16,12 +17,11 @@ import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.Player;
 import it.unibo.project.game.model.impl.GameWorldFactoryImpl;
 import it.unibo.project.input.api.InputHandler;
+import it.unibo.project.utility.Vector2D;
 import it.unibo.project.view.api.Scene;
 import it.unibo.project.view.api.Window;
-import it.unibo.project.view.impl.GameScene;
 import it.unibo.project.view.impl.SceneFactoryImpl;
 import it.unibo.project.view.impl.WindowFactoryImpl;
-import it.unibo.project.utility.Pair;
 
 /**
  * class {@linkplain LauncherImpl}, implements {@linkplain Launcher}, and it's a
@@ -32,6 +32,27 @@ public final class LauncherImpl implements Launcher {
      * {@code singleton} of {@linkplain Launcher} class.
      */
     public static final Launcher LAUNCHER = new LauncherImpl();
+    /** {@code width} in pixel of window. */
+    public static final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    /** {@code height} in pixel of window. */
+    public static final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+    /** {@code quantity} of cell in {@code orizontal} direction. */
+    public static final int ORIZ_CELL = 15;
+    /** {@code quantity} of cell in {@code vertical} direction. */
+    public static final int VERT_CELL = HEIGHT / (WIDTH / ORIZ_CELL) + 1;
+    /** {@code dimension} of one side of each cell, in {@code pixel}. */
+    public static final int CELL_DIM = WIDTH / ORIZ_CELL;
+    /**
+     * {@code quantity} of lines of orizontal cell to be loaded {@code above} the
+     * player current one.
+     */
+    public static final int TOP_CELL_DELTA = VERT_CELL / 2;
+    /**
+     * {@code quantity} of lines of orizontal cell to be loaded {@code below} the
+     * player current one.
+     */
+    public static final int BOTTOM_CELL_DELTA = VERT_CELL - TOP_CELL_DELTA - 1;
+
 
     private final Window window = new WindowFactoryImpl().createWindow();
     private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
@@ -122,16 +143,6 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public synchronized Pair<Integer, Integer> getCellDim() {
-        return new Pair<>(GameScene.ORIZ_CELL, GameScene.VERT_CELL);
-    }
-
-    @Override
-    public synchronized Pair<Integer, Integer> getHeightDelta() {
-        return new Pair<>(GameScene.TOP_CELL_DELTA, GameScene.BOTTOM_CELL_DELTA);
-    }
-
-    @Override
     public synchronized void loadMap(){
         this.gameWorld.loadMap();
     }
@@ -154,6 +165,22 @@ public final class LauncherImpl implements Launcher {
     @Override
     public void moveDynamicObstacles() {
         this.gameWorld.getGameLogic().getMovementLogic().moveObstacle();
+    }
+
+    @Override
+    public Vector2D convertCellToPixelPos(Vector2D cellPos) {
+        final int x = cellPos.getX() * CELL_DIM;
+        final int y = -1; // won't be ever used (hopefully)
+        return new Vector2D(x, y);
+    }
+
+    @Override
+    public Vector2D convertPixelToCellPos(Vector2D pixelPos) {
+        int x = pixelPos.getX() / CELL_DIM;
+        if (pixelPos.getX() % CELL_DIM > (CELL_DIM / 2)){
+            x++;
+        }
+        return new Vector2D(x, pixelPos.getY());
     }
     
 }

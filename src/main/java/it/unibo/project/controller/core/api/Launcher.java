@@ -5,11 +5,13 @@ import java.util.List;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.GameStat;
+import it.unibo.project.game.model.api.GameWorld;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.Player;
+import it.unibo.project.input.api.Action;
 import it.unibo.project.input.api.InputHandler;
+import it.unibo.project.utility.Vector2D;
 import it.unibo.project.view.api.Scene;
-import it.unibo.project.utility.Pair;
 
 /**
  * class {@code Launcher} is an {@code intermediary} between {@code View} and
@@ -52,14 +54,14 @@ public interface Launcher {
     void showWindow();
 
     /**
-     * @return width and height of map cells
+     * converter position in cell to position in pixel.
      */
-    Pair<Integer, Integer> getCellDim();
+    Vector2D convertCellToPixelPos(Vector2D cellPos);
 
     /**
-     * @return top and bottom point of map view
+     * converter position in pixel to position in cell.
      */
-    Pair<Integer, Integer> getHeightDelta();
+    Vector2D convertPixelToCellPos(Vector2D pixelPos);
 
     // MODEL methods
 
