@@ -26,9 +26,8 @@ public interface Obstacle extends Entity {
      * 
      * @param x represent the new x of new position.
      * @param y represent the new y of new position.
-     * @return a Vector2D that represent the new position.
      */
-    Vector2D movePixelPosition(int x, int y);
+    void movePixelPosition(int x, int y);
 
     /**
      * @return obstacle speed
