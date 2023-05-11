@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -15,11 +14,12 @@ import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.BackgroundCellType;
-import it.unibo.project.game.model.api.*;
+import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.GameStat;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
+import it.unibo.project.game.model.api.Player;
 import it.unibo.project.game.model.impl.PlayerImpl;
 import it.unibo.project.utility.Vector2D;
 
@@ -140,9 +140,8 @@ public abstract class AbstractLoader implements Loader {
     protected final List<String> loadResourceFile(final String resourcePath) {
         try {
             final InputStream inputStream = ClassLoader.getSystemResourceAsStream(resourcePath);
-            final String string = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            final List<String> lines = Arrays.asList(string.split(System.getProperty("line.separator")));
-            return lines;
+            final String buffer = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            return buffer.lines().toList();
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
