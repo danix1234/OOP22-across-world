@@ -70,7 +70,7 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public Optional<ObstacleType> checkDynamicObstacleCollision(Vector2D playerPos) {
-        if (!checkRiverCollision(playerPos).equals(Optional.of(null))) {
+        if (checkRiverCollision(playerPos).isPresent()) {
             return checkRiverCollision(playerPos);
         }
         return LauncherImpl.LAUNCHER.getObstacles().stream()
