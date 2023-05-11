@@ -30,7 +30,7 @@ public abstract class AbstractLoader implements Loader {
     // UTILITY PATH
 
     /** file separator. */
-    protected static final String FILE_SEP = System.getProperty("file.separator");
+    protected static final String FILE_SEP = "/";
     /** home directory of the user. */
     protected static final String USER_HOME_DIR = System.getProperty("user.home");
     /** resources directory. */
