@@ -55,7 +55,7 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public boolean checkFinishLineCollision(Vector2D playerPos) {
-        throw new UnsupportedOperationException("TODO");
+        return false;
     }
 
     @Override
