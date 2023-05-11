@@ -108,8 +108,8 @@ public class GameScene extends AbstractScene {
             if (!checkVertPos(cellPos)) {
                 return;
             }
-            final int x = 128 * cellPos.getX();
-            final int y = 128 * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
+            final int x = LauncherImpl.CELL_DIM * cellPos.getX();
+            final int y = LauncherImpl.CELL_DIM * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
             g.drawImage(image, x, y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
         }
 
@@ -117,7 +117,7 @@ public class GameScene extends AbstractScene {
             if (!checkVertPos(cellPos)) {
                 return;
             }
-            final int y = 128 * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
+            final int y = LauncherImpl.CELL_DIM * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
             g.drawImage(image, pixelPos.getX(), y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
         }
 
