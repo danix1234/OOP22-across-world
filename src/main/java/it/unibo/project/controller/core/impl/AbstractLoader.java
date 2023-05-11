@@ -2,8 +2,11 @@ package it.unibo.project.controller.core.impl;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -120,13 +123,36 @@ public abstract class AbstractLoader implements Loader {
     }
 
     @Override
-    public final Player getPlayerCell(final Difficulty difficulty){
+    public final Player getPlayerCell(final Difficulty difficulty) {
         return this.player;
+    }
+
+    // UTILITY
+
+    /**
+     * load resource file passing classpath.
+     * 
+     * @param resourcePath classpath of resource file
+     * @return collection of lines of the loaded resource file
+     */
+    protected final List<String> loadResourceFile(final String resourcePath) {
+        try {
+            final InputStream inputStream = ClassLoader.getSystemResourceAsStream(resourcePath);
+            final String string = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            final List<String> lines = Arrays.asList(string.split(System.getProperty("line.separator")));
+            return lines;
+        } catch (IOException e) {
+            LauncherImpl.LAUNCHER.closeWindow();
+        }
+
+        // will never be reached!
+        return null;
     }
 
     // GETTERS
 
-    /** get gamestat loaded from file.
+    /**
+     * get gamestat loaded from file.
      * 
      * @return {@link #gameStat}
      */
@@ -134,7 +160,8 @@ public abstract class AbstractLoader implements Loader {
         return this.gameStat;
     }
 
-    /** get obstacles loaded from file. difficulty chooses the map.
+    /**
+     * get obstacles loaded from file. difficulty chooses the map.
      * 
      * @return {@link #obstacles}
      */
@@ -142,7 +169,8 @@ public abstract class AbstractLoader implements Loader {
         return this.obstacles;
     }
 
-    /** get backgrounds loaded from file. difficulty chooses the map.
+    /**
+     * get backgrounds loaded from file. difficulty chooses the map.
      * 
      * @return {@link #backgroundCells}
      */
@@ -150,7 +178,8 @@ public abstract class AbstractLoader implements Loader {
         return this.backgroundCells;
     }
 
-    /** get collectables loaded from file. use difficulty to choose the map.
+    /**
+     * get collectables loaded from file. use difficulty to choose the map.
      * 
      * @return {@link #collectables}
      */
@@ -158,7 +187,8 @@ public abstract class AbstractLoader implements Loader {
         return this.collectables;
     }
 
-    /** get all player images.
+    /**
+     * get all player images.
      * 
      * @return {@link #playerImages}
      */
@@ -166,7 +196,8 @@ public abstract class AbstractLoader implements Loader {
         return this.playerImages;
     }
 
-    /** get all collectable images.
+    /**
+     * get all collectable images.
      * 
      * @return {@link #collectableImages}
      */
@@ -174,7 +205,8 @@ public abstract class AbstractLoader implements Loader {
         return this.collectableImages;
     }
 
-    /** get all background images.
+    /**
+     * get all background images.
      * 
      * @return {@link #backgroundCellImages}
      */
@@ -182,7 +214,8 @@ public abstract class AbstractLoader implements Loader {
         return this.backgroundCellImages;
     }
 
-    /** get all obstacles images.
+    /**
+     * get all obstacles images.
      * 
      * @return {@link #obstacleImages}
      */
@@ -190,7 +223,8 @@ public abstract class AbstractLoader implements Loader {
         return this.obstacleImages;
     }
 
-    /** get map file, buffered as list of string.
+    /**
+     * get map file, buffered as list of string.
      * 
      * @return {@link #mapBuffer}
      */
@@ -200,7 +234,8 @@ public abstract class AbstractLoader implements Loader {
 
     // SETTERS
 
-    /** set gamestat.
+    /**
+     * set gamestat.
      * 
      * @param gameStat
      */
@@ -208,7 +243,8 @@ public abstract class AbstractLoader implements Loader {
         this.gameStat = gameStat;
     }
 
-    /** set obstacles.
+    /**
+     * set obstacles.
      * 
      * @param obstacles
      */
@@ -216,7 +252,8 @@ public abstract class AbstractLoader implements Loader {
         this.obstacles = obstacles;
     }
 
-    /** set backgrounds.
+    /**
+     * set backgrounds.
      * 
      * @param backgroundCells
      */
@@ -224,7 +261,8 @@ public abstract class AbstractLoader implements Loader {
         this.backgroundCells = backgroundCells;
     }
 
-    /** set collectables.
+    /**
+     * set collectables.
      * 
      * @param collectables
      */
@@ -232,7 +270,8 @@ public abstract class AbstractLoader implements Loader {
         this.collectables = collectables;
     }
 
-    /** set player images.
+    /**
+     * set player images.
      * 
      * @param playerImages
      */
@@ -240,7 +279,8 @@ public abstract class AbstractLoader implements Loader {
         this.playerImages = playerImages;
     }
 
-    /** set collectable images.
+    /**
+     * set collectable images.
      * 
      * @param collectableImages
      */
@@ -248,7 +288,8 @@ public abstract class AbstractLoader implements Loader {
         this.collectableImages = collectableImages;
     }
 
-    /** set background images.
+    /**
+     * set background images.
      * 
      * @param backgroundCellImages
      */
@@ -257,7 +298,8 @@ public abstract class AbstractLoader implements Loader {
         this.backgroundCellImages = backgroundCellImages;
     }
 
-    /** set obstacle images.
+    /**
+     * set obstacle images.
      * 
      * @param obstacleImages
      */
@@ -265,7 +307,8 @@ public abstract class AbstractLoader implements Loader {
         this.obstacleImages = obstacleImages;
     }
 
-    /** set buffer of map as list of string.
+    /**
+     * set buffer of map as list of string.
      * 
      * @param mapBuffer
      */
