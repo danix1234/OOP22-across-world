@@ -6,15 +6,17 @@ import it.unibo.project.utility.Vector2D;
 import java.util.Objects;
 
 public class ObstacleImpl extends EntityImpl implements Obstacle {
-	private final boolean moveLeft;
 	private final ObstacleType type;
 	private Vector2D pixelPos;
+	private final int speed;
+	private final int moveLeft;
 
 	public ObstacleImpl(final Vector2D initialPos, final ObstacleType type) {
 		super(initialPos, type == ObstacleType.CAR_DX || type == ObstacleType.CAR_SX || type == ObstacleType.TRAIN_DX
 				|| type == ObstacleType.TRAIN_SX);
 		this.type = type;
-		this.moveLeft = (type == ObstacleType.CAR_SX || type == ObstacleType.TRAIN_SX || type == ObstacleType.TRUNK_SX);
+		this.moveLeft = (type == ObstacleType.CAR_SX || type== ObstacleType.TRAIN_SX || type == ObstacleType.TRUNK_SX) ? 1 : -1;
+		this.speed = this.moveLeft * 1;
 	}
 
 	@Override
@@ -36,11 +38,9 @@ public class ObstacleImpl extends EntityImpl implements Obstacle {
 	}
 
 	@Override
-	public boolean isMovableTowardLeft() {
-		if (!isMovable()){
-			throw new IllegalStateException("obstacle can't move!");
-		}
-		return this.moveLeft;
+	public int speed() {
+		return this.speed;
 	}
+
 
 }

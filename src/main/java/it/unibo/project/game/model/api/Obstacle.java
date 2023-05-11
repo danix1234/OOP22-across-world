@@ -31,9 +31,7 @@ public interface Obstacle extends Entity {
     Vector2D movePixelPosition(int x, int y);
 
     /**
-     * called to know moving obstacle direction.
-     * 
-     * @return true if entity direction is toward left
+     * @return obstacle speed
      */
-    boolean isMovableTowardLeft();
+    int speed();
 }
