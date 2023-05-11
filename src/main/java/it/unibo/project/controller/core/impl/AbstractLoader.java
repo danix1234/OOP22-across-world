@@ -28,18 +28,10 @@ public abstract class AbstractLoader implements Loader {
 
     /** file separator. */
     protected static final String FILE_SEP = System.getProperty("file.separator");
-    /** root directory of the project. */
-    protected static final String PROJECT_DIR = System.getProperty("user.dir");
     /** home directory of the user. */
     protected static final String USER_HOME_DIR = System.getProperty("user.home");
     /** resources directory. */
-    protected static final String RESOURCE_DIR = PROJECT_DIR
-            + FILE_SEP + "src"
-            + FILE_SEP + "main"
-            + FILE_SEP + "resources"
-            + FILE_SEP + "it"
-            + FILE_SEP + "unibo"
-            + FILE_SEP + "project";
+    protected static final String RESOURCE_DIR = "it" + FILE_SEP + "unibo" + FILE_SEP + "project";
 
     // RESOURCES DIRECTORIES
 
