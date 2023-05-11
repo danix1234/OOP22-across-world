@@ -70,8 +70,8 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public Optional<ObstacleType> checkDynamicObstacleCollision(Vector2D playerPos) {
-        if (checkRiverCollision(playerPos) == Optional.of(ObstacleType.TRUNK)) {
-            return Optional.of(ObstacleType.TRUNK);
+        if (checkRiverCollision(playerPos) == Optional.of(ObstacleType.TRUNK_DX)) {
+            return Optional.of(ObstacleType.TRUNK_DX);
         }
         return LauncherImpl.LAUNCHER.getObstacles().stream()
                 .filter(obstacle -> obstacle.getType().equals(ObstacleType.CAR_DX)
@@ -91,7 +91,7 @@ public class CheckCollisionImpl implements CheckCollision {
                 .filter(waterObstacle -> waterObstacle.getPosition().equals(playerPos))
                 .filter(waterWithPlayer -> waterWithPlayer.getPosition()
                         .equals(LauncherImpl.LAUNCHER.getObstacles().stream()
-                                .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRUNK))
+                                .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRUNK_DX))
                                 .filter(trunkObstacle -> trunkObstacle.getPosition().equals(playerPos))
                                 .findFirst()
                                 .map(Obstacle::getPosition)

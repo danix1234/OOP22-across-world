@@ -8,5 +8,6 @@ public enum ObstacleType {
     TRAIN_DX,
     TRAIN_SX,
     TRASPARENT_WATER,
-    TRUNK;
+    TRUNK_DX,
+    TRUNK_SX;
 }
