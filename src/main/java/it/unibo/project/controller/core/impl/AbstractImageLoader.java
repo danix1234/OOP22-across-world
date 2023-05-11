@@ -1,7 +1,6 @@
 package it.unibo.project.controller.core.impl;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,7 @@ public abstract class AbstractImageLoader extends AbstractMapLoader {
 
     private Image loadImage(final String path) {
         try {
-            return ImageIO.read(new File(path));
+            return ImageIO.read(ClassLoader.getSystemResourceAsStream(path));
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
