@@ -123,7 +123,7 @@ public class GameScene extends AbstractScene {
             final int y = LauncherImpl.CELL_DIM * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
             g.drawImage(image, (int) pixelX, y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
 
-            if (LauncherImpl.ENABLE_HITBOX){
+            if (LauncherImpl.ENABLE_HITBOX) {
                 drawHitBox(cellPos, g);
             }
         }
@@ -178,8 +178,6 @@ public class GameScene extends AbstractScene {
                             g));
 
             drawCell(playerSprite, player.getPosition(), g);
-
-
 
             // needed because repaint method is draw on screen only when java swing wants
             Toolkit.getDefaultToolkit().sync();
