@@ -33,7 +33,7 @@ public final class LauncherImpl implements Launcher {
      */
     public static final Launcher LAUNCHER = new LauncherImpl();
     /** {@code width} in pixel of window. */
-    public static final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() ;
+    public static final int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     /** {@code height} in pixel of window. */
     public static final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
     /** {@code quantity} of cell in {@code orizontal} direction. */
@@ -52,7 +52,6 @@ public final class LauncherImpl implements Launcher {
      * player current one.
      */
     public static final int BOTTOM_CELL_DELTA = VERT_CELL - TOP_CELL_DELTA - 1;
-
 
     private final Window window = new WindowFactoryImpl().createWindow();
     private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
@@ -139,11 +138,11 @@ public final class LauncherImpl implements Launcher {
 
     @Override
     public synchronized void showWindow() {
-        this.window.show();        
+        this.window.show();
     }
 
     @Override
-    public synchronized void loadMap(){
+    public synchronized void loadMap() {
         this.gameWorld.loadMap();
     }
 
@@ -168,19 +167,17 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public Vector2D convertCellToPixelPos(Vector2D cellPos) {
-        final int x = cellPos.getX() * CELL_DIM;
-        final int y = -1; // won't be ever used (hopefully)
-        return new Vector2D(x, y);
+    public double convertCellToPixelPos(Vector2D cellPos) {
+        return cellPos.getX() * CELL_DIM;
     }
 
     @Override
-    public Vector2D convertPixelToCellPos(Vector2D pixelPos) {
-        int x = pixelPos.getX() / CELL_DIM;
-        if (pixelPos.getX() % CELL_DIM > (CELL_DIM / 2)){
+    public Vector2D convertPixelToCellPos(double pixelX, int cellY) {
+        double x = pixelX / CELL_DIM;
+        if (pixelX % CELL_DIM > (CELL_DIM / 2)) {
             x++;
         }
-        return new Vector2D(x, pixelPos.getY());
+        return new Vector2D((int) x, cellY);
     }
-    
+
 }

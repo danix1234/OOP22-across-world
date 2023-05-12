@@ -56,12 +56,12 @@ public interface Launcher {
     /**
      * converter position in cell to position in pixel.
      */
-    Vector2D convertCellToPixelPos(Vector2D cellPos);
+    double convertCellToPixelPos(Vector2D cellPos);
 
     /**
      * converter position in pixel to position in cell.
      */
-    Vector2D convertPixelToCellPos(Vector2D pixelPos);
+    Vector2D convertPixelToCellPos(double pixelX, int cellY);
 
     // MODEL methods
 
