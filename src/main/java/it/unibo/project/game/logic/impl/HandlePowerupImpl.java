@@ -11,7 +11,7 @@ import it.unibo.project.game.model.api.CollectableType;
  * class {@code HandlePowerupImpl} implements {@linkplain HandlePowerup}.
  */
 public class HandlePowerupImpl implements HandlePowerup {
-    private Optional<CollectableType> powerUpType;
+    private Optional<CollectableType> powerUpType = Optional.empty();
 
     @Override
     public synchronized void addPowerUp(final CollectableType type) {
