@@ -131,7 +131,7 @@ public class GameScene extends AbstractScene {
 
             launcher.getBackgroundCells().stream()
                     .forEach(cell -> drawCell(
-                            randomizeLine.getHashedElement(
+                            randomizeLine.getLineRandomElement(
                                     loader.getBackgroundCellSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
@@ -140,7 +140,7 @@ public class GameScene extends AbstractScene {
             launcher.getObstacles().stream()
                     .filter(obstacle -> !obstacle.isMovable())
                     .forEach(cell -> drawCell(
-                            randomizeLine.getHashedElement(
+                            randomizeLine.getLineRandomElement(
                                     loader.getObstacleSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
@@ -149,7 +149,7 @@ public class GameScene extends AbstractScene {
             launcher.getObstacles().stream()
                     .filter(Obstacle::isMovable)
                     .forEach(cell -> drawPixels(
-                            randomizeLine.getHashedElement(
+                            randomizeLine.getLineRandomElement(
                                     loader.getObstacleSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
@@ -160,7 +160,7 @@ public class GameScene extends AbstractScene {
 
             launcher.getCollectables().stream()
                     .forEach(cell -> drawCell(
-                            randomizeLine.getHashedElement(
+                            randomizeLine.getLineRandomElement(
                                     loader.getCollectablesSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
