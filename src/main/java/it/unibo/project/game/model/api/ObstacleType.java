@@ -6,10 +6,10 @@ public enum ObstacleType {
     TREE(0, 0),
     BUSH(0, 0),
     TRANSPARENT_WATER(0, 0),
-    CAR_DX(1, LauncherImpl.ORIZ_CELL + 1),
-    CAR_SX(-1, LauncherImpl.ORIZ_CELL + 1),
-    TRAIN_DX(6, LauncherImpl.ORIZ_CELL * 4),
-    TRAIN_SX(-6, LauncherImpl.ORIZ_CELL * 4),
+    CAR_DX(5, LauncherImpl.ORIZ_CELL + 1),
+    CAR_SX(-5, LauncherImpl.ORIZ_CELL + 1),
+    TRAIN_DX(30, LauncherImpl.ORIZ_CELL * 4),
+    TRAIN_SX(-30, LauncherImpl.ORIZ_CELL * 4),
     TRUNK_DX(1, LauncherImpl.ORIZ_CELL + 1),
     TRUNK_SX(-1, LauncherImpl.ORIZ_CELL + 1);
 
