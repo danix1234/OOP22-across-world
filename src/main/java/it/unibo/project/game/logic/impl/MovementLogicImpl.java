@@ -45,7 +45,7 @@ public class MovementLogicImpl implements MovementLogic {
                     final var wrapAround = type.getWrapAroundDim() * LauncherImpl.CELL_DIM;
                     final var cellY = obstacle.getPosition().getY();
                     final var minSpeed = Double.min(type.getMinSpeed(), type.getMaxSpeed());
-                    final var maxSpeed = Double.min(type.getMinSpeed(), type.getMaxSpeed());
+                    final var maxSpeed = Double.max(type.getMinSpeed(), type.getMaxSpeed());
                     var speed = type.getSpeed();
                     if (LauncherImpl.RANDOMIZE_SPEED) {
                         calculateLineRandomValue(cellY);
