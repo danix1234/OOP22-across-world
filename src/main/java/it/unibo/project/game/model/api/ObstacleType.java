@@ -1,20 +1,24 @@
 package it.unibo.project.game.model.api;
 
+import it.unibo.project.controller.core.impl.LauncherImpl;
+
 public enum ObstacleType {
-    TREE(0),
-    BUSH(0),
-    CAR_DX(1),
-    CAR_SX(-1),
-    TRAIN_DX(6),
-    TRAIN_SX(-6),
-    TRANSPARENT_WATER(0),
-    TRUNK_DX(1),
-    TRUNK_SX(-1);
+    TREE(0, 0),
+    BUSH(0, 0),
+    TRANSPARENT_WATER(0, 0),
+    CAR_DX(1, LauncherImpl.ORIZ_CELL + 1),
+    CAR_SX(-1, LauncherImpl.ORIZ_CELL + 1),
+    TRAIN_DX(6, LauncherImpl.ORIZ_CELL * 4),
+    TRAIN_SX(-6, LauncherImpl.ORIZ_CELL * 4),
+    TRUNK_DX(1, LauncherImpl.ORIZ_CELL + 1),
+    TRUNK_SX(-1, LauncherImpl.ORIZ_CELL + 1);
 
     private final double speed;
+    private final int wrapAroundDim;
 
-    private ObstacleType(final double speed) {
+    private ObstacleType(final double speed, final int wrapAroundDim) {
         this.speed = speed;
+        this.wrapAroundDim = wrapAroundDim;
     }
 
     public double getSpeed() {
@@ -23,5 +27,9 @@ public enum ObstacleType {
 
     public boolean isMoveable() {
         return this.speed != 0;
+    }
+
+    public int getWrapAroundDim() {
+        return this.wrapAroundDim;
     }
 }
