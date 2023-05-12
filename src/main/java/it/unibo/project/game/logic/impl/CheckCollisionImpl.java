@@ -1,6 +1,7 @@
 package it.unibo.project.game.logic.impl;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.CheckCollision;
@@ -46,8 +47,7 @@ public class CheckCollisionImpl implements CheckCollision {
     @Override
     public Optional<ObstacleType> checkStaticObstacleCollision(Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getObstacles().stream()
-                .filter(obstacle -> obstacle.getType().equals(ObstacleType.BUSH)
-                        || obstacle.getType().equals(ObstacleType.TREE))
+                .filter(Predicate.not(Obstacle::isMovable))
                 .filter(staticObstacle -> staticObstacle.getPosition().equals(playerPos))
                 .findFirst()
                 .map(Obstacle::getType);
