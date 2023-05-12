@@ -21,7 +21,7 @@ public enum ObstacleType {
     TRUNK_SX(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1),
     TRUNK_FINISH_SX(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1),
     BIKE_DX(3, 1, 4, LauncherImpl.ORIZ_CELL * 4),
-    BIKE_SX(-3, 1, 4, LauncherImpl.ORIZ_CELL +1 );
+    BIKE_SX(-3, -1, -4, LauncherImpl.ORIZ_CELL + 1);
 
     private final int wrapAroundDim;
     private final double speed;
