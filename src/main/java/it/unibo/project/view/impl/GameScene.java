@@ -164,9 +164,7 @@ public class GameScene extends AbstractScene {
                                     loader.getObstacleSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
-                            cell.getPixelPosition() - ((LauncherImpl.TRANSLATE_PIXELS)
-                                    ? (LauncherImpl.CELL_DIM)
-                                    : (0)),
+                            LauncherImpl.LAUNCHER.getActualPixelX(cell.getPixelPosition()),
                             g));
 
             launcher.getCollectables().stream()

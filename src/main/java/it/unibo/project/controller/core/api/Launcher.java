@@ -63,6 +63,22 @@ public interface Launcher {
      */
     Vector2D convertPixelToCellPos(double pixelX, int cellY);
 
+    /**
+     * convert obstaclePixelX into the actual pixel on the screen.
+     * 
+     * @param pixelX
+     * @return actual pixel x position
+     */
+    double getActualPixelX(double obstaclePixelX);
+
+    /**
+     * inverse function of {@link #getActualPixelX(double)}
+     * 
+     * @param actualPixelX
+     * @return obstacle pixel x position
+     */
+    double getObstaclePixelX(double actualPixelX);
+
     // MODEL methods
 
     /**
