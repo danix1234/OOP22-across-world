@@ -53,6 +53,14 @@ public final class LauncherImpl implements Launcher {
      */
     public static final int BOTTOM_CELL_DELTA = VERT_CELL - TOP_CELL_DELTA - 1;
 
+    /**
+     * choose if you want to translate pixels to the left to avoid obstacle
+     * "teleportation".
+     * 
+     * @implNote put it to false if it generates problems
+     */
+    public static final boolean TRANSLATE_PIXELS = true;
+
     private final Window window = new WindowFactoryImpl().createWindow();
     private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
@@ -168,12 +176,18 @@ public final class LauncherImpl implements Launcher {
 
     @Override
     public double convertCellToPixelPos(Vector2D cellPos) {
+        if (TRANSLATE_PIXELS) {
+            return cellPos.getX() * CELL_DIM + CELL_DIM;
+        }
         return cellPos.getX() * CELL_DIM;
     }
 
     @Override
     public Vector2D convertPixelToCellPos(double pixelX, int cellY) {
         double x = pixelX / CELL_DIM;
+        if (TRANSLATE_PIXELS) {
+            x = (pixelX - CELL_DIM) / CELL_DIM;
+        }
         if (pixelX % CELL_DIM > (CELL_DIM / 2)) {
             x++;
         }
