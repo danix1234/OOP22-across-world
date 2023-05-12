@@ -29,6 +29,7 @@ public class MovementLogicImpl implements MovementLogic {
                         System.out.println(checker.checkCollectableCollision(nextPlayerPosition).get());
                         LauncherImpl.LAUNCHER.getCollectables()
                                 .remove(checker.checkCollectableCollision(nextPlayerPosition).get());
+                        LauncherImpl.LAUNCHER.getGameStat().addCoins(1);
                         break;
                     case POWERUP_COIN_MAGNET:
                         break;
