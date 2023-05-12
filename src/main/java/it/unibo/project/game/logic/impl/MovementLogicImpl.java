@@ -23,7 +23,21 @@ public class MovementLogicImpl implements MovementLogic {
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
                 && !checker.checkWallCollision(nextPlayerPosition)
                 && !checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
-
+            checker.checkCollectableCollision(nextPlayerPosition).ifPresent(collectable -> {
+                switch (collectable.getType()) {
+                    case COIN:
+                        System.out.println(checker.checkCollectableCollision(nextPlayerPosition).get());
+                        LauncherImpl.LAUNCHER.getCollectables()
+                                .remove(checker.checkCollectableCollision(nextPlayerPosition).get());
+                        break;
+                    case POWERUP_COIN_MAGNET:
+                        break;
+                    case POWERUP_COIN_MULTIPLIER:
+                        break;
+                    case POWERUP_IMMORTALITY:
+                        break;
+                }
+            });            
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
         } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);

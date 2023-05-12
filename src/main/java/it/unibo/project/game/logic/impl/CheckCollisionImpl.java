@@ -14,12 +14,11 @@ import it.unibo.project.utility.Vector2D;
 public class CheckCollisionImpl implements CheckCollision {
 
     @Override
-    public Optional<CollectableType> checkCollectableCollision(Vector2D playerPos) {
+    public Optional<Collectable> checkCollectableCollision(Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getCollectables().stream()
                 .filter(collectable -> collectable.getPosition()
                         .equals(playerPos))
-                .findFirst()
-                .map(Collectable::getType);
+                .findFirst();
     }
 
     @Override
@@ -96,12 +95,5 @@ public class CheckCollisionImpl implements CheckCollision {
                                 .isPresent())
                 .findFirst()
                 .isPresent();
-        /*
-         * return LauncherImpl.LAUNCHER.getObstacles().stream()
-         * .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRASPARENT_WATER)
-         * || obstacle.getType().equals(ObstacleType.TRUNK_DX) ||
-         * obstacle.getType().equals(ObstacleType.TRUNK_SX))
-         * .filter()
-         */
     }
 }

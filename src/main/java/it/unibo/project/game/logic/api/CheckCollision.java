@@ -2,12 +2,12 @@ package it.unibo.project.game.logic.api;
 
 import java.util.Optional;
 
-import it.unibo.project.game.model.api.CollectableType;
+import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.utility.Vector2D;
 
 public interface CheckCollision {
-    Optional<CollectableType> checkCollectableCollision(Vector2D playerPos); // true -> coin or powerup collected
+    Optional<Collectable> checkCollectableCollision(Vector2D playerPos); // true -> coin or powerup collected
 
     int checkCoinLessDistantThen(int distance); // true -> coin magnet powerup collected
 
