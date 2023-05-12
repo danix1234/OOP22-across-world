@@ -31,7 +31,7 @@ public class ObstacleImpl extends EntityImpl implements Obstacle {
 	}
 
 	@Override
-	public double speed() {
+	public double getSpeed() {
 		return this.speed;
 	}
 
