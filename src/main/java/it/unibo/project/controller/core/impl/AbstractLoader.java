@@ -69,18 +69,29 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(BackgroundCellType.RAIL, List.of("rail.png")),
             Map.entry(BackgroundCellType.ROAD, List.of("road.png")),
             Map.entry(BackgroundCellType.WATER, List.of("water.png")),
-            Map.entry(BackgroundCellType.FINISHLINE, List.of("finishline.png")));
+            Map.entry(BackgroundCellType.FINISHLINE, List.of("finishline.png")),
+            Map.entry(BackgroundCellType.BICYCLELANE, List.of("bicyclelane.png")));
     /** all obstacle sprite file names. */
     protected static final Map<ObstacleType, List<String>> OBSTACLE_FILES = Map.ofEntries(
             Map.entry(ObstacleType.BUSH, List.of("bush.png")),
             Map.entry(ObstacleType.TREE, List.of("tree.png")),
+            Map.entry(ObstacleType.FENCE, List.of("fence.png")),
+            Map.entry(ObstacleType.STOPLIGHT, List.of("stoplight.png")),
             Map.entry(ObstacleType.CAR_SX, List.of("carSX0.png", "carSX1.png", "carSX2.png")),
             Map.entry(ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png")),
             Map.entry(ObstacleType.TRAIN_SX, List.of("trainSX.png")),
             Map.entry(ObstacleType.TRAIN_DX, List.of("trainDX.png")),
-            Map.entry(ObstacleType.TRANSPARENT_WATER, List.of("transparentwater.png")),
-            Map.entry(ObstacleType.TRUNK_SX, List.of("trunkSX.png")),
-            Map.entry(ObstacleType.TRUNK_DX, List.of("trunkDX.png")));
+            Map.entry(ObstacleType.WAGON_SX, List.of("wagon.png")),
+            Map.entry(ObstacleType.WAGON_DX, List.of("wagon.png")),
+            Map.entry(ObstacleType.TRANSPARENT_OBSTACLE, List.of("transparentobstacle.png")),
+            Map.entry(ObstacleType.TRUNK_START_SX, List.of("trunkSXstart.png")),
+            Map.entry(ObstacleType.TRUNK_SX, List.of("trunkSXcenter.png")),
+            Map.entry(ObstacleType.TRUNK_FINISH_SX, List.of("trunkSXfinish.png")),
+            Map.entry(ObstacleType.TRUNK_START_DX, List.of("trunkDXstart.png")),
+            Map.entry(ObstacleType.TRUNK_DX, List.of("trunkDXcenter.png")),
+            Map.entry(ObstacleType.TRUNK_FINISH_DX, List.of("trunkDXfinish.png")),
+            Map.entry(ObstacleType.BIKE_SX, List.of("bikeSX.png")),
+            Map.entry(ObstacleType.BIKE_DX, List.of("bikeDX.png")));
     /** all map file names. */
     protected static final Map<Difficulty, String> MAP_FILES = Map.ofEntries(
             Map.entry(Difficulty.EASY, "easy.txt"),

@@ -5,13 +5,23 @@ import it.unibo.project.controller.core.impl.LauncherImpl;
 public enum ObstacleType {
     TREE(0, 0, 0, 0),
     BUSH(0, 0, 0, 0),
-    TRANSPARENT_WATER(0, 0, 0, 0),
+    FENCE(0, 0, 0, 0),
+    STOPLIGHT(0, 0, 0, 0),
+    TRANSPARENT_OBSTACLE(0, 0, 0, 0),
     CAR_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1),
     CAR_SX(-5, -1, -8, LauncherImpl.ORIZ_CELL + 1),
     TRAIN_DX(30, 20, 50, LauncherImpl.ORIZ_CELL * 4),
     TRAIN_SX(-30, -20, -50, LauncherImpl.ORIZ_CELL * 4),
+    WAGON_DX(30, 20, 50, LauncherImpl.ORIZ_CELL * 4),
+    WAGON_SX(-30, -20, -50, LauncherImpl.ORIZ_CELL * 4),
+    TRUNK_START_DX(2, 2, 6, LauncherImpl.ORIZ_CELL + 1),
     TRUNK_DX(2, 2, 6, LauncherImpl.ORIZ_CELL + 1),
-    TRUNK_SX(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1);
+    TRUNK_FINISH_DX(2, 2, 6, LauncherImpl.ORIZ_CELL + 1),
+    TRUNK_START_SX(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1),
+    TRUNK_SX(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1),
+    TRUNK_FINISH_SX(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1),
+    BIKE_DX(3, 1, 4, LauncherImpl.ORIZ_CELL * 4),
+    BIKE_SX(-3, 1, 4, LauncherImpl.ORIZ_CELL +1 );
 
     private final int wrapAroundDim;
     private final double speed;
