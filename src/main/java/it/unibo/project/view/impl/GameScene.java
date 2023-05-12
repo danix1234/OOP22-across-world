@@ -118,12 +118,12 @@ public class GameScene extends AbstractScene {
             g.drawImage(image, x, y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
         }
 
-        private void drawPixels(final Image image, final Vector2D cellPos, final Vector2D pixelPos, final Graphics g) {
+        private void drawPixels(final Image image, final Vector2D cellPos, final double pixelX, final Graphics g) {
             if (!checkVertPos(cellPos)) {
                 return;
             }
             final int y = LauncherImpl.CELL_DIM * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
-            g.drawImage(image, pixelPos.getX(), y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
+            g.drawImage(image, (int) pixelX, y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
         }
 
         private void calculateLineRandomValue(final int line) {

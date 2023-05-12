@@ -1,7 +1,5 @@
 package it.unibo.project.game.model.api;
 
-import it.unibo.project.utility.Vector2D;
-
 /**
  * Class {@code Obstacle}, contain the type and the position method for the
  * obstacle.
@@ -17,9 +15,9 @@ public interface Obstacle extends Entity {
     /**
      * Called for get the pixel position of the relative obstacle.
      * 
-     * @return Vector2D that represent the pixel position of the obstacle
+     * @return double that represent the x coordinate of the pixel position
      */
-    Vector2D getPixelPosition();
+    double getPixelPosition();
 
     /**
      * Called for move the pixel position of the relative obstacle.
@@ -27,7 +25,7 @@ public interface Obstacle extends Entity {
      * @param x represent the new x of new position.
      * @param y represent the new y of new position.
      */
-    void movePixelPosition(int x, int y);
+    void movePixelPosition(double x);
 
     /**
      * @return obstacle speed

@@ -3,12 +3,11 @@ package it.unibo.project.game.model.impl;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.utility.Vector2D;
-import java.util.Objects;
 
 public class ObstacleImpl extends EntityImpl implements Obstacle {
 	private final ObstacleType type;
-	private Vector2D pixelPos = new Vector2D(50, 0);
 	private final double speed;
+	private double pixelX = 50;
 
 	public ObstacleImpl(final Vector2D initialPos, final ObstacleType type) {
 		super(initialPos, type.isMoveable());
@@ -22,14 +21,13 @@ public class ObstacleImpl extends EntityImpl implements Obstacle {
 	}
 
 	@Override
-	public Vector2D getPixelPosition() {
-		Objects.requireNonNull(this.pixelPos);
-		return this.pixelPos;
+	public double getPixelPosition() {
+		return this.pixelX;
 	}
 
 	@Override
-	public void movePixelPosition(final int x, final int y) {
-		this.pixelPos = new Vector2D(x, y);
+	public void movePixelPosition(final double x) {
+		this.pixelX = x;
 	}
 
 	@Override
