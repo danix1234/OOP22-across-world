@@ -12,6 +12,7 @@ import it.unibo.project.utility.Vector2D;
 
 public class MovementLogicImpl implements MovementLogic {
     private final CheckCollisionImpl checker = new CheckCollisionImpl();
+    private final HandlePowerupImpl powerupHandler = new HandlePowerupImpl();
     private final Map<Integer, Integer> lineRandomValue = new HashMap<>();
     private final Random random = new Random();
 
@@ -29,17 +30,11 @@ public class MovementLogicImpl implements MovementLogic {
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
                         LauncherImpl.LAUNCHER.getGameStat().addCoins(1);
                         break;
-                    case POWERUP_COIN_MAGNET:
+                    default:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        break;
-                    case POWERUP_COIN_MULTIPLIER:
-                        LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        break;
-                    case POWERUP_IMMORTALITY:
-                        LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        break;
+                        powerupHandler.addPowerUp(collectable.getType());
                 }
-            });
+            });            
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
         } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
