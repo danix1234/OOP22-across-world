@@ -1,5 +1,9 @@
 package it.unibo.project.game.logic.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.MovementLogic;
@@ -8,6 +12,8 @@ import it.unibo.project.utility.Vector2D;
 
 public class MovementLogicImpl implements MovementLogic {
     private final CheckCollisionImpl checker = new CheckCollisionImpl();
+    private final Map<Integer, Integer> lineRandomValue = new HashMap<>();
+    private final Random random = new Random();
 
     @Override
     public void movePlayer(final int x, final int y) {
@@ -37,10 +43,16 @@ public class MovementLogicImpl implements MovementLogic {
                     final var type = obstacle.getType();
                     final var pixelX = obstacle.getPixelPosition();
                     final var wrapAround = type.getWrapAroundDim() * LauncherImpl.CELL_DIM;
-                    final var speed = type.getSpeed();
+                    final var cellY = obstacle.getPosition().getY();
+                    final var minSpeed = Double.min(type.getMinSpeed(), type.getMaxSpeed());
+                    final var maxSpeed = Double.min(type.getMinSpeed(), type.getMaxSpeed());
+                    var speed = type.getSpeed();
+                    if (LauncherImpl.RANDOMIZE_SPEED) {
+                        calculateLineRandomValue(cellY);
+                        speed = new Random(this.lineRandomValue.get(cellY)).nextDouble(minSpeed, maxSpeed);
+                    }
                     obstacle.movePixelPosition((pixelX + wrapAround + speed) % wrapAround);
-                    final var cellPos = LauncherImpl.LAUNCHER.convertPixelToCellPos(obstacle.getPixelPosition(),
-                            obstacle.getPosition().getY());
+                    final var cellPos = LauncherImpl.LAUNCHER.convertPixelToCellPos(pixelX, cellY);
                     obstacle.move(cellPos.getX(), cellPos.getY());
                 });
 
@@ -49,4 +61,9 @@ public class MovementLogicImpl implements MovementLogic {
         }
     }
 
+    private void calculateLineRandomValue(final int line) {
+        if (!lineRandomValue.containsKey(line)) {
+            lineRandomValue.put(line, random.nextInt(0, Integer.MAX_VALUE));
+        }
+    }
 }

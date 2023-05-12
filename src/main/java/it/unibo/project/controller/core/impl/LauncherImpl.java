@@ -61,6 +61,13 @@ public final class LauncherImpl implements Launcher {
      */
     public static final boolean TRANSLATE_PIXELS = true;
 
+    /**
+     * choose if you want to have random obstacle speed.
+     * 
+     * @implNote put it to false if it generates problems
+     */
+    public static final boolean RANDOMIZE_SPEED = true;
+
     private final Window window = new WindowFactoryImpl().createWindow();
     private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
