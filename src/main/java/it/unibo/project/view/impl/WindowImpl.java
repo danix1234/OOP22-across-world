@@ -22,12 +22,6 @@ public class WindowImpl implements Window {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationByPlatform(true);
         this.frame.setExtendedState(this.frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        //// uncomment following code to force fullscreen [WARNING: NOT RESIZABLE!] \\\\
-        // final GraphicsDevice gd =
-        // GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        // if (gd.isFullScreenSupported()) {
-        // gd.setFullScreenWindow(this.frame);
-        // }
     }
 
     @Override
