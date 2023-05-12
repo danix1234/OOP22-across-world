@@ -32,5 +32,5 @@ public interface Obstacle extends Entity {
     /**
      * @return obstacle speed
      */
-    int speed();
+    double speed();
 }

@@ -11,13 +11,13 @@ public enum ObstacleType {
     TRUNK_DX(1),
     TRUNK_SX(-1);
 
-    private final int speed;
+    private final double speed;
 
-    private ObstacleType(final int speed) {
+    private ObstacleType(final double speed) {
         this.speed = speed;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return this.speed;
     }
 

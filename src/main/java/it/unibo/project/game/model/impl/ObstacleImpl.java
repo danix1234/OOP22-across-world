@@ -8,7 +8,7 @@ import java.util.Objects;
 public class ObstacleImpl extends EntityImpl implements Obstacle {
 	private final ObstacleType type;
 	private Vector2D pixelPos = new Vector2D(50, 0);
-	private final int speed;
+	private final double speed;
 
 	public ObstacleImpl(final Vector2D initialPos, final ObstacleType type) {
 		super(initialPos, type.isMoveable());
@@ -33,7 +33,7 @@ public class ObstacleImpl extends EntityImpl implements Obstacle {
 	}
 
 	@Override
-	public int speed() {
+	public double speed() {
 		return this.speed;
 	}
 
