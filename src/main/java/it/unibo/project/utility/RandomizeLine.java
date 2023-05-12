@@ -16,18 +16,26 @@ public class RandomizeLine {
     }
 
     /**
-     * return always the same randomized element in the same line.
+     * calculate a random element of the collect dependent on the line parameter.
      * 
-     * @param <X>   type of element
-     * @param elems collection from which to get a random element
-     * @param line  line on which the element is situated
-     * @return a random element, which is always the same if the line is the same
+     * @param <X>
+     * @param elems
+     * @param line
+     * @return a random element of the collection
      */
     public <X> X getLineRandomElement(final List<X> elems, final int line) {
         calculateLineRandomValue(line);
         return elems.get(lineRandomValue.get(line) % elems.size());
     }
 
+    /**
+     * generate a random value dependent on the line parameter.
+     * 
+     * @param lowerBound
+     * @param upperBound
+     * @param line
+     * @return a random number in {@code [lowerBound, upperBound]}
+     */
     public double getLineRandomNumber(final double lowerBound, final double upperBound, final int line) {
         calculateLineRandomValue(line);
         if (lowerBound > upperBound) {
