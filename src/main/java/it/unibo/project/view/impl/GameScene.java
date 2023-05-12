@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.swing.JPanel;
 
@@ -138,7 +139,7 @@ public class GameScene extends AbstractScene {
                             g));
 
             launcher.getObstacles().stream()
-                    .filter(obstacle -> !obstacle.isMovable())
+                    .filter(Predicate.not(Obstacle::isMovable))
                     .forEach(cell -> drawCell(
                             randomizeLine.getLineRandomElement(
                                     loader.getObstacleSprites(cell.getType()),
@@ -153,7 +154,7 @@ public class GameScene extends AbstractScene {
                                     loader.getObstacleSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
-                            cell.getPixelPosition() - ((LauncherImpl.TRANSLATE_PIXELS)
+                            50 + cell.getPixelPosition() - ((LauncherImpl.TRANSLATE_PIXELS)
                                     ? (LauncherImpl.CELL_DIM)
                                     : (0)),
                             g));
