@@ -16,10 +16,10 @@ public class MovementLogicImpl implements MovementLogic {
         if (!checker.checkDynamicObstacleCollision(nextPlayerPosition)
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
                 && !checker.checkWallCollision(nextPlayerPosition)
-                && !checker.checkFinishLineCollision(nextPlayerPosition)) {
+                && !checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
 
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
-        } else if (checker.checkFinishLineCollision(nextPlayerPosition)) {
+        } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
         } else if (checker.checkDynamicObstacleCollision(nextPlayerPosition)) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
@@ -39,9 +39,10 @@ public class MovementLogicImpl implements MovementLogic {
                     final var wrapAround = type.getWrapAroundDim() * LauncherImpl.CELL_DIM;
                     final var speed = type.getSpeed();
                     obstacle.movePixelPosition((pixelX + wrapAround + speed) % wrapAround);
-                    final var cellPos = LauncherImpl.LAUNCHER.convertPixelToCellPos(obstacle.getPixelPosition(), obstacle.getPosition().getY());
+                    final var cellPos = LauncherImpl.LAUNCHER.convertPixelToCellPos(obstacle.getPixelPosition(),
+                            obstacle.getPosition().getY());
                     obstacle.move(cellPos.getX(), cellPos.getY());
-               });
+                });
 
         if (checker.checkDynamicObstacleCollision(playerPos)) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);

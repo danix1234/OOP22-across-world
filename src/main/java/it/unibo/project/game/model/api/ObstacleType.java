@@ -10,8 +10,8 @@ public enum ObstacleType {
     CAR_SX(-5, LauncherImpl.ORIZ_CELL + 1),
     TRAIN_DX(30, LauncherImpl.ORIZ_CELL * 4),
     TRAIN_SX(-30, LauncherImpl.ORIZ_CELL * 4),
-    TRUNK_DX(1, LauncherImpl.ORIZ_CELL + 1),
-    TRUNK_SX(-1, LauncherImpl.ORIZ_CELL + 1);
+    TRUNK_DX(2, LauncherImpl.ORIZ_CELL + 1),
+    TRUNK_SX(-2, LauncherImpl.ORIZ_CELL + 1);
 
     private final double speed;
     private final int wrapAroundDim;
