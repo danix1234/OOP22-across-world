@@ -68,6 +68,13 @@ public final class LauncherImpl implements Launcher {
      */
     public static final boolean RANDOMIZE_SPEED = true;
 
+    /**
+     * choose if you want to show the hitbox of all moving obstacles.
+     * 
+     * @implNote put it to false if it generates problems
+     */
+    public static final boolean ENABLE_HITBOX = !false;
+
     private final Window window = new WindowFactoryImpl().createWindow();
     private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
