@@ -6,10 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -19,6 +16,7 @@ import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.input.api.Action;
+import it.unibo.project.utility.RandomizeLine;
 import it.unibo.project.utility.Vector2D;
 import it.unibo.project.view.api.AbstractScene;
 
@@ -30,8 +28,7 @@ public class GameScene extends AbstractScene {
     private final Launcher launcher = LauncherImpl.LAUNCHER;
     private final Loader loader = LauncherImpl.LAUNCHER.getLoader();
     private final Image playerSprite;
-    private final Map<Integer, Integer> lineRandomValue = new HashMap<>();
-    private final Random random = new Random();
+    private final RandomizeLine randomizeLine = new RandomizeLine();
 
     /**
      * {@code GameScene} constructor.
@@ -126,17 +123,6 @@ public class GameScene extends AbstractScene {
             g.drawImage(image, (int) pixelX, y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
         }
 
-        private void calculateLineRandomValue(final int line) {
-            if (!lineRandomValue.containsKey(line)) {
-                lineRandomValue.put(line, random.nextInt(0, Integer.MAX_VALUE));
-            }
-        }
-
-        private Image getHashedElement(final List<Image> images, final int line) {
-            calculateLineRandomValue(line);
-            return images.get(lineRandomValue.get(line) % images.size());
-        }
-
         @Override
         protected final void paintComponent(final Graphics g) {
             super.paintComponent(g);
@@ -145,7 +131,7 @@ public class GameScene extends AbstractScene {
 
             launcher.getBackgroundCells().stream()
                     .forEach(cell -> drawCell(
-                            getHashedElement(
+                            randomizeLine.getHashedElement(
                                     loader.getBackgroundCellSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
@@ -154,7 +140,7 @@ public class GameScene extends AbstractScene {
             launcher.getObstacles().stream()
                     .filter(obstacle -> !obstacle.isMovable())
                     .forEach(cell -> drawCell(
-                            getHashedElement(
+                            randomizeLine.getHashedElement(
                                     loader.getObstacleSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
@@ -163,7 +149,7 @@ public class GameScene extends AbstractScene {
             launcher.getObstacles().stream()
                     .filter(Obstacle::isMovable)
                     .forEach(cell -> drawPixels(
-                            getHashedElement(
+                            randomizeLine.getHashedElement(
                                     loader.getObstacleSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
@@ -174,7 +160,7 @@ public class GameScene extends AbstractScene {
 
             launcher.getCollectables().stream()
                     .forEach(cell -> drawCell(
-                            getHashedElement(
+                            randomizeLine.getHashedElement(
                                     loader.getCollectablesSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
