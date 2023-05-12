@@ -8,6 +8,7 @@ import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.MovementLogic;
 import it.unibo.project.game.model.api.Obstacle;
+import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.utility.Vector2D;
 
 public class MovementLogicImpl implements MovementLogic {
@@ -19,8 +20,14 @@ public class MovementLogicImpl implements MovementLogic {
     @Override
     public void movePlayer(final int x, final int y) {
         final Vector2D nextPlayerPosition = new Vector2D(x, y);
+        final var checkDynamicCollision = checker.checkDynamicObstacleCollision(nextPlayerPosition);
 
-        if (!checker.checkDynamicObstacleCollision(nextPlayerPosition)
+        if (checkDynamicCollision.isPresent()
+                && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get().equals(ObstacleType.TRUNK_DX)
+                        || checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
+                                .equals(ObstacleType.TRUNK_SX))) {
+            LauncherImpl.LAUNCHER.getPlayer().move(x, y);
+        } else if (!checkDynamicCollision.isPresent()
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
                 && !checker.checkWallCollision(nextPlayerPosition)
                 && !checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
@@ -34,11 +41,11 @@ public class MovementLogicImpl implements MovementLogic {
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
                         powerupHandler.addPowerUp(collectable.getType());
                 }
-            });            
+            });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
         } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
-        } else if (checker.checkDynamicObstacleCollision(nextPlayerPosition)) {
+        } else if (checkDynamicCollision.isPresent()) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
     }
@@ -46,6 +53,7 @@ public class MovementLogicImpl implements MovementLogic {
     @Override
     public void moveObstacle() {
         final Vector2D playerPos = LauncherImpl.LAUNCHER.getPlayer().getPosition();
+        final var checkDynamicCollision = checker.checkDynamicObstacleCollision(playerPos);
 
         LauncherImpl.LAUNCHER.getObstacles()
                 .stream()
@@ -65,9 +73,19 @@ public class MovementLogicImpl implements MovementLogic {
                     obstacle.movePixelPosition((pixelX + wrapAround + speed) % wrapAround);
                     final var cellPos = LauncherImpl.LAUNCHER.convertPixelToCellPos(pixelX, cellY);
                     obstacle.move(cellPos.getX(), cellPos.getY());
+                    if (obstacle.getPosition().equals(playerPos)) {
+                        System.out.println(type);
+                    }
                 });
 
-        if (checker.checkDynamicObstacleCollision(playerPos)) {
+        if (checkDynamicCollision.isPresent()
+                && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
+                        .equals(ObstacleType.TRUNK_DX) || checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
+                        .equals(ObstacleType.TRUNK_DX))) {
+            LauncherImpl.LAUNCHER.movePlayerIfPossible(checkDynamicCollision.get().getPosition().getX(),
+                    checkDynamicCollision.get().getPosition().getY());
+
+        } else if (checkDynamicCollision.isPresent()) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
     }

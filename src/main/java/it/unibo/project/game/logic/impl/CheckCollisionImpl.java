@@ -68,32 +68,40 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public boolean checkDynamicObstacleCollision(Vector2D playerPos) {
-        if (checkRiverCollision(playerPos)) {
-            return false;
+    public Optional<Obstacle> checkDynamicObstacleCollision(Vector2D playerPos) {
+        if (checkRiverCollision(playerPos).isPresent()) {
+            return checkRiverCollision(playerPos);
         }
+
         return LauncherImpl.LAUNCHER.getObstacles().stream()
                 .filter(obstacle -> !obstacle.getType().equals(ObstacleType.TRUNK_DX)
                         && !obstacle.getType().equals(ObstacleType.TRUNK_SX))
                 .filter(obstacle -> obstacle.isMovable() || obstacle.getType().equals(ObstacleType.TRANSPARENT_WATER))
                 .filter(dynamicObstacle -> dynamicObstacle.getPosition()
                         .equals(playerPos))
-                .findFirst()
-                .isPresent();
+                .findFirst();
     }
 
-    private boolean checkRiverCollision(Vector2D playerPos) {
+    private Optional<Obstacle> checkRiverCollision(Vector2D playerPos) {
+        /*
+         * return LauncherImpl.LAUNCHER.getObstacles().stream()
+         * .filter(obstacle ->
+         * obstacle.getType().equals(ObstacleType.TRANSPARENT_WATER))
+         * .filter(waterObstacle -> waterObstacle.getPosition().equals(playerPos))
+         * .filter(waterWithPlayer -> LauncherImpl.LAUNCHER.getObstacles().stream()
+         * .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRUNK_DX)
+         * || obstacle.getType().equals(ObstacleType.TRUNK_SX))
+         * .filter(trunkObstacle ->
+         * trunkObstacle.getPosition().equals(waterWithPlayer.getPosition()))
+         * .findFirst()
+         * .map(Obstacle::getPosition)
+         * .isPresent())
+         * .findFirst();
+         */
         return LauncherImpl.LAUNCHER.getObstacles().stream()
-                .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRANSPARENT_WATER))
-                .filter(waterObstacle -> waterObstacle.getPosition().equals(playerPos))
-                .filter(waterWithPlayer -> LauncherImpl.LAUNCHER.getObstacles().stream()
-                                .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRUNK_DX)
-                                        || obstacle.getType().equals(ObstacleType.TRUNK_SX))
-                                .filter(trunkObstacle -> trunkObstacle.getPosition().equals(waterWithPlayer.getPosition()))
-                                .findFirst()
-                                .map(Obstacle::getPosition)
-                                .isPresent())
-                .findFirst()
-                .isPresent();
+                .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRUNK_DX)
+                        || obstacle.getType().equals(ObstacleType.TRUNK_SX))
+                .filter(trunkObstacle -> trunkObstacle.getPosition().equals(playerPos))                
+                .findFirst();
     }
 }
