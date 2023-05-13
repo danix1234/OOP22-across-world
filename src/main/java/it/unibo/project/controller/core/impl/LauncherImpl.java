@@ -205,8 +205,15 @@ public final class LauncherImpl implements Launcher {
     @Override
     public Vector2D convertPixelToCellPos(double pixelX, int cellY) {
         double x = getActualPixelX(pixelX) / CELL_DIM;
+        
+        // move cell one right if left side of cell is more then half over the cell
         if (pixelX % CELL_DIM > (CELL_DIM / 2)) {
             x++;
+        }
+
+        // move cell to narnia if in the left half of cell zero
+        if (pixelX < (CELL_DIM / 2)) {
+            x = LauncherImpl.ORIZ_CELL * 2;
         }
         return new Vector2D((int) x, cellY);
     }
