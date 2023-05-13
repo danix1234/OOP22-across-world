@@ -2,18 +2,21 @@ package it.unibo.project.game.logic.impl;
 
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
+import it.unibo.project.game.logic.api.CheckCollision;
+import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.logic.api.MovementLogic;
+import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.utility.RandomizeLine;
 import it.unibo.project.utility.Vector2D;
 
-public class MovementLogicImpl implements MovementLogic {
-    private final CheckCollisionImpl checker = new CheckCollisionImpl();
-    private final HandlePowerupImpl powerupHandler = new HandlePowerupImpl();
+public class MovementLogicImpl implements MovementLogic {    
     private final RandomizeLine randomizeLine = new RandomizeLine();
 
     @Override
     public void movePlayer(final int x, final int y) {
+        final CheckCollision checker = LauncherImpl.LAUNCHER.getCheckCollision();
+        final HandlePowerup powerupHandler = LauncherImpl.LAUNCHER.getHandlePowerup();
         final Vector2D nextPlayerPosition = new Vector2D(x, y);
         final var checkDynamicCollision = checker.checkDynamicObstacleCollision(nextPlayerPosition);
 
@@ -29,11 +32,12 @@ public class MovementLogicImpl implements MovementLogic {
                 switch (collectable.getType()) {
                     case COIN:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        LauncherImpl.LAUNCHER.getGameStat().addCoins(1);
+                        LauncherImpl.LAUNCHER.getGameStat().addCoins(powerupHandler.getCurrentPowerUp().get().equals(CollectableType.POWERUP_COIN_MULTIPLIER) ? 5 : 1);
                         break;
                     default:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        powerupHandler.addPowerUp(collectable.getType());
+                        //powerupHandler.addPowerUp(collectable.getType());
+                        powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
                 }
             });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
@@ -46,6 +50,7 @@ public class MovementLogicImpl implements MovementLogic {
 
     @Override
     public void moveObstacle() {
+        final CheckCollision checker = LauncherImpl.LAUNCHER.getCheckCollision();    
         final Vector2D playerPos = LauncherImpl.LAUNCHER.getPlayer().getPosition();
         final var checkDynamicCollision = checker.checkDynamicObstacleCollision(playerPos);
 
