@@ -83,24 +83,8 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     private Optional<Obstacle> checkRiverCollision(Vector2D playerPos) {
-        /*
-         * return LauncherImpl.LAUNCHER.getObstacles().stream()
-         * .filter(obstacle ->
-         * obstacle.getType().equals(ObstacleType.TRANSPARENT_WATER))
-         * .filter(waterObstacle -> waterObstacle.getPosition().equals(playerPos))
-         * .filter(waterWithPlayer -> LauncherImpl.LAUNCHER.getObstacles().stream()
-         * .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRUNK_DX)
-         * || obstacle.getType().equals(ObstacleType.TRUNK_SX))
-         * .filter(trunkObstacle ->
-         * trunkObstacle.getPosition().equals(waterWithPlayer.getPosition()))
-         * .findFirst()
-         * .map(Obstacle::getPosition)
-         * .isPresent())
-         * .findFirst();
-         */
         return LauncherImpl.LAUNCHER.getObstacles().stream()
-                .filter(obstacle -> obstacle.getType().equals(ObstacleType.TRUNK_DX)
-                        || obstacle.getType().equals(ObstacleType.TRUNK_SX))
+                .filter(obstacle -> obstacle.getType().isWalkableOn())
                 .filter(trunkObstacle -> trunkObstacle.getPosition().equals(playerPos))                
                 .findFirst();
     }
