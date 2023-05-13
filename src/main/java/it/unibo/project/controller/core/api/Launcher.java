@@ -2,6 +2,8 @@ package it.unibo.project.controller.core.api;
 
 import java.util.List;
 
+import it.unibo.project.game.logic.api.CheckCollision;
+import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.GameStat;
@@ -162,5 +164,19 @@ public interface Launcher {
      * @implNote game engine kills itself when not in game scene!
      */
     void startEngine();
+
+    /**
+     * get the collision checker
+     * 
+     * @return {@linkplain CheckCollision} to check any collision between entities
+     */
+    CheckCollision getCheckCollision();
+
+    /**
+     * get the powerup handler
+     * 
+     * @return {@linkplain HandlePowerup} to manage when a powerup is collected
+     */
+    HandlePowerup getHandlePowerup();
 
 }
