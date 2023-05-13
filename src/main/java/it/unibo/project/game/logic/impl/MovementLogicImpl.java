@@ -5,7 +5,6 @@ import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.MovementLogic;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.utility.RandomizeLine;
-import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.utility.Vector2D;
 
 public class MovementLogicImpl implements MovementLogic {
@@ -19,9 +18,7 @@ public class MovementLogicImpl implements MovementLogic {
         final var checkDynamicCollision = checker.checkDynamicObstacleCollision(nextPlayerPosition);
 
         if (checkDynamicCollision.isPresent()
-                && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get().equals(ObstacleType.TRUNK_DX)
-                        || checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
-                                .equals(ObstacleType.TRUNK_SX))
+                && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn())
                 && !checker.checkWallCollision(nextPlayerPosition)) {
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
         } else if (!checkDynamicCollision.isPresent()
@@ -73,10 +70,7 @@ public class MovementLogicImpl implements MovementLogic {
                 });
 
         if (checkDynamicCollision.isPresent()
-                && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
-                        .equals(ObstacleType.TRUNK_DX)
-                        || checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
-                                .equals(ObstacleType.TRUNK_DX))
+                && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn())
                 && !checker.checkWallCollision(playerPos)) {
             if(LauncherImpl.REMAIN_PLAYER_ON_TRUNK){
                 LauncherImpl.LAUNCHER.movePlayerIfPossible(checkDynamicCollision.get().getPosition().getX(),
