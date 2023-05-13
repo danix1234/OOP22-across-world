@@ -72,10 +72,8 @@ public class CheckCollisionImpl implements CheckCollision {
         if (checkRiverCollision(playerPos).isPresent()) {
             return checkRiverCollision(playerPos);
         }
-
         return LauncherImpl.LAUNCHER.getObstacles().stream()
-                .filter(obstacle -> !obstacle.getType().equals(ObstacleType.TRUNK_DX)
-                        && !obstacle.getType().equals(ObstacleType.TRUNK_SX))
+                .filter(obstacle -> !obstacle.getType().isWalkableOn())
                 .filter(obstacle -> obstacle.isMovable() || obstacle.getType().equals(ObstacleType.TRANSPARENT_OBSTACLE))
                 .filter(dynamicObstacle -> dynamicObstacle.getPosition()
                         .equals(playerPos))
