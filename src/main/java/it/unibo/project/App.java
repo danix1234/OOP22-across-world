@@ -2,7 +2,6 @@ package it.unibo.project;
 
 import javax.swing.SwingUtilities;
 
-import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 
 /**
@@ -22,7 +21,6 @@ public final class App {
             LauncherImpl.LAUNCHER.start();
             LauncherImpl.LAUNCHER.loadMap();
             LauncherImpl.LAUNCHER.showWindow();            
-            LauncherImpl.LAUNCHER.setDifficulty(Difficulty.NORMAL);
         });
     }
 }
