@@ -2,7 +2,10 @@ package it.unibo.project;
 
 import javax.swing.SwingUtilities;
 
+import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.impl.LauncherImpl;
+import it.unibo.project.input.api.Action;
+import it.unibo.project.input.impl.SharedInputHandler;
 
 /**
  * Class {@code App}, contains the {@code main} function.
@@ -20,7 +23,9 @@ public final class App {
         SwingUtilities.invokeLater(() -> {
             LauncherImpl.LAUNCHER.start();
             LauncherImpl.LAUNCHER.loadMap();
-            LauncherImpl.LAUNCHER.showWindow();
+            LauncherImpl.LAUNCHER.showWindow();            
+            LauncherImpl.LAUNCHER.setDifficulty(Difficulty.NORMAL);
+            new SharedInputHandler().executeAction(Action.CHANGE_SCENE_TO_GAME);
         });
     }
 }
