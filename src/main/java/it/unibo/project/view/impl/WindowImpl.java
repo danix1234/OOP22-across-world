@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import it.unibo.project.view.api.Scene;
 import it.unibo.project.view.api.Window;
+import java.awt.Toolkit;
 
 /**
  * class {@code WindowImpl}, implements {@linkplain Window}.
@@ -21,6 +22,7 @@ public class WindowImpl implements Window {
     public WindowImpl() {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationByPlatform(true);
+        this.frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.frame.setExtendedState(this.frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
 

@@ -6,10 +6,8 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.function.Predicate;
 
 import javax.swing.JPanel;
 
@@ -19,6 +17,7 @@ import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.input.api.Action;
+import it.unibo.project.utility.RandomizeLine;
 import it.unibo.project.utility.Vector2D;
 import it.unibo.project.view.api.AbstractScene;
 
@@ -30,8 +29,7 @@ public class GameScene extends AbstractScene {
     private final Launcher launcher = LauncherImpl.LAUNCHER;
     private final Loader loader = LauncherImpl.LAUNCHER.getLoader();
     private final Image playerSprite;
-    private final Map<Integer, Integer> lineRandomValue = new HashMap<>();
-    private final Random random = new Random();
+    private final RandomizeLine randomizeLine = new RandomizeLine();
 
     /**
      * {@code GameScene} constructor.
@@ -124,17 +122,16 @@ public class GameScene extends AbstractScene {
             }
             final int y = LauncherImpl.CELL_DIM * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
             g.drawImage(image, (int) pixelX, y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM, null);
-        }
 
-        private void calculateLineRandomValue(final int line) {
-            if (!lineRandomValue.containsKey(line)) {
-                lineRandomValue.put(line, random.nextInt(0, Integer.MAX_VALUE));
+            if (LauncherImpl.ENABLE_HITBOX) {
+                drawHitBox(cellPos, g);
             }
         }
 
-        private Image getHashedElement(final List<Image> images, final int line) {
-            calculateLineRandomValue(line);
-            return images.get(lineRandomValue.get(line) % images.size());
+        private void drawHitBox(final Vector2D cellPos, final Graphics g) {
+            final int x = LauncherImpl.CELL_DIM * cellPos.getX();
+            final int y = LauncherImpl.CELL_DIM * (LauncherImpl.VERT_CELL - posRelativeToPlayer(cellPos));
+            g.drawRect(x, y, LauncherImpl.CELL_DIM, LauncherImpl.CELL_DIM);
         }
 
         @Override
@@ -145,16 +142,16 @@ public class GameScene extends AbstractScene {
 
             launcher.getBackgroundCells().stream()
                     .forEach(cell -> drawCell(
-                            getHashedElement(
+                            randomizeLine.getLineRandomElement(
                                     loader.getBackgroundCellSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
                             g));
 
             launcher.getObstacles().stream()
-                    .filter(obstacle -> !obstacle.isMovable())
+                    .filter(Predicate.not(Obstacle::isMovable))
                     .forEach(cell -> drawCell(
-                            getHashedElement(
+                            randomizeLine.getLineRandomElement(
                                     loader.getObstacleSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
@@ -163,18 +160,16 @@ public class GameScene extends AbstractScene {
             launcher.getObstacles().stream()
                     .filter(Obstacle::isMovable)
                     .forEach(cell -> drawPixels(
-                            getHashedElement(
+                            randomizeLine.getLineRandomElement(
                                     loader.getObstacleSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),
-                            cell.getPixelPosition() - ((LauncherImpl.TRANSLATE_PIXELS)
-                                    ? (LauncherImpl.CELL_DIM)
-                                    : (0)),
+                            LauncherImpl.LAUNCHER.getActualPixelX(cell.getPixelPosition()),
                             g));
 
             launcher.getCollectables().stream()
                     .forEach(cell -> drawCell(
-                            getHashedElement(
+                            randomizeLine.getLineRandomElement(
                                     loader.getCollectablesSprites(cell.getType()),
                                     cell.getPosition().getY()),
                             cell.getPosition(),

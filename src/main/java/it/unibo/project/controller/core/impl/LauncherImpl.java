@@ -75,6 +75,15 @@ public final class LauncherImpl implements Launcher {
      */
     public static final boolean REMAIN_PLAYER_ON_TRUNK = true;
 
+    /**
+     * choose if you want to show the hitbox of all moving obstacles.
+     * 
+     * @implNote put it to false if it generates problems
+     */
+    public static final boolean ENABLE_HITBOX = !false;
+
+    private static final int TRANSLATION_TO_SX = TRANSLATE_PIXELS ? -CELL_DIM : 0;
+
     private final Window window = new WindowFactoryImpl().createWindow();
     private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();
@@ -190,22 +199,25 @@ public final class LauncherImpl implements Launcher {
 
     @Override
     public double convertCellToPixelPos(Vector2D cellPos) {
-        if (TRANSLATE_PIXELS) {
-            return cellPos.getX() * CELL_DIM + CELL_DIM;
-        }
-        return cellPos.getX() * CELL_DIM;
+        return getObstaclePixelX(cellPos.getX() * CELL_DIM);
     }
 
     @Override
     public Vector2D convertPixelToCellPos(double pixelX, int cellY) {
-        double x = pixelX / CELL_DIM;
-        if (TRANSLATE_PIXELS) {
-            x = (pixelX - CELL_DIM) / CELL_DIM;
-        }
+        double x = getActualPixelX(pixelX) / CELL_DIM;
         if (pixelX % CELL_DIM > (CELL_DIM / 2)) {
             x++;
         }
         return new Vector2D((int) x, cellY);
     }
 
+    @Override
+    public double getActualPixelX(double obstaclePixelX) {
+        return obstaclePixelX + TRANSLATION_TO_SX;
+    }
+
+    @Override
+    public double getObstaclePixelX(double actualPixelX) {
+        return actualPixelX - TRANSLATION_TO_SX;
+    }
 }
