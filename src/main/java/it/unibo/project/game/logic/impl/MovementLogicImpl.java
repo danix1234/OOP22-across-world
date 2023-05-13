@@ -17,11 +17,11 @@ public class MovementLogicImpl implements MovementLogic {
         final Vector2D nextPlayerPosition = new Vector2D(x, y);
         final var checkDynamicCollision = checker.checkDynamicObstacleCollision(nextPlayerPosition);
 
-        if (checkDynamicCollision.isPresent()
-                && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn())
+        if (checkDynamicCollision.isPresent()   //se è sul tronco e non c'è collisione col muro entra
+                && checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn()
                 && !checker.checkWallCollision(nextPlayerPosition)) {
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
-        } else if (!checkDynamicCollision.isPresent()
+        } else if (!checkDynamicCollision.isPresent()   //se non collide con bordi o ostacoli o traguardo entra
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
                 && !checker.checkWallCollision(nextPlayerPosition)
                 && !checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
@@ -37,9 +37,9 @@ public class MovementLogicImpl implements MovementLogic {
                 }
             });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
-        } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
+        } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) { //se taglia il traguardo
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
-        } else if (checkDynamicCollision.isPresent()) {
+        } else if (checkDynamicCollision.isPresent()) { //se collide con un ostacolo
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
     }
