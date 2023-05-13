@@ -68,6 +68,13 @@ public final class LauncherImpl implements Launcher {
      */
     public static final boolean RANDOMIZE_SPEED = true;
 
+    /**
+     * choose if you want that player remain on trunk following it.
+     * 
+     * @implNote put it false if it generates problems
+     */
+    public static final boolean REMAIN_PLAYER_ON_TRUNK = true;
+
     private final Window window = new WindowFactoryImpl().createWindow();
     private final GameEngine gameEngine = new GameEngineFactoryImpl().createGameEngine();
     private final GameWorld gameWorld = new GameWorldFactoryImpl().createGameWorld();

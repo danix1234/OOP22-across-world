@@ -25,7 +25,8 @@ public class MovementLogicImpl implements MovementLogic {
         if (checkDynamicCollision.isPresent()
                 && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get().equals(ObstacleType.TRUNK_DX)
                         || checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
-                                .equals(ObstacleType.TRUNK_SX))) {
+                                .equals(ObstacleType.TRUNK_SX))
+                && !checker.checkWallCollision(nextPlayerPosition)) {
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
         } else if (!checkDynamicCollision.isPresent()
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
@@ -73,18 +74,18 @@ public class MovementLogicImpl implements MovementLogic {
                     obstacle.movePixelPosition((pixelX + wrapAround + speed) % wrapAround);
                     final var cellPos = LauncherImpl.LAUNCHER.convertPixelToCellPos(pixelX, cellY);
                     obstacle.move(cellPos.getX(), cellPos.getY());
-                    if (obstacle.getPosition().equals(playerPos)) {
-                        System.out.println(type);
-                    }
                 });
 
         if (checkDynamicCollision.isPresent()
                 && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
-                        .equals(ObstacleType.TRUNK_DX) || checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
-                        .equals(ObstacleType.TRUNK_DX))) {
-            LauncherImpl.LAUNCHER.movePlayerIfPossible(checkDynamicCollision.get().getPosition().getX(),
+                        .equals(ObstacleType.TRUNK_DX)
+                        || checkDynamicCollision.map(obstacle -> obstacle.getType()).get()
+                                .equals(ObstacleType.TRUNK_DX))
+                && !checker.checkWallCollision(playerPos)) {
+            if(LauncherImpl.REMAIN_PLAYER_ON_TRUNK){
+                LauncherImpl.LAUNCHER.movePlayerIfPossible(checkDynamicCollision.get().getPosition().getX(),
                     checkDynamicCollision.get().getPosition().getY());
-
+            }
         } else if (checkDynamicCollision.isPresent()) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
