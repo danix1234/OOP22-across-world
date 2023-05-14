@@ -20,12 +20,12 @@ public class CheckCollisionImpl implements CheckCollision {
     public List<Collectable> checkCollectableCollision(Vector2D playerPos) {
         List<Collectable> collectables = new ArrayList<>();
         if (LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
-                .filter(b -> b.equals(CollectableType.POWERUP_COIN_MAGNET)).isPresent()) {
+                .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET)).isPresent()) {
             checkCoinLessDistantThen(1, collectables, playerPos);
         }
         LauncherImpl.LAUNCHER.getCollectables().stream()
                 .filter(collectable -> LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
-                        .filter(b -> b.equals(CollectableType.POWERUP_COIN_MAGNET)).isPresent()
+                        .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET)).isPresent()
                                 ? !collectable.getType().equals(CollectableType.COIN)
                                 : true)
                 .filter(collectable -> collectable.getPosition()

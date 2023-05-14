@@ -32,12 +32,12 @@ public class MovementLogicImpl implements MovementLogic {
                 switch (collectable.getType()) {
                     case COIN:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        LauncherImpl.LAUNCHER.getGameStat().addCoins(powerupHandler.getCurrentPowerUp().get().equals(CollectableType.POWERUP_COIN_MULTIPLIER) ? 5 : 1);
+                        LauncherImpl.LAUNCHER.getGameStat().addCoins(powerupHandler.getCurrentPowerUp().filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MULTIPLIER)).isPresent() ? 5 : 1);
                         break;
                     default:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
                         //powerupHandler.addPowerUp(collectable.getType());
-                        powerupHandler.addPowerUp(CollectableType.POWERUP_COIN_MAGNET);
+                        powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
                 }
             });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
