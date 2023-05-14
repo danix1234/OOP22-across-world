@@ -129,7 +129,6 @@ public abstract class AbstractLoader implements Loader {
     public final void deleteStatFile() {
         try {
             Files.deleteIfExists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
-            Files.deleteIfExists(Paths.get(STAT_DIR));
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
