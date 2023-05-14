@@ -28,7 +28,7 @@ public class MovementLogicImpl implements MovementLogic {
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
                 && !checker.checkWallCollision(nextPlayerPosition)
                 && !checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
-            checker.checkCollectableCollision(nextPlayerPosition).ifPresent(collectable -> {
+            checker.checkCollectableCollision(nextPlayerPosition).stream().forEach(collectable -> {
                 switch (collectable.getType()) {
                     case COIN:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
@@ -37,7 +37,7 @@ public class MovementLogicImpl implements MovementLogic {
                     default:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
                         //powerupHandler.addPowerUp(collectable.getType());
-                        powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
+                        powerupHandler.addPowerUp(CollectableType.POWERUP_COIN_MAGNET);
                 }
             });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
