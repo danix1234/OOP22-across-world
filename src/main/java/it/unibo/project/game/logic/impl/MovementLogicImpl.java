@@ -43,6 +43,7 @@ public class MovementLogicImpl implements MovementLogic {
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
         } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) { //se taglia il traguardo
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
+            LauncherImpl.LAUNCHER.getLoader().saveStatOnFile(LauncherImpl.LAUNCHER.getGameStat());
         } else if (checkDynamicCollision.isPresent()) { //se collide con un ostacolo
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
