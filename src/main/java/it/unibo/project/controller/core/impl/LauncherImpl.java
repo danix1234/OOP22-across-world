@@ -9,6 +9,8 @@ import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.engine.api.GameEngine;
 import it.unibo.project.controller.engine.impl.GameEngineFactoryImpl;
+import it.unibo.project.game.logic.api.CheckCollision;
+import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.model.api.BackgroundCell;
 import it.unibo.project.game.model.api.Collectable;
 import it.unibo.project.game.model.api.GameStat;
@@ -226,5 +228,15 @@ public final class LauncherImpl implements Launcher {
     @Override
     public double getObstaclePixelX(double actualPixelX) {
         return actualPixelX - TRANSLATION_TO_SX;
+    }
+
+    @Override
+    public CheckCollision getCheckCollision() {
+        return this.gameWorld.getGameLogic().getCollisionChecker();
+    }
+
+    @Override
+    public HandlePowerup getHandlePowerup() {
+        return this.gameWorld.getGameLogic().getPowerupHandler();
     }
 }

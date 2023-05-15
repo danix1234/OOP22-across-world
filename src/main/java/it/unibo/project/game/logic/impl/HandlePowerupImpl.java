@@ -15,7 +15,7 @@ public class HandlePowerupImpl implements HandlePowerup {
 
     @Override
     public synchronized void addPowerUp(final CollectableType type) {
-        this.powerUpType = Optional.of(type);
+        this.powerUpType = Optional.of(type);        
         TimerTask timerPowerUp = new TimerTask() {
 
             @Override
