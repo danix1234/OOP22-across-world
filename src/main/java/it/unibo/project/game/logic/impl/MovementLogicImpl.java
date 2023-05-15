@@ -44,7 +44,7 @@ public class MovementLogicImpl implements MovementLogic {
         } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) { //se taglia il traguardo
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
             LauncherImpl.LAUNCHER.getLoader().saveStatOnFile(LauncherImpl.LAUNCHER.getGameStat());
-        } else if (checkDynamicCollision.isPresent()) { //se collide con un ostacolo
+        } else if (checkDynamicCollision.stream().filter(obstacle -> !obstacle.getType().isWalkableOn()).findAny().isPresent()) { //se collide con un ostacolo
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
     }
@@ -62,7 +62,7 @@ public class MovementLogicImpl implements MovementLogic {
                     final var type = obstacle.getType();
                     final var pixelX = obstacle.getPixelPosition();
                     final var cellY = obstacle.getPosition().getY();
-                    final var wrapAround = type.getWrapAroundDim() * LauncherImpl.CELL_DIM;
+                    final var wrapAround = type.getWrapAroundDim() * LauncherImpl.CELL_DIM + (LauncherImpl.CELL_DIM / 2);
                     var speed = type.getSpeed();
                     if (LauncherImpl.RANDOMIZE_SPEED) {
                         speed = this.randomizeLine.getLineRandomNumber(
