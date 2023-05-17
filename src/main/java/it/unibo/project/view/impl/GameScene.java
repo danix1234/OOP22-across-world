@@ -3,13 +3,16 @@ package it.unibo.project.view.impl;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.Loader;
@@ -35,41 +38,7 @@ public class GameScene extends AbstractScene {
      * {@code GameScene} constructor.
      */
     public GameScene() {
-        this.panel.addKeyListener(new KeyListener() {
-
-            @Override
-            public void keyPressed(KeyEvent arg0) {
-                switch (arg0.getKeyCode()) {
-                    case KeyEvent.VK_UP:
-                    case KeyEvent.VK_W:
-                        getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_UP);
-                        break;
-                    case KeyEvent.VK_LEFT:
-                    case KeyEvent.VK_A:
-                        getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_LEFT);
-                        break;
-                    case KeyEvent.VK_DOWN:
-                    case KeyEvent.VK_S:
-                        getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_DOWN);
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                    case KeyEvent.VK_D:
-                        getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_RIGHT);
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent arg0) {
-            }
-
-            @Override
-            public void keyTyped(KeyEvent arg0) {
-            }
-
-        });
+        addKeyBindings();
         setPanel(this.panel);
 
         final List<Image> playerSkins = this.loader.getPlayerSprites();
@@ -181,11 +150,46 @@ public class GameScene extends AbstractScene {
             Toolkit.getDefaultToolkit().sync();
         }
 
-        /* needed to allow keyListener to work. */
-        @Override
-        public final boolean isFocusable() {
-            return true;
-        }
+    }
 
+    private void addKeyBindings() {
+        final var inputMap = panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        final var actionMap = panel.getActionMap();
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0), "move up");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "move up");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0), "move down");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "move down");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0), "move left");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "move left");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "move right");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "move right");
+
+        actionMap.put("move up", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_UP);
+            }
+        });
+
+        actionMap.put("move down", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_DOWN);
+            }
+        });
+
+        actionMap.put("move left", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_LEFT);
+            }
+        });
+
+        actionMap.put("move right", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_RIGHT);
+            }
+        });
     }
 }
