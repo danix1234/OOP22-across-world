@@ -70,7 +70,9 @@ public abstract class AbstractStatLoader extends AbstractLoader {
     private void createFile() {
         try {
             Files.createDirectories(Paths.get(STAT_DIR));
-            Files.createFile(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
+            if (!Files.exists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE))) {
+                Files.createFile(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
+            }
         } catch (IOException e) {
             LauncherImpl.LAUNCHER.closeWindow();
         }
