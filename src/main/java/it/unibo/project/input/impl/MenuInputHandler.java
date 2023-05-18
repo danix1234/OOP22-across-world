@@ -7,7 +7,6 @@ public class MenuInputHandler implements InputHandler {
 
     @Override
     public void executeAction(final Action action) {
-        // TODO Auto-generated method stub
         switch (action) {
             case CHANGE_SCENE_TO_GAME:
                 new SharedInputHandler().executeAction(Action.CHANGE_SCENE_TO_GAME);
@@ -15,14 +14,10 @@ public class MenuInputHandler implements InputHandler {
             case CHANGE_SCENE_TO_MENU:
                 new SharedInputHandler().executeAction(Action.CHANGE_SCENE_TO_MENU);
                 break;
-            // case CHANGE_SCENE_TO_OVER:
-            // new SharedInputHandler().executeAction(Action.CHANGE_SCENE_TO_OVER);
-            // break;
             case EXIT_APP:
                 new SharedInputHandler().executeAction(Action.EXIT_APP);
                 break;
             default:
-                throw new UnsupportedOperationException("Unimplemented method 'executeAction'");
         }
     }
 

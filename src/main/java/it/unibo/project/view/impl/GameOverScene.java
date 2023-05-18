@@ -11,6 +11,7 @@ import java.awt.event.*;
 public class GameOverScene extends AbstractScene {
     private JPanel panel;
     private JButton tryAgainButton;
+    private JButton backToMenu;
     private JButton exitButton;
     private JLabel titleLabel;
 
@@ -28,14 +29,24 @@ public class GameOverScene extends AbstractScene {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         // creazione dei pulsanti del menu
-        tryAgainButton = new JButton("Riprova");
-        exitButton = new JButton("Esci dal gioco");
+        tryAgainButton = new JButton("RESTART");
+        backToMenu = new JButton("BACK TO MENU");
+        exitButton = new JButton("EXIT");
 
-        // impostazioni dei buttons
+        //effetto testo evidenziato rimosso
+        tryAgainButton.setFocusPainted(false);
+        exitButton.setFocusPainted(false);
+
+        //impostazioni dei buttons
         tryAgainButton.setBackground(new Color(255, 255, 255));
         tryAgainButton.setForeground(Color.BLACK);
         tryAgainButton.setFont(new Font("Arial", Font.BOLD, 20));
         tryAgainButton.setPreferredSize(new Dimension(200, 70));
+
+        backToMenu.setBackground(new Color(255, 255, 255));
+        backToMenu.setForeground(Color.BLACK);
+        backToMenu.setFont(new Font("Arial", Font.BOLD, 20));
+        backToMenu.setPreferredSize(new Dimension(200, 70));
 
         exitButton.setBackground(new Color(255, 255, 255));
         exitButton.setForeground(Color.RED);
@@ -52,8 +63,11 @@ public class GameOverScene extends AbstractScene {
 
         gbc.gridy = 1;
         this.panel.add(tryAgainButton, gbc);
-    
+
         gbc.gridy = 2;
+        this.panel.add(backToMenu, gbc);
+
+        gbc.gridy = 3;
         this.panel.add(exitButton, gbc);
 
         // aggiungo gli ActionListener
@@ -61,6 +75,12 @@ public class GameOverScene extends AbstractScene {
             public void actionPerformed(ActionEvent e) {
                 // codice per riavviare il gioco
                 getInputHandler(SceneType.OVER).executeAction(Action.CHANGE_SCENE_TO_GAME);
+            }
+        });
+
+        backToMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                getInputHandler(SceneType.OVER).executeAction(Action.CHANGE_SCENE_TO_MENU);
             }
         });
 
