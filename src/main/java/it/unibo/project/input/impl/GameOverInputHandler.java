@@ -7,7 +7,6 @@ public class GameOverInputHandler implements InputHandler {
 
     @Override
     public void executeAction(final Action action) {
-        // TODO Auto-generated method stub
         switch(action){
             case CHANGE_SCENE_TO_GAME:
                 new SharedInputHandler().executeAction(Action.CHANGE_SCENE_TO_GAME);
@@ -24,7 +23,6 @@ public class GameOverInputHandler implements InputHandler {
             default:
                 break;
         }
-        throw new UnsupportedOperationException("Unimplemented method 'executeAction'");
     }
 
     @Override
