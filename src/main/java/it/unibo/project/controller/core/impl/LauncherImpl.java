@@ -82,7 +82,7 @@ public final class LauncherImpl implements Launcher {
      * 
      * @implNote put it to false if it generates problems
      */
-    public static final boolean ENABLE_HITBOX = !false;
+    public static final boolean ENABLE_HITBOX = false;
 
     private static final int TRANSLATION_TO_SX = TRANSLATE_PIXELS ? -CELL_DIM : 0;
 
