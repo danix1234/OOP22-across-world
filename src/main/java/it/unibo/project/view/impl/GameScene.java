@@ -144,7 +144,13 @@ public class GameScene extends AbstractScene {
                             cell.getPosition(),
                             g));
 
-            drawCell(playerSprite, player.getPosition(), g);
+            final var trunkCollided = launcher.getCheckCollision().checkTrunkCollision(player.getPosition());
+            if (trunkCollided.isPresent()) {
+                final var pixelPos = launcher.getActualPixelX(trunkCollided.get().getPixelPosition());
+                drawPixels(playerSprite, player.getPosition(), pixelPos, g);
+            } else {
+                drawCell(playerSprite, player.getPosition(), g);
+            }
 
             // needed because repaint method is draw on screen only when java swing wants
             Toolkit.getDefaultToolkit().sync();
