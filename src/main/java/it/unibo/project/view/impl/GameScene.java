@@ -154,12 +154,14 @@ public class GameScene extends AbstractScene {
             }
 
             g.setFont(getFont().deriveFont(30.0F));
-            g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), 10, 10, 40, 40, null);
-            g.drawString(launcher.getGameStat().getCoins() + "", 50, 40);
+            g.drawImage(playerSprite, 10, 10, 40, 40, null);
+            g.drawString(player.getMaxDistance() * 10 + "", 50, 40);
+            g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), 10, 60, 40, 40, null);
+            g.drawString(launcher.getGameStat().getCoins() + "", 50, 90);
             final var collectable = launcher.getHandlePowerup().getCurrentPowerUp();
-            if (collectable.isPresent()){
-                g.drawImage(loader.getCollectablesSprites(collectable.get()).get(0), 10, 60, 40, 40, null);
-                g.drawString(collectable.get().toString(), 50, 90);
+            if (collectable.isPresent()) {
+                g.drawImage(loader.getCollectablesSprites(collectable.get()).get(0), 10, 110, 40, 40, null);
+                g.drawString(collectable.get().toString(), 50, 140);
             }
 
             // needed because repaint method is draw on screen only when java swing wants
