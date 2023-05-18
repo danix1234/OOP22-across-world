@@ -78,8 +78,8 @@ public class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public Optional<Obstacle> checkDynamicObstacleCollision(Vector2D playerPos) {
-        if (checkRiverCollision(playerPos).isPresent()) {
-            return checkRiverCollision(playerPos);
+        if (checkTrunkCollision(playerPos).isPresent()) {
+            return checkTrunkCollision(playerPos);
         }
         if (LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
                 .filter(b -> b.equals(CollectableType.POWERUP_IMMORTALITY)).isEmpty()) {
@@ -94,7 +94,8 @@ public class CheckCollisionImpl implements CheckCollision {
         return Optional.empty();
     }
 
-    private Optional<Obstacle> checkRiverCollision(Vector2D playerPos) {
+    @Override
+    public Optional<Obstacle> checkTrunkCollision(Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getObstacles().stream()
                 .filter(obstacle -> obstacle.getType().isWalkableOn())
                 .filter(trunkObstacle -> trunkObstacle.getPosition().equals(playerPos))

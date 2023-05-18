@@ -19,4 +19,6 @@ public interface CheckCollision {
     boolean checkFinishLineCollision(Vector2D playerPos); // true -> you win
 
     boolean checkWallCollision(Vector2D playerPos); // true -> can't move in that direction
+
+    Optional<Obstacle> checkTrunkCollision(Vector2D playerPos);
 }
