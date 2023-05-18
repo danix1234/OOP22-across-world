@@ -18,6 +18,7 @@ import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
+import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.utility.RandomizeLine;
@@ -150,6 +151,15 @@ public class GameScene extends AbstractScene {
                 drawPixels(playerSprite, player.getPosition(), pixelPos, g);
             } else {
                 drawCell(playerSprite, player.getPosition(), g);
+            }
+
+            g.setFont(getFont().deriveFont(30.0F));
+            g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), 10, 10, 40, 40, null);
+            g.drawString(launcher.getGameStat().getCoins() + "", 50, 40);
+            final var collectable = launcher.getHandlePowerup().getCurrentPowerUp();
+            if (collectable.isPresent()){
+                g.drawImage(loader.getCollectablesSprites(collectable.get()).get(0), 10, 60, 40, 40, null);
+                g.drawString(collectable.get().toString(), 50, 90);
             }
 
             // needed because repaint method is draw on screen only when java swing wants
