@@ -38,8 +38,8 @@ public class GameScene extends AbstractScene {
      * {@code GameScene} constructor.
      */
     public GameScene() {
-        addKeyBindings();
         setPanel(this.panel);
+        addKeyBindings();
 
         final List<Image> playerSkins = this.loader.getPlayerSprites();
         final List<Boolean> unlockedSkins = launcher.getGameStat().getUnlockedSkins();
@@ -52,18 +52,6 @@ public class GameScene extends AbstractScene {
         this.playerSprite = loader.getElementRandom(unlockedSkinsImg);
     }
 
-    private int minCell() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() - LauncherImpl.BOTTOM_CELL_DELTA;
-    }
-
-    private int maxCell() {
-        return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() + LauncherImpl.TOP_CELL_DELTA;
-    }
-
-    private boolean checkVertPos(final Vector2D vector) {
-        return vector.getY() >= minCell() && vector.getY() <= maxCell();
-    }
-
     @Override
     public final void update() {
         this.panel.repaint();
@@ -71,6 +59,18 @@ public class GameScene extends AbstractScene {
 
     private class Panel extends JPanel {
         private static final long serialVersionUID = 0L;
+
+        private int minCell() {
+            return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() - LauncherImpl.BOTTOM_CELL_DELTA;
+        }
+
+        private int maxCell() {
+            return LauncherImpl.LAUNCHER.getPlayer().getPosition().getY() + LauncherImpl.TOP_CELL_DELTA;
+        }
+
+        private boolean checkVertPos(final Vector2D vector) {
+            return vector.getY() >= minCell() && vector.getY() <= maxCell();
+        }
 
         private int posRelativeToPlayer(final Vector2D cellPos) {
             return cellPos.getY() - launcher.getPlayer().getPosition().getY() + LauncherImpl.BOTTOM_CELL_DELTA + 1;
@@ -164,32 +164,23 @@ public class GameScene extends AbstractScene {
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "move right");
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "move right");
 
-        actionMap.put("move up", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_UP);
-            }
-        });
+        actionMap.put("move up", new GameAction(Action.MOVE_PLAYER_UP));
+        actionMap.put("move down", new GameAction(Action.MOVE_PLAYER_DOWN));
+        actionMap.put("move left", new GameAction(Action.MOVE_PLAYER_LEFT));
+        actionMap.put("move right", new GameAction(Action.MOVE_PLAYER_RIGHT));
+    }
 
-        actionMap.put("move down", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_DOWN);
-            }
-        });
+    private class GameAction extends AbstractAction {
+        private final Action action;
 
-        actionMap.put("move left", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_LEFT);
-            }
-        });
+        private GameAction(final Action action) {
+            this.action = action;
+        }
 
-        actionMap.put("move right", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).storeAction(Action.MOVE_PLAYER_RIGHT);
-            }
-        });
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            getInputHandler(SceneType.GAME).storeAction(this.action);
+        }
+
     }
 }
