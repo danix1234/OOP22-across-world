@@ -26,7 +26,7 @@ public class CheckCollisionImpl implements CheckCollision {
         LauncherImpl.LAUNCHER.getCollectables().stream()
                 .filter(collectable -> LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
                         .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET)).isPresent()
-                                ? !collectable.getType().equals(CollectableType.COIN)
+                                ? collectable.getType().isPowerUp()
                                 : true)
                 .filter(collectable -> collectable.getPosition()
                         .equals(playerPos))
@@ -42,7 +42,7 @@ public class CheckCollisionImpl implements CheckCollision {
                 final int innerX = x;
                 final int innerY = y;
                 LauncherImpl.LAUNCHER.getCollectables().stream()
-                        .filter(collectable -> collectable.getType().equals(CollectableType.COIN))
+                        .filter(collectable -> collectable.getType().isCoin())
                         .filter(collectable -> collectable.getPosition()
                                 .equals(new Vector2D(playerPos.getX() + innerX,
                                         playerPos.getY() + innerY)))
