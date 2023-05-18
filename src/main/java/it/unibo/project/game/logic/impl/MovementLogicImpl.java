@@ -10,7 +10,7 @@ import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.utility.RandomizeLine;
 import it.unibo.project.utility.Vector2D;
 
-public class MovementLogicImpl implements MovementLogic {    
+public class MovementLogicImpl implements MovementLogic {
     private final RandomizeLine randomizeLine = new RandomizeLine();
 
     @Override
@@ -20,11 +20,11 @@ public class MovementLogicImpl implements MovementLogic {
         final Vector2D nextPlayerPosition = new Vector2D(x, y);
         final var checkDynamicCollision = checker.checkDynamicObstacleCollision(nextPlayerPosition);
 
-        if (checkDynamicCollision.isPresent()   //se è sul tronco e non c'è collisione col muro entra
+        if (checkDynamicCollision.isPresent() // se è sul tronco e non c'è collisione col muro entra
                 && checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn()
                 && !checker.checkWallCollision(nextPlayerPosition)) {
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
-        } else if (!checkDynamicCollision.isPresent()   //se non collide con bordi o ostacoli o traguardo entra
+        } else if (!checkDynamicCollision.isPresent() // se non collide con bordi o ostacoli o traguardo entra
                 && checker.checkStaticObstacleCollision(nextPlayerPosition).isEmpty()
                 && !checker.checkWallCollision(nextPlayerPosition)
                 && !checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
@@ -32,26 +32,30 @@ public class MovementLogicImpl implements MovementLogic {
                 switch (collectable.getType()) {
                     case COIN:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        LauncherImpl.LAUNCHER.getGameStat().addCoins(powerupHandler.getCurrentPowerUp().filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MULTIPLIER)).isPresent() ? 5 : 1);
+                        LauncherImpl.LAUNCHER.getGameStat()
+                                .addCoins(powerupHandler.getCurrentPowerUp()
+                                        .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MULTIPLIER))
+                                        .isPresent() ? 5 : 1);
                         break;
                     default:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        //powerupHandler.addPowerUp(collectable.getType());
+                        // powerupHandler.addPowerUp(collectable.getType());
                         powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
                 }
             });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
-        } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) { //se taglia il traguardo
+        } else if (checker.checkFinishLineCollision(LauncherImpl.LAUNCHER.getPlayer().getPosition())) {
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
             LauncherImpl.LAUNCHER.getLoader().saveStatOnFile(LauncherImpl.LAUNCHER.getGameStat());
-        } else if (checkDynamicCollision.stream().filter(obstacle -> !obstacle.getType().isWalkableOn()).findAny().isPresent()) { //se collide con un ostacolo
+        } else if (checkDynamicCollision.stream().filter(obstacle -> !obstacle.getType().isWalkableOn()).findAny()
+                .isPresent()) { // se collide con un ostacolo
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
     }
 
     @Override
     public void moveObstacle() {
-        final CheckCollision checker = LauncherImpl.LAUNCHER.getCheckCollision();    
+        final CheckCollision checker = LauncherImpl.LAUNCHER.getCheckCollision();
         final Vector2D playerPos = LauncherImpl.LAUNCHER.getPlayer().getPosition();
         final var checkDynamicCollision = checker.checkDynamicObstacleCollision(playerPos);
 
@@ -62,7 +66,8 @@ public class MovementLogicImpl implements MovementLogic {
                     final var type = obstacle.getType();
                     final var pixelX = obstacle.getPixelPosition();
                     final var cellY = obstacle.getPosition().getY();
-                    final var wrapAround = type.getWrapAroundDim() * LauncherImpl.CELL_DIM + (LauncherImpl.CELL_DIM / 2);
+                    final var wrapAround = type.getWrapAroundDim() * LauncherImpl.CELL_DIM
+                            + (LauncherImpl.CELL_DIM / 2);
                     var speed = type.getSpeed();
                     if (LauncherImpl.RANDOMIZE_SPEED) {
                         speed = this.randomizeLine.getLineRandomNumber(
@@ -78,9 +83,9 @@ public class MovementLogicImpl implements MovementLogic {
         if (checkDynamicCollision.isPresent()
                 && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn())
                 && !checker.checkWallCollision(playerPos)) {
-            if(LauncherImpl.REMAIN_PLAYER_ON_TRUNK){
+            if (LauncherImpl.REMAIN_PLAYER_ON_TRUNK) {
                 LauncherImpl.LAUNCHER.movePlayerIfPossible(checkDynamicCollision.get().getPosition().getX(),
-                    checkDynamicCollision.get().getPosition().getY());
+                        checkDynamicCollision.get().getPosition().getY());
             }
         } else if (checkDynamicCollision.isPresent()) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);

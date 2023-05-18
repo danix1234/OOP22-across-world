@@ -3,7 +3,6 @@ package it.unibo.project.game.logic.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.CheckCollision;
@@ -35,7 +34,8 @@ public class CheckCollisionImpl implements CheckCollision {
         return collectables;
     }
 
-    private List<Collectable> checkCoinLessDistantThen(final int distance, List<Collectable> collectables, Vector2D playerPos) {
+    private List<Collectable> checkCoinLessDistantThen(final int distance, List<Collectable> collectables,
+            Vector2D playerPos) {
         int x, y;
         for (x = -distance; x <= distance; x++) {
             for (y = -distance; y <= distance; y++) {
@@ -55,7 +55,8 @@ public class CheckCollisionImpl implements CheckCollision {
     @Override
     public Optional<ObstacleType> checkStaticObstacleCollision(Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getObstacles().stream()
-                .filter(Predicate.not(Obstacle::isMovable))
+                .filter(obstacle -> !obstacle.isMovable()
+                        && !obstacle.getType().equals(ObstacleType.TRANSPARENT_OBSTACLE))
                 .filter(staticObstacle -> staticObstacle.getPosition().equals(playerPos))
                 .findFirst()
                 .map(Obstacle::getType);
