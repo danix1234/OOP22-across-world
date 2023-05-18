@@ -9,6 +9,9 @@ public class PlayerImpl extends EntityImpl implements Player {
 
 	public PlayerImpl(Vector2D initialPos) {
 		super(initialPos, true);
+
+		// force calculation of max distance
+		move(initialPos.getX(), initialPos.getY());
 	}
 
 	@Override
