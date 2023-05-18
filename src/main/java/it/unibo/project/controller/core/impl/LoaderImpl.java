@@ -2,6 +2,7 @@ package it.unibo.project.controller.core.impl;
 
 import java.awt.Image;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import it.unibo.project.controller.core.api.Difficulty;
@@ -66,6 +67,7 @@ public class LoaderImpl extends AbstractImageLoader {
 
     @Override
     public final List<BackgroundCell> getBackgroundCells(final Difficulty difficulty) {
+        setBackgroundCellsOpt(Optional.empty());
         return getBackgroundCellsOpt().orElseGet(() -> {
             loadMaps();
             return getBackgroundCellsOpt().orElseThrow();
@@ -74,6 +76,7 @@ public class LoaderImpl extends AbstractImageLoader {
 
     @Override
     public final List<Collectable> getCollectables(final Difficulty difficulty) {
+        setCollectablesOpt(Optional.empty());
         return getCollectablesOpt().orElseGet(() -> {
             loadMaps();
             return getCollectablesOpt().orElseThrow();
@@ -82,6 +85,7 @@ public class LoaderImpl extends AbstractImageLoader {
 
     @Override
     public final List<Obstacle> getObstacles(final Difficulty difficulty) {
+        setObstaclesOpt(Optional.empty());
         return getObstaclesOpt().orElseGet(() -> {
             loadMaps();
             return getObstaclesOpt().orElseThrow();
