@@ -1,5 +1,7 @@
 package it.unibo.project.game.logic.impl;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.TimerTask;
 
@@ -11,18 +13,18 @@ import it.unibo.project.game.model.api.CollectableType;
  * class {@code HandlePowerupImpl} implements {@linkplain HandlePowerup}.
  */
 public class HandlePowerupImpl implements HandlePowerup {
-    private Optional<CollectableType> powerUpType = Optional.empty();
+    private List<CollectableType> powerupTypeList = new LinkedList<>();
 
     @Override
     public synchronized void addPowerUp(final CollectableType type) {
-        this.powerUpType = Optional.of(type);        
+        this.powerupTypeList.add(type);
         TimerTask timerPowerUp = new TimerTask() {
 
             @Override
             public void run() {
                 try {
                     Thread.sleep(10000);
-                    clearPowerUp();
+                    powerupTypeList.remove(0);
                 } catch (final InterruptedException e) {
                     LauncherImpl.LAUNCHER.closeWindow();
                 }
@@ -34,11 +36,11 @@ public class HandlePowerupImpl implements HandlePowerup {
 
     @Override
     public synchronized Optional<CollectableType> getCurrentPowerUp() {
-        return powerUpType;
+        return powerupTypeList.isEmpty() ? Optional.empty() : Optional.of(powerupTypeList.get(powerupTypeList.size()-1));
     }
 
     @Override
     public synchronized void clearPowerUp() {
-        powerUpType = Optional.empty();
+        powerupTypeList.clear();
     }
 }

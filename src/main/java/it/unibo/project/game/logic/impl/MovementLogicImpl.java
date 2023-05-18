@@ -39,8 +39,8 @@ public class MovementLogicImpl implements MovementLogic {
                         break;
                     default:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
-                        // powerupHandler.addPowerUp(collectable.getType());
-                        powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
+                        powerupHandler.addPowerUp(collectable.getType());
+                        //powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
                 }
             });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
