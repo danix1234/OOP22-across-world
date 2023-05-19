@@ -60,9 +60,9 @@ public abstract class AbstractLoader implements Loader {
     /** all collectable sprite file names. */
     protected static final Map<CollectableType, List<String>> COLLECTABLE_FILES = Map.ofEntries(
             Map.entry(CollectableType.COIN, List.of("coin.png")),
-            Map.entry(CollectableType.POWERUP_COIN_MAGNET, List.of("powerup.png")),
-            Map.entry(CollectableType.POWERUP_COIN_MULTIPLIER, List.of("powerup.png")),
-            Map.entry(CollectableType.POWERUP_IMMORTALITY, List.of("powerup.png")));
+            Map.entry(CollectableType.POWERUP_COIN_MAGNET, List.of("magnet.png")),
+            Map.entry(CollectableType.POWERUP_COIN_MULTIPLIER, List.of("multiplier.png")),
+            Map.entry(CollectableType.POWERUP_IMMORTALITY, List.of("immortality.png")));
     /** all background sprite file names. */
     protected static final Map<BackgroundCellType, List<String>> BACKGROUND_FILES = Map.ofEntries(
             Map.entry(BackgroundCellType.GRASS, List.of("grass.png")),
@@ -70,13 +70,18 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(BackgroundCellType.ROAD, List.of("road.png")),
             Map.entry(BackgroundCellType.WATER, List.of("water.png")),
             Map.entry(BackgroundCellType.FINISHLINE, List.of("finishline.png")),
-            Map.entry(BackgroundCellType.BICYCLELANE, List.of("bicyclelane.png")));
+            Map.entry(BackgroundCellType.BICYCLELANE_GRASS, List.of("bicyclelaneGrass.png")),
+            Map.entry(BackgroundCellType.BICYCLELANE_SAND, List.of("bicyclelaneSand.png")),
+            Map.entry(BackgroundCellType.SAND, List.of("sand.png")));
     /** all obstacle sprite file names. */
     protected static final Map<ObstacleType, List<String>> OBSTACLE_FILES = Map.ofEntries(
             Map.entry(ObstacleType.BUSH, List.of("bush.png")),
             Map.entry(ObstacleType.TREE, List.of("tree.png")),
             Map.entry(ObstacleType.FENCE, List.of("fence.png")),
             Map.entry(ObstacleType.STOPLIGHT, List.of("stoplight.png")),
+            Map.entry(ObstacleType.SANDCASTLE, List.of("sandcastle.png")),
+            Map.entry(ObstacleType.PALM, List.of("palm.png")),
+            Map.entry(ObstacleType.BEACHUMBRELLA, List.of("beachumbrella.png")),
             Map.entry(ObstacleType.CAR_SX, List.of("carSX0.png", "carSX1.png", "carSX2.png")),
             Map.entry(ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png")),
             Map.entry(ObstacleType.TRAIN_SX, List.of("trainSX.png")),
@@ -91,7 +96,11 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(ObstacleType.TRUNK_DX, List.of("trunkDXcenter.png")),
             Map.entry(ObstacleType.TRUNK_FINISH_DX, List.of("trunkDXfinish.png")),
             Map.entry(ObstacleType.BIKE_SX, List.of("bikeSX.png")),
-            Map.entry(ObstacleType.BIKE_DX, List.of("bikeDX.png")));
+            Map.entry(ObstacleType.BIKE_DX, List.of("bikeDX.png")),
+            Map.entry(ObstacleType.BEACHMATTRESS_SX, List.of("beachmattressSX.png")),
+            Map.entry(ObstacleType.BEACHMATTRESS_DX, List.of("beachmattressDX.png")),
+            Map.entry(ObstacleType.BALL_SX, List.of("ballSX.png")),
+            Map.entry(ObstacleType.BALL_DX, List.of("ballDX.png")));
     /** all map file names. */
     protected static final Map<Difficulty, String> MAP_FILES = Map.ofEntries(
             Map.entry(Difficulty.EASY, "easy.txt"),

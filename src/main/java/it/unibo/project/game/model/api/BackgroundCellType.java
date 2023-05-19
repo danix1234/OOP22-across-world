@@ -6,6 +6,8 @@ public enum BackgroundCellType {
     WATER,
     RAIL,
     FINISHLINE,
-    BICYCLELANE;
+    BICYCLELANE_GRASS,
+    BICYCLELANE_SAND,
+    SAND;
 
 }
