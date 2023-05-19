@@ -161,7 +161,7 @@ public class GameScene extends AbstractScene {
             final var collectable = launcher.getHandlePowerup().getCurrentPowerUp();
             if (collectable.isPresent()) {
                 g.drawImage(loader.getCollectablesSprites(collectable.get()).get(0), 10, 110, 40, 40, null);
-                g.drawString(collectable.get().toString(), 50, 140);
+                g.drawString(collectable.get().toString().replace("POWERUP", "").replace("_", " "), 50, 140);
             }
 
             // needed because repaint method is draw on screen only when java swing wants
