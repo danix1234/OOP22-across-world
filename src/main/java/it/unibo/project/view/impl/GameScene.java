@@ -127,6 +127,14 @@ public class GameScene extends AbstractScene {
                             cell.getPosition(),
                             g));
 
+            launcher.getCollectables().stream()
+                    .forEach(cell -> drawCell(
+                            randomizeLine.getLineRandomElement(
+                                    loader.getCollectablesSprites(cell.getType()),
+                                    cell.getPosition().getY()),
+                            cell.getPosition(),
+                            g));
+
             launcher.getObstacles().stream()
                     .filter(Obstacle::isMovable)
                     .forEach(cell -> drawPixels(
@@ -135,14 +143,6 @@ public class GameScene extends AbstractScene {
                                     cell.getPosition().getY()),
                             cell.getPosition(),
                             LauncherImpl.LAUNCHER.getActualPixelX(cell.getPixelPosition()),
-                            g));
-
-            launcher.getCollectables().stream()
-                    .forEach(cell -> drawCell(
-                            randomizeLine.getLineRandomElement(
-                                    loader.getCollectablesSprites(cell.getType()),
-                                    cell.getPosition().getY()),
-                            cell.getPosition(),
                             g));
 
             final var trunkCollided = launcher.getCheckCollision().checkTrunkCollision(player.getPosition());
