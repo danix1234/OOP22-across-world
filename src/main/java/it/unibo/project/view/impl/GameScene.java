@@ -155,7 +155,7 @@ public class GameScene extends AbstractScene {
 
             g.setFont(getFont().deriveFont(30.0F));
             g.drawImage(playerSprite, 10, 10, 40, 40, null);
-            g.drawString(player.getMaxDistance() * 10 + "", 50, 40);
+            g.drawString(player.getMaxDistance() - 7 + "", 50, 40);
             g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), 10, 60, 40, 40, null);
             g.drawString(launcher.getGameStat().getCoins() + "", 50, 90);
             final var collectable = launcher.getHandlePowerup().getCurrentPowerUp();
