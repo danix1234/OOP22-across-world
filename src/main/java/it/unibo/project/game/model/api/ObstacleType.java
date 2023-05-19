@@ -11,6 +11,7 @@ public enum ObstacleType {
     SANDCASTLE(0, 0, 0, 0, false),
     PALM(0, 0, 0, 0, false),
     BEACHUMBRELLA(0, 0, 0, 0, false),
+    STARFISH(0, 0, 0, 0, false),
     CAR_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1, false),
     CAR_SX(-5, -1, -8, LauncherImpl.ORIZ_CELL + 1, false),
     TRAIN_DX(30, 20, 50, LauncherImpl.ORIZ_CELL * 4, false),
