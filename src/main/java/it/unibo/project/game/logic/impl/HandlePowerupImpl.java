@@ -24,7 +24,9 @@ public class HandlePowerupImpl implements HandlePowerup {
             public void run() {
                 try {
                     Thread.sleep(10000);
-                    powerupTypeList.remove(0);
+                    if (!powerupTypeList.isEmpty()){
+                        powerupTypeList.remove(0);
+                    }
                 } catch (final InterruptedException e) {
                     LauncherImpl.LAUNCHER.closeWindow();
                 }

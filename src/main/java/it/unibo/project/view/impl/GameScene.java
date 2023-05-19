@@ -18,6 +18,7 @@ import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
+import it.unibo.project.game.model.api.CollectableType;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.utility.RandomizeLine;
@@ -152,6 +153,17 @@ public class GameScene extends AbstractScene {
                 drawCell(playerSprite, player.getPosition(), g);
             }
 
+            g.setFont(getFont().deriveFont(30.0F));
+            g.drawImage(playerSprite, 10, 10, 40, 40, null);
+            g.drawString(player.getMaxDistance() * 10 + "", 50, 40);
+            g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), 10, 60, 40, 40, null);
+            g.drawString(launcher.getGameStat().getCoins() + "", 50, 90);
+            final var collectable = launcher.getHandlePowerup().getCurrentPowerUp();
+            if (collectable.isPresent()) {
+                g.drawImage(loader.getCollectablesSprites(collectable.get()).get(0), 10, 110, 40, 40, null);
+                g.drawString(collectable.get().toString(), 50, 140);
+            }
+
             // needed because repaint method is draw on screen only when java swing wants
             Toolkit.getDefaultToolkit().sync();
         }
@@ -170,22 +182,28 @@ public class GameScene extends AbstractScene {
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "move right");
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "move right");
 
-        actionMap.put("move up", new GameAction(Action.MOVE_PLAYER_UP));
-        actionMap.put("move down", new GameAction(Action.MOVE_PLAYER_DOWN));
-        actionMap.put("move left", new GameAction(Action.MOVE_PLAYER_LEFT));
-        actionMap.put("move right", new GameAction(Action.MOVE_PLAYER_RIGHT));
+        final var inputHandler = getInputHandler(SceneType.GAME);
+        actionMap.put("move up", new GameAction(e -> inputHandler.storeAction(Action.MOVE_PLAYER_UP)));
+        actionMap.put("move down", new GameAction(e -> inputHandler.storeAction(Action.MOVE_PLAYER_DOWN)));
+        actionMap.put("move left", new GameAction(e -> inputHandler.storeAction(Action.MOVE_PLAYER_LEFT)));
+        actionMap.put("move right", new GameAction(e -> inputHandler.storeAction(Action.MOVE_PLAYER_RIGHT)));
+    }
+
+    @FunctionalInterface
+    private interface GameActionFunctional {
+        public void actionPerformed(ActionEvent e);
     }
 
     private class GameAction extends AbstractAction {
-        private final Action action;
+        private final GameActionFunctional gameActionFunctional;
 
-        private GameAction(final Action action) {
-            this.action = action;
+        public GameAction(final GameActionFunctional gameActionFunctional) {
+            this.gameActionFunctional = gameActionFunctional;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            getInputHandler(SceneType.GAME).storeAction(this.action);
+            this.gameActionFunctional.actionPerformed(e);
         }
 
     }
