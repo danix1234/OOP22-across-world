@@ -12,6 +12,7 @@ import it.unibo.project.utility.Vector2D;
 
 public class MovementLogicImpl implements MovementLogic {
     private final RandomizeLine randomizeLine = new RandomizeLine();
+    private double speedMultiplier = 1.0; 
 
     @Override
     public void movePlayer(final int x, final int y) {
@@ -74,6 +75,7 @@ public class MovementLogicImpl implements MovementLogic {
                                 type.getMaxSpeed(),
                                 cellY);
                     }
+                    speed *= speedMultiplier;
                     obstacle.movePixelPosition((pixelX + wrapAround + speed) % wrapAround);
                     final var cellPos = LauncherImpl.LAUNCHER.convertPixelToCellPos(pixelX, cellY);
                     obstacle.move(cellPos.getX(), cellPos.getY());
@@ -89,5 +91,10 @@ public class MovementLogicImpl implements MovementLogic {
         } else if (checkDynamicCollision.isPresent()) {
             LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
         }
+    }
+
+    @Override
+    public void setSpeedMultiplier(double value) {
+        this.speedMultiplier = value;
     }
 }

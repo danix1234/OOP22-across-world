@@ -8,4 +8,6 @@ public interface MovementLogic {
     // also defines the direction and speed of the obstacles
     // need to change location inside the obstacle object
     void moveObstacle();
+
+    void setSpeedMultiplier(double value);    
 }
