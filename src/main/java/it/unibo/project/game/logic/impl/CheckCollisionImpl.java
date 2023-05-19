@@ -18,13 +18,16 @@ public class CheckCollisionImpl implements CheckCollision {
     @Override
     public List<Collectable> checkCollectableCollision(Vector2D playerPos) {
         List<Collectable> collectables = new ArrayList<>();
-        if (LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
-                .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET)).isPresent()) {
+        if (LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp().stream()
+                .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET))
+                .findAny().isPresent()) {
             checkCoinLessDistantThen(1, collectables, playerPos);
         }
         LauncherImpl.LAUNCHER.getCollectables().stream()
                 .filter(collectable -> LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
-                        .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET)).isPresent()
+                        .stream()
+                        .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET))
+                        .findAny().isPresent()
                                 ? collectable.getType().isPowerUp()
                                 : true)
                 .filter(collectable -> collectable.getPosition()
@@ -82,7 +85,9 @@ public class CheckCollisionImpl implements CheckCollision {
             return checkTrunkCollision(playerPos);
         }
         if (LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
-                .filter(b -> b.equals(CollectableType.POWERUP_IMMORTALITY)).isEmpty()) {
+        .stream()
+                .filter(b -> b.equals(CollectableType.POWERUP_IMMORTALITY))
+                .findAny().isEmpty()) {
             return LauncherImpl.LAUNCHER.getObstacles().stream()
                     .filter(obstacle -> !obstacle.getType().isWalkableOn())
                     .filter(obstacle -> obstacle.isMovable()

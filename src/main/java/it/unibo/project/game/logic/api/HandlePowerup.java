@@ -1,6 +1,6 @@
 package it.unibo.project.game.logic.api;
 
-import java.util.Optional;
+import java.util.List;
 
 import it.unibo.project.game.model.api.CollectableType;
 
@@ -15,7 +15,7 @@ public interface HandlePowerup {
     // then restore the saved collectables inside gameworld
     void addPowerUp(CollectableType type); // add timer thread to remove powerup after 10 seconds
 
-    Optional<CollectableType> getCurrentPowerUp();
+    List<CollectableType> getCurrentPowerUp();
 
     void clearPowerUp();
 }
