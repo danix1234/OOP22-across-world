@@ -12,7 +12,7 @@ import it.unibo.project.utility.Vector2D;
 
 public class MovementLogicImpl implements MovementLogic {
     private final RandomizeLine randomizeLine = new RandomizeLine();
-    private double speedMultiplier = 1.0; 
+    private double speedMultiplier = 1.0;
 
     @Override
     public void movePlayer(final int x, final int y) {
@@ -35,13 +35,15 @@ public class MovementLogicImpl implements MovementLogic {
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
                         LauncherImpl.LAUNCHER.getGameStat()
                                 .addCoins(powerupHandler.getCurrentPowerUp()
+                                        .stream()
                                         .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MULTIPLIER))
+                                        .findAny()
                                         .isPresent() ? 5 : 1);
                         break;
                     default:
                         LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
                         powerupHandler.addPowerUp(collectable.getType());
-                        //powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
+                        // powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
                 }
             });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);
