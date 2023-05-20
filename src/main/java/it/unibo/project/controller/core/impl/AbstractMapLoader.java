@@ -44,7 +44,7 @@ public abstract class AbstractMapLoader extends AbstractStatLoader {
                 .map(String::strip)
                 .dropWhile(line -> !line.equalsIgnoreCase("[" + nameEntity + "]"))
                 .skip(1)
-                .takeWhile(line -> line.length() > 0)
+                .takeWhile(line -> line.length() > 0 && line.charAt(0) != '[')
                 .map(line -> line.split(" "))
                 .map(line -> new Vector2D(Integer.parseInt(line[0]), Integer.parseInt(line[1])))
                 .toList();
