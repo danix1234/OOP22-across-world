@@ -158,7 +158,7 @@ public class GameScene extends AbstractScene {
             g.drawString(player.getMaxDistance() - 4 + "", 50, 40);
             g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), 10, 60, 40, 40, null);
             g.drawString(launcher.getGameStat().getCoins() + "", 50, 90);
-            final var collectables = launcher.getHandlePowerup().getCurrentPowerUp();
+            final var collectables = launcher.getHandlePowerup().getCurrentPowerUp().stream().distinct().toList();
             for (int i = 0; i < collectables.size(); i++) {
                 g.drawImage(loader.getCollectablesSprites(collectables.get(i)).get(0), 10 + 40 * i, 110, 40, 40, null);
             }
