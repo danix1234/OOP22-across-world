@@ -1,4 +1,5 @@
 package it.unibo.project.view.impl;
+
 import javax.swing.*;
 
 import it.unibo.project.controller.core.api.Difficulty;
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
 
-public class MenuScene extends AbstractScene{
+public class MenuScene extends AbstractScene {
     private JPanel panel;
     private JButton startButton;
     private JComboBox<String> difficultyComboBox;
@@ -19,40 +20,42 @@ public class MenuScene extends AbstractScene{
     private JLabel titleLabel;
 
     public MenuScene() {
-        //pannello principale
+        // pannello principale
         this.panel = new JPanel();
         this.panel.setLayout(new GridBagLayout());
         this.panel.setBackground(new Color(40, 40, 40));
-    
-        //creazione del titolo del gioco
+
+        // creazione del titolo del gioco
         titleLabel = new JLabel("Across the world");
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
         titleLabel.setBounds(0, 10, panel.getWidth(), 50);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    
-        //creazione dei buttons del menu
+
+        // creazione dei buttons del menu
         startButton = new JButton("START");
         var difficulties = Arrays
-            .stream(Difficulty.values())
-            .map(Enum::name)
-            .toArray(String[]::new);
+                .stream(Difficulty.values())
+                .map(Enum::name)
+                .toArray(String[]::new);
         difficultyComboBox = new JComboBox<>(difficulties);
         shopButton = new JButton("SHOP");
         exitButton = new JButton("EXIT");
+        // bug fix: difficolty didn't change to what is shown
+        LauncherImpl.LAUNCHER.setDifficulty(Difficulty.valueOf(difficultyComboBox.getSelectedItem() + ""));
 
-        //elimino effetto testo evidenziato
+        // elimino effetto testo evidenziato
         startButton.setFocusPainted(false);
         difficultyComboBox.setFocusable(false);
         shopButton.setFocusPainted(false);
         exitButton.setFocusPainted(false);
-    
-        //estetica dei buttons
+
+        // estetica dei buttons
         startButton.setBackground(new Color(255, 255, 255));
         startButton.setForeground(Color.BLACK);
         startButton.setFont(new Font("Arial", Font.BOLD, 20));
         startButton.setPreferredSize(new Dimension(200, 70));
-    
+
         difficultyComboBox.setBackground(new Color(255, 255, 255));
         difficultyComboBox.setForeground(Color.BLACK);
         difficultyComboBox.setFont(new Font("Arial", Font.BOLD, 20));
@@ -62,13 +65,13 @@ public class MenuScene extends AbstractScene{
         shopButton.setForeground(Color.BLACK);
         shopButton.setFont(new Font("Arial", Font.BOLD, 20));
         shopButton.setPreferredSize(new Dimension(200, 70));
-    
+
         exitButton.setBackground(new Color(255, 255, 255));
         exitButton.setForeground(Color.RED);
         exitButton.setFont(new Font("Arial", Font.BOLD, 20));
         exitButton.setPreferredSize(new Dimension(200, 70));
-    
-        //aggiunta i pulsanti al pannello principale
+
+        // aggiunta i pulsanti al pannello principale
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -83,14 +86,14 @@ public class MenuScene extends AbstractScene{
         this.panel.add(shopButton, gbc);
         gbc.gridy = 4;
         this.panel.add(exitButton, gbc);
-    
-        //aggiungo gli ActionListener 
+
+        // aggiungo gli ActionListener
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 getInputHandler(SceneType.MENU).executeAction(Action.CHANGE_SCENE_TO_GAME);
             }
         });
-    
+
         difficultyComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String selectedDifficulty = (String) difficultyComboBox.getSelectedItem();
@@ -99,11 +102,11 @@ public class MenuScene extends AbstractScene{
         });
 
         shopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 getInputHandler(SceneType.MENU).executeAction(Action.CHANGE_SCENE_TO_SHOP);
             }
         });
-    
+
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 getInputHandler(SceneType.MENU).executeAction(Action.EXIT_APP);
@@ -116,8 +119,3 @@ public class MenuScene extends AbstractScene{
     public void update() {
     }
 }
-
-
-
-
-
