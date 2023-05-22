@@ -17,7 +17,7 @@ import it.unibo.project.utility.Vector2D;
  */
 class CheckCollisionTest {
     /**
-     * assure all collision are detected
+     * assure all collision of collectable type are detected
      */
     @Test
     void checkCollectableCollision() {
@@ -28,6 +28,9 @@ class CheckCollisionTest {
         assertEquals(LauncherImpl.LAUNCHER.getCheckCollision().checkCollectableCollision(new Vector2D(8, 26)).get(0).getType(), CollectableType.COIN);
     }
 
+    /**
+     * assure all collision of dynamic obstacle are detected
+     */
     @Test
     void checkDynamicObstacleCollision() {
         LauncherImpl.LAUNCHER.start();        
@@ -39,6 +42,9 @@ class CheckCollisionTest {
         assertEquals(LauncherImpl.LAUNCHER.getCheckCollision().checkDynamicObstacleCollision(new Vector2D(4, 31)).get().getType(), ObstacleType.TRANSPARENT_OBSTACLE);
     }
 
+    /**
+     * assure all collision of static obstacle are detected
+     */
     @Test
     void checkStaticObstacleCollision() {
         LauncherImpl.LAUNCHER.start();        
@@ -49,6 +55,9 @@ class CheckCollisionTest {
         assertEquals(LauncherImpl.LAUNCHER.getCheckCollision().checkStaticObstacleCollision(new Vector2D(4, 4)).get(), ObstacleType.BUSH);
     }
 
+    /**
+     * assure all collision of finish line are detected
+     */
     @Test
     void checkFinishLineCollision() {
         LauncherImpl.LAUNCHER.start();        
@@ -59,6 +68,9 @@ class CheckCollisionTest {
         assertFalse(LauncherImpl.LAUNCHER.getCheckCollision().checkFinishLineCollision(new Vector2D(6, 60)));
     }
 
+    /**
+     * assure all collision of trunks are detected
+     */
     @Test
     void checkTrunkCollision() {
         LauncherImpl.LAUNCHER.start();        
@@ -68,6 +80,9 @@ class CheckCollisionTest {
         assertFalse(LauncherImpl.LAUNCHER.getCheckCollision().checkTrunkCollision(new Vector2D(4, 20)).isPresent());
     }
 
+    /**
+     * assure all collision to the walls are detected
+     */
     @Test
     void checkWallCollision() {
         LauncherImpl.LAUNCHER.start();        
