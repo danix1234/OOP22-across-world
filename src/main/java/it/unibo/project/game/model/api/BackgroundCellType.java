@@ -3,13 +3,13 @@ package it.unibo.project.game.model.api;
 public enum BackgroundCellType {
     GRASS,
     ROAD,
-    HARDROAD,
     WATER,
     RAIL,
-    HARDRAIL,
     BICYCLELANE_GRASS,
     BICYCLELANE_SAND,
     SAND,
+    HARDROAD,
+    HARDRAIL,
     DIRT,
     LAVA,
     FINISHLINE;
