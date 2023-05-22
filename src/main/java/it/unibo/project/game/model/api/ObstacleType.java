@@ -12,6 +12,8 @@ public enum ObstacleType {
     PALM(0, 0, 0, 0, false),
     BEACHUMBRELLA(0, 0, 0, 0, false),
     STARFISH(0, 0, 0, 0, false),
+    FIRETREE(0, 0, 0, 0, false),
+    FIRE(0, 0, 0, 0, true),
     CAR_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1, false),
     CAR_SX(-5, -1, -8, LauncherImpl.ORIZ_CELL + 1, false),
     TRAIN_DX(30, 20, 50, LauncherImpl.ORIZ_CELL * 4, false),
@@ -29,7 +31,12 @@ public enum ObstacleType {
     BEACHMATTRESS_SX(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1, true),
     BEACHMATTRESS_DX(2, 2, 6, LauncherImpl.ORIZ_CELL + 1, true),
     BALL_SX(-5, -1, -8, LauncherImpl.ORIZ_CELL + 1, false),
-    BALL_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1, false);
+    BALL_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1, false),
+    ROCK(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1, true),
+    JET_DX(30, 20, 50, LauncherImpl.ORIZ_CELL * 4, false),
+    JET_SX(-30, -20, -50, LauncherImpl.ORIZ_CELL * 4, false),
+    MONSTER_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1, false),
+    MONSTER_SX(-5, -1, -8, LauncherImpl.ORIZ_CELL + 1, false);
 
     private final int wrapAroundDim;
     private final double speed;
