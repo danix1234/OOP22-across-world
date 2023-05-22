@@ -27,6 +27,7 @@ public class SharedInputHandler implements InputHandler {
                 LauncherImpl.LAUNCHER.setScene(SceneType.SHOP);
                 break;
             case CHANGE_SCENE_TO_GAME:
+                LauncherImpl.LAUNCHER.getHandlePowerup().clearPowerUp();
                 LauncherImpl.LAUNCHER.loadMap();
                 LauncherImpl.LAUNCHER.startEngine();
                 LauncherImpl.LAUNCHER.setScene(SceneType.GAME);
