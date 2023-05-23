@@ -16,8 +16,8 @@ import it.unibo.project.utility.Vector2D;
 public class CheckCollisionImpl implements CheckCollision {
 
     @Override
-    public List<Collectable> checkCollectableCollision(Vector2D playerPos) {
-        List<Collectable> collectables = new ArrayList<>();
+    public List<Collectable> checkCollectableCollision(final Vector2D playerPos) {
+        final List<Collectable> collectables = new ArrayList<>();
         if (LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp().stream()
                 .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET))
                 .findAny().isPresent()) {
@@ -37,8 +37,8 @@ public class CheckCollisionImpl implements CheckCollision {
         return collectables;
     }
 
-    private List<Collectable> checkCoinLessDistantThen(final int distance, List<Collectable> collectables,
-            Vector2D playerPos) {
+    private List<Collectable> checkCoinLessDistantThen(final int distance, final List<Collectable> collectables,
+            final Vector2D playerPos) {
         int x, y;
         for (x = -distance; x <= distance; x++) {
             for (y = -distance; y <= distance; y++) {
@@ -56,7 +56,7 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public Optional<ObstacleType> checkStaticObstacleCollision(Vector2D playerPos) {
+    public Optional<ObstacleType> checkStaticObstacleCollision(final Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getObstacles().stream()
                 .filter(obstacle -> !obstacle.isMovable()
                         && !obstacle.getType().equals(ObstacleType.TRANSPARENT_OBSTACLE))
@@ -66,7 +66,7 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public boolean checkFinishLineCollision(Vector2D playerPos) {
+    public boolean checkFinishLineCollision(final Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getBackgroundCells().stream()
                 .filter(background -> background.getType().equals(BackgroundCellType.FINISHLINE))
                 .filter(finishline -> finishline.getPosition().equals(playerPos))
@@ -75,12 +75,12 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public boolean checkWallCollision(Vector2D playerPos) {
+    public boolean checkWallCollision(final Vector2D playerPos) {
         return playerPos.getX() < 0 || playerPos.getX() >= LauncherImpl.ORIZ_CELL;
     }
 
     @Override
-    public Optional<Obstacle> checkDynamicObstacleCollision(Vector2D playerPos) {
+    public Optional<Obstacle> checkDynamicObstacleCollision(final Vector2D playerPos) {
         if (checkTrunkCollision(playerPos).isPresent()) {
             return checkTrunkCollision(playerPos);
         }
@@ -100,7 +100,7 @@ public class CheckCollisionImpl implements CheckCollision {
     }
 
     @Override
-    public Optional<Obstacle> checkTrunkCollision(Vector2D playerPos) {
+    public Optional<Obstacle> checkTrunkCollision(final Vector2D playerPos) {
         return LauncherImpl.LAUNCHER.getObstacles().stream()
                 .filter(obstacle -> obstacle.getType().isWalkableOn())
                 .filter(trunkObstacle -> trunkObstacle.getPosition().equals(playerPos))

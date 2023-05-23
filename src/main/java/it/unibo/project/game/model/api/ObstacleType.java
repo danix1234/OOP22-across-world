@@ -45,7 +45,7 @@ public enum ObstacleType {
     private final double maxSpeed;
     private final boolean isWalkableOn;
 
-    private ObstacleType(final double speed, final double minSpeed, final double maxSpeed,
+    ObstacleType(final double speed, final double minSpeed, final double maxSpeed,
             final int wrapAroundDim, final boolean isWalkableOn) {
         this.speed = speed;
         this.wrapAroundDim = wrapAroundDim;
