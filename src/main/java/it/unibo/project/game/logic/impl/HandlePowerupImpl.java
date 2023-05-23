@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimerTask;
 
+import javax.swing.SwingUtilities;
+
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.model.api.CollectableType;
@@ -13,6 +15,7 @@ import it.unibo.project.game.model.api.CollectableType;
  */
 public class HandlePowerupImpl implements HandlePowerup {
     private final List<CollectableType> powerupTypeList = new LinkedList<>();
+    private long counter = Long.MIN_VALUE;
 
     @Override
     public synchronized void addPowerUp(final CollectableType type) {
@@ -22,10 +25,13 @@ public class HandlePowerupImpl implements HandlePowerup {
             @Override
             public void run() {
                 try {
+                    final long clearId = getCounter();
                     Thread.sleep(10_000);
-                    if (!powerupTypeList.isEmpty()) {
-                        powerupTypeList.remove(0);
-                    }
+                    SwingUtilities.invokeLater(() -> {
+                        if (clearId == getCounter() && !powerupTypeList.isEmpty()) {
+                            powerupTypeList.remove(0);
+                        }
+                    });
                 } catch (final InterruptedException e) {
                     LauncherImpl.LAUNCHER.closeWindow();
                 }
@@ -42,6 +48,15 @@ public class HandlePowerupImpl implements HandlePowerup {
 
     @Override
     public synchronized void clearPowerUp() {
+        increaseCounter();
         powerupTypeList.clear();
+    }
+
+    private synchronized long getCounter() {
+        return this.counter;
+    }
+
+    private synchronized void increaseCounter() {
+        this.counter++;
     }
 }
