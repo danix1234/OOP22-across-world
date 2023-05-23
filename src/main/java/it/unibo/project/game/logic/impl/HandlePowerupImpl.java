@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimerTask;
 
+import javax.swing.SwingUtilities;
+
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.model.api.CollectableType;
@@ -23,9 +25,11 @@ public class HandlePowerupImpl implements HandlePowerup {
             public void run() {
                 try {
                     Thread.sleep(10000);
-                    if (!powerupTypeList.isEmpty()) {
-                        powerupTypeList.remove(0);
-                    }
+                    SwingUtilities.invokeLater(() -> {
+                        if (!powerupTypeList.isEmpty()) {
+                            powerupTypeList.remove(0);
+                        }
+                    });
                 } catch (final InterruptedException e) {
                     LauncherImpl.LAUNCHER.closeWindow();
                 }
