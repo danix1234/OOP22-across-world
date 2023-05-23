@@ -12,7 +12,7 @@ public enum CollectableType {
     private final boolean isPowerUp;
     private final Optional<Integer> coinValue;
 
-    private CollectableType(final boolean isCoin, final boolean isPowerUp, final Optional<Integer> coinValue) {
+    CollectableType(final boolean isCoin, final boolean isPowerUp, final Optional<Integer> coinValue) {
         this.isCoin = isCoin;
         this.isPowerUp = isPowerUp;
         this.coinValue = coinValue;

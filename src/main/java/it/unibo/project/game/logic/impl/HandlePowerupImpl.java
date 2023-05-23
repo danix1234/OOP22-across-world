@@ -12,17 +12,17 @@ import it.unibo.project.game.model.api.CollectableType;
  * class {@code HandlePowerupImpl} implements {@linkplain HandlePowerup}.
  */
 public class HandlePowerupImpl implements HandlePowerup {
-    private List<CollectableType> powerupTypeList = new LinkedList<>();
+    private final List<CollectableType> powerupTypeList = new LinkedList<>();
 
     @Override
     public synchronized void addPowerUp(final CollectableType type) {
         this.powerupTypeList.add(type);
-        TimerTask timerPowerUp = new TimerTask() {
+        final TimerTask timerPowerUp = new TimerTask() {
 
             @Override
             public void run() {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(10_000);
                     if (!powerupTypeList.isEmpty()) {
                         powerupTypeList.remove(0);
                     }
