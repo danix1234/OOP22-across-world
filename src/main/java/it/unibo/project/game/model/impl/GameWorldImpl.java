@@ -20,7 +20,7 @@ public class GameWorldImpl implements GameWorld {
     private List<Obstacle> obstacleList;
     private List<Collectable> collectableList;
     private List<BackgroundCell> backgroundCellList;
-    private GameLogic gameLogic = new GameLogicImpl();
+    private final GameLogic gameLogic = new GameLogicImpl();
 
     @Override
     public Player getPlayer() {

@@ -119,7 +119,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public synchronized void setDifficulty(Difficulty difficulty) {
+    public synchronized void setDifficulty(final Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -134,7 +134,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public synchronized InputHandler getInputHandler(SceneType sceneType) {
+    public synchronized InputHandler getInputHandler(final SceneType sceneType) {
         return getScene().getInputHandler(sceneType);
     }
 
@@ -185,7 +185,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public synchronized void movePlayerIfPossible(int x, int y) {
+    public synchronized void movePlayerIfPossible(final int x, final int y) {
         this.gameWorld.getGameLogic().getMovementLogic().movePlayer(x, y);
     }
 
@@ -205,7 +205,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public Vector2D convertPixelToCellPos(double pixelX, int cellY) {
+    public Vector2D convertPixelToCellPos(final double pixelX, final int cellY) {
         double x = getActualPixelX(pixelX) / CELL_DIM;
 
         // move cell one right if left side of cell is more then half over the cell
@@ -215,18 +215,18 @@ public final class LauncherImpl implements Launcher {
 
         // move cell to narnia if in the left half of cell zero
         if (pixelX < (CELL_DIM / 2)) {
-            x = TRANSLATE_PIXELS ? (LauncherImpl.ORIZ_CELL * 2) : x;
+            x = TRANSLATE_PIXELS ? LauncherImpl.ORIZ_CELL * 2 : x;
         }
         return new Vector2D((int) x, cellY);
     }
 
     @Override
-    public double getActualPixelX(double obstaclePixelX) {
+    public double getActualPixelX(final double obstaclePixelX) {
         return obstaclePixelX + TRANSLATION_TO_SX;
     }
 
     @Override
-    public double getObstaclePixelX(double actualPixelX) {
+    public double getObstaclePixelX(final double actualPixelX) {
         return actualPixelX - TRANSLATION_TO_SX;
     }
 

@@ -7,7 +7,7 @@ public class PlayerImpl extends EntityImpl implements Player {
 
 	private int maxDistance = 0;
 
-	public PlayerImpl(Vector2D initialPos) {
+	public PlayerImpl(final Vector2D initialPos) {
 		super(initialPos, true);
 
 		// force calculation of max distance

@@ -125,7 +125,7 @@ public abstract class AbstractLoader implements Loader {
     protected static final String STAT_FILE = "stats.txt";
 
     // LOADED DATA
-    private Vector2D playerPos = new Vector2D(7, 4);
+    private final Vector2D playerPos = new Vector2D(7, 4);
     private Optional<GameStat> gameStat = Optional.empty();
     private Optional<Map<Difficulty, List<Obstacle>>> obstacles = Optional.empty();
     private Optional<Map<Difficulty, List<BackgroundCell>>> backgroundCells = Optional.empty();
