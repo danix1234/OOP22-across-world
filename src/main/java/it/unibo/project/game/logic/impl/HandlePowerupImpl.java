@@ -15,6 +15,7 @@ import it.unibo.project.game.model.api.CollectableType;
  */
 public class HandlePowerupImpl implements HandlePowerup {
     private List<CollectableType> powerupTypeList = new LinkedList<>();
+    private long counter = Long.MIN_VALUE;
 
     @Override
     public synchronized void addPowerUp(final CollectableType type) {
@@ -24,9 +25,10 @@ public class HandlePowerupImpl implements HandlePowerup {
             @Override
             public void run() {
                 try {
+                    final long clearId = getCounter();
                     Thread.sleep(10000);
                     SwingUtilities.invokeLater(() -> {
-                        if (!powerupTypeList.isEmpty()) {
+                        if (clearId == getCounter() && !powerupTypeList.isEmpty()) {
                             powerupTypeList.remove(0);
                         }
                     });
@@ -46,6 +48,15 @@ public class HandlePowerupImpl implements HandlePowerup {
 
     @Override
     public synchronized void clearPowerUp() {
+        increaseCounter();
         powerupTypeList.clear();
+    }
+
+    private synchronized long getCounter() {
+        return this.counter;
+    }
+
+    private synchronized void increaseCounter() {
+        this.counter++;
     }
 }
