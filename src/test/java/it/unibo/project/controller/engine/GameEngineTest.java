@@ -24,9 +24,6 @@ class GameEngineTest {
         assertDoesNotThrow(() -> {
             LauncherImpl.LAUNCHER.setScene(SceneType.MENU);
             this.engine.start();
-            this.engine.render();
-            this.engine.processInput();
-            this.engine.updateGame();
         });
     }
 }

@@ -30,7 +30,7 @@ public class GameStatImpl implements GameStat {
     }
 
     @Override
-    public void setCoins(int coins) {
+    public void setCoins(final int coins) {
         this.coins = coins;
     }
 

@@ -69,7 +69,7 @@ public class MovementLogicImpl implements MovementLogic {
                     final var pixelX = obstacle.getPixelPosition();
                     final var cellY = obstacle.getPosition().getY();
                     final var wrapAround = type.getWrapAroundDim() * LauncherImpl.CELL_DIM
-                            + (LauncherImpl.CELL_DIM / 2);
+                            + LauncherImpl.CELL_DIM / 2;
                     var speed = type.getSpeed();
                     if (LauncherImpl.RANDOMIZE_SPEED) {
                         speed = this.randomizeLine.getLineRandomNumber(
@@ -84,7 +84,7 @@ public class MovementLogicImpl implements MovementLogic {
                 });
 
         if (checkDynamicCollision.isPresent()
-                && (checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn())
+                && checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn()
                 && !checker.checkWallCollision(playerPos)) {
             if (LauncherImpl.REMAIN_PLAYER_ON_TRUNK) {
                 LauncherImpl.LAUNCHER.movePlayerIfPossible(checkDynamicCollision.get().getPosition().getX(),
@@ -96,7 +96,7 @@ public class MovementLogicImpl implements MovementLogic {
     }
 
     @Override
-    public void setSpeedMultiplier(double value) {
+    public void setSpeedMultiplier(final double value) {
         this.speedMultiplier = value;
     }
 }
