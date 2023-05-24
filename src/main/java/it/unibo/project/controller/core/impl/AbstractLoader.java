@@ -76,7 +76,8 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(BackgroundCellType.DIRT, List.of("dirt.png")),
             Map.entry(BackgroundCellType.HARDRAIL, List.of("hardrail.png")),
             Map.entry(BackgroundCellType.HARDROAD, List.of("hardroad.png")),
-            Map.entry(BackgroundCellType.LAVA, List.of("lava.png")));
+            Map.entry(BackgroundCellType.LAVA, List.of("lava.png")),
+            Map.entry(BackgroundCellType.FIRE, List.of("fire0.png", "fire1.png")));
     /** all obstacle sprite file names. */
     protected static final Map<ObstacleType, List<String>> OBSTACLE_FILES = Map.ofEntries(
             Map.entry(ObstacleType.BUSH, List.of("bush.png")),
@@ -107,7 +108,6 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(ObstacleType.BALL_SX, List.of("ballSX.png")),
             Map.entry(ObstacleType.BALL_DX, List.of("ballDX.png")),
             Map.entry(ObstacleType.FIRETREE, List.of("firetree.png")),
-            Map.entry(ObstacleType.FIRE, List.of("fire0.png", "fire1.png")),
             Map.entry(ObstacleType.MONSTER_SX, List.of("monsterSX0.png", "monsterSX1.png", "monsterSX2.png")),
             Map.entry(ObstacleType.MONSTER_DX, List.of("monsterDX0.png", "monsterDX1.png", "monsterDX2.png")),
             Map.entry(ObstacleType.JET_SX, List.of("jetSX.png")),
