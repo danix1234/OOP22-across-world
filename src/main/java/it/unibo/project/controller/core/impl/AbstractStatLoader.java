@@ -57,12 +57,7 @@ public abstract class AbstractStatLoader extends AbstractLoader {
 
     @Override
     public final void loadStats() {
-        try {
-            loadStat(getStatFile());
-        } catch (final Exception t) {
-            deleteStatFile();
-            loadStat(getStatFile());
-        }
+        loadStat(getStatFile());
     }
 
     // SAVE operations
