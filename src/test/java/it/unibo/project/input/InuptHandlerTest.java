@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.project.input.api.Action;
-import it.unibo.project.input.api.InputHandler;
 import it.unibo.project.input.impl.SharedInputHandler;
 
 /**

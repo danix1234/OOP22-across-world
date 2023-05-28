@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/** class {@linkplain RandomizeLine} to handle line dependent randomization. */
 public class RandomizeLine {
     private final Map<Integer, Integer> lineRandomValue = new HashMap<>();
     private final Random random = new Random();

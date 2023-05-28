@@ -20,7 +20,7 @@ public final class App {
         SwingUtilities.invokeLater(() -> {
             LauncherImpl.LAUNCHER.start();
             LauncherImpl.LAUNCHER.loadMap();
-            LauncherImpl.LAUNCHER.showWindow();            
+            LauncherImpl.LAUNCHER.showWindow();
         });
     }
 }

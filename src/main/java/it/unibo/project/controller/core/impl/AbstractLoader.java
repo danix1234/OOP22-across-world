@@ -65,9 +65,9 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(CollectableType.POWERUP_IMMORTALITY, List.of("immortality.png")));
     /** all background sprite file names. */
     protected static final Map<BackgroundCellType, List<String>> BACKGROUND_FILES = Map.ofEntries(
-            Map.entry(BackgroundCellType.GRASS, List.of("grass.png")),           
-            Map.entry(BackgroundCellType.RAIL, List.of("rail.png")),           
-            Map.entry(BackgroundCellType.ROAD, List.of("road.png")),           
+            Map.entry(BackgroundCellType.GRASS, List.of("grass.png")),
+            Map.entry(BackgroundCellType.RAIL, List.of("rail.png")),
+            Map.entry(BackgroundCellType.ROAD, List.of("road.png")),
             Map.entry(BackgroundCellType.WATER, List.of("water.png")),
             Map.entry(BackgroundCellType.FINISHLINE, List.of("finishline.png")),
             Map.entry(BackgroundCellType.BICYCLELANE_GRASS, List.of("bicyclelaneGrass.png")),
@@ -87,7 +87,8 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(ObstacleType.SANDCASTLE, List.of("sandcastle.png")),
             Map.entry(ObstacleType.PALM, List.of("palm0.png", "palm1.png")),
             Map.entry(ObstacleType.BEACHUMBRELLA, List.of("beachumbrella.png")),
-            Map.entry(ObstacleType.STARFISH, List.of("starfish0.png", "starfish1.png", "starfish2.png", "starfish3.png")),
+            Map.entry(ObstacleType.STARFISH,
+                    List.of("starfish0.png", "starfish1.png", "starfish2.png", "starfish3.png")),
             Map.entry(ObstacleType.CAR_SX, List.of("carSX0.png", "carSX1.png", "carSX2.png")),
             Map.entry(ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png")),
             Map.entry(ObstacleType.TRAIN_SX, List.of("trainSX.png")),
@@ -125,7 +126,7 @@ public abstract class AbstractLoader implements Loader {
     protected static final String STAT_FILE = "stats.txt";
 
     // LOADED DATA
-    private Vector2D playerPos = new Vector2D(7, 4);
+    private final Vector2D playerPos = new Vector2D(7, 4);
     private Optional<GameStat> gameStat = Optional.empty();
     private Optional<Map<Difficulty, List<Obstacle>>> obstacles = Optional.empty();
     private Optional<Map<Difficulty, List<BackgroundCell>>> backgroundCells = Optional.empty();
@@ -178,8 +179,8 @@ public abstract class AbstractLoader implements Loader {
             LauncherImpl.LAUNCHER.closeWindow();
         }
 
-        // will never be reached!
-        return null;
+        // will never be reached, but compiler doesn't know!
+        return List.of();
     }
 
     // GETTERS

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.Test;
 
 import it.unibo.project.controller.core.api.Difficulty;
@@ -17,7 +19,10 @@ import it.unibo.project.view.impl.GameOverScene;
  * tests for {@linkplain Launcher} class.
  */
 class LauncherTest {
+    private static final int UP_BOUND = 10;
+
     private final Launcher launcher = LauncherImpl.LAUNCHER;
+    private final Random random = new Random();
 
     /**
      * assure scene type setter and getter work.
@@ -65,13 +70,13 @@ class LauncherTest {
         }
 
         assertDoesNotThrow(() -> {
-            this.launcher.convertCellToPixelPos(new Vector2D(1, 0));
-            assertNotNull(this.launcher.convertPixelToCellPos(10.5, 10));
-            this.launcher.getActualPixelX(60.8);
-            this.launcher.getObstaclePixelX(45.3);
+            this.launcher.convertCellToPixelPos(new Vector2D(random.nextInt(UP_BOUND), random.nextInt(UP_BOUND)));
+            assertNotNull(this.launcher.convertPixelToCellPos(random.nextDouble(), random.nextInt(UP_BOUND)));
+            this.launcher.getActualPixelX(random.nextDouble());
+            this.launcher.getObstaclePixelX(random.nextDouble());
         });
 
-        assertDoesNotThrow(() -> this.launcher.movePlayerIfPossible(0, 0));
+        assertDoesNotThrow(() -> this.launcher.movePlayerIfPossible(random.nextInt(UP_BOUND), random.nextInt(UP_BOUND)));
         assertDoesNotThrow(() -> this.launcher.moveDynamicObstacles());
     }
 

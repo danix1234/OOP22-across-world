@@ -59,7 +59,7 @@ public abstract class AbstractStatLoader extends AbstractLoader {
     public final void loadStats() {
         try {
             loadStat(getStatFile());
-        } catch (Throwable t) {
+        } catch (final Exception t) {
             deleteStatFile();
             loadStat(getStatFile());
         }
