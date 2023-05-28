@@ -16,7 +16,7 @@ public class GameStatImpl implements GameStat {
 
     @Override
     public List<Boolean> getUnlockedSkins() {
-        return unlockedSkins;
+        return List.copyOf(unlockedSkins);
     }
 
     @Override

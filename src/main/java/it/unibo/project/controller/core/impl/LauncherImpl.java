@@ -3,6 +3,7 @@ package it.unibo.project.controller.core.impl;
 import java.awt.Toolkit;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.Loader;
@@ -205,8 +206,9 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
+    @SuppressFBWarnings(value = "ICAST") // suppressed false positive
     public Vector2D convertPixelToCellPos(double pixelX, int cellY) {
-        double x = getActualPixelX(pixelX) / CELL_DIM;
+        double x = getActualPixelX(pixelX) / (double) CELL_DIM;
 
         // move cell one right if left side of cell is more then half over the cell
         if (pixelX % CELL_DIM > (CELL_DIM / 2)) {

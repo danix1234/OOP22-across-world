@@ -29,7 +29,7 @@ public class GameWorldImpl implements GameWorld {
 
     @Override
     public List<Obstacle> getObstacles() {
-        return this.obstacleList;
+        return List.copyOf(this.obstacleList);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class GameWorldImpl implements GameWorld {
 
     @Override
     public List<BackgroundCell> getBackgroundCells() {
-        return this.backgroundCellList;
+        return List.copyOf(this.backgroundCellList);
     }
 
     @Override

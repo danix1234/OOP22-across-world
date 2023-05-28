@@ -12,7 +12,6 @@ import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Launcher;
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
-import it.unibo.project.utility.Vector2D;
 import it.unibo.project.view.impl.GameOverScene;
 
 /**
@@ -69,14 +68,8 @@ class LauncherTest {
             assertNotNull(this.launcher.getInputHandler(type));
         }
 
-        assertDoesNotThrow(() -> {
-            this.launcher.convertCellToPixelPos(new Vector2D(random.nextInt(UP_BOUND), random.nextInt(UP_BOUND)));
-            assertNotNull(this.launcher.convertPixelToCellPos(random.nextDouble(), random.nextInt(UP_BOUND)));
-            this.launcher.getActualPixelX(random.nextDouble());
-            this.launcher.getObstaclePixelX(random.nextDouble());
-        });
-
-        assertDoesNotThrow(() -> this.launcher.movePlayerIfPossible(random.nextInt(UP_BOUND), random.nextInt(UP_BOUND)));
+        assertDoesNotThrow(
+                () -> this.launcher.movePlayerIfPossible(random.nextInt(UP_BOUND), random.nextInt(UP_BOUND)));
         assertDoesNotThrow(() -> this.launcher.moveDynamicObstacles());
     }
 

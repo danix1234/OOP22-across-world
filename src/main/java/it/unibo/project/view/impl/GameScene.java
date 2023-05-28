@@ -193,7 +193,7 @@ public class GameScene extends AbstractScene {
         public void actionPerformed(ActionEvent e);
     }
 
-    private class GameAction extends AbstractAction {
+    private static class GameAction extends AbstractAction {
         private final GameActionFunctional gameActionFunctional;
 
         public GameAction(final GameActionFunctional gameActionFunctional) {
