@@ -161,7 +161,7 @@ public final class LauncherImpl implements Launcher {
 
     @Override
     public synchronized Loader getLoader() {
-        return this.loader;
+        return new LoaderImpl();
     }
 
     @Override

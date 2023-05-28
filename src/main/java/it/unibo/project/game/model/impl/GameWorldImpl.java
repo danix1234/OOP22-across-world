@@ -2,6 +2,7 @@ package it.unibo.project.game.model.impl;
 
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.impl.LauncherImpl;
@@ -47,6 +48,8 @@ public class GameWorldImpl implements GameWorld {
         return this.gameLogic;
     }
 
+    // cannot duplicate gameStat, because it store the current statistics
+    @SuppressFBWarnings(value = "EI")
     @Override
     public GameStat getGameStat() {
         return this.gameStat;
@@ -68,7 +71,7 @@ public class GameWorldImpl implements GameWorld {
 
     @Override
     public void removeCollectable(final Collectable toRemove) {
-        if (this.collectableList != null){
+        if (this.collectableList != null) {
             this.collectableList.remove(toRemove);
         }
     }
