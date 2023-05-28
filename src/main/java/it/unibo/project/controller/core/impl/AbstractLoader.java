@@ -65,9 +65,9 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(CollectableType.POWERUP_IMMORTALITY, List.of("immortality.png")));
     /** all background sprite file names. */
     protected static final Map<BackgroundCellType, List<String>> BACKGROUND_FILES = Map.ofEntries(
-            Map.entry(BackgroundCellType.GRASS, List.of("grass.png")),           
-            Map.entry(BackgroundCellType.RAIL, List.of("rail.png")),           
-            Map.entry(BackgroundCellType.ROAD, List.of("road.png")),           
+            Map.entry(BackgroundCellType.GRASS, List.of("grass.png")),
+            Map.entry(BackgroundCellType.RAIL, List.of("rail.png")),
+            Map.entry(BackgroundCellType.ROAD, List.of("road.png")),
             Map.entry(BackgroundCellType.WATER, List.of("water.png")),
             Map.entry(BackgroundCellType.FINISHLINE, List.of("finishline.png")),
             Map.entry(BackgroundCellType.BICYCLELANE_GRASS, List.of("bicyclelaneGrass.png")),
@@ -76,7 +76,8 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(BackgroundCellType.DIRT, List.of("dirt.png")),
             Map.entry(BackgroundCellType.HARDRAIL, List.of("hardrail.png")),
             Map.entry(BackgroundCellType.HARDROAD, List.of("hardroad.png")),
-            Map.entry(BackgroundCellType.LAVA, List.of("lava.png")));
+            Map.entry(BackgroundCellType.LAVA, List.of("lava.png")),
+            Map.entry(BackgroundCellType.FIRE, List.of("fire0.png", "fire1.png")));
     /** all obstacle sprite file names. */
     protected static final Map<ObstacleType, List<String>> OBSTACLE_FILES = Map.ofEntries(
             Map.entry(ObstacleType.BUSH, List.of("bush.png")),
@@ -86,7 +87,8 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(ObstacleType.SANDCASTLE, List.of("sandcastle.png")),
             Map.entry(ObstacleType.PALM, List.of("palm0.png", "palm1.png")),
             Map.entry(ObstacleType.BEACHUMBRELLA, List.of("beachumbrella.png")),
-            Map.entry(ObstacleType.STARFISH, List.of("starfish0.png", "starfish1.png", "starfish2.png", "starfish3.png")),
+            Map.entry(ObstacleType.STARFISH,
+                    List.of("starfish0.png", "starfish1.png", "starfish2.png", "starfish3.png")),
             Map.entry(ObstacleType.CAR_SX, List.of("carSX0.png", "carSX1.png", "carSX2.png")),
             Map.entry(ObstacleType.CAR_DX, List.of("carDX0.png", "carDX1.png", "carDX2.png")),
             Map.entry(ObstacleType.TRAIN_SX, List.of("trainSX.png")),
@@ -107,7 +109,6 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(ObstacleType.BALL_SX, List.of("ballSX.png")),
             Map.entry(ObstacleType.BALL_DX, List.of("ballDX.png")),
             Map.entry(ObstacleType.FIRETREE, List.of("firetree.png")),
-            Map.entry(ObstacleType.FIRE, List.of("fire0.png", "fire1.png")),
             Map.entry(ObstacleType.MONSTER_SX, List.of("monsterSX0.png", "monsterSX1.png", "monsterSX2.png")),
             Map.entry(ObstacleType.MONSTER_DX, List.of("monsterDX0.png", "monsterDX1.png", "monsterDX2.png")),
             Map.entry(ObstacleType.JET_SX, List.of("jetSX.png")),
@@ -178,8 +179,8 @@ public abstract class AbstractLoader implements Loader {
             LauncherImpl.LAUNCHER.closeWindow();
         }
 
-        // will never be reached!
-        return null;
+        // will never be reached, but compiler doesn't know!
+        return List.of();
     }
 
     // GETTERS

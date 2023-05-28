@@ -43,7 +43,7 @@ public class HandlePowerupImpl implements HandlePowerup {
 
     @Override
     public synchronized List<CollectableType> getCurrentPowerUp() {
-        return this.powerupTypeList;
+        return List.copyOf(this.powerupTypeList);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -59,7 +60,7 @@ public abstract class AbstractStatLoader extends AbstractLoader {
     public final void loadStats() {
         try {
             loadStat(getStatFile());
-        } catch (Throwable t) {
+        } catch (final NoSuchElementException | IllegalArgumentException e) {
             deleteStatFile();
             loadStat(getStatFile());
         }

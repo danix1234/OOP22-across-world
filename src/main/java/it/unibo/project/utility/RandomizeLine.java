@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/** class {@linkplain RandomizeLine} to handle line dependent randomization. */
 public class RandomizeLine {
     private final Map<Integer, Integer> lineRandomValue = new HashMap<>();
     private final Random random = new Random();
+    private final Random randomLineWise = new Random();
 
     private void calculateLineRandomValue(final int line) {
         if (!lineRandomValue.containsKey(line)) {
@@ -38,12 +40,13 @@ public class RandomizeLine {
      */
     public double getLineRandomNumber(final double lowerBound, final double upperBound, final int line) {
         calculateLineRandomValue(line);
+        randomLineWise.setSeed(this.lineRandomValue.get(line));
         if (lowerBound > upperBound) {
-            return new Random(this.lineRandomValue.get(line)).nextDouble(upperBound, lowerBound);
+            return randomLineWise.nextDouble(upperBound, lowerBound);
         }
         if (lowerBound == upperBound) {
             return lowerBound;
         }
-        return new Random(this.lineRandomValue.get(line)).nextDouble(lowerBound, upperBound);
+        return randomLineWise.nextDouble(lowerBound, upperBound);
     }
 }

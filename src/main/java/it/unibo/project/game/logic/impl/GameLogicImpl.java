@@ -1,5 +1,6 @@
 package it.unibo.project.game.logic.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.project.game.logic.api.CheckCollision;
 import it.unibo.project.game.logic.api.GameLogic;
 import it.unibo.project.game.logic.api.HandlePowerup;
@@ -9,15 +10,15 @@ import it.unibo.project.game.logic.api.MovementLogic;
  * class {@code GameLogicImpl} implements {@linkplain GameLogic}.
  */
 public class GameLogicImpl implements GameLogic {
-    private final CheckCollision checkCollision = new CheckCollisionImpl();
     private final HandlePowerup handlePowerup = new HandlePowerupImpl();
-    private final MovementLogic movementLogic = new MovementLogicImpl();
 
     @Override
     public final CheckCollision getCollisionChecker() {
-        return this.checkCollision;
+        return new CheckCollisionImpl();
     }
 
+    // cannot duplicate powerupHandler, because it store the current powerups
+    @SuppressFBWarnings(value = "EI")
     @Override
     public final HandlePowerup getPowerupHandler() {
         return this.handlePowerup;
@@ -25,7 +26,7 @@ public class GameLogicImpl implements GameLogic {
 
     @Override
     public final MovementLogic getMovementLogic() {
-        return this.movementLogic;
+        return new MovementLogicImpl();
     }
 
 }

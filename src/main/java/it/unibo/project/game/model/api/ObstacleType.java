@@ -12,8 +12,8 @@ public enum ObstacleType {
     PALM(0, 0, 0, 0, false),
     BEACHUMBRELLA(0, 0, 0, 0, false),
     STARFISH(0, 0, 0, 0, false),
-    CAR_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1, false),
-    CAR_SX(-5, -1, -8, LauncherImpl.ORIZ_CELL + 1, false),
+    CAR_DX(5, 2, 8, LauncherImpl.ORIZ_CELL + 1, false),
+    CAR_SX(-5, -2, -8, LauncherImpl.ORIZ_CELL + 1, false),
     TRAIN_DX(30, 20, 50, LauncherImpl.ORIZ_CELL * 4, false),
     TRAIN_SX(-30, -20, -50, LauncherImpl.ORIZ_CELL * 4, false),
     WAGON_DX(30, 20, 50, LauncherImpl.ORIZ_CELL * 4, false),
@@ -31,13 +31,12 @@ public enum ObstacleType {
     BALL_SX(-5, -1, -8, LauncherImpl.ORIZ_CELL + 1, false),
     BALL_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1, false),
     FIRETREE(0, 0, 0, 0, false),
-    FIRE(0, 0, 0, 0, true),
     ROCK_DX(2, 2, 6, LauncherImpl.ORIZ_CELL + 1, true),
     ROCK_SX(-2, -2, -6, LauncherImpl.ORIZ_CELL + 1, true),
     JET_DX(30, 20, 50, LauncherImpl.ORIZ_CELL * 4, false),
     JET_SX(-30, -20, -50, LauncherImpl.ORIZ_CELL * 4, false),
-    MONSTER_DX(5, 1, 8, LauncherImpl.ORIZ_CELL + 1, false),
-    MONSTER_SX(-5, -1, -8, LauncherImpl.ORIZ_CELL + 1, false);
+    MONSTER_DX(5, 2, 8, LauncherImpl.ORIZ_CELL + 1, false),
+    MONSTER_SX(-5, -2, -8, LauncherImpl.ORIZ_CELL + 1, false);
 
     private final int wrapAroundDim;
     private final double speed;

@@ -12,6 +12,7 @@ public enum BackgroundCellType {
     HARDRAIL,
     DIRT,
     LAVA,
+    FIRE,
     FINISHLINE;
 
 }

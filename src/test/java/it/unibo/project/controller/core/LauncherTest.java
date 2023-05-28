@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.Test;
 
 import it.unibo.project.controller.core.api.Difficulty;
@@ -16,7 +18,10 @@ import it.unibo.project.view.impl.GameOverScene;
  * tests for {@linkplain Launcher} class.
  */
 class LauncherTest {
+    private static final int UP_BOUND = 10;
+
     private final Launcher launcher = LauncherImpl.LAUNCHER;
+    private final Random random = new Random();
 
     /**
      * assure scene type setter and getter work.
@@ -44,31 +49,28 @@ class LauncherTest {
     }
 
     /**
-     * assure entity getter works.
+     * assure all other getters works.
      */
     @Test
-    void testEntity() {
+    void testGetters() {
+        assertDoesNotThrow(() -> this.launcher.loadMap());
         assertNotNull(this.launcher.getPlayer());
         assertNotNull(this.launcher.getObstacles());
         assertNotNull(this.launcher.getBackgroundCells());
         assertNotNull(this.launcher.getCollectables());
-    }
-
-    /**
-     * assure loader getter works.
-     */
-    @Test
-    void testLoader() {
+        assertNotNull(this.launcher.getGameStat());
         assertNotNull(this.launcher.getLoader());
-    }
+        assertNotNull(this.launcher.getHandlePowerup());
+        assertNotNull(this.launcher.getCheckCollision());
 
-    /**
-     * assure input handler getter works.
-     */
-    @Test
-    void testInputHandler() {
+        assertDoesNotThrow(() -> this.launcher.start());
         for (final var type : SceneType.values()) {
             assertNotNull(this.launcher.getInputHandler(type));
         }
+
+        assertDoesNotThrow(
+                () -> this.launcher.movePlayerIfPossible(random.nextInt(UP_BOUND), random.nextInt(UP_BOUND)));
+        assertDoesNotThrow(() -> this.launcher.moveDynamicObstacles());
     }
+
 }
