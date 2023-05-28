@@ -9,13 +9,11 @@ import it.unibo.project.game.logic.api.MovementLogic;
  * class {@code GameLogicImpl} implements {@linkplain GameLogic}.
  */
 public class GameLogicImpl implements GameLogic {
-    private final CheckCollision checkCollision = new CheckCollisionImpl();
     private final HandlePowerup handlePowerup = new HandlePowerupImpl();
-    private final MovementLogic movementLogic = new MovementLogicImpl();
 
     @Override
     public final CheckCollision getCollisionChecker() {
-        return this.checkCollision;
+        return new CheckCollisionImpl();
     }
 
     @Override
@@ -25,7 +23,7 @@ public class GameLogicImpl implements GameLogic {
 
     @Override
     public final MovementLogic getMovementLogic() {
-        return this.movementLogic;
+        return new MovementLogicImpl();
     }
 
 }

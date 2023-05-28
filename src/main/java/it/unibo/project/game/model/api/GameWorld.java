@@ -11,12 +11,13 @@ public interface GameWorld {
 
     List<Collectable> getCollectables();
 
+    void removeCollectable(Collectable toRemove);
+
     List<BackgroundCell> getBackgroundCells();
 
     GameLogic getGameLogic();
 
-    GameStat getGameStat();    
+    GameStat getGameStat();
 
     void loadMap();
 }
-

@@ -34,7 +34,7 @@ public class GameWorldImpl implements GameWorld {
 
     @Override
     public List<Collectable> getCollectables() {
-        return this.collectableList;
+        return List.copyOf(this.collectableList);
     }
 
     @Override
@@ -63,6 +63,13 @@ public class GameWorldImpl implements GameWorld {
         this.player = loader.getPlayerCell(difficulty);
         if (this.gameStat == null) {
             this.gameStat = loader.getGameStat();
+        }
+    }
+
+    @Override
+    public void removeCollectable(final Collectable toRemove) {
+        if (this.collectableList != null){
+            this.collectableList.remove(toRemove);
         }
     }
 
