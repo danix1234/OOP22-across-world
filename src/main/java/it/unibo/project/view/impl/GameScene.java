@@ -180,12 +180,14 @@ public class GameScene extends AbstractScene {
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "move left");
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "move right");
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "move right");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "exit app");
 
         final var inputHandler = getInputHandler(SceneType.GAME);
         actionMap.put("move up", new GameAction(e -> inputHandler.storeAction(Action.MOVE_PLAYER_UP)));
         actionMap.put("move down", new GameAction(e -> inputHandler.storeAction(Action.MOVE_PLAYER_DOWN)));
         actionMap.put("move left", new GameAction(e -> inputHandler.storeAction(Action.MOVE_PLAYER_LEFT)));
         actionMap.put("move right", new GameAction(e -> inputHandler.storeAction(Action.MOVE_PLAYER_RIGHT)));
+        actionMap.put("exit app", new GameAction(e -> inputHandler.executeAction(Action.EXIT_APP)));
     }
 
     @FunctionalInterface
