@@ -21,10 +21,28 @@ public class GameEngineImpl implements GameEngine {
     private static final int MILLI_SEC_IN_NANO_SEC = 1_000_000;
 
     private int playerFrameCounter;
+    private boolean forceStop;
 
     @Override
     public final void start() {
         new Thread(this::engine).start();
+    }
+
+    @Override
+    public final void processInput() {
+        if (this.playerFrameCounter == 0) {
+            LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).executeStoredAction();
+        }
+    }
+
+    @Override
+    public final void updateGame() {
+        LauncherImpl.LAUNCHER.moveDynamicObstacles();
+    }
+
+    @Override
+    public final void render() {
+        LauncherImpl.LAUNCHER.getScene().update();
     }
 
     private void engine() {
@@ -33,8 +51,8 @@ public class GameEngineImpl implements GameEngine {
         double timeLeft;
 
         while (true) {
-            // exit thread if not in game scene
-            if (LauncherImpl.LAUNCHER.getSceneType() != SceneType.GAME) {
+            // exit thread if not in game scene or if forceStop method is called
+            if (isEngineToBeStopped() || LauncherImpl.LAUNCHER.getSceneType() != SceneType.GAME) {
                 return;
             }
 
@@ -59,20 +77,11 @@ public class GameEngineImpl implements GameEngine {
     }
 
     @Override
-    public final void processInput() {
-        if (this.playerFrameCounter == 0) {
-            LauncherImpl.LAUNCHER.getInputHandler(SceneType.GAME).executeStoredAction();
-        }
+    public final synchronized void forceStop() {
+        this.forceStop = true;
     }
 
-    @Override
-    public final void updateGame() {
-        LauncherImpl.LAUNCHER.moveDynamicObstacles();
+    private synchronized boolean isEngineToBeStopped() {
+        return this.forceStop;
     }
-
-    @Override
-    public final void render() {
-        LauncherImpl.LAUNCHER.getScene().update();
-    }
-
 }

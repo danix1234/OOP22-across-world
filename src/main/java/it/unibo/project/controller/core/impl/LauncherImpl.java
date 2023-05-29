@@ -131,6 +131,7 @@ public final class LauncherImpl implements Launcher {
 
     @Override
     public synchronized void closeWindow() {
+        this.gameEngine.forceStop();
         this.window.close();
     }
 

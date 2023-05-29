@@ -24,4 +24,9 @@ public interface GameEngine {
      * redraw window.
      */
     void render();
+
+    /**
+     * force stop game engine.
+     */
+    void forceStop();
 }
