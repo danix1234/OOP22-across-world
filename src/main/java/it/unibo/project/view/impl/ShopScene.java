@@ -241,7 +241,6 @@ public class ShopScene extends AbstractScene {
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
     }
 }
 
