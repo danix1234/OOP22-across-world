@@ -1,4 +1,4 @@
-package it.unibo.project.view.api;
+package it.unibo.project.view.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,8 @@ import it.unibo.project.input.impl.GameInputHandler;
 import it.unibo.project.input.impl.GameOverInputHandler;
 import it.unibo.project.input.impl.MenuInputHandler;
 import it.unibo.project.input.impl.ShopInputHandler;
+import it.unibo.project.input.impl.VictoryInputHandler;
+import it.unibo.project.view.api.Scene;
 
 /**
  * class {@code AbstractScene} for respecting {@code D.R.Y.} principle and
@@ -29,6 +31,7 @@ public abstract class AbstractScene implements Scene {
         this.inputHandlers.put(SceneType.SHOP, new ShopInputHandler());
         this.inputHandlers.put(SceneType.GAME, new GameInputHandler());
         this.inputHandlers.put(SceneType.OVER, new GameOverInputHandler());
+        this.inputHandlers.put(SceneType.VICTORY, new VictoryInputHandler());
     }
 
     @Override

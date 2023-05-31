@@ -5,7 +5,6 @@ import javax.swing.*;
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
-import it.unibo.project.view.api.AbstractScene;
 import it.unibo.project.input.api.Action;
 import java.awt.*;
 import java.awt.event.*;

@@ -23,7 +23,6 @@ import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.utility.RandomizeLine;
 import it.unibo.project.utility.Vector2D;
-import it.unibo.project.view.api.AbstractScene;
 
 /**
  * Class {@code GameScene} takes care of rendering all entities on window.
