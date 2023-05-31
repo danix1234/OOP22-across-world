@@ -13,7 +13,10 @@ import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.utility.Vector2D;
 
-public class CheckCollisionImpl implements CheckCollision {
+/**
+ * Class {@code CheckCollisionImpl}, implements {@link CheckCollision}.
+ */
+public final class CheckCollisionImpl implements CheckCollision {
 
     @Override
     public List<Collectable> checkCollectableCollision(final Vector2D playerPos) {
