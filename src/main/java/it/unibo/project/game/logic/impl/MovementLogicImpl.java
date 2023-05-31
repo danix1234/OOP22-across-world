@@ -10,7 +10,10 @@ import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.utility.RandomizeLine;
 import it.unibo.project.utility.Vector2D;
 
-public class MovementLogicImpl implements MovementLogic {
+/**
+ * Class {@code MovementLogicImpl}, implements {@link MovementLogic}.
+ */
+public final class MovementLogicImpl implements MovementLogic {
     private final RandomizeLine randomizeLine = new RandomizeLine();
     private double speedMultiplier = 1.0;
 
@@ -20,6 +23,7 @@ public class MovementLogicImpl implements MovementLogic {
         final HandlePowerup powerupHandler = LauncherImpl.LAUNCHER.getHandlePowerup();
         final Vector2D nextPlayerPosition = new Vector2D(x, y);
         final var checkDynamicCollision = checker.checkDynamicObstacleCollision(nextPlayerPosition);
+        final int coinMultipliedValue = 5;
 
         if (checkDynamicCollision.isPresent() // se è sul tronco e non c'è collisione col muro entra
                 && checkDynamicCollision.map(obstacle -> obstacle.getType()).get().isWalkableOn()
@@ -38,7 +42,7 @@ public class MovementLogicImpl implements MovementLogic {
                                         .stream()
                                         .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MULTIPLIER))
                                         .findAny()
-                                        .isPresent() ? 5 : 1);
+                                        .isPresent() ? coinMultipliedValue : 1);
                         break;
                     default:
                         LauncherImpl.LAUNCHER.removeCollectable(collectable);
