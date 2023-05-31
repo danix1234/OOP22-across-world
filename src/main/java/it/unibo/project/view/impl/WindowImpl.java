@@ -27,7 +27,7 @@ public final class WindowImpl implements Window {
     }
 
     @Override
-    public final void setScene(final Scene scene) {
+    public void setScene(final Scene scene) {
         Objects.requireNonNull(scene);
         Optional.ofNullable(this.scene).ifPresent(oldScene -> this.frame.remove(oldScene.getPanel()));
         this.scene = scene;
@@ -36,12 +36,12 @@ public final class WindowImpl implements Window {
     }
 
     @Override
-    public final Scene getScene() {
+    public Scene getScene() {
         return Optional.ofNullable(this.scene).orElseThrow();
     }
 
     @Override
-    public final void close() {
+    public void close() {
         this.frame.dispose();
     }
 
