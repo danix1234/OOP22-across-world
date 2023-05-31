@@ -5,9 +5,12 @@ import java.util.List;
 
 import it.unibo.project.game.model.api.GameStat;
 
-public class GameStatImpl implements GameStat {
-    int coins;
-    List<Boolean> unlockedSkins = new ArrayList<>();
+/**
+ * Class {@code GameStatImpl}, implements {@link GameStat}.
+ */
+public final class GameStatImpl implements GameStat {
+    private int coins;
+    private List<Boolean> unlockedSkins = new ArrayList<>();
 
     @Override
     public int getCoins() {
