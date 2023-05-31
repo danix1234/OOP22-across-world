@@ -13,20 +13,14 @@ public class ShopInputHandler implements InputHandler {
 
     @Override
     public void storeAction(final Action action) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'storeAction'");
     }
 
     @Override
     public void executeStoredAction() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'executeStoredAction'");
     }
 
     @Override
     public void clearStoredAction() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clearStoredAction'");
     }
 
 }
