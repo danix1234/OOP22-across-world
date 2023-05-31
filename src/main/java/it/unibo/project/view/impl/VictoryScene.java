@@ -2,8 +2,6 @@ package it.unibo.project.view.impl;
 
 import it.unibo.project.input.api.Action;
 import it.unibo.project.controller.core.api.SceneType;
-import it.unibo.project.controller.core.impl.LauncherImpl;
-import it.unibo.project.controller.core.api.Launcher;
 
 import javax.swing.*;
 import java.awt.*;
