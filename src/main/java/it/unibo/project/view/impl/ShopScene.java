@@ -14,12 +14,14 @@ import java.awt.event.*;
 //import java.util.Arrays;
 import java.util.List;
 //import java.util.ArrayList;
+import java.util.Random;
 
 
 public class ShopScene extends AbstractScene {
     private final Launcher launcher = LauncherImpl.LAUNCHER;
     //private final Loader loader = new LoaderImpl();
     //private List<String> skin = List.of("player0.png", "player1.png","player2.png");
+    private Random random = new Random();
     private JPanel panel;
     private JButton exitButton;
     private JLabel titleLabel;
@@ -191,7 +193,8 @@ public class ShopScene extends AbstractScene {
     }
 
     private void purchaseRandomSkin() {
-        int randomSkin = (int) (Math.random() * 3) + 1;
+        //Random random = new Random();
+        int randomSkin = random.nextInt(3) + 1;
         if (isSkinPurchased(randomSkin)) {
             showMessage("Skin " + randomSkin + " già acquistata!");
         } else {
@@ -226,6 +229,8 @@ public class ShopScene extends AbstractScene {
                 skin3Purchased = true;
                 skin3Button.setEnabled(false);
                 break;
+            default:
+            break;
         }
     }
 

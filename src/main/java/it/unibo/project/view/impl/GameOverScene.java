@@ -23,7 +23,7 @@ public class GameOverScene extends AbstractScene {
         // creazione del titolo del gioco
         titleLabel = new JLabel("GAME OVER!");
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 100));
         titleLabel.setBounds(0, 10, panel.getWidth(), 50);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
