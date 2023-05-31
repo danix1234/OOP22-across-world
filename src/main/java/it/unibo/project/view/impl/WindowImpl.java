@@ -12,7 +12,7 @@ import java.awt.Toolkit;
 /**
  * class {@code WindowImpl}, implements {@linkplain Window}.
  */
-public class WindowImpl implements Window {
+public final class WindowImpl implements Window {
     private final JFrame frame = new JFrame("Across the world");
     private Scene scene;
 
