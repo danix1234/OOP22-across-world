@@ -35,6 +35,9 @@ public class SharedInputHandler implements InputHandler {
             case CHANGE_SCENE_TO_OVER:
                 LauncherImpl.LAUNCHER.setScene(SceneType.OVER);
                 break;
+            case CHANGE_SCENE_TO_VICTORY:
+                LauncherImpl.LAUNCHER.setScene(SceneType.VICTORY);
+                break;
             default:
                 break;
         }

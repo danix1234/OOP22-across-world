@@ -11,6 +11,7 @@ public class GameInputHandler implements InputHandler {
 
     @Override
     public void executeAction(final Action action) {
+        // to be changed if some action aren't already handled in SharedInputHandler
         new SharedInputHandler().executeAction(action);
     }
 
