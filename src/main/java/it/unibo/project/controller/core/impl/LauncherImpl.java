@@ -242,4 +242,11 @@ public final class LauncherImpl implements Launcher {
     public HandlePowerup getHandlePowerup() {
         return this.gameWorld.getGameLogic().getPowerupHandler();
     }
+
+    @Override
+    public void removeCollectable(Collectable collectable) {
+        gameWorld.removeCollectable(collectable);
+    }
+
+    
 }

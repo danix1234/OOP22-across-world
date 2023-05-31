@@ -32,7 +32,7 @@ public class MovementLogicImpl implements MovementLogic {
             checker.checkCollectableCollision(nextPlayerPosition).stream().forEach(collectable -> {
                 switch (collectable.getType()) {
                     case COIN:
-                        LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
+                        LauncherImpl.LAUNCHER.removeCollectable(collectable);
                         LauncherImpl.LAUNCHER.getGameStat()
                                 .addCoins(powerupHandler.getCurrentPowerUp()
                                         .stream()
@@ -41,9 +41,8 @@ public class MovementLogicImpl implements MovementLogic {
                                         .isPresent() ? 5 : 1);
                         break;
                     default:
-                        LauncherImpl.LAUNCHER.getCollectables().remove(collectable);
+                        LauncherImpl.LAUNCHER.removeCollectable(collectable);
                         powerupHandler.addPowerUp(collectable.getType());
-                        // powerupHandler.addPowerUp(CollectableType.POWERUP_IMMORTALITY);
                 }
             });
             LauncherImpl.LAUNCHER.getPlayer().move(x, y);

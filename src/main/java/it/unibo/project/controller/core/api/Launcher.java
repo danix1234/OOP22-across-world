@@ -144,6 +144,12 @@ public interface Launcher {
      */
     void moveDynamicObstacles();
 
+    /**
+     * call the remove method from gameWorld to remove the given collectable.
+     * @param collectable to remove from the collectableList
+     */
+    void removeCollectable(Collectable collectable);
+
     // CONTROLLER methods
     /**
      * starts the application.
