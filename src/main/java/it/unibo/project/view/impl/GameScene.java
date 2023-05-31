@@ -108,6 +108,24 @@ public class GameScene extends AbstractScene {
             super.paintComponent(g);
 
             final var player = launcher.getPlayer();
+            final float fontSpec = 30.0F;
+            final int playerImageX1 = 10;
+            final int playerImageY1 = 10;
+            final int playerImageX2 = 40;
+            final int playerImageY2 = 40;
+            final int scoreStringX = 50;
+            final int scoreStringY = 40;
+            final int collectablesImageX1 = 10;
+            final int collectablesImageY1 = 60;
+            final int collectablesImageX2 = 40;
+            final int collectablesImageY2 = 40;
+            final int coinCollectedX = 50;
+            final int coinCollectedY = 90;
+            final int collectableLogoCollectedX1 = 10;
+            final int collectableLogoCollectedY1 = 110;
+            final int collectableLogoCollectedX2 = 40;
+            final int collectableLogoCollectedY2 = 40;
+            final int pixelSpacing = 40;
 
             launcher.getBackgroundCells().stream()
                     .forEach(cell -> drawCell(
@@ -152,14 +170,17 @@ public class GameScene extends AbstractScene {
                 drawCell(playerSprite, player.getPosition(), g);
             }
 
-            g.setFont(getFont().deriveFont(30.0F));
-            g.drawImage(playerSprite, 10, 10, 40, 40, null);
-            g.drawString(player.getMaxDistance() - 4 + "", 50, 40);
-            g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), 10, 60, 40, 40, null);
-            g.drawString(launcher.getGameStat().getCoins() + "", 50, 90);
+            g.setFont(getFont().deriveFont(fontSpec));
+            g.drawImage(playerSprite, playerImageX1, playerImageY1, playerImageX2, playerImageY2, null);
+            g.drawString(player.getMaxDistance() - 4 + "", scoreStringX, scoreStringY);
+            g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), collectablesImageX1,
+                    collectablesImageY1, collectablesImageX2, collectablesImageY2, null);
+            g.drawString(launcher.getGameStat().getCoins() + "", coinCollectedX, coinCollectedY);
             final var collectables = launcher.getHandlePowerup().getCurrentPowerUp().stream().distinct().toList();
             for (int i = 0; i < collectables.size(); i++) {
-                g.drawImage(loader.getCollectablesSprites(collectables.get(i)).get(0), 10 + 40 * i, 110, 40, 40, null);
+                g.drawImage(loader.getCollectablesSprites(collectables.get(i)).get(0),
+                        collectableLogoCollectedX1 + pixelSpacing * i, collectableLogoCollectedY1,
+                        collectableLogoCollectedX2, collectableLogoCollectedY2, null);
             }
 
             // needed because repaint method is draw on screen only when java swing wants
@@ -191,18 +212,18 @@ public class GameScene extends AbstractScene {
 
     @FunctionalInterface
     private interface GameActionFunctional {
-        public void actionPerformed(ActionEvent e);
+        void actionPerformed(ActionEvent e);
     }
 
     private static class GameAction extends AbstractAction {
         private final GameActionFunctional gameActionFunctional;
 
-        public GameAction(final GameActionFunctional gameActionFunctional) {
+        GameAction(final GameActionFunctional gameActionFunctional) {
             this.gameActionFunctional = gameActionFunctional;
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
             this.gameActionFunctional.actionPerformed(e);
         }
 
