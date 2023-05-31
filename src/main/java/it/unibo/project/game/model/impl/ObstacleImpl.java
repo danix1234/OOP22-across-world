@@ -19,7 +19,7 @@ public final class ObstacleImpl extends EntityImpl implements Obstacle {
      * the given param.
      * 
      * @param initialPos Vector2D that contains the initial position to give to the obstacle
-     * @param type ObstacleType that contains the type to attribute to the object
+     * @param type ObstacleType that contains the type to attribute to the obstacle
      */
     public ObstacleImpl(final Vector2D initialPos, final ObstacleType type) {
         super(initialPos, type.isMoveable());
