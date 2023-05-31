@@ -23,7 +23,6 @@ public interface Obstacle extends Entity {
      * Called for move the pixel position of the relative obstacle.
      * 
      * @param x represent the new x of new position.
-     * @param y represent the new y of new position.
      */
     void movePixelPosition(double x);
 
