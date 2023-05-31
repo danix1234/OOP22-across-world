@@ -202,7 +202,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public double convertCellToPixelPos(Vector2D cellPos) {
+    public double convertCellToPixelPos(final Vector2D cellPos) {
         return getObstaclePixelX(cellPos.getX() * CELL_DIM);
     }
 
@@ -244,9 +244,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    public void removeCollectable(Collectable collectable) {
+    public void removeCollectable(final Collectable collectable) {
         gameWorld.removeCollectable(collectable);
     }
-
-    
 }
