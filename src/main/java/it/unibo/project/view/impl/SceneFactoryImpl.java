@@ -16,6 +16,7 @@ public class SceneFactoryImpl implements SceneFactory {
             case OVER -> new GameOverScene();
             case MENU -> new MenuScene();
             case SHOP -> new ShopScene();
+            case VICTORY -> new VictoryScene();
         };
     }
 }

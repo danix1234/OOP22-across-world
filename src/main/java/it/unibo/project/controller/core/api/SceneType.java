@@ -20,4 +20,8 @@ public enum SceneType {
      * game over scene.
      */
     OVER,
+    /**
+     * victory scene.
+     */
+    VICTORY,
 }
