@@ -15,7 +15,10 @@ import it.unibo.project.game.model.api.GameWorld;
 import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.Player;
 
-public class GameWorldImpl implements GameWorld {
+/**
+ * Class {@code GameWorldImpl}, implements {@link GameWorld}.
+ */
+public final class GameWorldImpl implements GameWorld {
     private Player player;
     private GameStat gameStat;
     private List<Obstacle> obstacleList;
