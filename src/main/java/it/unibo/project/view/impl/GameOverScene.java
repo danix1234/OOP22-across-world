@@ -30,7 +30,7 @@ public class GameOverScene extends AbstractScene {
         // creazione dei pulsanti del menu
         tryAgainButton = new JButton("RESTART");
         backToMenu = new JButton("BACK TO MENU");
-        exitButton = new JButton("EXIT");
+        exitButton = new JButton("SAVE AND EXIT");
 
         //effetto testo evidenziato rimosso
         tryAgainButton.setFocusPainted(false);
