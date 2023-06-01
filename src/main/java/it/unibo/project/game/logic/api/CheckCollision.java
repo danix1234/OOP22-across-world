@@ -8,17 +8,66 @@ import it.unibo.project.game.model.api.Obstacle;
 import it.unibo.project.game.model.api.ObstacleType;
 import it.unibo.project.utility.Vector2D;
 
+/**
+ * Interface {@code CheckCollision}, contains methods to check all possible
+ * collisions between entities.
+ */
 public interface CheckCollision {
-    List<Collectable> checkCollectableCollision(Vector2D playerPos); // true -> coin or powerup collected
-    
-    Optional<ObstacleType> checkStaticObstacleCollision(Vector2D playerPos); // Optional not empty -> can't move in that direction
+    /**
+     * called to check if there is a collectable in the position that the player
+     * wants to go.
+     * 
+     * @param playerPos next player position (where he wants to go)
+     * @return List<Collectable> that contains collectables collected from player
+     *         movement
+     */
+    List<Collectable> checkCollectableCollision(Vector2D playerPos);
 
-    // !! REMEMBER TO HANDLE THE CASE OF COLLISION WITH TRUNK!!
-    Optional<Obstacle> checkDynamicObstacleCollision(Vector2D playerPos); // list not empty -> you lose (unless you hit water & trunk)
+    /**
+     * called to check if there is a static obstacle in the position that the player
+     * wants to go.
+     * 
+     * @param playerPos next player position (where he wants to go)
+     * @return Optional<ObstacleType> if valued contains the obstacle type that
+     *         coincides with the playerPos
+     */
+    Optional<ObstacleType> checkStaticObstacleCollision(Vector2D playerPos);
 
-    boolean checkFinishLineCollision(Vector2D playerPos); // true -> you win
+    /**
+     * called to check if there is a dynamic obstacle in the position that the
+     * player wants to go.
+     * 
+     * @param playerPos next player position (where he wants to go)
+     * @return Optional<Obstacle> if valued contains the obstacle that player will
+     *         collides in position playerPos
+     */
+    Optional<Obstacle> checkDynamicObstacleCollision(Vector2D playerPos);
 
-    boolean checkWallCollision(Vector2D playerPos); // true -> can't move in that direction
+    /**
+     * called to check if there is the finish line in the position that the player
+     * wants to go.
+     * 
+     * @param playerPos next player position (where he wants to go)
+     * @return boolean that is set to true if collision is detected
+     */
+    boolean checkFinishLineCollision(Vector2D playerPos);
 
+    /**
+     * called to check if there is the border of screen (wall) in the position that
+     * the player wants to go.
+     * 
+     * @param playerPos next player position (where he wants to go)
+     * @return boolean that is set to true if collision is detected
+     */
+    boolean checkWallCollision(Vector2D playerPos);
+
+    /**
+     * called to check if there is a trunk in the position that the player wants to
+     * go.
+     * 
+     * @param playerPos next player position (where he wants to go)
+     * @return Optional<Obstacle> if valued contains the obstacle (in that case
+     *         trunk) that player will collides in position playerPos
+     */
     Optional<Obstacle> checkTrunkCollision(Vector2D playerPos);
 }
