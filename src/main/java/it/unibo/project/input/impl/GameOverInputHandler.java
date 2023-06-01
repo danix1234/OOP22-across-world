@@ -3,7 +3,7 @@ package it.unibo.project.input.impl;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.input.api.InputHandler;
 
-public class GameOverInputHandler implements InputHandler {
+public final class GameOverInputHandler implements InputHandler {
 
     @Override
     public void executeAction(final Action action) {
