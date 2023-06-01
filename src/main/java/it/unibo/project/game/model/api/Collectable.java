@@ -1,7 +1,7 @@
 package it.unibo.project.game.model.api;
 
 /**
- * Class {@code Collectable}, contain the get type of an collectavle.
+ * Interface {@code Collectable}, contain the get type of an collectavle.
  * 
  */
 public interface Collectable extends Entity {

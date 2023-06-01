@@ -9,5 +9,5 @@ public interface MovementLogic {
     // need to change location inside the obstacle object
     void moveObstacle();
 
-    void setSpeedMultiplier(double value);    
+    void setSpeedMultiplier(double value);
 }

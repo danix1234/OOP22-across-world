@@ -3,7 +3,7 @@ package it.unibo.project.game.model.api;
 import it.unibo.project.utility.Vector2D;
 
 /**
- * Class {@code Entity}, contain the position method for the entities.
+ * Interface {@code Entity}, contain the position method for the entities.
  * 
  */
 public interface Entity {

@@ -1,7 +1,7 @@
 package it.unibo.project.game.model.api;
 
 /**
- * Class {@code Obstacle}, contain the type and the position method for the
+ * Interface {@code Obstacle}, contain the type and the position method for the
  * obstacle.
  */
 public interface Obstacle extends Entity {

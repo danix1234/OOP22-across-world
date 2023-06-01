@@ -1,7 +1,7 @@
 package it.unibo.project.game.model.api;
 
 /**
- * Class {@code BackgroundCell}, contain the get type of a background cell.
+ * Interface {@code BackgroundCell}, contain the get type of a background cell.
  * 
  */
 public interface BackgroundCell extends Entity {

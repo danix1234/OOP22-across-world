@@ -1,7 +1,7 @@
 package it.unibo.project.game.model.api;
 
 /**
- * Class {@code Player}, contain the get max distance method that the player has reached.
+ * Interface {@code Player}, contain the get max distance method that the player has reached.
  * 
  */
 public interface Player extends Entity {

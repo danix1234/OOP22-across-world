@@ -42,7 +42,7 @@ public final class MovementLogicImpl implements MovementLogic {
                                         .stream()
                                         .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MULTIPLIER))
                                         .findAny()
-                                        .isPresent() ? coinMultipliedValue : 1);
+                                        .isPresent() ? coinMultipliedValue : collectable.getType().getCoinValue().get());
                         break;
                     default:
                         LauncherImpl.LAUNCHER.removeCollectable(collectable);

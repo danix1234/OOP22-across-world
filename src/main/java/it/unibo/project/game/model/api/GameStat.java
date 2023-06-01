@@ -3,7 +3,7 @@ package it.unibo.project.game.model.api;
 import java.util.List;
 
 /**
- * Class {@code GameStat}, contain the number of coin, the list of skins and the metods to modify them.
+ * Interface {@code GameStat}, contain the number of coin, the list of skins and the metods to modify them.
  * 
  */
 public interface GameStat {
