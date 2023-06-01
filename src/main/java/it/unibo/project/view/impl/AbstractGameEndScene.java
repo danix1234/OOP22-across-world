@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import it.unibo.project.controller.core.api.SceneType;
+import it.unibo.project.input.api.Action;
+
 public abstract class AbstractGameEndScene extends AbstractScene {
     private JPanel panel;
     private JButton tryAgainButton;
@@ -19,7 +22,7 @@ public abstract class AbstractGameEndScene extends AbstractScene {
     private JButton exitButton;
     private JLabel titleLabel;
 
-    protected AbstractGameEndScene(String title) {
+    protected AbstractGameEndScene(String title, Action tryAgainAction, Action backToMenuAction, Action exitButtonAction, SceneType type) {
 
 
         // pannello principale
@@ -76,7 +79,10 @@ public abstract class AbstractGameEndScene extends AbstractScene {
         gbc.gridy = 3;
         this.panel.add(exitButton, gbc);
 
-        
+        tryAgainButton.addActionListener(((e) -> getInputHandler(type).executeAction(tryAgainAction)));
+        backToMenu.addActionListener(((e) -> getInputHandler(type).executeAction(backToMenuAction)));
+        exitButton.addActionListener(((e) -> getInputHandler(type).executeAction(exitButtonAction)));
+
 
         setPanel(this.panel);
     }
