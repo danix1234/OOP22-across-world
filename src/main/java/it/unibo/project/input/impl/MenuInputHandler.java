@@ -3,7 +3,7 @@ package it.unibo.project.input.impl;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.input.api.InputHandler;
 
-public class MenuInputHandler implements InputHandler {
+public final class MenuInputHandler implements InputHandler {
 
     @Override
     public void executeAction(final Action action) {
