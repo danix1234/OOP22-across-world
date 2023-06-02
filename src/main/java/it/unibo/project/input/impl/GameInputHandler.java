@@ -6,6 +6,7 @@ import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.input.api.InputHandler;
 
+/** {@linkplain InputHandler} for {@code GameScene}. */
 public final class GameInputHandler implements InputHandler {
     private Optional<Action> storedAction = Optional.empty();
 

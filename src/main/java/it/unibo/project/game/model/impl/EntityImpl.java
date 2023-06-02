@@ -34,6 +34,9 @@ public class EntityImpl implements Entity {
         return this.movable;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void move(final int x, final int y) {
         if (movable) {

@@ -15,7 +15,7 @@ import it.unibo.project.game.model.api.CollectableType;
  */
 public final class HandlePowerupImpl implements HandlePowerup {
     private static final int POWERUP_DURATION = 10_000;
-    
+
     private final List<CollectableType> powerupTypeList = new LinkedList<>();
     private long counter = Long.MIN_VALUE;
 
