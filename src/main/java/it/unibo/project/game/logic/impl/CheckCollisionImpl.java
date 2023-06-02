@@ -27,12 +27,11 @@ public final class CheckCollisionImpl implements CheckCollision {
             checkCoinLessDistantThen(1, collectables, playerPos);
         }
         LauncherImpl.LAUNCHER.getCollectables().stream()
-                .filter(collectable -> LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
+                .filter(collectable -> !LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
                         .stream()
                         .filter(powerup -> powerup.equals(CollectableType.POWERUP_COIN_MAGNET))
                         .findAny().isPresent()
-                                ? collectable.getType().isPowerUp()
-                                : true)
+                        || collectable.getType().isPowerUp())
                 .filter(collectable -> collectable.getPosition()
                         .equals(playerPos))
                 .findFirst()
@@ -88,7 +87,7 @@ public final class CheckCollisionImpl implements CheckCollision {
             return checkTrunkCollision(playerPos);
         }
         if (LauncherImpl.LAUNCHER.getHandlePowerup().getCurrentPowerUp()
-        .stream()
+                .stream()
                 .filter(b -> b.equals(CollectableType.POWERUP_IMMORTALITY))
                 .findAny().isEmpty()) {
             return LauncherImpl.LAUNCHER.getObstacles().stream()
