@@ -13,24 +13,26 @@ import it.unibo.project.utility.Vector2D;
 /**
  * tests for {@linkplain EntityTest} class.
  */
-public class EntityTest {
+class EntityTest {
     /**
-     * assure that entity methods works
+     * assure that entity methods works.
      */
     @Test
     void entityTest() {
-        Entity staticEntity = new EntityImpl(new Vector2D(2, 6), false);
-        Entity movableEntity = new EntityImpl(new Vector2D(0, 8), true);
+        final Vector2D pos1 = new Vector2D(2, 6);
+        final Vector2D pos2 = new Vector2D(0, 8);
+        final Entity staticEntity = new EntityImpl(pos1, false);
+        final Entity movableEntity = new EntityImpl(pos2, true);
 
         assertFalse(staticEntity.isMovable());
         assertTrue(movableEntity.isMovable());
-        assertEquals(staticEntity.getPosition(), new Vector2D(2, 6));
-        assertEquals(movableEntity.getPosition(), new Vector2D(0, 8));
-        staticEntity.move(2, 7);
-        assertTrue(staticEntity.getPosition().equals(new Vector2D(2, 6))); // rimasta posizione originaria (non può
-                                                                           // muoversi)
-        movableEntity.move(1, 8);
-        assertTrue(movableEntity.getPosition().equals(new Vector2D(1, 8))); // posizione corrente aggiornata (movimento
-                                                                            // avvenuto correttamente)
+        assertEquals(staticEntity.getPosition(), pos1);
+        assertEquals(movableEntity.getPosition(), pos2);
+
+        staticEntity.move(pos1.getX(), pos1.getY() + 1);
+        assertEquals(staticEntity.getPosition(), pos1);
+
+        movableEntity.move(pos2.getX() + 1, pos2.getY());
+        assertEquals(movableEntity.getPosition(), new Vector2D(pos2.getX() + 1, pos2.getY()));
     }
 }
