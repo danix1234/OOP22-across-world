@@ -14,12 +14,13 @@ import it.unibo.project.game.model.api.CollectableType;
  * class {@code HandlePowerupImpl} implements {@linkplain HandlePowerup}.
  */
 public final class HandlePowerupImpl implements HandlePowerup {
+    private static final int POWERUP_DURATION = 10_000;
+    
     private final List<CollectableType> powerupTypeList = new LinkedList<>();
     private long counter = Long.MIN_VALUE;
 
     @Override
     public synchronized void addPowerUp(final CollectableType type) {
-        int timeToSleep = 10_000;
         this.powerupTypeList.add(type);
         final TimerTask timerPowerUp = new TimerTask() {
 
@@ -27,7 +28,7 @@ public final class HandlePowerupImpl implements HandlePowerup {
             public void run() {
                 try {
                     final long clearId = getCounter();
-                    Thread.sleep(timeToSleep);
+                    Thread.sleep(POWERUP_DURATION);
                     SwingUtilities.invokeLater(() -> {
                         if (clearId == getCounter() && !powerupTypeList.isEmpty()) {
                             powerupTypeList.remove(0);

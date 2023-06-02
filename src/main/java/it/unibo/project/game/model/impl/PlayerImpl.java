@@ -8,7 +8,7 @@ import it.unibo.project.utility.Vector2D;
  * extends {@link EntityImpl} and implements {@link Player}
  */
 public final class PlayerImpl extends EntityImpl implements Player {
-    private int maxDistance = 0;
+    private int maxDistance;
 
     /**
     * constructor of PlayerImpl, set the initial player postition with the value of

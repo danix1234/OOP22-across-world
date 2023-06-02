@@ -18,7 +18,7 @@ public class GameLogicImpl implements GameLogic {
     }
 
     // cannot duplicate powerupHandler, because it store the current powerups
-    @SuppressFBWarnings(value = "EI")
+    @SuppressFBWarnings("EI")
     @Override
     public final HandlePowerup getPowerupHandler() {
         return this.handlePowerup;

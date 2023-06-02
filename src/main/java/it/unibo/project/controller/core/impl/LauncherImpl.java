@@ -207,7 +207,7 @@ public final class LauncherImpl implements Launcher {
     }
 
     @Override
-    @SuppressFBWarnings(value = "ICAST") // suppressed false positive
+    @SuppressFBWarnings("ICAST") // suppressed false positive
     public Vector2D convertPixelToCellPos(final double pixelX, final int cellY) {
         double x = getActualPixelX(pixelX) / (double) CELL_DIM;
 

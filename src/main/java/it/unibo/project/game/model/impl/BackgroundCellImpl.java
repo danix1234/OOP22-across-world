@@ -9,7 +9,7 @@ import it.unibo.project.utility.Vector2D;
  * extends {@link EntityImpl} and implements {@link BackgroundCell}
  */
 public final class BackgroundCellImpl extends EntityImpl implements BackgroundCell {
-    private BackgroundCellType type;
+    private final BackgroundCellType type;
 
     /**
      * constructor of BackgroundCellImpl, set the initial postition and type of the background cell with the value of

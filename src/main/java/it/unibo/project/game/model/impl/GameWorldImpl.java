@@ -52,7 +52,7 @@ public final class GameWorldImpl implements GameWorld {
     }
 
     // cannot duplicate gameStat, because it store the current statistics
-    @SuppressFBWarnings(value = "EI")
+    @SuppressFBWarnings("EI")
     @Override
     public GameStat getGameStat() {
         return this.gameStat;
