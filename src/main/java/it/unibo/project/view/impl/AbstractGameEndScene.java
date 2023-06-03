@@ -33,7 +33,7 @@ public abstract class AbstractGameEndScene extends AbstractScene {
     protected AbstractGameEndScene(final String title, final Action tryAgainAction, 
     final Action backToMenuAction, final Action exitButtonAction, final SceneType type) {
 
-        // pannello principa
+        // pannello principale
         this.panel = new JPanel(new GridBagLayout());
         this.panel.setLayout(new GridBagLayout());
         this.panel.setBackground(new Color(BACKGROUND_RED, BACKGROUND_GREEN, BACKGROUND_BLUE));
