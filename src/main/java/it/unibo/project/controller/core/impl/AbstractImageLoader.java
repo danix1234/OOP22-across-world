@@ -22,7 +22,7 @@ public abstract class AbstractImageLoader extends AbstractMapLoader {
         try {
             return ImageIO.read(ClassLoader.getSystemResourceAsStream(path));
         } catch (IOException e) {
-            throw new IllegalStateException();
+            throw new IllegalStateException(e);
         }
     }
 

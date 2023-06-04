@@ -23,7 +23,7 @@ public abstract class AbstractStatLoader extends AbstractLoader {
             try {
                 return Files.readAllLines(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
             } catch (IOException e) {
-                throw new IllegalStateException();
+                throw new IllegalStateException(e);
             }
         }
         return loadResourceFile(DEFAULT_STAT_DIR + FILE_SEP + STAT_FILE);
@@ -75,7 +75,7 @@ public abstract class AbstractStatLoader extends AbstractLoader {
                 Files.createFile(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
             }
         } catch (IOException e) {
-            throw new IllegalStateException();
+            throw new IllegalStateException(e);
         }
     }
 
@@ -89,7 +89,7 @@ public abstract class AbstractStatLoader extends AbstractLoader {
                             .collect(Collectors.joining("\n"));
             Files.writeString(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE), buffer);
         } catch (IOException e) {
-            throw new IllegalStateException();
+            throw new IllegalStateException(e);
         }
     }
 

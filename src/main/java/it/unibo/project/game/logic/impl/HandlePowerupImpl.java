@@ -34,7 +34,7 @@ public final class HandlePowerupImpl implements HandlePowerup {
                         }
                     });
                 } catch (final InterruptedException e) {
-                    throw new IllegalStateException();
+                    throw new IllegalStateException(e);
                 }
             }
         };
