@@ -153,7 +153,7 @@ public abstract class AbstractLoader implements Loader {
         try {
             Files.deleteIfExists(Paths.get(STAT_DIR + FILE_SEP + STAT_FILE));
         } catch (IOException e) {
-            LauncherImpl.LAUNCHER.closeWindow();
+            throw new IllegalStateException();
         }
     }
 
@@ -176,11 +176,8 @@ public abstract class AbstractLoader implements Loader {
             final String buffer = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
             return buffer.lines().toList();
         } catch (IOException e) {
-            LauncherImpl.LAUNCHER.closeWindow();
+            throw new IllegalStateException();
         }
-
-        // will never be reached, but compiler doesn't know!
-        return List.of();
     }
 
     // GETTERS

@@ -6,7 +6,6 @@ import java.util.TimerTask;
 
 import javax.swing.SwingUtilities;
 
-import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.game.logic.api.HandlePowerup;
 import it.unibo.project.game.model.api.CollectableType;
 
@@ -35,7 +34,7 @@ public final class HandlePowerupImpl implements HandlePowerup {
                         }
                     });
                 } catch (final InterruptedException e) {
-                    LauncherImpl.LAUNCHER.closeWindow();
+                    throw new IllegalStateException();
                 }
             }
         };

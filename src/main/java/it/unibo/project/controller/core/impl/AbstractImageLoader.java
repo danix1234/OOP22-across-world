@@ -22,9 +22,8 @@ public abstract class AbstractImageLoader extends AbstractMapLoader {
         try {
             return ImageIO.read(ClassLoader.getSystemResourceAsStream(path));
         } catch (IOException e) {
-            LauncherImpl.LAUNCHER.closeWindow();
+            throw new IllegalStateException();
         }
-        throw new IllegalStateException("this exception can never be reached!");
     }
 
     private List<Image> loadImages(final String directory, final List<String> fileNames) {

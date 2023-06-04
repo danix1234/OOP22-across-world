@@ -68,7 +68,7 @@ public class GameEngineImpl implements GameEngine {
                 Thread.sleep((long) (timeLeft / MILLI_SEC_IN_NANO_SEC), (int) (timeLeft % MILLI_SEC_IN_NANO_SEC));
                 nextDrawTime += drawInterval;
             } catch (InterruptedException e) {
-                LauncherImpl.LAUNCHER.closeWindow();
+                throw new IllegalStateException();
             }
 
             // limits movement player to every n frames
