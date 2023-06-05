@@ -16,9 +16,6 @@ plugins {
 	// support for code quality checkers
 	// check code quality via "./gradlew check"
 	id("org.danilopianini.gradle-java-qa") version "1.6.0"
-    
-	// support for java version
-	id("java-library")
 }
 
 java {
