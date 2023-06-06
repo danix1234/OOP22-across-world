@@ -18,7 +18,6 @@ import javax.swing.SwingConstants;
 
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.SceneType;
-import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.input.api.Action;
 
@@ -143,7 +142,7 @@ public class MenuScene extends AbstractScene {
         clearProgressButton.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 LauncherImpl.LAUNCHER.getLoader().deleteStatFile();
-                getInputHandler(SceneType.MENU).executeAction(Action.EXIT_APP);
+                getInputHandler(SceneType.MENU).executeAction(Action.NO_SAVE_EXIT_APP);
             }
         });
 
