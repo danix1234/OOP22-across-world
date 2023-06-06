@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 
 import it.unibo.project.controller.core.api.Difficulty;
 import it.unibo.project.controller.core.api.SceneType;
+import it.unibo.project.controller.core.api.Loader;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.input.api.Action;
 
@@ -63,7 +64,7 @@ public class MenuScene extends AbstractScene {
                 .toArray(String[]::new);
         difficultyComboBox = new JComboBox<>(difficulties);
         shopButton = new JButton("SHOP");
-        clearProgressButton = new JButton("CLEAR PROGRESS");
+        clearProgressButton = new JButton("CLEAR AND EXIT");
         exitButton = new JButton("SAVE AND EXIT");
         // bug fix: difficolty didn't change to what is shown
         LauncherImpl.LAUNCHER.setDifficulty(Difficulty.valueOf(difficultyComboBox.getSelectedItem() + ""));
@@ -92,7 +93,7 @@ public class MenuScene extends AbstractScene {
         shopButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 
         clearProgressButton.setBackground(new Color(WHITE_RED, WHITE_GREEN, WHITE_BLUE));
-        clearProgressButton.setForeground(Color.BLACK);
+        clearProgressButton.setForeground(Color.RED);
         clearProgressButton.setFont(new Font("Arial", Font.BOLD, FONT_SIZE));
         clearProgressButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 
@@ -141,7 +142,8 @@ public class MenuScene extends AbstractScene {
 
         clearProgressButton.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                //LauncherImpl.LAUNCHER.deleteStatFile();
+                LauncherImpl.LAUNCHER.getLoader().deleteStatFile();
+                getInputHandler(SceneType.MENU).executeAction(Action.EXIT_APP);
             }
         });
 
