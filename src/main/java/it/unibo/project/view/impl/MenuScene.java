@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,12 +23,7 @@ import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.input.api.Action;
 
 public class MenuScene extends AbstractScene {
-    //private JPanel panel;
-    //private final JButton startButton;
     private final JComboBox<String> difficultyComboBox;
-    //private final JButton exitButton;
-    //private final JButton shopButton;
-    //private final JButton clearProgressButton;
     private static final int PANEL_BACKGROUND_RED = 40;
     private static final int PANEL_BACKGROUND_GREEN = 40;
     private static final int PANEL_BACKGROUND_BLUE = 40;
@@ -66,7 +62,14 @@ public class MenuScene extends AbstractScene {
         final JButton clearProgressButton = new JButton("CLEAR PROGRESS");
         final JButton exitButton = new JButton("SAVE AND EXIT");
         // bug fix: difficolty didn't change to what is shown
-        LauncherImpl.LAUNCHER.setDifficulty(Difficulty.valueOf(difficultyComboBox.getSelectedItem() + ""));
+        //LauncherImpl.LAUNCHER.setDifficulty(Difficulty.valueOf(difficultyComboBox.getSelectedItem() + ""));
+        LauncherImpl.LAUNCHER.setDifficulty(
+            Difficulty.valueOf(
+                difficultyComboBox.getSelectedItem()
+                .toString().
+                toUpperCase(Locale.ROOT)
+            )
+        );
 
         // elimino effetto testo evidenziato
         startButton.setFocusPainted(false);
@@ -93,7 +96,7 @@ public class MenuScene extends AbstractScene {
 
         clearProgressButton.setBackground(new Color(WHITE_RED, WHITE_GREEN, WHITE_BLUE));
         clearProgressButton.setForeground(Color.BLACK);
-        clearProgressButton.setFont(new Font(FONT_NAME, Font.BOLD, FONT_SIZE));
+        clearProgressButton.setFont(new Font("Arial", Font.BOLD, FONT_SIZE));
         clearProgressButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 
         exitButton.setBackground(new Color(WHITE_RED, WHITE_GREEN, WHITE_BLUE));
@@ -145,7 +148,8 @@ public class MenuScene extends AbstractScene {
         clearProgressButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                //LauncherImpl.LAUNCHER.deleteStatFile();
+                LauncherImpl.LAUNCHER.getLoader().deleteStatFile();
+                getInputHandler(SceneType.MENU).executeAction(Action.NO_SAVE_EXIT_APP);
             }
         });
 

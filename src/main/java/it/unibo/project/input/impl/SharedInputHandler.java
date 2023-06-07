@@ -17,6 +17,9 @@ public class SharedInputHandler implements InputHandler {
     @Override
     public final void executeAction(final Action action) {
         switch (action) {
+            case NO_SAVE_EXIT_APP:
+                LauncherImpl.LAUNCHER.closeWindow();
+                break;
             case EXIT_APP:
                 LauncherImpl.LAUNCHER.saveAndCloseWindow();
                 break;

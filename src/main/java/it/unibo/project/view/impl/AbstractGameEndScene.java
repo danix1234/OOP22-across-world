@@ -29,8 +29,7 @@ public abstract class AbstractGameEndScene extends AbstractScene {
     private static final int FONT_SIZE = 20;
     private static final String FONT_NAME = "Arial";
 
-    protected AbstractGameEndScene(final String title, final Action tryAgainAction, 
-    final Action backToMenuAction, final Action exitButtonAction, final SceneType type) {
+    protected AbstractGameEndScene(final String title, final SceneType type) {
 
         // pannello principale
         final JPanel panel = new JPanel(new GridBagLayout());
@@ -86,9 +85,9 @@ public abstract class AbstractGameEndScene extends AbstractScene {
         gbc.gridy = 3;
         panel.add(exitButton, gbc);
 
-        tryAgainButton.addActionListener((e) -> getInputHandler(type).executeAction(tryAgainAction));
-        backToMenu.addActionListener((e) -> getInputHandler(type).executeAction(backToMenuAction));
-        exitButton.addActionListener((e) -> getInputHandler(type).executeAction(exitButtonAction));
+        tryAgainButton.addActionListener((e) -> getInputHandler(type).executeAction(Action.CHANGE_SCENE_TO_GAME));
+        backToMenu.addActionListener((e) -> getInputHandler(type).executeAction(Action.CHANGE_SCENE_TO_MENU));
+        exitButton.addActionListener((e) -> getInputHandler(type).executeAction(Action.EXIT_APP));
 
         setPanel(panel);
     }

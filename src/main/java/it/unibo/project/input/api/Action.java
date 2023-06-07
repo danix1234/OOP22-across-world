@@ -14,8 +14,10 @@ public enum Action {
     CHANGE_SCENE_TO_OVER,
     /** change the current scene to {@code SceneType.VICTORY}. */
     CHANGE_SCENE_TO_VICTORY,
-    /** exit application. */
+    /** saves and exit application. */
     EXIT_APP,
+    /** do not save and exit application. */
+    NO_SAVE_EXIT_APP,
     /** indicate input handler to try moving player one position up. */
     MOVE_PLAYER_UP,
     /** indicate input handler to try moving player one position down. */
