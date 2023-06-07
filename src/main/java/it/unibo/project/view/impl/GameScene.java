@@ -217,7 +217,7 @@ public class GameScene extends AbstractScene {
 
     private static class GameAction extends AbstractAction {
         private static final long serialVersionUID = 0L;
-        private final GameActionFunctional gameActionFunctional;
+        private transient final GameActionFunctional gameActionFunctional;
 
         GameAction(final GameActionFunctional gameActionFunctional) {
             this.gameActionFunctional = gameActionFunctional;
