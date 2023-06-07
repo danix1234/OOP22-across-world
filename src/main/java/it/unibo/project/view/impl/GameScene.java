@@ -172,10 +172,10 @@ public class GameScene extends AbstractScene {
 
             g.setFont(getFont().deriveFont(fontSpec));
             g.drawImage(playerSprite, playerImageX1, playerImageY1, playerImageX2, playerImageY2, null);
-            g.drawString(player.getMaxDistance() - 4 + "", scoreStringX, scoreStringY);
+            g.drawString(Integer.toString(player.getMaxDistance() - 4), scoreStringX, scoreStringY);
             g.drawImage(loader.getCollectablesSprites(CollectableType.COIN).get(0), collectablesImageX1,
                     collectablesImageY1, collectablesImageX2, collectablesImageY2, null);
-            g.drawString(launcher.getGameStat().getCoins() + "", coinCollectedX, coinCollectedY);
+            g.drawString(Integer.toString(launcher.getGameStat().getCoins()), coinCollectedX, coinCollectedY);
             final var collectables = launcher.getHandlePowerup().getCurrentPowerUp().stream().distinct().toList();
             for (int i = 0; i < collectables.size(); i++) {
                 g.drawImage(loader.getCollectablesSprites(collectables.get(i)).get(0),
@@ -216,6 +216,7 @@ public class GameScene extends AbstractScene {
     }
 
     private static class GameAction extends AbstractAction {
+        private static final long serialVersionUID = 0L;
         private final GameActionFunctional gameActionFunctional;
 
         GameAction(final GameActionFunctional gameActionFunctional) {

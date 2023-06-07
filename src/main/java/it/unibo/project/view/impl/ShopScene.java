@@ -29,10 +29,7 @@ public class ShopScene extends AbstractScene {
     private final Launcher launcher = LauncherImpl.LAUNCHER;
     private final Random random = new Random();
     private final JPanel panel;
-    //private final JButton exitButton;
-    //private final JLabel titleLabel;
     private final List<JButton> skinButtons = new ArrayList<>();
-    //private final JButton randomButton;
     private final JLabel coinsLabel;
     private static final int PANEL_BACKGROUND_RED = 40;
     private static final int PANEL_BACKGROUND_GREEN = 40;
@@ -45,11 +42,11 @@ public class ShopScene extends AbstractScene {
     private static final int FONT_SIZE = 20;
     private static final int BUTTON_WIDTH = 200;
     private static final int BUTTON_HEIGHT = 70;
-    private static final int COINS_TO_SUBTRACT = 100;
+    private static final int COINS_TO_SUBTRACT = -25;
     private static final int SKIN_SIZE = 150;
-    private static final int BASE_GRID_X = 200;
     private static final String FONT_NAME = "Arial";
-
+    private static final String PRICE_LABEL = "Skin Price: 25 Coins";
+    private static final int PRICE_SKIN = 25;
 
     public ShopScene() {
         // pannello principale
@@ -57,27 +54,39 @@ public class ShopScene extends AbstractScene {
         this.panel.setLayout(new GridBagLayout());
         this.panel.setBackground(new Color(PANEL_BACKGROUND_RED, PANEL_BACKGROUND_GREEN, PANEL_BACKGROUND_BLUE));
 
-        //launcher.getGameStat().setCoins(500); // Imposta il numero di monete iniziali a 200
         coinsLabel = new JLabel();
         coinsLabel.setText("Coins: " + launcher.getGameStat().getCoins());
         coinsLabel.setForeground(Color.WHITE);
         coinsLabel.setFont(new Font(FONT_NAME, Font.BOLD, COINS_FONT_SIZE));
         this.panel.add(coinsLabel);
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.gridwidth = 0;
-        gbc.gridheight = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.NORTHEAST;
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
+        gbc.weighty = 0.0;
         gbc.insets = new Insets(0, 10, 10, 10);
         this.panel.add(coinsLabel, gbc);
 
+        final JLabel priceLabel = new JLabel();
+        priceLabel.setText(PRICE_LABEL);
+        priceLabel.setForeground(Color.WHITE);
+        priceLabel.setFont(new Font(FONT_NAME, Font.BOLD, COINS_FONT_SIZE));
+        this.panel.add(priceLabel);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.NORTHEAST;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.0;
+        gbc.insets = new Insets(0, 10, 10, 10);
+        this.panel.add(priceLabel, gbc);
 
-        // creazione del titolo del gioco
         final JLabel titleLabel = new JLabel("SHOP");
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setFont(new Font(FONT_NAME, Font.BOLD, TITLE_FONT_SIZE));
@@ -85,13 +94,13 @@ public class ShopScene extends AbstractScene {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 4;
+        gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.insets = new Insets(10, 0, 10, 0); 
+        gbc.weighty = 0.0;
+        gbc.insets = new Insets(10, 0, 10, 0);
         this.panel.add(titleLabel, gbc);
 
         // Creazione dei pulsanti delle skin
@@ -110,7 +119,7 @@ public class ShopScene extends AbstractScene {
         randomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (hasEnoughCoins(100)) {
+                if (hasEnoughCoins(PRICE_SKIN)) {
                     purchaseRandomSkin();
                 } else {
                     showMessage("Monete insufficienti!");
@@ -119,13 +128,13 @@ public class ShopScene extends AbstractScene {
         });
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 0;
-        gbc.gridheight = 0;
+        gbc.gridy = playerSprites.size() + 2;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
+        gbc.weighty = 0.0;
         gbc.insets = new Insets(10, 0, 10, 0);
         this.panel.add(randomButton, gbc);
 
@@ -137,14 +146,14 @@ public class ShopScene extends AbstractScene {
         exitButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 4;
+        gbc.gridy = playerSprites.size() + 3;
+        gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.SOUTHWEST;
+        gbc.anchor = GridBagConstraints.SOUTHWEST; // Modificato: posizionamento in basso a sinistra
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.insets = new Insets(0, 10, 10, 10); 
+        gbc.weighty = 0.0;
+        gbc.insets = new Insets(0, 10, 10, 10);
         this.panel.add(exitButton, gbc);
 
         exitButton.addActionListener(new ActionListener() {
@@ -161,7 +170,7 @@ public class ShopScene extends AbstractScene {
         final JButton button = new JButton();
         button.setPreferredSize(new Dimension(SKIN_SIZE, SKIN_SIZE));
 
-        //ImageIcon icon = new ImageIcon();
+        // ImageIcon icon = new ImageIcon();
         final Image scaledImage = image.getScaledInstance(SKIN_SIZE, SKIN_SIZE, Image.SCALE_DEFAULT);
         button.setIcon(new ImageIcon(scaledImage));
 
@@ -174,7 +183,7 @@ public class ShopScene extends AbstractScene {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (hasEnoughCoins(100)) {
+                if (hasEnoughCoins(PRICE_SKIN)) {
                     purchaseSkin(skinIndex);
                 } else {
                     showMessage("Monete insufficienti!");
@@ -183,14 +192,14 @@ public class ShopScene extends AbstractScene {
         });
 
         final GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = BASE_GRID_X * skinIndex;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = skinIndex + 2;
+        gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
+        gbc.weighty = 0.0;
         gbc.insets = new Insets(0, 10, 10, 10);
         this.panel.add(button, gbc);
 
@@ -209,7 +218,7 @@ public class ShopScene extends AbstractScene {
     }
 
     private void purchaseRandomSkin() {
-        if (hasEnoughCoins(100)) {
+        if (hasEnoughCoins(PRICE_SKIN)) {
             final List<Boolean> unlockedSkins = launcher.getGameStat().getUnlockedSkins();
             final List<Integer> unlockedIndexes = new ArrayList<>();
             for (int i = 0; i < unlockedSkins.size(); i++) {
@@ -218,7 +227,7 @@ public class ShopScene extends AbstractScene {
                 }
             }
 
-            if (unlockedIndexes.isEmpty()) {
+            if (!unlockedIndexes.isEmpty()) {
                 final int randomSkin = unlockedIndexes.get(random.nextInt(unlockedIndexes.size()));
                 purchaseSkin(randomSkin);
             } else {
@@ -244,5 +253,3 @@ public class ShopScene extends AbstractScene {
     public void update() {
     }
 }
-
-

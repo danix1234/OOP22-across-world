@@ -59,7 +59,7 @@ public class MenuScene extends AbstractScene {
                 .toArray(String[]::new);
         difficultyComboBox = new JComboBox<>(difficulties);
         final JButton shopButton = new JButton("SHOP");
-        final JButton clearProgressButton = new JButton("CLEAR PROGRESS");
+        final JButton clearProgressButton = new JButton("RESET");
         final JButton exitButton = new JButton("SAVE AND EXIT");
         // bug fix: difficolty didn't change to what is shown
         //LauncherImpl.LAUNCHER.setDifficulty(Difficulty.valueOf(difficultyComboBox.getSelectedItem() + ""));

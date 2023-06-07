@@ -1,5 +1,5 @@
 [coins]
-0
+50
 
 [skins]
 3
