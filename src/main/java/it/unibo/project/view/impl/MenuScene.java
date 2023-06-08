@@ -22,6 +22,10 @@ import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.input.api.Action;
 
+/**
+ * Represents the menu scene of the game.
+ * Extends {@link AbstractScene}.
+ */
 public class MenuScene extends AbstractScene {
     private final JComboBox<String> difficultyComboBox;
     private static final int PANEL_BACKGROUND_RED = 40;
@@ -38,31 +42,39 @@ public class MenuScene extends AbstractScene {
     private static final int GRID_Y_VALUE = 5;
     private static final String FONT_NAME = "Arial";
 
+    /**
+     * Creates a new instance of the MenuScene.
+     */
     public MenuScene() {
-        // pannello principale
+        // main panel
         final JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         panel.setBackground(new Color(PANEL_BACKGROUND_RED, PANEL_BACKGROUND_GREEN, PANEL_BACKGROUND_BLUE));
 
-        // creazione del titolo del gioco
+        // game title label
         final JLabel titleLabel = new JLabel("Across the world");
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setFont(new Font(FONT_NAME, Font.BOLD, TITLE_FONT_SIZE));
         titleLabel.setBounds(0, 10, panel.getWidth(), TITLE_HEIGHT);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // creazione dei buttons del menu
+        // menu buttons creation
         final JButton startButton = new JButton("START");
-        final var difficulties = Arrays
-                .stream(Difficulty.values())
-                .map(Enum::name)
-                .toArray(String[]::new);
+        /**
+        * Creates a JComboBox object containing the game difficulty options.
+        * The options are obtained from the Difficulty enumeration and converted into a string array.
+        *
+        * @return A JComboBox object with the game difficulty options.
+        */
+        final var difficulties = Arrays // converts the array of enumeration values ​​into a stream of items.
+                .stream(Difficulty.values()) // returns an array containing all the values ​​of the 'Difficulty' enumeration.
+                .map(Enum::name) // transforms each value of the enumeration into a string representing the name of the element
+                .toArray(String[]::new); // convert the stream to an array
         difficultyComboBox = new JComboBox<>(difficulties);
         final JButton shopButton = new JButton("SHOP");
         final JButton clearProgressButton = new JButton("RESET");
         final JButton exitButton = new JButton("SAVE AND EXIT");
         // bug fix: difficolty didn't change to what is shown
-        //LauncherImpl.LAUNCHER.setDifficulty(Difficulty.valueOf(difficultyComboBox.getSelectedItem() + ""));
         LauncherImpl.LAUNCHER.setDifficulty(
             Difficulty.valueOf(
                 difficultyComboBox.getSelectedItem()
@@ -71,14 +83,14 @@ public class MenuScene extends AbstractScene {
             )
         );
 
-        // elimino effetto testo evidenziato
+        // remove focus highlighting
         startButton.setFocusPainted(false);
         difficultyComboBox.setFocusable(false);
         shopButton.setFocusPainted(false);
         clearProgressButton.setFocusPainted(false);
         exitButton.setFocusPainted(false);
 
-        // estetica dei buttons
+        // button aesthetics
         startButton.setBackground(new Color(WHITE_RED, WHITE_GREEN, WHITE_BLUE));
         startButton.setForeground(Color.BLACK);
         startButton.setFont(new Font(FONT_NAME, Font.BOLD, FONT_SIZE));
@@ -104,7 +116,7 @@ public class MenuScene extends AbstractScene {
         exitButton.setFont(new Font(FONT_NAME, Font.BOLD, FONT_SIZE));
         exitButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 
-        // aggiunta i pulsanti al pannello principale
+        // add buttons to the main panel
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -122,7 +134,7 @@ public class MenuScene extends AbstractScene {
         gbc.gridy = GRID_Y_VALUE;
         panel.add(exitButton, gbc);
 
-        // aggiungo gli ActionListener
+        // add ActionListeners
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {

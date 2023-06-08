@@ -3,6 +3,9 @@ package it.unibo.project.input.impl;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.input.api.InputHandler;
 
+/**
+ * Implementation of the {@link InputHandler} interface that handles menu input.
+ */
 public final class MenuInputHandler implements InputHandler {
 
     @Override

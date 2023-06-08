@@ -25,6 +25,9 @@ import it.unibo.project.controller.core.api.SceneType;
 import it.unibo.project.controller.core.impl.LauncherImpl;
 import it.unibo.project.input.api.Action;
 
+/**
+ * The ShopScene class represents the scene where players can purchase skins.
+ */
 public class ShopScene extends AbstractScene {
     private final Launcher launcher = LauncherImpl.LAUNCHER;
     private final Random random = new Random();
@@ -48,8 +51,11 @@ public class ShopScene extends AbstractScene {
     private static final String PRICE_LABEL = "Skin Price: 25 Coins";
     private static final int PRICE_SKIN = 25;
 
+    /**
+     * Creates a new instance of the ShopScene.
+     */
     public ShopScene() {
-        // pannello principale
+        // main panel
         this.panel = new JPanel();
         this.panel.setLayout(new GridBagLayout());
         this.panel.setBackground(new Color(PANEL_BACKGROUND_RED, PANEL_BACKGROUND_GREEN, PANEL_BACKGROUND_BLUE));
@@ -103,13 +109,15 @@ public class ShopScene extends AbstractScene {
         gbc.insets = new Insets(10, 0, 10, 0);
         this.panel.add(titleLabel, gbc);
 
-        // Creazione dei pulsanti delle skin
+        /**
+        * Retrieves a list of player sprites from the game loader and creates skin buttons for each sprite.
+        */
         final List<Image> playerSprites = LauncherImpl.LAUNCHER.getLoader().getPlayerSprites();
         for (final Image img : playerSprites) {
             createSkinButton(img, playerSprites.indexOf(img));
         }
 
-        // Pulsante per l'acquisto randomico di una skin
+        // random skin button
         final JButton randomButton = new JButton("BUY RANDOM");
         randomButton.setFocusPainted(false);
         randomButton.setBackground(new Color(WHITE_RED, WHITE_GREEN, WHITE_BLUE));
@@ -122,7 +130,7 @@ public class ShopScene extends AbstractScene {
                 if (hasEnoughCoins(PRICE_SKIN)) {
                     purchaseRandomSkin();
                 } else {
-                    showMessage("Monete insufficienti!");
+                    showMessage("Not enough coins!");
                 }
             }
         });
@@ -150,7 +158,7 @@ public class ShopScene extends AbstractScene {
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.SOUTHWEST; // Modificato: posizionamento in basso a sinistra
+        gbc.anchor = GridBagConstraints.SOUTHWEST; 
         gbc.weightx = 1.0;
         gbc.weighty = 0.0;
         gbc.insets = new Insets(0, 10, 10, 10);
@@ -166,11 +174,11 @@ public class ShopScene extends AbstractScene {
         setPanel(this.panel);
     }
 
+    // creates the skins buttons
     private JButton createSkinButton(final Image image, final int skinIndex) {
         final JButton button = new JButton();
         button.setPreferredSize(new Dimension(SKIN_SIZE, SKIN_SIZE));
 
-        // ImageIcon icon = new ImageIcon();
         final Image scaledImage = image.getScaledInstance(SKIN_SIZE, SKIN_SIZE, Image.SCALE_DEFAULT);
         button.setIcon(new ImageIcon(scaledImage));
 
@@ -186,7 +194,7 @@ public class ShopScene extends AbstractScene {
                 if (hasEnoughCoins(PRICE_SKIN)) {
                     purchaseSkin(skinIndex);
                 } else {
-                    showMessage("Monete insufficienti!");
+                    showMessage("Not enough coins!");
                 }
             }
         });
@@ -206,17 +214,35 @@ public class ShopScene extends AbstractScene {
         return button;
     }
 
+    /**
+     * Check if the player has enough coins.
+     *
+     * @param amount the amount of coins required
+     * @return true if the player has enough coins, false otherwise
+     */
     private boolean hasEnoughCoins(final int amount) {
         return launcher.getGameStat().getCoins() >= amount;
     }
 
+    /**
+     * Purchase a skin with the specified index.
+     *
+     * @param skinIndex the index of the skin to be purchased
+     */
     private void purchaseSkin(final int skinIndex) {
         launcher.getGameStat().addCoins(COINS_TO_SUBTRACT);
         setSkinPurchased(skinIndex);
         coinsLabel.setText("Coins:" + launcher.getGameStat().getCoins());
-        showMessage("Acquistata Skin " + skinIndex + "!");
+        showMessage("Purchased Skin " + skinIndex + "!");
     }
 
+    /**
+    * Attempts to purchase a random skin if the player has enough coins.
+    * It checks the list of unlocked skins and selects a random index from the locked ones.
+    * If there are unlocked skins available, it purchases the selected random skin.
+    * Otherwise, it displays a message indicating that no skins are available.
+    * If the player doesn't have enough coins, it displays a message indicating insufficient coins.
+    */
     private void purchaseRandomSkin() {
         if (hasEnoughCoins(PRICE_SKIN)) {
             final List<Boolean> unlockedSkins = launcher.getGameStat().getUnlockedSkins();
@@ -231,13 +257,18 @@ public class ShopScene extends AbstractScene {
                 final int randomSkin = unlockedIndexes.get(random.nextInt(unlockedIndexes.size()));
                 purchaseSkin(randomSkin);
             } else {
-                showMessage("Nessuna skin disponibile!");
+                showMessage("No skins available!");
             }
         } else {
-            showMessage("Monete insufficienti!");
+            showMessage("Not enough coins!");
         }
     }
 
+    /**
+     * Set a skin as purchased.
+     *
+     * @param skinIndex the index of the skin to be set as purchased
+     */
     private void setSkinPurchased(final int skinIndex) {
         final List<Boolean> unlockedSkins = new ArrayList<>(launcher.getGameStat().getUnlockedSkins());
         unlockedSkins.set(skinIndex, true);
@@ -245,8 +276,13 @@ public class ShopScene extends AbstractScene {
         skinButtons.get(skinIndex).setEnabled(false);
     }
 
+    /**
+     * Show a message dialog with the specified message.
+     *
+     * @param message the message to be displayed
+     */
     private void showMessage(final String message) {
-        JOptionPane.showMessageDialog(panel, message, "Messaggio", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(panel, message, "Message", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override

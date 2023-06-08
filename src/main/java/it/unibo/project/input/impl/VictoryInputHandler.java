@@ -3,7 +3,10 @@ package it.unibo.project.input.impl;
 import it.unibo.project.input.api.Action;
 import it.unibo.project.input.api.InputHandler;
 
-public class VictoryInputHandler implements InputHandler {
+/**
+ * Implementation of the {@link InputHandler} interface that handles input during victory state.
+ */
+public final class VictoryInputHandler implements InputHandler {
 
     @Override
     public void executeAction(final Action action) {
