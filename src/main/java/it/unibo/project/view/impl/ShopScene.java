@@ -114,7 +114,15 @@ public class ShopScene extends AbstractScene {
         */
         final List<Image> playerSprites = LauncherImpl.LAUNCHER.getLoader().getPlayerSprites();
         for (final Image img : playerSprites) {
+            if (playerSprites.indexOf(img) >= launcher.getGameStat().getUnlockedSkins().size()){
+                break;
+            }
             createSkinButton(img, playerSprites.indexOf(img));
+        }
+
+        if (launcher.getGameStat().getUnlockedSkins().size() > playerSprites.size() ){
+            throw new IllegalStateException("Skin quantity is less than unlocked skin quantity");
+
         }
 
         // random skin button
