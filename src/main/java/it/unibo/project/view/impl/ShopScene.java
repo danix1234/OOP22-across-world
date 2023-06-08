@@ -61,8 +61,8 @@ public class ShopScene extends AbstractScene {
         this.panel.setBackground(new Color(PANEL_BACKGROUND_RED, PANEL_BACKGROUND_GREEN, PANEL_BACKGROUND_BLUE));
 
         coinsLabel = new JLabel();
-        coinsLabel.setText("Coins: " + launcher.getGameStat().getCoins());
-        coinsLabel.setForeground(Color.WHITE);
+        coinsLabel.setText("Money: " + launcher.getGameStat().getCoins() + " Coins");
+        coinsLabel.setForeground(Color.GREEN);
         coinsLabel.setFont(new Font(FONT_NAME, Font.BOLD, COINS_FONT_SIZE));
         this.panel.add(coinsLabel);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -79,22 +79,22 @@ public class ShopScene extends AbstractScene {
 
         final JLabel priceLabel = new JLabel();
         priceLabel.setText(PRICE_LABEL);
-        priceLabel.setForeground(Color.WHITE);
+        priceLabel.setForeground(Color.GREEN);
         priceLabel.setFont(new Font(FONT_NAME, Font.BOLD, COINS_FONT_SIZE));
         this.panel.add(priceLabel);
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.NORTHEAST;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.weightx = 1.0;
         gbc.weighty = 0.0;
         gbc.insets = new Insets(0, 10, 10, 10);
         this.panel.add(priceLabel, gbc);
 
         final JLabel titleLabel = new JLabel("SHOP");
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(Color.YELLOW);
         titleLabel.setFont(new Font(FONT_NAME, Font.BOLD, TITLE_FONT_SIZE));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gbc = new GridBagConstraints();
