@@ -121,7 +121,8 @@ public abstract class AbstractLoader implements Loader {
             Map.entry(Difficulty.NORMAL, "normal.txt"),
             Map.entry(Difficulty.HARD, "hard.txt"));
     /** all player sprite file names. */
-    protected static final List<String> PLAYER_FILES = List.of("player0.png", "player1.png", "player2.png");
+    protected static final List<String> PLAYER_FILES = List.of("player0.png", "player1.png", "player2.png",
+            "player3.png", "player4.png");
     /** stats file name. */
     protected static final String STAT_FILE = "stats.txt";
 
