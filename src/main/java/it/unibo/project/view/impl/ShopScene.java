@@ -2,11 +2,15 @@ package it.unibo.project.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import it.unibo.project.controller.core.api.SceneType;
+import it.unibo.project.input.api.Action;
 
 /**
  * The ShopScene class represents the scene where players can purchase skins.
@@ -14,7 +18,7 @@ import javax.swing.JScrollPane;
 public class ShopScene extends AbstractScene {
     private final JPanel panel = new JPanel(new BorderLayout());
     private final JPanel northPanel = new JPanel(new BorderLayout());
-    private final JPanel centerPanel = new JPanel();
+    private final JPanel centerPanel = new JPanel(new GridBagLayout());
     private final JPanel southPanel = new JPanel(new BorderLayout());
     private final JScrollPane scrollPanel = new JScrollPane(centerPanel);
     private final JLabel priceLabel = new JLabel("skin price here");
@@ -37,6 +41,8 @@ public class ShopScene extends AbstractScene {
         this.scrollPanel.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
         this.scrollPanel.setBorder(null);
 
+        // action listeners
+        this.exitButton.addActionListener(e -> getInputHandler(SceneType.SHOP).executeAction(Action.CHANGE_SCENE_TO_MENU));
 
         setPanel(this.panel);
     }
