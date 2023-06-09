@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
 
 /**
  * The ShopScene class represents the scene where players can purchase skins.
@@ -34,9 +33,10 @@ public class ShopScene extends AbstractScene {
         this.southPanel.add(buyRandomButton, BorderLayout.EAST);
 
         // scroll visual fixes
-        scrollPanel.getHorizontalScrollBar().setUnitIncrement(25);
-        scrollPanel.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
-        scrollPanel.setBorder(null);
+        this.scrollPanel.getHorizontalScrollBar().setUnitIncrement(25);
+        this.scrollPanel.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
+        this.scrollPanel.setBorder(null);
+
 
         setPanel(this.panel);
     }
