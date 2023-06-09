@@ -1,11 +1,13 @@
 package it.unibo.project.view.impl;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 /**
  * The ShopScene class represents the scene where players can purchase skins.
@@ -22,6 +24,20 @@ public class ShopScene extends AbstractScene {
     private final JButton buyRandomButton = new JButton("CHOOSE RANDOM");
 
     public ShopScene() {
+        // layout
+        this.panel.add(northPanel, BorderLayout.NORTH);
+        this.panel.add(southPanel, BorderLayout.SOUTH);
+        this.panel.add(scrollPanel, BorderLayout.CENTER);
+        this.northPanel.add(priceLabel, BorderLayout.WEST);
+        this.northPanel.add(coinsLabel, BorderLayout.EAST);
+        this.southPanel.add(exitButton, BorderLayout.WEST);
+        this.southPanel.add(buyRandomButton, BorderLayout.EAST);
+
+        // scroll visual fixes
+        scrollPanel.getHorizontalScrollBar().setUnitIncrement(25);
+        scrollPanel.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
+        scrollPanel.setBorder(null);
+
         setPanel(this.panel);
     }
 
