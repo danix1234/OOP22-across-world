@@ -25,6 +25,7 @@ import it.unibo.project.input.api.Action;
  * The ShopScene class represents the scene where players can purchase skins.
  */
 public class ShopScene extends AbstractScene {
+    private static final int SCROLL_UNIT = 25;
     private static final Color BACKGROUND_COLOR = new Color(40, 40, 40);
     private static final int COINS_FONT_SIZE = 20;
     private static final int WHITE_RED = 255;
@@ -49,7 +50,9 @@ public class ShopScene extends AbstractScene {
     private final JButton exitButton = new JButton("EXIT");
     private final JButton buyRandomButton = new JButton("BUY RANDOM");
     private final List<JButton> skinButtons = new ArrayList<>();
+    private final Random random = new Random();
 
+    /** constructor of shopscene. */
     public ShopScene() {
         initAllComponents();
         updateAllComponents();
@@ -87,7 +90,7 @@ public class ShopScene extends AbstractScene {
         this.northPanel.add(coinsLabel, BorderLayout.EAST);
         this.southPanel.add(exitButton, BorderLayout.WEST);
         this.southPanel.add(buyRandomButton, BorderLayout.EAST);
-        this.scrollPanel.getHorizontalScrollBar().setUnitIncrement(25);
+        this.scrollPanel.getHorizontalScrollBar().setUnitIncrement(SCROLL_UNIT);
         this.scrollPanel.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
         this.scrollPanel.setBorder(null);
         this.northPanel.setBackground(BACKGROUND_COLOR);
@@ -161,7 +164,7 @@ public class ShopScene extends AbstractScene {
             }
 
             if (!unlockedIndexes.isEmpty()) {
-                final int randomSkin = unlockedIndexes.get(new Random().nextInt(unlockedIndexes.size()));
+                final int randomSkin = unlockedIndexes.get(this.random.nextInt(unlockedIndexes.size()));
                 purchaseSkin(randomSkin);
             } else {
                 showMessage("No skins available!");
@@ -182,6 +185,9 @@ public class ShopScene extends AbstractScene {
         JOptionPane.showMessageDialog(panel, message, "Message", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
     }
