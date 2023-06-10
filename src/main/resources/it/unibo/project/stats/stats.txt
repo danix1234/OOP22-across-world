@@ -2,7 +2,13 @@
 50
 
 [skins]
-3
+9
 true
+false
+false
+false
+false
+false
+false
 false
 false
