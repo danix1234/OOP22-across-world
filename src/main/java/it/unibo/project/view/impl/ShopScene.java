@@ -43,12 +43,12 @@ public class ShopScene extends AbstractScene {
     private static final int FONT_SIZE = 20;
     private static final int BUTTON_WIDTH = 200;
     private static final int BUTTON_HEIGHT = 70;
-    private static final int SKIN_SIZE = 150;
+    private static final int SKIN_SIZE = 300;
     private static final String FONT_NAME = "Arial";
     private static final int SKIN_PRICE = 25;
     private static final int COIN_SIZE = 30;
     private static final String PRICE_LABEL = "Skin Price: " + SKIN_PRICE;
-    private static final int HORIZONTAL_SCROLL_INCREMENT = 25;
+    private static final int SCROLL_INCREMENT = 50;
     private final Launcher launcher = LauncherImpl.LAUNCHER;
     private final Random random = new Random();
     private JPanel panel;
@@ -110,8 +110,8 @@ public class ShopScene extends AbstractScene {
         skinPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         skinPane.setBackground(new Color(PANEL_BACKGROUND_RED, PANEL_BACKGROUND_GREEN, PANEL_BACKGROUND_BLUE));
         skinPane.setBorder(null);
-        skinPane.getHorizontalScrollBar().setUnitIncrement(HORIZONTAL_SCROLL_INCREMENT);
-        skinPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
+        skinPane.getHorizontalScrollBar().setUnitIncrement(SCROLL_INCREMENT);
+        skinPane.getVerticalScrollBar().setUnitIncrement(SCROLL_INCREMENT);
 
         /**
         * Retrieves a list of player sprites from the game loader and creates skin buttons for each sprite.
